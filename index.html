@@ -475,14 +475,14 @@
 <p>这样会快很多，还有就是block的大小跟代码速度有巨大关系，根据dllxl等人的不懈努力，确定$block=n/(m*2/3)$时，是最快的（目前）；</p>
 <p>讲讲题吧：</p>
 <h3 id="小Z的袜子"><a href="#小Z的袜子" class="headerlink" title="小Z的袜子"></a><a href="https://www.luogu.org/problemnew/show/P1494" target="_blank" rel="noopener">小Z的袜子</a></h3><p>我们考虑对于一个区间$[l,r]$,设$cnt[x]$为此区间中颜色为x的个数，则选到相同袜子的情况有$\sum C_{cnt[x]}^2$种，而任意选两个，一共有$C_{r-l+1}^2$种选法，两者相除即为答案。</p>
-<p>由公式<br>$C_n^2=\frac{n!}{2!<em>(n-2)!}=\frac{n</em>(n-1)}{2}$并整理得</p>
+<p>由公式$C_n^2=\frac{n!}{2!<em>(n-2)!}=\frac{n</em>(n-1)}{2}$并整理得</p>
 <p>设$len=r-l+1$,则答案为</p>
 <p>$\frac{\sum cnt[x]^2-\sum cnt[x]}{len\times(len-1)}$</p>
 <p>$=\frac{\sum cnt[x]^2-len}{len\times(len-1)}$</p>
 <p>而我们要维护的，就是$\sum cnt[x]^2(x\in col(l,r))$;</p>
 <p>用莫队：</p>
-<p>考虑转移的时候，如果加入一个元素x，则$ans+=cnt[x]<em>2+1,cnt[x]++$<br>（因为$(cnt[x]+1)^2=cnt[x]^2+2</em>cnt[x]+1$）</p>
-<p>同理，当删除一个元素x，则$ans-=cnt[x]<em>2-1,cnt[x]—$(因为$(cnt[x]-1)^2=cnt[x]^2-2</em>cnt[x]+1$)</p>
+<p>考虑转移的时候，如果加入一个元素x，则 $ans+=cnt[x]<em>2+1,cnt[x]++$（因为$(cnt[x]+1)^2=cnt[x]^2+2</em>cnt[x]+1$）</p>
+<p>同理，当删除一个元素x，则 $ans-=cnt[x]<em>2-1,cnt[x]—$ (因为 $(cnt[x]-1)^2=cnt[x]^2-2</em>cnt[x]+1$ )</p>
 <p>我们可以写两个函数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inline void add(int x) &#123;ans+=cnt[x]*2+1,cnt[x]++;&#125;</span><br><span class="line">inline void del(int x) &#123;ans-=cnt[x]*2-1,cnt[x]--;&#125;</span><br></pre></td></tr></table></figure>
 <p>然后，我们每转移的时候：</p>
