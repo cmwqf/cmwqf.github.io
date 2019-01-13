@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="莫队，是一种算法，是国家队长莫涛发明的orz，它是来解决什么问题的呢？划重点 我们常常会遇到这样一类题：给你一个$[1,n]$的序列，每次查询$[l,r]$的一些信息（例如不同数的个数等），这个时候，我们就可以使用莫队来解决。 注意，莫队是一种离线算法。 我们考虑，当我们知道$[l1,r1]$的值时，我们要计算出$[l2,r2]$的值。 我们可以$O(1)$地算出$[l1-1,r1],[l1+1,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-13T11:53:23.957Z">
+<meta property="og:updated_time" content="2019-01-13T11:55:17.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="莫队">
 <meta name="twitter:description" content="莫队，是一种算法，是国家队长莫涛发明的orz，它是来解决什么问题的呢？划重点 我们常常会遇到这样一类题：给你一个$[1,n]$的序列，每次查询$[l,r]$的一些信息（例如不同数的个数等），这个时候，我们就可以使用莫队来解决。 注意，莫队是一种离线算法。 我们考虑，当我们知道$[l1,r1]$的值时，我们要计算出$[l2,r2]$的值。 我们可以$O(1)$地算出$[l1-1,r1],[l1+1,">
@@ -329,7 +329,7 @@
 <p>$=\frac{\sum cnt[x]^2-len}{len\times(len-1)}$</p>
 <p>而我们要维护的，就是$\sum cnt[x]^2(x\in col(l,r))$;</p>
 <p>用莫队：</p>
-<p>考虑转移的时候，如果加入一个元素x，则 $ans+=cnt[x]<em>2+1,cnt[x]++$（因为$(cnt[x]+1)^2=cnt[x]^2+2</em>cnt[x]+1$）</p>
+<p>考虑转移的时候，如果加入一个元素x，则 <script type="math/tex">ans+=cnt[x]*2+1,cnt[x]++</script>（因为$(cnt[x]+1)^2=cnt[x]^2+2*cnt[x]+1$）</p>
 <p>同理，当删除一个元素x，则 $ans-=cnt[x]<em>2-1,cnt[x]—$ (因为 $(cnt[x]-1)^2=cnt[x]^2-2</em>cnt[x]+1$ )</p>
 <p>我们可以写两个函数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inline void add(int x) &#123;ans+=cnt[x]*2+1,cnt[x]++;&#125;</span><br><span class="line">inline void del(int x) &#123;ans-=cnt[x]*2-1,cnt[x]--;&#125;</span><br></pre></td></tr></table></figure>
