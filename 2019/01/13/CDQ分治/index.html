@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="CDQ分治,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="据说这个CDQ分治也是某位集训队大爷发明的orz 这是来解决三维偏序的题的，那么什么是三维偏序呢？ 具体来说，就是有n个三元组$(a,b,c)$,求$f(i)=$ $(a_{j}&amp;lt;=a_{i}$ &amp;amp;&amp;amp; $b_{j}&amp;lt;=b_{i}$&amp;amp;&amp;amp;$c_{j}&amp;lt;=c_{i})$的$j$的个数 怎么办呢？ 首先，我们考虑先把a从小到大来排序，这样，在后面的操作中，">
+<meta name="keywords" content="CDQ分治">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDQ分治">
+<meta property="og:url" content="http://yoursite.com/2019/01/13/CDQ分治/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="据说这个CDQ分治也是某位集训队大爷发明的orz 这是来解决三维偏序的题的，那么什么是三维偏序呢？ 具体来说，就是有n个三元组$(a,b,c)$,求$f(i)=$ $(a_{j}&amp;lt;=a_{i}$ &amp;amp;&amp;amp; $b_{j}&amp;lt;=b_{i}$&amp;amp;&amp;amp;$c_{j}&amp;lt;=c_{i})$的$j$的个数 怎么办呢？ 首先，我们考虑先把a从小到大来排序，这样，在后面的操作中，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-13T11:32:47.272Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="CDQ分治">
+<meta name="twitter:description" content="据说这个CDQ分治也是某位集训队大爷发明的orz 这是来解决三维偏序的题的，那么什么是三维偏序呢？ 具体来说，就是有n个三元组$(a,b,c)$,求$f(i)=$ $(a_{j}&amp;lt;=a_{i}$ &amp;amp;&amp;amp; $b_{j}&amp;lt;=b_{i}$&amp;amp;&amp;amp;$c_{j}&amp;lt;=c_{i})$的$j$的个数 怎么办呢？ 首先，我们考虑先把a从小到大来排序，这样，在后面的操作中，">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/13/CDQ分治/">
 
 
 
 
 
-  <title>Hexo</title>
+  <title>CDQ分治 | Hexo</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <a href="https:github.com/cmwqf"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -225,9 +229,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -257,9 +261,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/13/CDQ分治/" itemprop="url">CDQ分治</a></h1>
+          <h1 class="post-title" itemprop="name headline">CDQ分治</h1>
         
 
         <div class="post-meta">
@@ -309,9 +311,7 @@
       
 
       
-        
-          
-            <p>据说这个CDQ分治也是某位集训队大爷发明的orz</p>
+        <p>据说这个CDQ分治也是某位集训队大爷发明的orz</p>
 <p>这是来解决三维偏序的题的，那么什么是三维偏序呢？</p>
 <p>具体来说，就是有n个三元组$(a,b,c)$,求$f(i)=$ $(a_{j}&lt;=a_{i}$ &amp;&amp; $b_{j}&lt;=b_{i}$&amp;&amp;$c_{j}&lt;=c_{i})$的$j$的个数</p>
 <p>怎么办呢？</p>
@@ -344,8 +344,6 @@
 <p>然后，基本上就没什么了吧（<del>完结撒花</del>）</p>
 <p>上代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxN=1e5 + 100;</span><br><span class="line">int n,k,res;</span><br><span class="line">struct Node</span><br><span class="line">&#123;</span><br><span class="line">	int a,b,c,cnt,ans;</span><br><span class="line">&#125;num[maxN*2+1],tmp[maxN*2+1];</span><br><span class="line">int C[maxN*4+1],ans[maxN*2+1];</span><br><span class="line">int read()</span><br><span class="line">&#123;</span><br><span class="line">	int num=0,f=1;</span><br><span class="line">	char ch=getchar();</span><br><span class="line">	while(!isdigit(ch)) &#123;if(ch==&apos;-&apos;) f=-1;ch=getchar();&#125;</span><br><span class="line">	while(isdigit(ch)) num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch^48),ch=getchar();</span><br><span class="line">	return num*f;</span><br><span class="line">&#125;</span><br><span class="line">inline int lowbit(int x) &#123;return x&amp;(-x);&#125;</span><br><span class="line">inline void change(int x,int num)</span><br><span class="line">&#123;</span><br><span class="line">	for(int i=x;i&lt;=k;i+=lowbit(i)) C[i]+=num;</span><br><span class="line">&#125;</span><br><span class="line">inline int query(int x)</span><br><span class="line">&#123;</span><br><span class="line">	int ans=0;</span><br><span class="line">	for(int i=x;i&gt;0;i^=lowbit(i)) ans+=C[i];</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line">bool comp(Node a,Node b)</span><br><span class="line">&#123;</span><br><span class="line">	return a.a&lt;b.a || (a.a==b.a&amp;&amp;a.b&lt;b.b) || (a.a==b.a&amp;&amp;a.b==b.b&amp;&amp;a.c&lt;b.c);</span><br><span class="line">&#125;</span><br><span class="line">inline void cdq(int l,int r)</span><br><span class="line">&#123;</span><br><span class="line">	if(l==r) &#123; num[l].ans+=num[l].cnt-1; return;&#125;</span><br><span class="line">	int mid=(l+r)&gt;&gt;1;</span><br><span class="line">	cdq(l,mid); cdq(mid+1,r);</span><br><span class="line">	int i=l,j=mid+1,tot=l;</span><br><span class="line">	while(i&lt;=mid&amp;&amp;j&lt;=r)</span><br><span class="line">		if(num[i].b&lt;=num[j].b) change(num[i].c,num[i].cnt),tmp[tot++]=num[i++];</span><br><span class="line">		else num[j].ans+=query(num[j].c),tmp[tot++]=num[j++];</span><br><span class="line">	while(j&lt;=r) num[j].ans+=query(num[j].c),tmp[tot++]=num[j++];</span><br><span class="line">	for(int k=l;k&lt;i;k++) change(num[k].c,-num[k].cnt);</span><br><span class="line">	while(i&lt;=mid) tmp[tot++]=num[i++];</span><br><span class="line">	for(int k=l;k&lt;=r;k++) num[k]=tmp[k];</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	n=read(),k=read();</span><br><span class="line">	for(int i=1;i&lt;=n;i++) num[i].a=read(),num[i].b=read(),num[i].c=read(),num[i].cnt=1;</span><br><span class="line">	sort(num+1,num+n+1,comp);</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(i==1 || !(num[i].a==num[i-1].a&amp;&amp;num[i].b==num[i-1].b&amp;&amp;num[i].c==num[i-1].c)) num[++res]=num[i];</span><br><span class="line">		else num[res].cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	cdq(1,res);</span><br><span class="line">	for(int i=1;i&lt;=res;i++) ans[num[i].ans]+=num[i].cnt;</span><br><span class="line">	for(int i=0;i&lt;n;i++) printf(&quot;%d\n&quot;,ans[i]);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
     
@@ -360,282 +358,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/莫队/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/12/莫队/" itemprop="url">莫队</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T20:33:57+08:00">
-                2019-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/CDQ分治/" rel="tag"># CDQ分治</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>莫队，是一种算法，是国家队长莫涛发明的orz，<br>它是来解决什么问题的呢？<del>划重点</del></p>
-<p>我们常常会遇到这样一类题：给你一个$[1,n]$的序列，每次查询$[l,r]$的一些信息（例如不同数的个数等），这个时候，我们就可以使用莫队来解决。</p>
-<p>注意，莫队是一种离线算法。</p>
-<p>我们考虑，当我们知道$[l1,r1]$的值时，我们要计算出$[l2,r2]$的值。</p>
-<p>我们可以$O(1)$地算出$[l1-1,r1],[l1+1,r1],[l1,r1-1],[l1,r1+1]$的值，那么，我们就可以在$O(|l2-l1|+|r2-r1|)$的时间复杂度内完成这次转移，即算出答案。也就是说，我们可以省去这两个询问区间的交集所需要的时间。</p>
-<p>而我们现在要做的，就是通过一种特定的排序方式，使得对于一个询问集合$q$,使得$\sum_{i=1}^n(|q[i].l-q[i-1].l|+q[i].r-q[i-1].r|)$达到我们可以接受的值；</p>
-<p>我们考虑用分块来优化，以<strong>左端点所在的块</strong>为第一关键字，<strong>右端点的值</strong>为第二关键字来排序，这样的时间复杂度就降到了$O(n\sqrt{n})$</p>
-<p>证明？<del>我也不会啊</del></p>
-<p>根据dllxl的认(ka)真(chang)教(ji)导(qiao)，我们在comp函数中可以进行优化（奇偶块优化），即如果是奇数块就右端点升序排列，否则就降序排列：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">inline bool comp(Node a,Node b)</span><br><span class="line">&#123;</span><br><span class="line">	return belong[a.l]^belong[b.l] ? belong[a.l] &lt; belong[b.l] : belong[a.l]&amp;1 ? a.r&lt;b.r : a.r&gt;b.r; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样会快很多，还有就是block的大小跟代码速度有巨大关系，根据dllxl等人的不懈努力，确定$block=n/(m*2/3)$时，是最快的（目前）；</p>
-<p>讲讲题吧：</p>
-<h3 id="小Z的袜子"><a href="#小Z的袜子" class="headerlink" title="小Z的袜子"></a><a href="https://www.luogu.org/problemnew/show/P1494" target="_blank" rel="noopener">小Z的袜子</a></h3><p>我们考虑对于一个区间$[l,r]$,设$cnt[x]$为此区间中颜色为x的个数，则选到相同袜子的情况有$\sum C_{cnt[x]}^2$种，而任意选两个，一共有$C_{r-l+1}^2$种选法，两者相除即为答案。</p>
-<p>由公式<br>$C_n^2=\frac{n!}{2!<em>(n-2)!}=\frac{n</em>(n-1)}{2}$并整理得</p>
-<p>设$len=r-l+1$,则答案为</p>
-<p>$\frac{\sum cnt[x]^2-\sum cnt[x]}{len\times(len-1)}$</p>
-<p>$=\frac{\sum cnt[x]^2-len}{len\times(len-1)}$</p>
-<p>而我们要维护的，就是$\sum cnt[x]^2(x\in col(l,r))$;</p>
-<p>用莫队：</p>
-<p>考虑转移的时候，如果加入一个元素x，则$ans+=cnt[x]<em>2+1,cnt[x]++$<br>（因为$(cnt[x]+1)^2=cnt[x]^2+2</em>cnt[x]+1$）</p>
-<p>同理，当删除一个元素x，则$ans-=cnt[x]<em>2-1,cnt[x]–$(因为$(cnt[x]-1)^2=cnt[x]^2-2</em>cnt[x]+1$)</p>
-<p>我们可以写两个函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inline void add(int x) &#123;ans+=cnt[x]*2+1,cnt[x]++;&#125;</span><br><span class="line">inline void del(int x) &#123;ans-=cnt[x]*2-1,cnt[x]--;&#125;</span><br></pre></td></tr></table></figure>
-<p>然后，我们每转移的时候：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while(q[i].l&gt;l) del(a[l++]);</span><br><span class="line">while(q[i].l&lt;l) add(a[--l]);</span><br><span class="line">while(q[i].r&lt;r) del(a[r--]);</span><br><span class="line">while(q[i].r&gt;r) add(a[++r]);</span><br></pre></td></tr></table></figure>
-<p>再统计一下答案，约个分就OK了</p>
-<p><strong>注意：先处理第一组询问，$l==r$时要特判</strong>；</p>
-<p>然后？然后好像就没了，<del>完结撒花</del></p>
-<p>上代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxN=1e5 + 100;</span><br><span class="line">struct Node</span><br><span class="line">&#123;</span><br><span class="line">    int l,r,id;</span><br><span class="line">&#125;q[maxN+1];</span><br><span class="line">int belong[maxN+1],block;</span><br><span class="line">int a[maxN+1],n,m,l,r;</span><br><span class="line">long long res[maxN+1][2],ans,cnt[maxN+1];</span><br><span class="line">inline int read()</span><br><span class="line">&#123;</span><br><span class="line">    int num=0,f=1;</span><br><span class="line">    char ch=getchar();</span><br><span class="line">    while(!isdigit(ch)) &#123;if(ch==&apos;-&apos;) f=-1; ch=getchar();&#125;</span><br><span class="line">    while(isdigit(ch)) num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch^48),ch=getchar();</span><br><span class="line">    return num*f;</span><br><span class="line">&#125;</span><br><span class="line">inline bool comp(Node a,Node b)</span><br><span class="line">&#123;</span><br><span class="line">    return belong[a.l]^belong[b.l] ? belong[a.l]&lt;belong[b.l] : belong[a.l]&amp;1 ? a.r&lt;b.r : a.r&gt;b.r;</span><br><span class="line">&#125;</span><br><span class="line">inline void add(int x) &#123;ans+=2*cnt[x]+1; cnt[x]++;&#125;</span><br><span class="line">inline void del(int x) &#123;ans-=2*cnt[x]-1; cnt[x]--;&#125;</span><br><span class="line">inline long long gcd(long long x,long long y,long long r)</span><br><span class="line">&#123;</span><br><span class="line">    if(!r) return y;</span><br><span class="line">    return gcd(y,r,y%r);</span><br><span class="line">&#125;</span><br><span class="line">inline void work(int x)</span><br><span class="line">&#123;</span><br><span class="line">    long long len=q[x].r-q[x].l+1,tmp=ans-len;</span><br><span class="line">    if(!tmp) &#123;res[q[x].id][0]=0,res[q[x].id][1]=1; return;&#125;</span><br><span class="line">    len=len*(len-1);</span><br><span class="line">    long long g=gcd(tmp,len,tmp%len);</span><br><span class="line">    res[q[x].id][0]=tmp/g,res[q[x].id][1]=len/g;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    n=read(),m=read(); block=n/sqrt(m*2/3);</span><br><span class="line">    for(int i=1;i&lt;=n;i++) a[i]=read(),belong[i]=(i-1)/block+1;</span><br><span class="line">    for(int i=1;i&lt;=m;i++) q[i].l=read(),q[i].r=read(),q[i].id=i;</span><br><span class="line">    sort(q+1,q+m+1,comp);</span><br><span class="line">    for(int i=q[1].l;i&lt;=q[1].r;i++) add(a[i]);</span><br><span class="line">    work(1);</span><br><span class="line">    l=q[1].l,r=q[1].r;</span><br><span class="line">    for(int i=2;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        while(q[i].l&gt;l) del(a[l++]);</span><br><span class="line">        while(q[i].l&lt;l) add(a[--l]);</span><br><span class="line">        while(q[i].r&lt;r) del(a[r--]);</span><br><span class="line">        while(q[i].r&gt;r) add(a[++r]);</span><br><span class="line">        work(i);</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=m;i++) printf(&quot;%lld/%lld\n&quot;,res[i][0],res[i][1]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/12/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T10:35:24+08:00">
-                2019-01-12
-              </time>
+              <a href="/2019/01/12/莫队/" rel="next" title="莫队">
+                <i class="fa fa-chevron-left"></i> 莫队
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>cmwqf将在这里写出自己的oi历程。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -645,10 +397,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -656,6 +409,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -874,6 +631,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
