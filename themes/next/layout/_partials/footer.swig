@@ -1,4 +1,5 @@
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 <div class="copyright">{#
 #}{% set current = date(Date.now(), "YYYY") %}{#
 #}&copy; {% if theme.footer.since and theme.footer.since != current %}{{ theme.footer.since }} &mdash; {% endif %}{#
@@ -21,6 +22,10 @@
   #}</span>
   {% endif %}
 </div>
+
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
 
 {% if theme.footer.powered and theme.footer.theme.enable %}
   <span class="post-meta-divider">|</span>
