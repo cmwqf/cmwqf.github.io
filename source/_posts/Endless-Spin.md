@@ -11,4 +11,4 @@ $$
 max(S)=\sum_{T \subset S}(-1)^{|T|-1}min(T)
 $$
 
-
+<!--more-->
