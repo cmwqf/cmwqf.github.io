@@ -86,7 +86,94 @@ $$
 
 第二类斯特林数就暴力计算就好了。
 
+注意：在计算g的时候，$u==1$的时候无需计算，而且计算要放在循环外面，不然叶子节点就计算不到，我就因为这个一直过不去样例（丢脸）。
+
 **PS：我的代码风格可能有较大改变，因为学习了大佬 @menci 的代码风格。**
 
 上代码：
+
+```c++
+#include <cstdio>
+#include <iostream>
+using namespace std;
+
+const int maxN = 1e5 + 100, mod = 10007;
+
+struct Node
+{
+    int to, next;
+}edge[maxN * 2 + 1];
+
+int S[200][200], n, k, fac[200];
+int tot, head[maxN + 1];
+int f[maxN + 1][200], g[maxN + 1][200];
+
+inline int read()
+{
+    int num = 0, f = 1;
+    char ch = getchar();
+    while(!isdigit(ch)) {if(ch == '-') f = -1; ch = getchar(); }
+    while(isdigit(ch)) num = (num << 3) + (num << 1) + (ch ^ 48), ch = getchar();
+    return num * f;
+}
+
+inline void add(int x, int y)
+{
+    tot ++;
+    edge[tot].to = y;
+    edge[tot].next = head[x];
+    head[x] = tot;
+}
+
+inline void dfs1(int u, int pa)
+{
+    f[u][0]=1;
+    for(int i = head[u]; i; i = edge[i].next)
+       if(edge[i].to != pa)
+       {
+           int v = edge[i].to;
+           dfs1(v, u);
+           f[u][0] = (f[u][0] + f[v][0]) % mod;
+           for(int j = 1; j <= k; j++) f[u][j] = (f[u][j] + f[v][j] + f[v][j - 1]) % mod;
+       }
+}
+
+inline void dfs2(int u, int pa)
+{
+    if(u != 1)
+    {
+        g[u][0] = ((g[pa][0] + f[pa][0] - f[u][0]) % mod + mod) % mod;
+        g[u][1] = ((g[pa][1] + g[pa][0] + f[pa][1] + f[pa][0] - f[u][1] - 2 * f[u][0]) % mod + mod) % mod;
+        for(int j = 2; j <= k; j++)
+            g[u][j] = ((g[pa][j] + g[pa][j - 1] + f[pa][j] + f[pa][j - 1] - f[u][j] - 2 * f[u][j - 1] - f[u][j - 2]) % mod + mod) % mod;
+    }
+    for(int i = head[u]; i; i = edge[i].next)
+       if(edge[i].to != pa) dfs2(edge[i].to, u);
+}
+
+int main()
+{
+    n = read(), k = read();
+    for(int i = 1; i < n; i++)
+    {
+        int x = read(), y = read();
+        add(x, y); add(y, x);
+    }
+    fac[0] = 1;
+    for(int i = 1; i <= k; i++) fac[i] = fac[i - 1] * i % mod;
+    S[0][0] = 1;
+    for(int i = 1; i <= k; i++)
+       for(int j = 1; j <= i; j++) S[i][j] = (S[i - 1][j - 1] + S[i - 1][j] * j % mod) % mod;
+    dfs1(1, 0);
+    dfs2(1, 0);
+    for(int i = 1; i <= n; i++)
+    {
+        int ans = 0;
+        for(int j = 0; j <= k; j++) 
+            ans = (ans + S[k][j] * fac[j] % mod * (f[i][j] + g[i][j]) % mod) % mod;
+        printf("%d\n", ans);
+    }
+    return 0;
+}
+```
 
