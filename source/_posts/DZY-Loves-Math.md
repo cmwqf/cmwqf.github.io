@@ -2,6 +2,7 @@
 title: DZY Loves Math
 date: 2019-03-08 16:55:45
 tags: [数论]
+categories: [BZOJ]
 ---
 
 [DZY Loves Math](https://www.lydsy.com/JudgeOnline/problem.php?id=3309)
@@ -29,5 +30,16 @@ $$
 $$
 我们考虑怎么求
 $$
-\sum_{d|n}f(d)*\mu(\frac{n}{d})
+g(n)=\sum_{d|n}f(d)*\mu(\frac{n}{d})
 $$
+我们设
+$$
+n=p1^{a1}*p2^{a2}*...*pk^{ak}\\
+d=p1^{b1}*p2^{b2}*...*pk^{bk}
+$$
+根据$\mu$的性质，如果$ai-bi>=2$，那么$\mu$就是0。
+
+所以，只有$ai=bi$或$ai=bi+1$。
+
+这样，我们假设$max(ai)=k$，那么$f(d)=k或k-1$。
+
