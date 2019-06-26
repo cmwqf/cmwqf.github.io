@@ -7,7 +7,7 @@ categories: [BZOJ]
 
 [DZY Loves Math](https://www.lydsy.com/JudgeOnline/problem.php?id=3309)
 
-题意：
+# Description
 
 求
 $$
@@ -16,7 +16,7 @@ $$
 $$
 <!--more-->
 
-sol:
+# Solution
 
 我们设$n<=m$，然后又开始大力推式子了：
 $$
@@ -47,13 +47,13 @@ $$
 
 我们有一下两个结论：
 
-1.当$ai\neq aj(i\neq j)​$时，$g(n)=0​$。
+1.当$ai\neq aj(i\neq j)$时，$g(n)=0$。
 
 我们考虑如果选了$t个=l(0<t<k)$的，那么，如果我们一共选了s个质数，若s为奇数，记为s1，那么答案就会加上$l\times (-1)\times C(k-t,s1-t)$，若s为偶数，记为s2，则答案会加上$l\times 1\times C(k-t,s2-t)$，而我们考虑到，$C(k,i)$中奇数项和等于偶数项和，所以
 $$
 \sum_{s1=2i-1}C(k-t,s1-t)=\sum_{s2=2i}C(k-t,s2-t)
 $$
-所以最终的结果加起来等于$l\times (-1)\times C(k-t,s1-t)+l\times 1\times C(k-t,s2-t)=0​$，同理，当乘上的数是$l-1​$时，$g(n)=0​$，所以结论成立。
+所以最终的结果加起来等于$l\times (-1)\times C(k-t,s1-t)+l\times 1\times C(k-t,s2-t)=0$，同理，当乘上的数是$l-1$时，$g(n)=0$，所以结论成立。
 
 因此，只有当$a1=a2=...=an$时，才会产生贡献。
 
@@ -74,10 +74,10 @@ $$
 在筛的时候有两种情况：
 
 1. i % prime[j] != 0
-     这个时候，$prime[j]​$和$i​$互质，且$prime[j]​$是$i\times prime[j]​$的最小的质因子（线性筛的原理），
-     因此，我们用一数组$a[i]​$表示i中最小的质因子出现的次数，$b[i]​$表示i中最小质因子所构成的数值。
+     这个时候，$prime[j]$和$i$互质，且$prime[j]$是$i\times prime[j]$的最小的质因子（线性筛的原理），
+     因此，我们用一数组$a[i]$表示i中最小的质因子出现的次数，$b[i]$表示i中最小质因子所构成的数值。
      这两个都很好转移。
-     然后，此时的$g[i\times prime[j]]​$就看i是否有平方因子，如果有，那么$g[i \times prime[j]]​$就是0，否则就是$g[i]​$的相反数。
+     然后，此时的$g[i\times prime[j]]$就看i是否有平方因子，如果有，那么$g[i \times prime[j]]$就是0，否则就是$g[i]$的相反数。
      即
 
 ```c++
@@ -92,11 +92,11 @@ if(i % prime[j])
 
    这个时候，$i$里面有$prime[j]$的因子，且$prime[j]$必定是$i$中最小的因子，这个时候，我们可以算出$i\times  prime[j]$里面$prime[j]$出现的次数和$prime[j]$所构成的数值，我们怎么判断$g[i \times prime[j]]$的值呢？我们只要看$i$中除去$prime[j]$这个因子构成的数后的数，记为$num$，看$a[num]$是否等于$a[i\times prime[j]]$，如果相等的话，直接$g[i\times prime[j]]=-g[num]$，如果$g[num]$等于0，那么$g[i\times prime[j]]$也是0，否则，就直接是其相反数。
 
-   特别地，如果当前这个数$n​$仅仅是由一个质因子的幂次方组成的，那么这个数的$g[n]=1​$（自己推一下就好了）。
+   特别地，如果当前这个数$n$仅仅是由一个质因子的幂次方组成的，那么这个数的$g[n]=1$（自己推一下就好了）。
 
-   还有一个要注意的，就是当$num​$变成了1，而1的所有属性都没有计算，所以要额外考虑，即此时的$i\times prime[j]​$是$prime[j]^2​$的形式，那么，$g[i\times prime[j]]=1​$就好了。
+   还有一个要注意的，就是当$num$变成了1，而1的所有属性都没有计算，所以要额外考虑，即此时的$i\times prime[j]$是$prime[j]^2$的形式，那么，$g[i\times prime[j]]=1$就好了。
 
-还是看看代码吧，剩下的也就是简单的整除分块了：
+# Code
 
 ```c++
 #include <cstdio>

@@ -6,7 +6,7 @@ tags: [dp,组合数学]
 
 [Crash的文明世界](https://www.luogu.org/problemnew/show/P4827)
 
-题意：
+# Description
 
 给定一棵树和k，求：
 $$
@@ -14,9 +14,9 @@ F(i)=\sum_{j=1}^ndist(i,j)^k
 $$
 <!--more-->
 
-sol:
+# Solution
 
-这一题有一个弱化版，就是$k=1​$，是一个非常简单的换根dp(其实我都觉得不是dp):
+这一题有一个弱化版，就是$k=1$，是一个非常简单的换根dp(其实我都觉得不是dp):
 
 [STA-Station](https://www.luogu.org/problemnew/show/P3478)
 
@@ -28,7 +28,7 @@ sol:
 $$
 \sum_{j=1}^ndist(i,j)^k=\sum_{j=1}^n\sum_{t=0}^{min(dist(i,j),k)}S(k,t)*t!*C(dist(i,j),t)
 $$
-我们假设$dist(i,j)>k​$，毕竟，k的范围要比n要小得多。
+我们假设$dist(i,j)>k$，毕竟，k的范围要比n要小得多。
 
 则原式变为：
 $$
@@ -39,11 +39,11 @@ $$
 $$
 \sum_{j=1}^nC(dist(i,j),t)
 $$
-首先我们假设1为根，然后设$f[u][t]​$为以$u​$为根的子树中所有节点$v​$的$C(dist(u,v),t)​$之和。
+首先我们假设1为根，然后设$f[u][t]$为以$u$为根的子树中所有节点$v$的$C(dist(u,v),t)$之和。
 
 我们再设一个$g[u][t]$指整棵树中除了$u$的子树的所有节点$v$的$C(dist(u,v),t)$之和。
 
-我们用$v\in u​$表示v在u的子树里，则上面的定义可以写成：
+我们用$v\in u$表示v在u的子树里，则上面的定义可以写成：
 $$
 f[u][t]=\sum_{v\in u}C(dist(u,v),t)\\
 g[u][t]=\sum_{v\notin u}C(dist(u,v),t)
@@ -90,7 +90,7 @@ $$
 
 **PS：我的代码风格可能有较大改变，因为学习了大佬 @menci 的代码风格。**
 
-上代码：
+# Code
 
 ```c++
 #include <cstdio>
