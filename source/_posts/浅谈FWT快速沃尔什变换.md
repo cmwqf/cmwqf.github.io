@@ -101,7 +101,7 @@ $$
 
 ## Code
 
-```c++.
+```c++
 inline void FWT(int *a, int type)
 {
 	for(int mid = 1; mid < lim; mid <<= 1)
@@ -117,29 +117,40 @@ inline void FWT(int *a, int type)
 
 这个最难。
 
-我们要求
-$$
-C_k=\sum_{i\oplus j = k}A_i*B_j
-$$
-我们设
+尝试证明，却失败.jpg
+
+## 结论
+
 $$
 FWT(A)=
 \begin{cases}
 (FWT(A_0)+FWT(A_1),FWT(A_0)-FWT(A_1))\quad (n \neq 1)\\
 A\quad (n = 1)
+\end{cases}\\
+IFWT(A)=
+\begin{cases}
+(\frac{IFWT(A_0)+IFWT(A_1)}{2},\frac{IFWT(A_0)-IFWT(A_1)}{2})\quad(n\neq 1)\\
+A\quad(n=1)
 \end{cases}
 $$
-我们定义
-$$
-A\oplus B=(\sum A_i*B_{0\oplus i},...)
-$$
-那么，我们就要证明
-$$
-FWT(A\oplus B)=FWT(A)*FWT(B)
-$$
-证明如下：
-$$
-FWT(A\oplus B)=(FWT(A\oplus B)_0+FWT(A\oplus B)_1,FWT(A\oplus B)_0-FWT(A\oplus B)_1)\\
-=(FWT(A_0\oplus B_0+A_1\oplus B_1+A_0\oplus B_1+A_1\oplus B_0),\\
-FWT(A_0\oplus B_0+A_1\oplus B_1-A_0\oplus B_1-A_1\oplus B_0))\\
-$$
+## Code
+
+```c++
+inline void FWT(int *a, int type)
+{
+    for(int mid = 1; mid < lim; mid <<= 1)
+        for(int i = 0; i < lim; i += (mid << 1))
+            for(int j = 0; j < mid; j++)
+            {
+                int x = a[i + j], y = a[i + mid + j];
+                a[i + j] = x + y;
+                a[i + mid + j] = x - y;
+                if(type == -1) a[i + j] /= 2, a[i + mid + j] /= 2;
+            }
+}
+```
+
+
+
+
+
