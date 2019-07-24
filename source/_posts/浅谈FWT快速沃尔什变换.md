@@ -32,7 +32,8 @@ $$
 
 所以
 $$
-A'=merge(A0',A0'+A1')
+A'=merge(A0',A0'+A1')\\
+即FWT(A)=merge(FWT(A_0),FWT(A_0)+FWT(A_1))
 $$
 其中，$merge$就是将两个数组拼接在一起，$+$表示对应下标的数相加。
 
@@ -40,9 +41,105 @@ $$
 
 这样，我们就可以算出$FWT(C)$，那么，我们怎么把$FWT(C)$转回来呢？
 
-现在，问题变成了反过来，我们现在知道了$A0',A1'$，又因为$A0‘=A0,A1'=A0+A1$，
+$$
+FWT(A)_0:FWT(A)的前半部分,FWT(A_0):A的前半部分的FWT\\
+\because FWT(A)_0=FWT(A_0)\\
+\therefore A_0 = IFWT(FWT(A_0))=IFWT(FWT(A)_0)\\
+\because FWT(A)_1=FWT(A_0)+FWT(A_1)\\
+\therefore A_1=IFWT(FWT(A_1))=IFWT(FWT(A)_1-FWT(A)_0)
+$$
 
-所以，
+## 结论
+
+$$
+FWT(A)=
+\begin{cases}
+(FWT(A_0),FWT(A_0+A_1))\quad(n\neq 1)\\
+A\quad(n=1)
+\end{cases}
+$$
+
+下面写$IFWT$，注意，此时大括号后面的$A$是已经$FWT$过后的$A$
+$$
+IFWT(A)=
+\begin{cases}
+(IFWT(A_0),IFWT(A_1-A_0))\quad(n \neq 1)\\
+A\quad(n = 1)
+\end{cases}
+$$
+
+## Code
+
+```c++
+inline void FWT(int *a, int type)
+{
+    for(int mid = 1; mid < lim; mid <<= 1)
+        	for(int i = 0; i < lim; i += (mid << 1))
+                	for(int j = 0; j < mid; j++)
+                        a[i + mid + j] += a[i + j] * type;
+}
+```
+
+# 与(and)运算的FWT
+
+证明太麻烦了，直接上结论吧，这个和上面或的差不多。
+
+## 结论
+
+$$
+FWT(A)=
+\begin{cases}
+(FWT(A_0+A_1),FWT(A_1))\quad(n\neq 1)\\
+A\quad (n=1)
+\end{cases}\\
+IFWT(A)=
+\begin{cases}
+(IFWT(A_0-A_1),IFWT(A_1))\quad (n\neq 1)\\
+A\quad(n=1)
+\end{cases}
+$$
+
+## Code
+
+```c++.
+inline void FWT(int *a, int type)
+{
+	for(int mid = 1; mid < lim; mid <<= 1)
+		for(int i = 0; i < lim; i += (mid << 1))
+			for(int j = 0; j < mid; j++)
+				a[i + j] += a[i + mid + j] * type;
+}
+```
 
 
 
+# 异或(xor)运算的FWT
+
+这个最难。
+
+我们要求
+$$
+C_k=\sum_{i\oplus j = k}A_i*B_j
+$$
+我们设
+$$
+FWT(A)=
+\begin{cases}
+(FWT(A_0)+FWT(A_1),FWT(A_0)-FWT(A_1))\quad (n \neq 1)\\
+A\quad (n = 1)
+\end{cases}
+$$
+我们定义
+$$
+A\oplus B=(\sum A_i*B_{0\oplus i},...)
+$$
+那么，我们就要证明
+$$
+FWT(A\oplus B)=FWT(A)*FWT(B)
+$$
+证明如下：
+$$
+FWT(A\oplus B)=(FWT(A\oplus B)_0+FWT(A\oplus B)_1,FWT(A\oplus B)_0-FWT(A\oplus B)_1)\\
+=(FWT(A_0\oplus B_0+A_1\oplus B_1+A_0\oplus B_1+A_1\oplus B_0),\\
+FWT(A_0\oplus B_0+A_1\oplus B_1-A_0\oplus B_1-A_1\oplus B_0))\\
+$$
