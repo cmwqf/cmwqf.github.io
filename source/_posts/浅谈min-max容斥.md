@@ -29,7 +29,7 @@ $$
 
 我们计$max_k(S)$表示$S$中第$k$大的元素，那么我们有：
 $$
-max_k(S)=\sum_{T\sub S}(-1)^{|T|-k}C(|T|-1,k-1)min(T)
+max_k(S)=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)min(T)
 $$
 具体的证明什么的，我当然看不懂了，记住就好了。
 
@@ -37,8 +37,8 @@ $$
 
 由于期望的线性性，$min-max$容斥适用于期望。
 $$
-E(max(S))=\sum_{T\sub S}(-1)^{|T|-1}E(min(T))\\
-E(max_k(S))=\sum_{T\sub S}(-1)^{|T|-k}C(|T|-1,k-1)E(min(T))
+E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))\\
+E(max_k(S))=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)E(min(T))
 $$
 
 # 例题
