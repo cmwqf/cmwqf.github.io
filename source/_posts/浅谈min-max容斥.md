@@ -12,6 +12,8 @@ tags: [组合数学]
 $$
 max(S)=\sum_{T\subset S}(-1)^{|T|-1}min(T)
 $$
+<!--more-->
+
 举个例子：
 $$
 max(a,b)=min(a)+min(b)-min(a,b)\\
@@ -41,4 +43,4 @@ $$
 
 # 例题
 
-[HAOI2015按位或]()
+[HAOI2015按位或](https://cmwqf.github.io/2019/07/25/%E6%8C%89%E4%BD%8D%E6%88%96/)
