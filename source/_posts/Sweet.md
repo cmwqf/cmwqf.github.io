@@ -41,3 +41,61 @@ t*(C_{b-k+n}^n-C_{a-k+n-1}^n)
 $$
 那么，问题来了，因为2004是个合数，所以可能不存在逆元，那么我们怎么算后面这个东西呢？
 
+我们考虑暴力计算$(n-m+1)\*...\*n$，这样，我们就剩下要除以一个$n!$了。
+
+首先，前面那个式子一定有$n!$这个因子，设为$(k\*mod+r)\*n!$，那么答案应该就是$r$，现在因为我们不能直接除以$n!$，所以我们改为将它模$mod*n!$。
+
+这样，我们算出来的答案就是$r*n!$，然后我们再除以$n!$就好了。
+
+~~不仅拍手：妙啊~~
+
+# Code
+
+```c++
+#include <cstdio>
+using namespace std;
+
+#define int long long
+
+const int maxN = 500 + 10;
+
+int m[maxN + 1], mod = 2004;
+int tmp = 1, ans;
+int n, a, b;
+
+inline int C(int n, int m)
+{
+	if(n < m) return 0;
+	int ans = 1;
+	for(int i = n - m + 1; i <= n; i++) ans = ans * i % mod;
+	return ans;
+}
+
+inline void dfs(int x, int lim, int num)
+{
+	if(lim > b) return;
+	if(x > n)
+	{
+		ans += num * ( C(b - lim + n, n) - C(a - lim + n - 1, n) ) % mod;
+		ans %= mod;
+		return;
+	}
+	dfs(x + 1, lim, num);
+	dfs(x + 1, lim + m[x] + 1, -num);
+} 
+
+#undef int
+int main()
+#define int long long
+{
+	scanf("%lld %lld %lld", &n, &a, &b);
+	for(int i = 1; i <= n; i++) scanf("%lld", &m[i]);
+	for(int i = 1; i <= n; i++) tmp *= i;
+	mod *= tmp;
+	dfs(1, 0, 1);
+	ans /= tmp;
+	printf("%lld", (ans % 2004 + 2004) % 2004);
+	return 0;
+}
+```
+
