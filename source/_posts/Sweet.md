@@ -1,5 +1,5 @@
 ---
-title: [BZOJ3027]Sweet
+title: Sweet
 date: 2019-07-25 08:34:11
 tags: [生成函数,组合数学]
 categories: [BZOJ]
