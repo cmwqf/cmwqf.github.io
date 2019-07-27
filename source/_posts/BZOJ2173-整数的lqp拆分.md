@@ -7,7 +7,11 @@ categories: [BZOJ]
 
 # Description
 
-一个数$N=a_1+a_2+...+a_m(m>0)$，它的贡献是$Fib_{a_1}*Fib_{a_2}*...*Fib_{a_m}$，求它的所有整数划分的贡献之和对$1e9+7$取模。
+一个数$N=a_1+a_2+...+a_m(m>0)$，它的贡献是
+$$
+Fib{a_1}*Fib{a_2}*...*Fib_{a_m}
+$$
+求它的所有整数划分的贡献之和对$1e9+7$取模。
 
 <!--more-->
 
@@ -15,7 +19,7 @@ categories: [BZOJ]
 
 设$F(x)$是$Fibonacci$数列的生成函数，则答案就是
 $$
-ans=\sum_{i=1}^{\infin}[x^n]F^i(x)=[x^n]\frac{F(x)}{1-F(x)}
+ans=\sum_{i=1}^{\infty}[x^n]F^i(x)=[x^n]\frac{F(x)}{1-F(x)}
 $$
 我们先推一下$Fibonacci$数列（除去第$0$项）的生成函数。
 $$
