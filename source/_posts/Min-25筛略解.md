@@ -62,7 +62,7 @@ S(n,j)=\sum_{i=1}^n[min(p)>=P_j]f(i)
 $$
 这个怎么转移呢？我们先把质数的算出来，然后考虑合数，我们可以枚举它的最小质因子和它出现的次数，就可以转移了。
 $$
-S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_k^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n}(S(\lfloor\frac{n}{P_k^e}\rfloor,k+1)*f(P_k^e)+f(P_k^{e+1}))
+S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n}(S(\lfloor\frac{n}{P_k^e}\rfloor,k+1)*f(P_k^e)+f(P_k^{e+1}))
 $$
 然后，就没有了，最后的答案就是$S(n,1)+f(1)$。
 
