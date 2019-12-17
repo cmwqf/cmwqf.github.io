@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cmwqf.github.io/blog/"/>
-  <updated>2019-11-30T08:59:14.104Z</updated>
+  <updated>2019-12-17T10:22:13.826Z</updated>
   <id>http://cmwqf.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈Dilworth定理</title>
+    <link href="http://cmwqf.github.io/blog/2019/12/17/%E6%B5%85%E8%B0%88Dilworth%E5%AE%9A%E7%90%86/"/>
+    <id>http://cmwqf.github.io/blog/2019/12/17/浅谈Dilworth定理/</id>
+    <published>2019-12-17T09:41:37.000Z</published>
+    <updated>2019-12-17T10:22:13.826Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Dilworth定理"><a href="#Dilworth定理" class="headerlink" title="Dilworth定理"></a>Dilworth定理</h1><p>$Dilworth$定理是组合数学的一个重要定理，它是定义在偏序集上的，在解决实际问题时非常有效。比如经典的题目“导弹拦截”。现在，我们就来对它一探究竟。</p><h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><p><strong>偏序集上最小链划分中链的数量等于其反链长度的最大值。</strong></p><a id="more"></a><h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>是不是一脸懵？</p><p>$Dilworth$定理是定义在偏序集上的，什么是偏序集？我们定义一种比较关系，使得两种元素之间进行比较，例如对于元素为二元组$(a,b),(c,d)$我们定义$(a,b)&lt;=(c,d)$当且仅当$a&lt;=c,b&lt;=d$，那么这两个元素就可比了，但是如果$a&gt;c,b&lt;=d$，那么这两个元素就不可比了。</p><p>偏序集可以允许不可比的元素存在，但是整个偏序集$S$要满足一下几个性质：</p><script type="math/tex; mode=display">1.自反性： \forall a \in S,a<=a\\2.对称性： \forall a,b\in S,若a<=b,则b>=a\\3.传递性： 若a<=b,b<=c,则a<=c</script><p>如果对于每个$a,b$，若$a&lt;=b$，我们连一条$a-&gt;b$的边，那么显然，整个偏序集构成一个$DAG$。</p><p>我们现在来理解一下$Dilworth$定理的内容，什么叫最小链划分？</p><p>我们将$S$中的所有元素划分成若干条链，使每个元素都在且仅在唯一一条链中，叫链划分。</p><h2 id="链"><a href="#链" class="headerlink" title="链"></a>链</h2><p>什么是链？</p><p>我们假设在若干元素构成一个集合，那么，这个集合是链当且仅当这个集合的所有元素两两是可比的。换句话说，你可以看成是$DAG$上的一条路径上的一些元素，<strong>注意，这个集合中的元素可能只是这条路径上的一部分，中间挖掉几个点也是有可能的。</strong></p><h2 id="反链"><a href="#反链" class="headerlink" title="反链"></a>反链</h2><p>那么，什么是反链？</p><p>正如名字一样，反链和链的定义恰好相反，对于一个集合，它是反链当且仅当这个集合里的元素两两都是<strong>不可比的</strong>。换句话说，这个集合里的任何两个元素无法联通。大家可以脑补一下。</p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>那么，了解了这两个知识以后，这个定理的内容就很清晰了，也就是说，我们将一个偏序集$S$划分为若干个小集合，使得每个小集合里的元素构成一条链，这个最小的划分数量，等于这个偏序集最长的反链的长度。</p><p>这个很有用，可以把一些看起来很不可做的题目转化为十分简单的题目。</p><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=3997" target="_blank" rel="noopener">TJOI2015 组合数学</a></p><p>看起来很不好做，对吧？</p><p>我们定义这样一个偏序，其实是定义一个$DAG$，对于每个点$(i,j)$，我们把它拆成$val[i][j]$个点。</p><p>这样就构成了一个新的点集。</p><p>然后对于新点集中每个点，向它所能到达的所有的点连一条有向边，这样，就构成了一个$DAG$，那么，每一条路径，就是一条链，题目所求即这个$DAG$的最小链划分，由$Dilworth$定理，这个就等于$DAG$的最长反链的长度。</p><p>回到题目所给的模型，什么是这个$DAG$的反链？</p><p>换句话说，就是网格图中两两不能到达的点。对于每个点，它右上角和左下角的矩形中的点都是两两无法到达的，我们就是要找到一条路径，选的点从右上到左下，使点权的和最大（因为这个时候，每个点所拆成的点都两两不可到达，所以直接全部加上就好了）。这个，就直接$DP$了。</p><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, n, m, a[maxN + <span class="number">1</span>][maxN + <span class="number">1</span>];</span><br><span class="line">LL f[maxN + <span class="number">1</span>][maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> num = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">char</span> ch = getchar();</span><br><span class="line"><span class="keyword">while</span>( !<span class="built_in">isdigit</span>( ch ) ) &#123; <span class="keyword">if</span>(ch == <span class="string">'-'</span>) f = <span class="number">-1</span>; ch = getchar(); &#125;</span><br><span class="line"><span class="keyword">while</span>( <span class="built_in">isdigit</span>( ch ) ) num = (num &lt;&lt; <span class="number">3</span>) + (num &lt;&lt; <span class="number">1</span>) + (ch ^ <span class="number">48</span>), ch = getchar();</span><br><span class="line"><span class="keyword">return</span> num * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">T = read();</span><br><span class="line"><span class="keyword">while</span>(T --)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">n = read(), m = read();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) a[i][j] = read();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = m; j &gt;= <span class="number">1</span>; j--)</span><br><span class="line">&#123;</span><br><span class="line">f[i][j] = f[i - <span class="number">1</span>][j + <span class="number">1</span>] + a[i][j];</span><br><span class="line">f[i][j] = max(f[i][j], max(f[i - <span class="number">1</span>][j], f[i][j + <span class="number">1</span>]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, f[n][<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Dilworth定理&quot;&gt;&lt;a href=&quot;#Dilworth定理&quot; class=&quot;headerlink&quot; title=&quot;Dilworth定理&quot;&gt;&lt;/a&gt;Dilworth定理&lt;/h1&gt;&lt;p&gt;$Dilworth$定理是组合数学的一个重要定理，它是定义在偏序集上的，在解决实际问题时非常有效。比如经典的题目“导弹拦截”。现在，我们就来对它一探究竟。&lt;/p&gt;
+&lt;h1 id=&quot;内容&quot;&gt;&lt;a href=&quot;#内容&quot; class=&quot;headerlink&quot; title=&quot;内容&quot;&gt;&lt;/a&gt;内容&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;偏序集上最小链划分中链的数量等于其反链长度的最大值。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="组合数学" scheme="http://cmwqf.github.io/blog/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
@@ -481,28 +502,6 @@ n=\prod_{i=1}^wpi^{ai}&lt;/script&gt;
     
     
       <category term="数论" scheme="http://cmwqf.github.io/blog/tags/%E6%95%B0%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈purfer序列</title>
-    <link href="http://cmwqf.github.io/blog/2019/06/19/%E6%B5%85%E8%B0%88purfer%E5%BA%8F%E5%88%97/"/>
-    <id>http://cmwqf.github.io/blog/2019/06/19/浅谈purfer序列/</id>
-    <published>2019-06-19T07:09:38.000Z</published>
-    <updated>2019-11-30T08:59:14.110Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="什么是purfer序列"><a href="#什么是purfer序列" class="headerlink" title="什么是purfer序列"></a>什么是purfer序列</h1><p>purfer序列是用来表示一棵无根树的，一个purfer序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个purfer序列，一个purfer序列也可以还原出唯一的一个无根树。</p><a id="more"></a><h1 id="如何构造purfer序列"><a href="#如何构造purfer序列" class="headerlink" title="如何构造purfer序列"></a>如何构造purfer序列</h1><p>对于一棵无根树，我们首先每次找到当前编号最小的叶子节点（无根树中的叶子结点指度为1），然后将其从无根树中删掉，再将所有与这个节点相连的节点编号加入purfer序列末端，不断重复这个步骤，直到最后只剩下两个节点为止。</p><p>因此，$n$个点的purfer序列长度为$n-2$。</p><h1 id="如何还原无根树"><a href="#如何还原无根树" class="headerlink" title="如何还原无根树"></a>如何还原无根树</h1><p>如果已知一个purfer序列，我们是可以根据它还原无根树的，那么，怎么还原呢？</p><p>首先，我们把purfer序列中的每一个节点的度数设为1，然后加上每一个点在序列中出现的次数，作为这个点的度数。然后对于第i步：</p><p>先找出度数为1的所有的点中最小的那一个，设为$u$，将它与purfer序列中第i个节点$v$连边，然后将$u,v$的度数都减1。</p><p>最后，还剩下两个度数为1的点，将它们连边即可。</p><p>至于正确性，我也不会证明，知道就好了。。。</p><h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>purfer序列还有一个重要的性质：</p><p>我们考虑一个节点怎样才会被放入purfer序列里：当与它相连的节点被删除时，就会把它加进去。直到它自己被删除。</p><p>因此，我们可以得到：</p><p><strong>无根树中一个点的度数=这个点在purfer序列中出现的次数+1</strong></p><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href>bzoj1005明明的烦恼</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;什么是purfer序列&quot;&gt;&lt;a href=&quot;#什么是purfer序列&quot; class=&quot;headerlink&quot; title=&quot;什么是purfer序列&quot;&gt;&lt;/a&gt;什么是purfer序列&lt;/h1&gt;&lt;p&gt;purfer序列是用来表示一棵无根树的，一个purfer序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个purfer序列，一个purfer序列也可以还原出唯一的一个无根树。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="图论" scheme="http://cmwqf.github.io/blog/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-      <category term="生成树" scheme="http://cmwqf.github.io/blog/tags/%E7%94%9F%E6%88%90%E6%A0%91/"/>
     
   </entry>
   
