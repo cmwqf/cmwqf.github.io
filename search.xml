@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AGC009E Eternal Average]]></title>
+    <url>%2F2020%2F01%2F03%2FAGC009E-Eternal-Average%2F</url>
+    <content type="text"><![CDATA[Descrption有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？ Solution又是神仙题一道，$Atcoder$上的$dp$怎么都那么神仙啊。。。 考虑构造一个树形结构，有$n+m$个叶子节点，每次操作相当于给某$k$个点连上一个祖先，权值为其孩子的权值的平均数，显然，最后的答案是根节点的值。 考虑每个叶子节点的贡献，假设$n$个$0$叶子标号为$x1,x2,…xn$，$m$个$1$叶子标号为$y1,y2,…ym$，那么根节点的值就是$\sum k^{-yi}$。这个想一想就知道了。 其实想不到树形结构也没有关系，依然是考虑每个数$i$的贡献，若它被选了$t$次，那么它的贡献就是$\frac{a[i]}{k^t}$。其中$a[i]$是这个数的值。 然而后面的就不好想了，我们怎么计算这个东西的值呢？ 看到这样一个固定的值$k$的若干次方和，就应该想到转化为$k$进制数来统计。我们只要统计满足条件的$k$进制小数个数即可。 问题在于，满足什么条件的$k$进制小数才是合法的呢？ 我们假设这个$k$进制小数有$len$位，为$0.c1c_2c_3…c{len}$，那么首先，很显然地$\sum c_i\le m$（虽然显然，但是还是难以想到这是一个限制条件，可能这就是这一类题的套路吧），还有，如果不考虑进位，可以得知$\sum c_i=m$，然后，考虑每次进位，我们会损失掉$k$个数，但是我们会在前面一位加上1个数，也就是说，每次进位，我们会损失$k-1$个数，那么，另外一个限制条件是$\sum c_i\equiv m\quad (mod\quad k-1)$。 于是，我们就可以用$dp$，设$dp[i][j][0/1]$表示前$i$位，和为$j$，最后一位为$0$或其他的方案数即可。为什么要有最后一位？因为我们统计的时候最后一位一定是非零的，所以要单独拿出来。然后$dp$方程很显然，前缀和优化一下即可。 总结那么，这一道题，我们学到了什么？ 首先，对于一些元素进行运算的结果之类的问题，我们可以考虑每个元素的贡献，就会简单很多。 对于形如$\sum_{i=1}^n k^{t_i}$的不同结果数的形式，我们往往把它对应到一个$k$进制数上去统计，而统计的条件是$\sum c_i \le n$，$\sum c_i \equiv n\quad (mod\quad k-1)$，这一点如果没做过这类题，还是挺难想的。 总之，$Atcoder$上的$dp$题思维难度都很高，遇到没有思路的题目，想一想转化模型，比如建图，构树之类的，也许就会豁然开朗。 Code1234567891011121314151617181920212223242526272829303132#include &lt;bits/stdc++.h&gt;using namespace std; const int maxN = 2005, mod = 1e9 + 7; int n, m, k, len, ans;int f[maxN * 2 + 1][maxN + 1][2], sum[maxN * 2 + 1][maxN + 1]; inline int ADD(int x, int y) &#123; return x + y &gt;= mod ? x + y - mod : x + y; &#125; inline int SUB(int x, int y) &#123; return x - y &lt; 0 ? x - y + mod : x - y; &#125; int main()&#123; scanf("%d %d %d", &amp;n, &amp;m, &amp;k); len = (n + m - 1) / (k - 1); f[0][0][0] = 1; for(int i = 0; i &lt;= m; i++) sum[0][i] = 1; for(int i = 1; i &lt;= len; i++) for(int j = 0; j &lt;= m; j++) &#123; f[i][j][0] = ADD(f[i - 1][j][0], f[i - 1][j][1]); if(j) f[i][j][1] = SUB(sum[i - 1][j - 1], j &gt;= k ? sum[i - 1][j - k] : 0); int t = (i - 1) * (k - 1) + k - j; if(j &lt;= m &amp;&amp; j % (k - 1) == m % (k - 1) &amp;&amp; t &lt;= n &amp;&amp; t % (k - 1) == n % (k - 1)) ans = ADD(ans, f[i][j][1]); if(j) sum[i][j] = sum[i][j - 1]; sum[i][j] = ADD(sum[i][j], ADD(f[i][j][0], f[i][j][1])); &#125; printf("%d", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>Atcoder</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[浅谈Dilworth定理]]></title>
     <url>%2F2019%2F12%2F17%2F%E6%B5%85%E8%B0%88Dilworth%E5%AE%9A%E7%90%86%2F</url>
     <content type="text"><![CDATA[Dilworth定理$Dilworth$定理是组合数学的一个重要定理，它是定义在偏序集上的，在解决实际问题时非常有效。比如经典的题目“导弹拦截”。现在，我们就来对它一探究竟。 内容偏序集上最小链划分中链的数量等于其反链长度的最大值。 理解是不是一脸懵？ $Dilworth$定理是定义在偏序集上的，什么是偏序集？我们定义一种比较关系，使得两种元素之间进行比较，例如对于元素为二元组$(a,b),(c,d)$我们定义$(a,b)&lt;=(c,d)$当且仅当$a&lt;=c,b&lt;=d$，那么这两个元素就可比了，但是如果$a&gt;c,b&lt;=d$，那么这两个元素就不可比了。 偏序集可以允许不可比的元素存在，但是整个偏序集$S$要满足一下几个性质： 1.自反性： \forall a \in S,a]]></content>
@@ -40,8 +51,8 @@
         <category>BZOJ</category>
       </categories>
       <tags>
-        <tag>组合数学</tag>
         <tag>dp</tag>
+        <tag>组合数学</tag>
         <tag>容斥原理</tag>
       </tags>
   </entry>
@@ -66,8 +77,8 @@
     <url>%2F2019%2F07%2F29%2FLOJ6053-%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[Description有一个函数$f(x)$： f(1)=1\\ f(p^c)=p\oplus c(p\in Prime)\\ f(ab)=f(a)f(b)求$\sum_{i=1}^nf(i)\quad mod\quad 1e9+7$ Solution考虑$f(p)$的值，可以发现 f(p)= \begin{cases} p-1\quad(p\neq2)\\ p+1\quad(p=2) \end{cases}我们不妨假设所有的$f(p)=p-1$，最后只要在含有$p=2$的答案$+2$就行了。 按照之前讲的，直接积性函数计算并不好计算，所以我们把它拆成两个式子，一个是$p$，一个是$1$。 也就是说，我们改为计算 \sum_{i=1}^n[i\in Prime]i和\sum_{i=1}^n[i\in Prime]1所以我们只要维护这两个东西就好了，设为$g,h$。 那么，最后的计算就是 S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}P_i-(h(n,|P|)-(j-1))+...后面的就是之前推过的式子了。 注意，当$j==1$的时候，答案要加上$2$，之前说过的。 最后的答案就是$S(n,1)+1$了。 Code注意：随时取模。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include &lt;cstdio&gt;#include &lt;cmath&gt;#define int long longconst int maxN =1e6 + 100, mod = 1e9 + 7;int n, id1[maxN + 1], id2[maxN + 1], m, w[maxN + 1];int g[maxN + 1], h[maxN + 1], sum[maxN + 1];int prime[maxN + 1], tot, lim, inv2;bool flag[maxN + 1];inline int pow(int a, int x)&#123; int ans = 1; while(x) &#123; if(x &amp; 1) ans = ans * a % mod; a = a * a % mod; x &gt;&gt;= 1; &#125; return ans;&#125;inline void init()&#123; lim = std::sqrt(n); for(int i = 2; i &lt;= lim; i++) &#123; if(!flag[i]) prime[++ tot] = i, sum[tot] = (sum[tot - 1] + i) % mod; for(int j = 1; j &lt;= tot &amp;&amp; i * prime[j] &lt;= lim; j++) &#123; flag[i * prime[j]] = true; if(i % prime[j] == 0) break; &#125; &#125; int i = 1; inv2 = pow(2, mod - 2); while(i &lt;= n) &#123; int j = n / i, k = n / j; w[++ m] = j; if(w[m] &lt;= lim) id1[ w[m] ] = m; else id2[ n / w[m] ] = m; h[m] = (w[m] - 1) % mod; g[m] = w[m] % mod * ((w[m] + 1) % mod) % mod * inv2 % mod; g[m] = (g[m] - 1) % mod; i = k + 1; &#125; for(int j = 1; j &lt;= tot; j++) for(int i = 1; i &lt;= m &amp;&amp; prime[j] * prime[j] &lt;= w[i]; i++) &#123; int k = (w[i] / prime[j] &lt;= lim ? id1[ w[i] / prime[j] ] : id2[ n / (w[i] / prime[j]) ]); g[i] = (g[i] - prime[j] * (g[k] - sum[j - 1]) % mod) % mod; h[i] = (h[i] - h[k] + j - 1) % mod; &#125;&#125;inline int S(int x, int y)&#123; if(x &lt;= 1 || prime[y] &gt; x) return 0; int k = (x &lt;= lim ? id1[x] : id2[n / x]), res = g[k] - sum[y - 1] - (h[k] - (y - 1)); res %= mod; if(y == 1) res = (res + 2) % mod; for(int i = y; i &lt;= tot &amp;&amp; prime[i] * prime[i] &lt;= x; i++) for(int j = 1, t = prime[i]; t * prime[i] &lt;= x; j++, t *= prime[i]) res = (res + S(x / t, i + 1) * (prime[i] ^ j) % mod + (prime[i] ^ (j + 1)) % mod) % mod; return res;&#125;#undef intint main()#define int long long&#123; scanf("%lld", &amp;n); init(); int ans = S(n, 1) + 1; printf("%lld", (ans % mod + mod) % mod); return 0;&#125;]]></content>
       <tags>
-        <tag>数论</tag>
         <tag>Min_25筛</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -75,8 +86,8 @@
     <url>%2F2019%2F07%2F29%2FMin-25%E7%AD%9B%E7%95%A5%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[Min_25筛大名鼎鼎的$Min25$筛，是用来干什么的呢？ 它是用来求积性函数前缀和$\sum f(i)$的，而且复杂度很优，是$O(\frac{N^\frac{3}{4}}{log_2N})$。使用它要满足一下几个条件： 1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来 对于第二个条件，我的理解是如果遇到一个类似$p^{a1}+p^{a2}+…$，把每一项分开来算（后面的例题可以看出），这样才能算出来，也就是说，即使一个函数$f$是积性函数，比如$f(p)=p-1(p\in Prime),f(ab)=f(a)f(b)$，也不能直接拿$f(p)=p-1$来筛，而是把它拆成两个$f1(p)=p,f2(p)=1$，再来算。 求解g我们考虑先设 g(n,j)=\sum_{i=1}^n[i\in Prime\quad or\quad min(p)>Prime_j,p|i,p\in Prime]f(i)换句话说，$g(n,j)$就是1到n中是质数或最小质因子大于$Prime_j$的贡献和。 然后，我们计算出对于所有$x=\lfloor\frac{n}{i}\rfloor$的$g(x,j)$的值。我们考虑怎么计算转移。 如果$Prime_j^2&gt;x$，那么答案不会产生变化。 如果$Prime_j^2&lt;=x$，那么答案相较于$g(x,j-1)$会减少，减少的量容斥一下就好了。 后面的$Prime_j$用$P_j$表示。 g(x,j)= \begin{cases} g(x,j-1)\quad (P_j^2>x)\\ g(x,j-1)-f(P_j)*(g(\lfloor\frac{x}{P_j}\rfloor,j-1)-\sum_{i=1}^{j-1}f(P_i))\quad (P_j^2=P_j]f(i)这个怎么转移呢？我们先把质数的算出来，然后考虑合数，我们可以枚举它的最小质因子和它出现的次数，就可以转移了。 S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2]]></content>
       <tags>
-        <tag>数论</tag>
         <tag>Min_25筛</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -96,7 +107,7 @@
     <url>%2F2019%2F07%2F26%2F%E6%B5%85%E8%B0%88%E9%AB%98%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%2F</url>
     <content type="text"><![CDATA[高维前缀和什么是高维前缀和？其实，高维前缀和是用来计算子集和的问题的，也就是 ans[S]=\sum_{T\subset S}a[T] 实现原理我们举个例子，比如我们如果要求二维前缀和，我们可以这样 123for(int i = 1; i &lt;= n; i++) for(int j = 1; j &lt;= m; j++) a[i][j] += a[i - 1][j] + a[i][j - 1] - a[i - 1][j - 1]; 但我们也可以这样 1234for(int i = 1; i &lt;= n; i++) for(int j = 1; j &lt;= m; j++) a[i][j] += a[i][j - 1];for(int i = 1; i &lt;= n; i++) for(int j = 1; j &lt;= m; j++) a[i][j] += a[i - 1][j]; 看起来多了一重，但实际上并非如此。 在更高维的情况下，如果采用上面的容斥方法，时间复杂度是$O(n*2^d)$，其中$d$是维度。 但用后者，时间复杂度是$O(n*d)$。 显然后者更优秀。 模板给一个模板吧 123for(int i = 0; i &lt; n; i++) for(int j = 0; j &lt; (1 &lt;&lt; n); j++) if(j &amp; (1 &lt;&lt; i)) f[j] += f[j ^ (1 &lt;&lt; i)];]]></content>
       <tags>
-        <tag>组合计数</tag>
+        <tag>组合数学</tag>
       </tags>
   </entry>
   <entry>
@@ -263,8 +274,8 @@
     <url>%2F2019%2F03%2F02%2FCrash%E7%9A%84%E6%96%87%E6%98%8E%E4%B8%96%E7%95%8C%2F</url>
     <content type="text"><![CDATA[Crash的文明世界 Description给定一棵树和k，求： F(i)=\sum_{j=1}^ndist(i,j)^k Solution这一题有一个弱化版，就是$k=1$，是一个非常简单的换根dp(其实我都觉得不是dp): STA-Station 而且，这一题也用了那一题的思路。 废话少说，来看这一题： 先推式子。 \sum_{j=1}^ndist(i,j)^k=\sum_{j=1}^n\sum_{t=0}^{min(dist(i,j),k)}S(k,t)*t!*C(dist(i,j),t)我们假设$dist(i,j)&gt;k$，毕竟，k的范围要比n要小得多。 则原式变为： \sum_{j=1}^n\sum_{t=0}^kS(k,t)*t!*C(dist(i,j),t)\\ =\sum_{t=0}^kS(k,t)*t!*\sum_{j=1}^nC(dist(i,j),t)前面那个式子直接暴力计算，我们主要需要计算的，是 \sum_{j=1}^nC(dist(i,j),t)首先我们假设1为根，然后设$f[u][t]$为以$u$为根的子树中所有节点$v$的$C(dist(u,v),t)$之和。 我们再设一个$g[u][t]$指整棵树中除了$u$的子树的所有节点$v$的$C(dist(u,v),t)$之和。 我们用$v\in u$表示v在u的子树里，则上面的定义可以写成： f[u][t]=\sum_{v\in u}C(dist(u,v),t)\\ g[u][t]=\sum_{v\notin u}C(dist(u,v),t)我们知道： C(n,m)=C(n-1,m)+C(n-1,m-1)所以，我们就能进行转移啦： f[u][t]=\sum_{v\in u}C(dist(u,v),t)\\ =[t=0]+\sum_{v\in u,u\neq v}\sum_{w\in v}C(dist(v,w)+1,t)为什么要加上那一个$[t=0]$，因为如果t=0的话，$0^0=1$，所以要在统计子树的同时统计自己的贡献。 这个可以直接特判掉： f[u][0]=1+\sum_{v\in u}f[v][0]剩下的就是$t&gt;1$的情况，就不用特别地写$u\neq v$了： \sum_{v\in u}\sum_{w\in v}C(dist(v,w)+1,t)\\ =\sum_{v\in u}\sum_{w\in v}(C(dist(v,w),t)+C(dist(v,w),t-1))\\ =\sum_{v\in u}f[v][t]+f[v][t-1]这就好转移了。 但是，怎么求g呢？ g[u][t]=\sum_{v\notin u}C(dist(u,v),t)\\ =\sum_{v\notin pa}C(dist(pa,v)+1,t)+\sum_{v\in pa}C(dist(pa,v)+1,t)-\sum_{v\in u}C((dist(u,v)+1)+1,t)其中，最后那个式子中的$dist(u,v)+1$指的是：$dist(pa,v)(v\in pa且v\in u)$ 所以， g[u][t]=g[pa][t]+g[pa][t-1]+f[pa][t]+f[pa][t-1]-f[u][t]-2*f[u][t-1]-f[u][t-2]然后，然后好像就好了。 第二类斯特林数就暴力计算就好了。 注意：在计算g的时候，$u==1$的时候无需计算，而且计算要放在循环外面，不然叶子节点就计算不到，我就因为这个一直过不去样例（丢脸）。 PS：我的代码风格可能有较大改变，因为学习了大佬 @menci 的代码风格。 Code12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182#include &lt;cstdio&gt;#include &lt;iostream&gt;using namespace std;const int maxN = 1e5 + 100, mod = 10007;struct Node&#123; int to, next;&#125;edge[maxN * 2 + 1];int S[200][200], n, k, fac[200];int tot, head[maxN + 1];int f[maxN + 1][200], g[maxN + 1][200];inline int read()&#123; int num = 0, f = 1; char ch = getchar(); while(!isdigit(ch)) &#123;if(ch == '-') f = -1; ch = getchar(); &#125; while(isdigit(ch)) num = (num &lt;&lt; 3) + (num &lt;&lt; 1) + (ch ^ 48), ch = getchar(); return num * f;&#125;inline void add(int x, int y)&#123; tot ++; edge[tot].to = y; edge[tot].next = head[x]; head[x] = tot;&#125;inline void dfs1(int u, int pa)&#123; f[u][0]=1; for(int i = head[u]; i; i = edge[i].next) if(edge[i].to != pa) &#123; int v = edge[i].to; dfs1(v, u); f[u][0] = (f[u][0] + f[v][0]) % mod; for(int j = 1; j &lt;= k; j++) f[u][j] = (f[u][j] + f[v][j] + f[v][j - 1]) % mod; &#125;&#125;inline void dfs2(int u, int pa)&#123; if(u != 1) &#123; g[u][0] = ((g[pa][0] + f[pa][0] - f[u][0]) % mod + mod) % mod; g[u][1] = ((g[pa][1] + g[pa][0] + f[pa][1] + f[pa][0] - f[u][1] - 2 * f[u][0]) % mod + mod) % mod; for(int j = 2; j &lt;= k; j++) g[u][j] = ((g[pa][j] + g[pa][j - 1] + f[pa][j] + f[pa][j - 1] - f[u][j] - 2 * f[u][j - 1] - f[u][j - 2]) % mod + mod) % mod; &#125; for(int i = head[u]; i; i = edge[i].next) if(edge[i].to != pa) dfs2(edge[i].to, u);&#125;int main()&#123; n = read(), k = read(); for(int i = 1; i &lt; n; i++) &#123; int x = read(), y = read(); add(x, y); add(y, x); &#125; fac[0] = 1; for(int i = 1; i &lt;= k; i++) fac[i] = fac[i - 1] * i % mod; S[0][0] = 1; for(int i = 1; i &lt;= k; i++) for(int j = 1; j &lt;= i; j++) S[i][j] = (S[i - 1][j - 1] + S[i - 1][j] * j % mod) % mod; dfs1(1, 0); dfs2(1, 0); for(int i = 1; i &lt;= n; i++) &#123; int ans = 0; for(int j = 0; j &lt;= k; j++) ans = (ans + S[k][j] * fac[j] % mod * (f[i][j] + g[i][j]) % mod) % mod; printf("%d\n", ans); &#125; return 0;&#125;]]></content>
       <tags>
-        <tag>组合数学</tag>
         <tag>dp</tag>
+        <tag>组合数学</tag>
       </tags>
   </entry>
   <entry>
