@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Descrption有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-03T08:45:13.467Z">
+<meta property="og:updated_time" content="2020-01-03T08:48:22.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AGC009E Eternal Average">
 <meta name="twitter:description" content="Descrption有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
@@ -456,7 +456,9 @@
 <p>看到这样一个固定的值$k$的若干次方和，就应该想到转化为$k$进制数来统计。我们只要统计满足条件的$k$进制小数个数即可。</p>
 <p>问题在于，满足什么条件的$k$进制小数才是合法的呢？</p>
 <p>首先，我们把$xi$也看成$1$，那么就有$\sum k^{-xi}+\sum k^{-yi}=1$（考虑那棵树的意义即可，这个真的很难想到诶），所以，当我们确定了其中$\sum k^{-yi}$的$k$进制小数时，$\sum k^{-xi}$的小数也确定了，所以，对于一个$k$进制小数$c$，我们不仅要看它能不能写成$c=\sum k^{-yi}$的形式，也要看是否有$1-c=\sum k^{-xi}$。那么，我们怎么看是否有$c=\sum k^{-yi}$呢？</p>
-<p>我们假设这个$k$进制小数有$len$位，为$c<em>1,c_2,c_3,…,c</em>{len}$，那么首先，很显然地$\sum c_i\le m$（虽然显然，但是还是难以想到这是一个限制条件，可能这就是这一类题的套路吧），还有，如果不考虑进位，可以得知$\sum c_i=m$，然后，考虑每次进位，我们会损失掉$k$个数，但是我们会在前面一位加上1个数，也就是说，每次进位，我们会损失$k-1$个数，那么，另外一个限制条件是$\sum c_i\equiv m\quad (mod\quad k-1)$。</p>
+<p>我们假设这个$k$进制小数有$len$位，为</p>
+<script type="math/tex; mode=display">
+c_1,c_2,c_3,...,c_{len}</script><p>那么首先，很显然地$\sum c_i\le m$（虽然显然，但是还是难以想到这是一个限制条件，可能这就是这一类题的套路吧），还有，如果不考虑进位，可以得知$\sum c_i=m$，然后，考虑每次进位，我们会损失掉$k$个数，但是我们会在前面一位加上1个数，也就是说，每次进位，我们会损失$k-1$个数，那么，另外一个限制条件是$\sum c_i\equiv m\quad (mod\quad k-1)$。</p>
 <p>所以这个限制对于$1-c$也是同理的，我们可以算出来$\sum(1-c)_i=(len-1)\times (k-1)+k-\sum c_i$，$(1-c)_i$表示$1-c$的第$i$位。那么，统计的时候如此判断一下即可。</p>
 <p>于是，我们就可以用$dp$，设$dp[i][j][0/1]$表示前$i$位，和为$j$，最后一位为$0$或其他的方案数即可。为什么要有最后一位？因为我们统计的时候最后一位一定是非零的，所以要单独拿出来。然后$dp$方程很显然，前缀和优化一下即可。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>那么，这一道题，我们学到了什么？</p>
