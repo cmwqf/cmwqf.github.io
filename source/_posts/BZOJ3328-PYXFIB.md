@@ -36,7 +36,7 @@ A=\left[
 $$
 这样，将二项式定理推广到矩阵形式，我们有
 $$
-\sum_{i=0}^nC_n^iFib_i=(A+I)^n,
+\sum_{i=0}^nC_n^iFib_i=(A+I)^n_{1,1},
 I=
 \left[
 \begin{matrix}
