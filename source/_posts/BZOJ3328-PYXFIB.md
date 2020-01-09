@@ -2,6 +2,7 @@
 title: '[BZOJ3328]PYXFIB'
 date: 2020-01-09 11:01:25
 tags: [数论]
+categories: [BZOJ]
 ---
 
 # Description
