@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cmwqf.github.io/blog/"/>
-  <updated>2020-01-08T09:19:33.036Z</updated>
+  <updated>2020-01-09T03:18:12.583Z</updated>
   <id>http://cmwqf.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[BZOJ3328]PYXFIB</title>
+    <link href="http://cmwqf.github.io/blog/2020/01/09/BZOJ3328-PYXFIB/"/>
+    <id>http://cmwqf.github.io/blog/2020/01/09/BZOJ3328-PYXFIB/</id>
+    <published>2020-01-09T03:01:25.000Z</published>
+    <updated>2020-01-09T03:18:12.583Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定$n,k,p$且保证$k|p-1$，求</p><script type="math/tex; mode=display">\sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}</script><p>$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$</p><h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>又一次被打败了。。。</p><p>看这个式子形式就很不好搞，我们换一种</p><script type="math/tex; mode=display">\sum_{i=0}^n[k|i]C_n^iFib_i</script><p>一般看到组合数和某个数相乘之和，首先想到二项式定理，考虑把$Fib_i$化成$x^i$的形式。</p><p>注意到$Fib<em>i=(A^i)</em>{1,1}$，其中</p><script type="math/tex; mode=display">A=\left[\begin{matrix}1 & 1\\1 & 0\end{matrix}\right]</script><p>这样，将二项式定理推广到矩阵形式，我们有</p><script type="math/tex; mode=display">\sum_{i=0}^nC_n^iFib_i=(A+I)^n,I=\left[\begin{matrix}1 & 0\\0 & 1\end{matrix}\right]</script><p>然而，那个$[k|i]$有什么用呢？</p><p>如果你看了上面那篇<strong>原根及其应用</strong>，你就会明白，</p><script type="math/tex; mode=display">[k|i]=\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij},w_k=g^{\frac{p-1}{k}}</script><p>这样，原式等于</p><script type="math/tex; mode=display">\frac{1}{k}\sum_{i=0}^n\sum_{j=0}^{k-1}w_k^{ij}C_n^iFib_i\\=\frac{1}{k}\sum_{j=0}^{k-1}\sum_{i=0}^{n}w_k^{ij}C_n^iFib_i\\=\frac{1}{k}\sum_{j=0}^{k-1}(A*w_k^{j}+I)^n_{1,1}</script><p>然后直接矩阵快速幂即可。</p><p>复杂度$O(klogn)$。</p><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line">LL mod, n, k;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">matrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    LL a[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"> </span><br><span class="line">    matrix() &#123; <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a)); &#125;</span><br><span class="line"> </span><br><span class="line">    matrix <span class="keyword">operator</span> * (matrix rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        matrix ans;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                    ans.a[i][j] = (ans.a[i][j] + a[i][k] * rhs.a[k][j] % mod) % mod;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">mpow</span><span class="params">(LL a, LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = ans * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">check</span><span class="params">(LL g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL x = mod - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">2</span>; i * i &lt;= x; i++)</span><br><span class="line">        <span class="keyword">if</span>(x % i == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(mpow(g, (mod - <span class="number">1</span>) / i) == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">while</span>(x % i == <span class="number">0</span>) x /= i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(x != <span class="number">1</span> &amp;&amp; mpow(g, (mod - <span class="number">1</span>) / x) == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">solve</span><span class="params">(LL w, LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    matrix a;</span><br><span class="line">    a.a[<span class="number">0</span>][<span class="number">0</span>] = w + <span class="number">1</span>, a.a[<span class="number">0</span>][<span class="number">1</span>] = w;</span><br><span class="line">    a.a[<span class="number">1</span>][<span class="number">0</span>] = w, a.a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    matrix ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) ans.a[i][i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = ans * a;</span><br><span class="line">        a = a * a;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans.a[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T --)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld %lld %lld"</span>, &amp;n, &amp;k, &amp;mod);</span><br><span class="line">        LL ans = <span class="number">0</span>, g = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>( !check(g) ) g ++;</span><br><span class="line">        LL w = <span class="number">1</span>, wn = mpow(g, (mod - <span class="number">1</span>) / k);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++, w = w * wn % mod) ans = (ans + solve(w, n)) % mod;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans * mpow(k, mod - <span class="number">2</span>) % mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h1&gt;&lt;p&gt;给定$n,k,p$且保证$k|p-1$，求&lt;/p&gt;
+&lt;script 
+      
+    
+    </summary>
+    
+    
+      <category term="数论" scheme="http://cmwqf.github.io/blog/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈原根及其应用</title>
+    <link href="http://cmwqf.github.io/blog/2020/01/08/%E6%B5%85%E8%B0%88%E5%8E%9F%E6%A0%B9%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/"/>
+    <id>http://cmwqf.github.io/blog/2020/01/08/浅谈原根及其应用/</id>
+    <published>2020-01-08T15:18:50.000Z</published>
+    <updated>2020-01-09T03:00:23.316Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h1><p>要想了解原根，先了解什么是阶。</p><p>数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。</p><p>而原根，就是定义在阶的基础上的：</p><p>如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。</p><p>如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。</p><a id="more"></a><h1 id="原根的性质"><a href="#原根的性质" class="headerlink" title="原根的性质"></a>原根的性质</h1><p>原根有什么性质？<br>以下我们都讨论$p$为质数的情况，合数则只要把$p-1$换成$\phi(p)$即可。</p><p><strong>对于$\forall 1 \le i,j \le p-1,i\neq j$，都有$g^i\not\equiv g^j \quad(mod\quad p)$。</strong></p><p>证明：</p><p>考虑反证法，如果$\exist 1\le i,j\le p-1,i\neq j$，有$g^i\equiv g^j\quad (mod \quad p)$，不妨设$i&lt;j$，那么就有$g^{j-i}\equiv 1\quad (mod\quad p)$，而$0&lt;j-i&lt;p-1$，这与原根的定义矛盾，所以假设不成立。</p><p>证毕。</p><p>这是一个非常好的性质，为后面作为单位根做铺垫。</p><h1 id="原根的应用"><a href="#原根的应用" class="headerlink" title="原根的应用"></a>原根的应用</h1><p>单位根。</p><p>复数的单位根，指的是将$2\pi$平均分为$k$份，而复数$(cos(\frac{2\pi}{k}),sin(\frac{2\pi}{k}))$就是单位根，记为$w_k$。它有什么性质呢？</p><p>由其在复平面上的性质，我们可以发现$w_k^i,0\le i\le k-1$两两不同（考虑在单位圆中旋转，每次旋转$\frac{2\pi}{k}$，在此范围内不会重合）。而$FFT$也是利用了这个性质（将$n$个不同的数带入多项式，将多项式转为点值表示法）。</p><p>那么，在模意义下的单位根，原根就派上了用场。</p><p>记$w_k=g^{\frac{p-1}{k}}$，前提是$k|p-1$，这也是$NTT$模数必须是$2^m+1$的形式的重要原因（也因此，$NTT$不能处理长度为$1e7$的数列，因为这样会使$k$过大而无法满足$k| p - 1$)。</p><p><strong>那么，我们依然有$0\le i\le k-1,w_k^i$两两不同。</strong></p><p>证明也很显然，因为$\frac{i(p-1)}{k}&lt;p-1$，根据原根的性质，必然是两两不同的。</p><p>这也是$NTT$所依赖的性质。</p><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>如果我们要求某个值，给定$n,k,p$,且保证$k|p-1$</p><script type="math/tex; mode=display">\sum_{i=0}^n[k|i]F(i)\quad(mod\quad p)</script><p>怎么办？</p><p>意思就是说，当$k|i$时才对答案产生贡献，否则不产生贡献。</p><p>那么我们要构造一个函数，使得当$k|i$时，这个函数值为$1$，否则为$0$。</p><p>考虑单位根$w_k=g^{\frac{p-1}{k}}$，构造</p><script type="math/tex; mode=display">\sum_{j=0}^{k-1}w_k^{ij}</script><p>可以发现，如果$k|i$，那么每一项都是$1$，这个数就等于$k$。</p><p>否则，根据等比数列求和，它等于</p><script type="math/tex; mode=display">\frac{w_k^{ki}-1}{w^i-1}=\frac{1-1}{w^i-1}=0</script><p>这样，</p><script type="math/tex; mode=display">\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij}</script><p>就能完美地满足我们的要求了。</p><p>是不是很巧妙呢？</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;原根&quot;&gt;&lt;a href=&quot;#原根&quot; class=&quot;headerlink&quot; title=&quot;原根&quot;&gt;&lt;/a&gt;原根&lt;/h1&gt;&lt;p&gt;要想了解原根，先了解什么是阶。&lt;/p&gt;
+&lt;p&gt;数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。&lt;/p&gt;
+&lt;p&gt;而原根，就是定义在阶的基础上的：&lt;/p&gt;
+&lt;p&gt;如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。&lt;/p&gt;
+&lt;p&gt;如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="数论" scheme="http://cmwqf.github.io/blog/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>AGC020C Median Sum</title>
@@ -81,30 +129,6 @@
     
     
       <category term="组合数学" scheme="http://cmwqf.github.io/blog/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://cmwqf.github.io/blog/2019/11/30/hello-world/"/>
-    <id>http://cmwqf.github.io/blog/2019/11/30/hello-world/</id>
-    <published>2019-11-30T08:59:14.104Z</published>
-    <updated>2019-11-30T08:59:14.104Z</updated>
-    
-    <content type="html"><![CDATA[<p>cmwqf将在这里写出自己的oi历程。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;cmwqf将在这里写出自己的oi历程。&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="开始" scheme="http://cmwqf.github.io/blog/tags/%E5%BC%80%E5%A7%8B/"/>
     
   </entry>
   
@@ -243,9 +267,9 @@ f(ab)=f(a)f(b)&lt;/script&gt;&lt;p&gt;求$\sum_{i=1}^nf(i)\quad mod\quad 1e9+7$&
     </summary>
     
     
-      <category term="Min_25筛" scheme="http://cmwqf.github.io/blog/tags/Min-25%E7%AD%9B/"/>
-    
       <category term="数论" scheme="http://cmwqf.github.io/blog/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+      <category term="Min_25筛" scheme="http://cmwqf.github.io/blog/tags/Min-25%E7%AD%9B/"/>
     
   </entry>
   
@@ -270,9 +294,9 @@ f(ab)=f(a)f(b)&lt;/script&gt;&lt;p&gt;求$\sum_{i=1}^nf(i)\quad mod\quad 1e9+7$&
     </summary>
     
     
-      <category term="Min_25筛" scheme="http://cmwqf.github.io/blog/tags/Min-25%E7%AD%9B/"/>
-    
       <category term="数论" scheme="http://cmwqf.github.io/blog/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+      <category term="Min_25筛" scheme="http://cmwqf.github.io/blog/tags/Min-25%E7%AD%9B/"/>
     
   </entry>
   
@@ -469,31 +493,6 @@ max(S)=\sum_{T\subset S}(-1)^{|T|-1}min(T)&lt;/script&gt;
       <category term="dp" scheme="http://cmwqf.github.io/blog/tags/dp/"/>
     
       <category term="斜率优化dp" scheme="http://cmwqf.github.io/blog/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96dp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈FWT快速沃尔什变换</title>
-    <link href="http://cmwqf.github.io/blog/2019/07/06/%E6%B5%85%E8%B0%88FWT%E5%BF%AB%E9%80%9F%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2/"/>
-    <id>http://cmwqf.github.io/blog/2019/07/06/浅谈FWT快速沃尔什变换/</id>
-    <published>2019-07-06T15:05:27.000Z</published>
-    <updated>2019-11-30T08:59:14.109Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="快速沃尔什变换"><a href="#快速沃尔什变换" class="headerlink" title="快速沃尔什变换"></a>快速沃尔什变换</h1><p>FWT与FFT类似，只不过是进行集合卷积的计算，如：</p><script type="math/tex; mode=display">C_k=\sum_{i\oplus j = k} A_i*B_j\\其中\oplus是位运算,可以是与,或,异或等</script><a id="more"></a><h1 id="或-or-运算的FWT"><a href="#或-or-运算的FWT" class="headerlink" title="或(or)运算的FWT"></a>或(or)运算的FWT</h1><p>我们考虑或的FWT，如果我们有一个集合$A_i$，设$FWT(A)=A’$那么$A’_i$的意义就是这个集合所有子集的贡献之和。</p><script type="math/tex; mode=display">A'_i=\sum_{i|j=i}A_j</script><p>这样，因为$k|(i|j)=k$可以推出$k|i=k,k|j=k$我们可以得到一个结论：</p><script type="math/tex; mode=display">C'_k=\sum_{k|t=k}C_t=\sum_{k|t=k}\sum_{i|j=t}A_i*B_j=\sum_{k|(i|j)=k}A_i*B_j\\=(\sum_{k|i=k}A_i)*(\sum_{k|j=k}B_j)=A'_k*B'_k</script><p>这样我们来看$A’$是怎么求的。</p><p>我们考虑吧$A$长度补为$2^k$，分为两半，$A0$是前面一半，表示第一位是0，$A1$是后面一半，表示第一位是1。</p><p>然后，我们也把$A’$分为两半来考虑，前面一半是第一位是0，那么它的子集就是$A0’$（它本身），后面一半第一位是1，它的子集既有$A1‘$(它本身)，还有$A0’$。</p><p>所以</p><script type="math/tex; mode=display">A'=merge(A0',A0'+A1')\\即FWT(A)=merge(FWT(A_0),FWT(A_0)+FWT(A_1))</script><p>其中，$merge$就是将两个数组拼接在一起，$+$表示对应下标的数相加。</p><p>这样我们就能在$O(nlogn)$的复杂度内求出了$FWT(A)$。</p><p>这样，我们就可以算出$FWT(C)$，那么，我们怎么把$FWT(C)$转回来呢？</p><script type="math/tex; mode=display">FWT(A)_0:FWT(A)的前半部分,FWT(A_0):A的前半部分的FWT\\\because FWT(A)_0=FWT(A_0)\\\therefore A_0 = IFWT(FWT(A_0))=IFWT(FWT(A)_0)\\\because FWT(A)_1=FWT(A_0)+FWT(A_1)\\\therefore A_1=IFWT(FWT(A_1))=IFWT(FWT(A)_1-FWT(A)_0)</script><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">FWT(A)=\begin{cases}(FWT(A_0),FWT(A_0+A_1))\quad(n\neq 1)\\A\quad(n=1)\end{cases}</script><p>下面写$IFWT$，注意，此时大括号后面的$A$是已经$FWT$过后的$A$</p><script type="math/tex; mode=display">IFWT(A)=\begin{cases}(IFWT(A_0),IFWT(A_1-A_0))\quad(n \neq 1)\\A\quad(n = 1)\end{cases}</script><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">                        a[i + mid + j] += a[i + j] * type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="与-and-运算的FWT"><a href="#与-and-运算的FWT" class="headerlink" title="与(and)运算的FWT"></a>与(and)运算的FWT</h1><p>证明太麻烦了，直接上结论吧，这个和上面或的差不多。</p><h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">FWT(A)=\begin{cases}(FWT(A_0+A_1),FWT(A_1))\quad(n\neq 1)\\A\quad (n=1)\end{cases}\\IFWT(A)=\begin{cases}(IFWT(A_0-A_1),IFWT(A_1))\quad (n\neq 1)\\A\quad(n=1)\end{cases}</script><h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">a[i + j] += a[i + mid + j] * type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="异或-xor-运算的FWT"><a href="#异或-xor-运算的FWT" class="headerlink" title="异或(xor)运算的FWT"></a>异或(xor)运算的FWT</h1><p>这个最难。</p><p>尝试证明，却失败.jpg</p><h2 id="结论-2"><a href="#结论-2" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">FWT(A)=\begin{cases}(FWT(A_0)+FWT(A_1),FWT(A_0)-FWT(A_1))\quad (n \neq 1)\\A\quad (n = 1)\end{cases}\\IFWT(A)=\begin{cases}(\frac{IFWT(A_0)+IFWT(A_1)}{2},\frac{IFWT(A_0)-IFWT(A_1)}{2})\quad(n\neq 1)\\A\quad(n=1)\end{cases}</script><h2 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x = a[i + j], y = a[i + mid + j];</span><br><span class="line">                a[i + j] = x + y;</span><br><span class="line">                a[i + mid + j] = x - y;</span><br><span class="line">                <span class="keyword">if</span>(type == <span class="number">-1</span>) a[i + j] /= <span class="number">2</span>, a[i + mid + j] /= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;快速沃尔什变换&quot;&gt;&lt;a href=&quot;#快速沃尔什变换&quot; class=&quot;headerlink&quot; title=&quot;快速沃尔什变换&quot;&gt;&lt;/a&gt;快速沃尔什变换&lt;/h1&gt;&lt;p&gt;FWT与FFT类似，只不过是进行集合卷积的计算，如：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-C_k=\sum_{i\oplus j = k} A_i*B_j\\
-其中\oplus是位运算,可以是与,或,异或等&lt;/script&gt;
-    
-    </summary>
-    
-    
-      <category term="多项式" scheme="http://cmwqf.github.io/blog/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
-    
-      <category term="FWT" scheme="http://cmwqf.github.io/blog/tags/FWT/"/>
     
   </entry>
   

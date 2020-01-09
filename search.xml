@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[BZOJ3328]PYXFIB]]></title>
+    <url>%2F2020%2F01%2F09%2FBZOJ3328-PYXFIB%2F</url>
+    <content type="text"><![CDATA[Description给定$n,k,p$且保证$k|p-1$，求 \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$ Solution又一次被打败了。。。 看这个式子形式就很不好搞，我们换一种 \sum_{i=0}^n[k|i]C_n^iFib_i一般看到组合数和某个数相乘之和，首先想到二项式定理，考虑把$Fib_i$化成$x^i$的形式。 注意到$Fibi=(A^i){1,1}$，其中 A=\left[ \begin{matrix} 1 & 1\\ 1 & 0 \end{matrix} \right]这样，将二项式定理推广到矩阵形式，我们有 \sum_{i=0}^nC_n^iFib_i=(A+I)^n, I= \left[ \begin{matrix} 1 & 0\\ 0 & 1 \end{matrix} \right]然而，那个$[k|i]$有什么用呢？ 如果你看了上面那篇原根及其应用，你就会明白， [k|i]=\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij},w_k=g^{\frac{p-1}{k}}这样，原式等于 \frac{1}{k}\sum_{i=0}^n\sum_{j=0}^{k-1}w_k^{ij}C_n^iFib_i\\ =\frac{1}{k}\sum_{j=0}^{k-1}\sum_{i=0}^{n}w_k^{ij}C_n^iFib_i\\ =\frac{1}{k}\sum_{j=0}^{k-1}(A*w_k^{j}+I)^n_{1,1}然后直接矩阵快速幂即可。 复杂度$O(klogn)$。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081#include &lt;bits/stdc++.h&gt;using namespace std; #define LL long long int T;LL mod, n, k; struct matrix&#123; LL a[2][2]; matrix() &#123; memset(a, 0, sizeof(a)); &#125; matrix operator * (matrix rhs) &#123; matrix ans; for(int i = 0; i &lt; 2; i++) for(int j = 0; j &lt; 2; j++) for(int k = 0; k &lt; 2; k++) ans.a[i][j] = (ans.a[i][j] + a[i][k] * rhs.a[k][j] % mod) % mod; return ans; &#125; &#125;; inline LL mpow(LL a, LL x)&#123; LL ans = 1; while(x) &#123; if(x &amp; 1) ans = ans * a % mod; a = a * a % mod; x &gt;&gt;= 1; &#125; return ans;&#125; inline bool check(LL g)&#123; LL x = mod - 1; for(LL i = 2; i * i &lt;= x; i++) if(x % i == 0) &#123; if(mpow(g, (mod - 1) / i) == 1) return false; while(x % i == 0) x /= i; &#125; if(x != 1 &amp;&amp; mpow(g, (mod - 1) / x) == 1) return false; return true;&#125; inline LL solve(LL w, LL x)&#123; matrix a; a.a[0][0] = w + 1, a.a[0][1] = w; a.a[1][0] = w, a.a[1][1] = 1; matrix ans; for(int i = 0; i &lt; 2; i++) ans.a[i][i] = 1; while(x) &#123; if(x &amp; 1) ans = ans * a; a = a * a; x &gt;&gt;= 1; &#125; return ans.a[0][0];&#125; int main()&#123; scanf("%d", &amp;T); while(T --) &#123; scanf("%lld %lld %lld", &amp;n, &amp;k, &amp;mod); LL ans = 0, g = 2; while( !check(g) ) g ++; LL w = 1, wn = mpow(g, (mod - 1) / k); for(int i = 0; i &lt; k; i++, w = w * wn % mod) ans = (ans + solve(w, n)) % mod; printf("%lld\n", ans * mpow(k, mod - 2) % mod); &#125; return 0;&#125;]]></content>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[浅谈原根及其应用]]></title>
+    <url>%2F2020%2F01%2F08%2F%E6%B5%85%E8%B0%88%E5%8E%9F%E6%A0%B9%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。 原根的性质原根有什么性质？以下我们都讨论$p$为质数的情况，合数则只要把$p-1$换成$\phi(p)$即可。 对于$\forall 1 \le i,j \le p-1,i\neq j$，都有$g^i\not\equiv g^j \quad(mod\quad p)$。 证明： 考虑反证法，如果$\exist 1\le i,j\le p-1,i\neq j$，有$g^i\equiv g^j\quad (mod \quad p)$，不妨设$i&lt;j$，那么就有$g^{j-i}\equiv 1\quad (mod\quad p)$，而$0&lt;j-i&lt;p-1$，这与原根的定义矛盾，所以假设不成立。 证毕。 这是一个非常好的性质，为后面作为单位根做铺垫。 原根的应用单位根。 复数的单位根，指的是将$2\pi$平均分为$k$份，而复数$(cos(\frac{2\pi}{k}),sin(\frac{2\pi}{k}))$就是单位根，记为$w_k$。它有什么性质呢？ 由其在复平面上的性质，我们可以发现$w_k^i,0\le i\le k-1$两两不同（考虑在单位圆中旋转，每次旋转$\frac{2\pi}{k}$，在此范围内不会重合）。而$FFT$也是利用了这个性质（将$n$个不同的数带入多项式，将多项式转为点值表示法）。 那么，在模意义下的单位根，原根就派上了用场。 记$w_k=g^{\frac{p-1}{k}}$，前提是$k|p-1$，这也是$NTT$模数必须是$2^m+1$的形式的重要原因（也因此，$NTT$不能处理长度为$1e7$的数列，因为这样会使$k$过大而无法满足$k| p - 1$)。 那么，我们依然有$0\le i\le k-1,w_k^i$两两不同。 证明也很显然，因为$\frac{i(p-1)}{k}&lt;p-1$，根据原根的性质，必然是两两不同的。 这也是$NTT$所依赖的性质。 例题如果我们要求某个值，给定$n,k,p$,且保证$k|p-1$ \sum_{i=0}^n[k|i]F(i)\quad(mod\quad p)怎么办？ 意思就是说，当$k|i$时才对答案产生贡献，否则不产生贡献。 那么我们要构造一个函数，使得当$k|i$时，这个函数值为$1$，否则为$0$。 考虑单位根$w_k=g^{\frac{p-1}{k}}$，构造 \sum_{j=0}^{k-1}w_k^{ij}可以发现，如果$k|i$，那么每一项都是$1$，这个数就等于$k$。 否则，根据等比数列求和，它等于 \frac{w_k^{ki}-1}{w^i-1}=\frac{1-1}{w^i-1}=0这样， \frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij}就能完美地满足我们的要求了。 是不是很巧妙呢？]]></content>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[AGC020C Median Sum]]></title>
     <url>%2F2020%2F01%2F08%2FAGC020C-Median-Sum%2F</url>
     <content type="text"><![CDATA[Description给定$n$个数$a_i$，求这$n$个数构成的$2^n-1$个子集的和的中位数。 $(n\le 2000,a_i\le 2000)$ Solution$Atcoder$的题面永远那么简单，思维难度依然那么高。。。 看到这个中位数就感到很头疼，这么大的范围，感觉可能就是一个结论题。 确实是结论题，只是想不到。。。 设$sum$表示这些数的和。 考虑任何一个$\sum q_i&lt; \frac{1}{2}sum$的非空也非全集的子集${q}$，那么它的补集，记为$q$，因为$\sum p_i + \sum q_i = sum$，必然有$\sum q_i &gt; \frac{1}{2}sum$，所以，如果把所有和不等于$\frac{1}{2}sum$的子集分为$&lt;\frac{1}{2}sum$及$&gt;\frac{1}{2}sum$两组，两组之间的元素是一一对应的。也就是说，两组中的元素个数是相等的！ 一一对应推到出个数相等，这是数学中的常用技巧，也适用于信息竞赛中。 然后，等于$\frac{1}{2}sum$的子集个数显然也是偶数个，因此，这个集合的中位数就相当于在$\frac{1}{2}sum$的中间位置划了一条线，前面和后面的元素个数相等。 最后，因为最终的集合个数又加了一个总的和（加在最后），所以中位数就是所有出现的和中第一个$\ge \frac{1}{2}sum$的数。注意，因为$sum$可能是奇数，所以应该是$\ge (sum+1)/2$。 那么，考虑怎么维护最终所有可能出现的和的集合？ 动态规划？超时。而$BUG$般的存在$bitset$就能完美地在$O(\frac{n^2\times max(a_i) }{w})$的时间解决这道题了。 哎，思维还是不太行呢。。。 Code1234567891011121314151617181920#include &lt;bits/stdc++.h&gt;using namespace std;const int N = 2010;int n, sum, x;bitset&lt;N * N&gt; s;int main()&#123; scanf("%d", &amp;n); s[0] = 1; for(int i = 1; i &lt;= n; i++) scanf("%d", &amp;x), s = s | (s &lt;&lt; x), sum += x; sum = (sum + 1) / 2; for(int i = 1; i &lt; N * N; i++) if(s[i] &amp;&amp; i &gt;= sum) &#123; printf("%d", i); return 0; &#125; return 0;&#125;]]></content>
@@ -29,14 +45,6 @@
     <content type="text"><![CDATA[Dilworth定理$Dilworth$定理是组合数学的一个重要定理，它是定义在偏序集上的，在解决实际问题时非常有效。比如经典的题目“导弹拦截”。现在，我们就来对它一探究竟。 内容偏序集上最小链划分中链的数量等于其反链长度的最大值。 理解是不是一脸懵？ $Dilworth$定理是定义在偏序集上的，什么是偏序集？我们定义一种比较关系，使得两种元素之间进行比较，例如对于元素为二元组$(a,b),(c,d)$我们定义$(a,b)&lt;=(c,d)$当且仅当$a&lt;=c,b&lt;=d$，那么这两个元素就可比了，但是如果$a&gt;c,b&lt;=d$，那么这两个元素就不可比了。 偏序集可以允许不可比的元素存在，但是整个偏序集$S$要满足一下几个性质： 1.自反性： \forall a \in S,a]]></content>
       <tags>
         <tag>组合数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F11%2F30%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[cmwqf将在这里写出自己的oi历程。]]></content>
-      <tags>
-        <tag>开始</tag>
       </tags>
   </entry>
   <entry>
@@ -89,8 +97,8 @@
     <url>%2F2019%2F07%2F29%2FLOJ6053-%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[Description有一个函数$f(x)$： f(1)=1\\ f(p^c)=p\oplus c(p\in Prime)\\ f(ab)=f(a)f(b)求$\sum_{i=1}^nf(i)\quad mod\quad 1e9+7$ Solution考虑$f(p)$的值，可以发现 f(p)= \begin{cases} p-1\quad(p\neq2)\\ p+1\quad(p=2) \end{cases}我们不妨假设所有的$f(p)=p-1$，最后只要在含有$p=2$的答案$+2$就行了。 按照之前讲的，直接积性函数计算并不好计算，所以我们把它拆成两个式子，一个是$p$，一个是$1$。 也就是说，我们改为计算 \sum_{i=1}^n[i\in Prime]i和\sum_{i=1}^n[i\in Prime]1所以我们只要维护这两个东西就好了，设为$g,h$。 那么，最后的计算就是 S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}P_i-(h(n,|P|)-(j-1))+...后面的就是之前推过的式子了。 注意，当$j==1$的时候，答案要加上$2$，之前说过的。 最后的答案就是$S(n,1)+1$了。 Code注意：随时取模。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include &lt;cstdio&gt;#include &lt;cmath&gt;#define int long longconst int maxN =1e6 + 100, mod = 1e9 + 7;int n, id1[maxN + 1], id2[maxN + 1], m, w[maxN + 1];int g[maxN + 1], h[maxN + 1], sum[maxN + 1];int prime[maxN + 1], tot, lim, inv2;bool flag[maxN + 1];inline int pow(int a, int x)&#123; int ans = 1; while(x) &#123; if(x &amp; 1) ans = ans * a % mod; a = a * a % mod; x &gt;&gt;= 1; &#125; return ans;&#125;inline void init()&#123; lim = std::sqrt(n); for(int i = 2; i &lt;= lim; i++) &#123; if(!flag[i]) prime[++ tot] = i, sum[tot] = (sum[tot - 1] + i) % mod; for(int j = 1; j &lt;= tot &amp;&amp; i * prime[j] &lt;= lim; j++) &#123; flag[i * prime[j]] = true; if(i % prime[j] == 0) break; &#125; &#125; int i = 1; inv2 = pow(2, mod - 2); while(i &lt;= n) &#123; int j = n / i, k = n / j; w[++ m] = j; if(w[m] &lt;= lim) id1[ w[m] ] = m; else id2[ n / w[m] ] = m; h[m] = (w[m] - 1) % mod; g[m] = w[m] % mod * ((w[m] + 1) % mod) % mod * inv2 % mod; g[m] = (g[m] - 1) % mod; i = k + 1; &#125; for(int j = 1; j &lt;= tot; j++) for(int i = 1; i &lt;= m &amp;&amp; prime[j] * prime[j] &lt;= w[i]; i++) &#123; int k = (w[i] / prime[j] &lt;= lim ? id1[ w[i] / prime[j] ] : id2[ n / (w[i] / prime[j]) ]); g[i] = (g[i] - prime[j] * (g[k] - sum[j - 1]) % mod) % mod; h[i] = (h[i] - h[k] + j - 1) % mod; &#125;&#125;inline int S(int x, int y)&#123; if(x &lt;= 1 || prime[y] &gt; x) return 0; int k = (x &lt;= lim ? id1[x] : id2[n / x]), res = g[k] - sum[y - 1] - (h[k] - (y - 1)); res %= mod; if(y == 1) res = (res + 2) % mod; for(int i = y; i &lt;= tot &amp;&amp; prime[i] * prime[i] &lt;= x; i++) for(int j = 1, t = prime[i]; t * prime[i] &lt;= x; j++, t *= prime[i]) res = (res + S(x / t, i + 1) * (prime[i] ^ j) % mod + (prime[i] ^ (j + 1)) % mod) % mod; return res;&#125;#undef intint main()#define int long long&#123; scanf("%lld", &amp;n); init(); int ans = S(n, 1) + 1; printf("%lld", (ans % mod + mod) % mod); return 0;&#125;]]></content>
       <tags>
-        <tag>Min_25筛</tag>
         <tag>数论</tag>
+        <tag>Min_25筛</tag>
       </tags>
   </entry>
   <entry>
@@ -98,8 +106,8 @@
     <url>%2F2019%2F07%2F29%2FMin-25%E7%AD%9B%E7%95%A5%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[Min_25筛大名鼎鼎的$Min25$筛，是用来干什么的呢？ 它是用来求积性函数前缀和$\sum f(i)$的，而且复杂度很优，是$O(\frac{N^\frac{3}{4}}{log_2N})$。使用它要满足一下几个条件： 1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来 对于第二个条件，我的理解是如果遇到一个类似$p^{a1}+p^{a2}+…$，把每一项分开来算（后面的例题可以看出），这样才能算出来，也就是说，即使一个函数$f$是积性函数，比如$f(p)=p-1(p\in Prime),f(ab)=f(a)f(b)$，也不能直接拿$f(p)=p-1$来筛，而是把它拆成两个$f1(p)=p,f2(p)=1$，再来算。 求解g我们考虑先设 g(n,j)=\sum_{i=1}^n[i\in Prime\quad or\quad min(p)>Prime_j,p|i,p\in Prime]f(i)换句话说，$g(n,j)$就是1到n中是质数或最小质因子大于$Prime_j$的贡献和。 然后，我们计算出对于所有$x=\lfloor\frac{n}{i}\rfloor$的$g(x,j)$的值。我们考虑怎么计算转移。 如果$Prime_j^2&gt;x$，那么答案不会产生变化。 如果$Prime_j^2&lt;=x$，那么答案相较于$g(x,j-1)$会减少，减少的量容斥一下就好了。 后面的$Prime_j$用$P_j$表示。 g(x,j)= \begin{cases} g(x,j-1)\quad (P_j^2>x)\\ g(x,j-1)-f(P_j)*(g(\lfloor\frac{x}{P_j}\rfloor,j-1)-\sum_{i=1}^{j-1}f(P_i))\quad (P_j^2=P_j]f(i)这个怎么转移呢？我们先把质数的算出来，然后考虑合数，我们可以枚举它的最小质因子和它出现的次数，就可以转移了。 S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2]]></content>
       <tags>
-        <tag>Min_25筛</tag>
         <tag>数论</tag>
+        <tag>Min_25筛</tag>
       </tags>
   </entry>
   <entry>
@@ -201,8 +209,8 @@
     <url>%2F2019%2F06%2F26%2F%E4%BC%AF%E5%8A%AA%E5%88%A9%E6%95%B0%E7%9B%B8%E5%85%B3%2F</url>
     <content type="text"><![CDATA[伯努利数伯努利数，它的发明其实就是为了解决自然数幂和的问题的，所以，并没有什么具体的含义。 那么，怎样定义它呢？ 我们可以采取递归定义法（因为另一种我看不懂）： 伯努利数B，满足： B_0=1,\\ \sum_{k=0}^nC(n+1,k)*B_k=0 这样，我们就可以推出B的递推式了： B_n=-\frac{1}{n+1}\sum_{k=0}^{n-1}C(n+1,k)*B_k还有一种求B的方法是多项式求逆，这个以后再学吧，先留个坑。。 伯努利数与自然数幂和当n很大，而k很小的时候，就可以用上这个公式。 这是一个公式，具体推导太复杂，根本记不住（看不懂），只能强记公式了： \sum_{i=1}^ni^k=\frac{1}{k+1}\sum_{i=0}^{k}C(k+1,i)*B_i*n^{k+1-i}]]></content>
       <tags>
-        <tag>组合数学</tag>
         <tag>数论</tag>
+        <tag>组合数学</tag>
       </tags>
   </entry>
   <entry>
