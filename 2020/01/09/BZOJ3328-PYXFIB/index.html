@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$ Solution又一次被打败了。。。 看这个式子形式就很不好搞，我们换一种  \sum_{i=0}^n[k|i]C_n^iFib_i">
+<meta name="description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$">
 <meta name="keywords" content="数论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[BZOJ3328]PYXFIB">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2020/01/09/BZOJ3328-PYXFIB/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$ Solution又一次被打败了。。。 看这个式子形式就很不好搞，我们换一种  \sum_{i=0}^n[k|i]C_n^iFib_i">
+<meta property="og:description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-09T03:19:21.368Z">
+<meta property="og:updated_time" content="2020-01-09T03:22:28.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[BZOJ3328]PYXFIB">
-<meta name="twitter:description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$ Solution又一次被打败了。。。 看这个式子形式就很不好搞，我们换一种  \sum_{i=0}^n[k|i]C_n^iFib_i">
+<meta name="twitter:description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$">
 
 
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  604
+                  606
                 </span>
               
 
@@ -454,6 +454,7 @@
         <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定$n,k,p$且保证$k|p-1$，求</p>
 <script type="math/tex; mode=display">
 \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}</script><p>$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$</p>
+<a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>又一次被打败了。。。</p>
 <p>看这个式子形式就很不好搞，我们换一种</p>
 <script type="math/tex; mode=display">
@@ -467,7 +468,7 @@ A=\left[
 \end{matrix}
 \right]</script><p>这样，将二项式定理推广到矩阵形式，我们有</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^nC_n^iFib_i=(A+I)^n,
+\sum_{i=0}^nC_n^iFib_i=(A+I)^n_{1,1},
 I=
 \left[
 \begin{matrix}
