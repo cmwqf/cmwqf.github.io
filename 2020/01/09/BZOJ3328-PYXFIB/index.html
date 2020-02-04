@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-09T03:22:28.944Z">
+<meta property="og:updated_time" content="2020-01-25T06:22:56.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[BZOJ3328]PYXFIB">
 <meta name="twitter:description" content="Description给定$n,k,p$且保证$k|p-1$，求  \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}$Fib$指斐波那契数列。$n\le 1e18,k\le 2e5,p\le 1e9$">
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  606
+                  607
                 </span>
               
 
@@ -459,7 +459,9 @@
 <p>看这个式子形式就很不好搞，我们换一种</p>
 <script type="math/tex; mode=display">
 \sum_{i=0}^n[k|i]C_n^iFib_i</script><p>一般看到组合数和某个数相乘之和，首先想到二项式定理，考虑把$Fib_i$化成$x^i$的形式。</p>
-<p>注意到$Fib<em>i=(A^i)</em>{1,1}$，其中</p>
+<p>注意到</p>
+<script type="math/tex; mode=display">
+Fib_i=(A^i)_{1,1}</script><p>，其中</p>
 <script type="math/tex; mode=display">
 A=\left[
 \begin{matrix}
@@ -524,6 +526,10 @@ I=
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/15/多项式牛顿迭代及相关/" rel="prev" title="多项式牛顿迭代及相关">
+                多项式牛顿迭代及相关 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -605,7 +611,7 @@ I=
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

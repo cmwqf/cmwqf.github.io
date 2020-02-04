@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Descrption有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
+<meta name="description" content="Description有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
 <meta name="keywords" content="dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AGC009E Eternal Average">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2020/01/03/AGC009E-Eternal-Average/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Descrption有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
+<meta property="og:description" content="Description有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-03T08:48:22.102Z">
+<meta property="og:updated_time" content="2020-01-09T03:25:48.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AGC009E Eternal Average">
-<meta name="twitter:description" content="Descrption有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
+<meta name="twitter:description" content="Description有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？">
 
 
 
@@ -451,7 +451,7 @@
       
 
       
-        <h1 id="Descrption"><a href="#Descrption" class="headerlink" title="Descrption"></a>Descrption</h1><p>有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？</p>
 <a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>又是神仙题一道，$Atcoder$上的$dp$怎么都那么神仙啊。。。</p>
 <p>考虑构造一个树形结构，有$n+m$个叶子节点，每次操作相当于给某$k$个点连上一个祖先，权值为其孩子的权值的平均数，显然，最后的答案是根节点的值。</p>
@@ -595,7 +595,7 @@ c_1,c_2,c_3,...,c_{len}</script><p>那么首先，很显然地$\sum c_i\le m$（
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -657,7 +657,7 @@ c_1,c_2,c_3,...,c_{len}</script><p>那么首先，很显然地$\sum c_i\le m$（
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Descrption"><span class="nav-number">1.</span> <span class="nav-text">Descrption</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
 
           </div>
