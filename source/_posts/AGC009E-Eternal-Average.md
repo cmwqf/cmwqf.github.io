@@ -5,7 +5,7 @@ tags: [dp]
 categories: [Atcoder]
 ---
 
-# Descrption
+# Description
 
 有$n$个0和$m$个1，每次选出$k$个数删去，并把它们的平均数加入，最后只剩下一个数字（保证$k-1|n+m-1$），问最后剩下的数字有多少种可能？
 
