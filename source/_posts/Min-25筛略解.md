@@ -24,7 +24,7 @@ $$
 $$
 g(n,j)=\sum_{i=1}^n[i\in Prime\quad or\quad min(p)>Prime_j,p|i,p\in Prime]f(i)
 $$
-换句话说，$g(n,j)$就是1到n中是质数或最小质因子大于$Prime_j$的贡献和。
+换句话说，$g(n,j)$就是$1$到$n$中是质数或最小质因子大于$Prime_j$的贡献和。
 
 然后，我们计算出对于所有$x=\lfloor\frac{n}{i}\rfloor$的$g(x,j)$的值。我们考虑怎么计算转移。
 
