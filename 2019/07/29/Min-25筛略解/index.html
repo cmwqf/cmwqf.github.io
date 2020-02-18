@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Min_25筛大名鼎鼎的$Min25$筛，是用来干什么的呢？ 它是用来求积性函数前缀和$\sum f(i)$的，而且复杂度很优，是$O(\frac{N^\frac{3}{4}}{log_2N})$。使用它要满足一下几个条件：  1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-30T08:59:14.103Z">
+<meta property="og:updated_time" content="2020-02-05T08:36:58.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Min_25筛略解">
 <meta name="twitter:description" content="Min_25筛大名鼎鼎的$Min25$筛，是用来干什么的呢？ 它是用来求积性函数前缀和$\sum f(i)$的，而且复杂度很优，是$O(\frac{N^\frac{3}{4}}{log_2N})$。使用它要满足一下几个条件：  1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  459
+                  460
                 </span>
               
 
@@ -438,7 +438,7 @@
 <p>对于第二个条件，我的理解是如果遇到一个类似$p^{a1}+p^{a2}+…$，把每一项分开来算（后面的例题可以看出），这样才能算出来，也就是说，即使一个函数$f$是积性函数，比如$f(p)=p-1(p\in Prime),f(ab)=f(a)f(b)$，也不能直接拿$f(p)=p-1$来筛，而是把它拆成两个$f1(p)=p,f2(p)=1$，再来算。</p>
 <h1 id="求解g"><a href="#求解g" class="headerlink" title="求解g"></a>求解g</h1><p>我们考虑先设</p>
 <script type="math/tex; mode=display">
-g(n,j)=\sum_{i=1}^n[i\in Prime\quad or\quad min(p)>Prime_j,p|i,p\in Prime]f(i)</script><p>换句话说，$g(n,j)$就是1到n中是质数或最小质因子大于$Prime_j$的贡献和。</p>
+g(n,j)=\sum_{i=1}^n[i\in Prime\quad or\quad min(p)>Prime_j,p|i,p\in Prime]f(i)</script><p>换句话说，$g(n,j)$就是$1$到$n$中是质数或最小质因子大于$Prime_j$的贡献和。</p>
 <p>然后，我们计算出对于所有$x=\lfloor\frac{n}{i}\rfloor$的$g(x,j)$的值。我们考虑怎么计算转移。</p>
 <ol>
 <li><p>如果$Prime_j^2&gt;x$，那么答案不会产生变化。</p>
@@ -590,7 +590,7 @@ S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -612,7 +612,7 @@ S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
