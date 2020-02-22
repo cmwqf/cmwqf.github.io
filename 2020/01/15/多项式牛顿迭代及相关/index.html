@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="愿你走出半生，归来仍是少年">
+<meta name="description" content="泰勒公式多项式牛顿迭代是很多多项式有关算法的基础，而要了解多项式牛顿迭代，首先要知道泰勒展开公式。 泰勒公式定义如下： 如果$f(x)$在某个包含$x_0$的闭区间$[a,b]$存在$n$阶导数，且在开区间$(a,b)$上存在$n+1$阶导数，则对于$[a,b]$中任意一点$x$，有如下式子成立  f(x)=\frac{f(x_0)}{0!}+\frac{f&apos;(x_0)}{1!}(x-x_0)+.">
 <meta name="keywords" content="生成函数,多项式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多项式牛顿迭代及相关">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2020/01/15/多项式牛顿迭代及相关/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="愿你走出半生，归来仍是少年">
+<meta property="og:description" content="泰勒公式多项式牛顿迭代是很多多项式有关算法的基础，而要了解多项式牛顿迭代，首先要知道泰勒展开公式。 泰勒公式定义如下： 如果$f(x)$在某个包含$x_0$的闭区间$[a,b]$存在$n$阶导数，且在开区间$(a,b)$上存在$n+1$阶导数，则对于$[a,b]$中任意一点$x$，有如下式子成立  f(x)=\frac{f(x_0)}{0!}+\frac{f&apos;(x_0)}{1!}(x-x_0)+.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-15T03:38:58.421Z">
+<meta property="og:updated_time" content="2020-02-22T11:08:48.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多项式牛顿迭代及相关">
-<meta name="twitter:description" content="愿你走出半生，归来仍是少年">
+<meta name="twitter:description" content="泰勒公式多项式牛顿迭代是很多多项式有关算法的基础，而要了解多项式牛顿迭代，首先要知道泰勒展开公式。 泰勒公式定义如下： 如果$f(x)$在某个包含$x_0$的闭区间$[a,b]$存在$n$阶导数，且在开区间$(a,b)$上存在$n+1$阶导数，则对于$[a,b]$中任意一点$x$，有如下式子成立  f(x)=\frac{f(x_0)}{0!}+\frac{f&apos;(x_0)}{1!}(x-x_0)+.">
 
 
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  1.8k
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  8
                 </span>
               
             </div>
@@ -429,7 +429,101 @@
       
 
       
-        
+        <h1 id="泰勒公式"><a href="#泰勒公式" class="headerlink" title="泰勒公式"></a>泰勒公式</h1><p><strong>多项式牛顿迭代</strong>是很多多项式有关算法的基础，而要了解<strong>多项式牛顿迭代</strong>，首先要知道泰勒展开公式。</p>
+<p>泰勒公式定义如下：</p>
+<p>如果$f(x)$在某个包含$x_0$的闭区间$[a,b]$存在$n$阶导数，且在开区间$(a,b)$上存在$n+1$阶导数，则对于$[a,b]$中任意一点$x$，有如下式子成立</p>
+<script type="math/tex; mode=display">
+f(x)=\frac{f(x_0)}{0!}+\frac{f'(x_0)}{1!}(x-x_0)+...+\frac{f^{n}(x_0)}{n!}(x-x_0)^n+R_n(x)</script><p>这个$R_n(x)$指的是一个余项。</p>
+<a id="more"></a>
+<p>这个公式怎么证明，我也不太会，总之，记住就好了。</p>
+<p>那么，这个泰勒公式和<strong>多项式牛顿迭代</strong>有什么关系呢？</p>
+<h1 id="多项式牛顿迭代"><a href="#多项式牛顿迭代" class="headerlink" title="多项式牛顿迭代"></a>多项式牛顿迭代</h1><p>多项式牛顿迭代指的是：</p>
+<p>我们知道$G(x)$的表达式，要求解$G(F(x)) \equiv 0\quad (mod\quad x^n)$。</p>
+<p>换句话说，我们已知$G(x)$，$G(F(x)) \equiv 0\quad (mod\quad x^n)$，我们要求$F(x)$在$mod\quad x^n$下的表达式。</p>
+<p>类似多项式求逆的思想，</p>
+<p>我们假设已知$F_0(x)$满足$G(F_0(x))\equiv 0\quad (mod\quad x^{\frac{n}{2}})$。</p>
+<p><strong>注意，这里简写的$\frac{n}{2}$实际上是上取整，即$\lceil \frac{n}{2}\rceil$，以下所有的$\frac{n}{2}$均指上取整。</strong></p>
+<p>我们考虑$G(F(x))$在$F_0(x)$处的泰勒展开：</p>
+<script type="math/tex; mode=display">
+G(F(x))\equiv G(F_0(x))+\frac{G'(F_0(x))}{1!}(F(x)-F_0(x))\\+\frac{G''(F_0(x))}{2!}(F(x)-F_0(x))^2+...\quad (mod\quad x^n)</script><p>我们观察$(F(x)-F_0(x))^2$，由定义可知，$F(x)$和$F_0(x)$前$\frac{n}{2}-1$项是相同的那么$F(x)-F_0(x)$第一个非零之处是第$\frac{n}{2}$项，而平方一下就是第$n$项（因为上取整，所以也有可能是第$n+1$项），此时我们发现，因为是在$mod\quad x^n$意义下进行，所以这一项是没有用的。也就是说，在二阶导及其后面的所有项在$mod\quad x^n$下都是$0$，可以直接省略！</p>
+<p>那么，式子就变成了</p>
+<script type="math/tex; mode=display">
+G(F(x))\equiv G(F_0(x))+G'(F_0(x))(F(x)-F_0(x))\quad (mod\quad x^n)</script><p>而我们知道$G(F(x))\equiv 0\quad (mod\quad x^n)$，所以我们有</p>
+<script type="math/tex; mode=display">
+F(x)\equiv F_0(x)-\frac{G(F_0(x))}{G'(F_0(x))}\quad (mod\quad x^n)</script><p>这个，就是多项式牛顿迭代的式子。</p>
+<p><strong>值得注意的是，因为我们考虑的是$G(F(x))$在$F_0(x)$处的泰勒展开，整个过程相当于用$F(x)$代替了$x$，因此，我们在求导时，把$F(x)$看成变量而不是一个函数，而与$F(x)$无关的量不管是不是一个多项式都看成一个常数，这一点会在后面的$exp$中得到体现。</strong></p>
+<p>然而，求解这个东西也需要前置知识，下面，我们先讲一些基础。</p>
+<h1 id="多项式求逆"><a href="#多项式求逆" class="headerlink" title="多项式求逆"></a>多项式求逆</h1><p>什么是多项式求逆？</p>
+<p>类似求整数逆元，有的时候，我们要求已知$A(x)$，我们要求$B(x)$，满足$B(x)A(x)\equiv 1\quad(mod \quad x^n)$，</p>
+<p>我们假设我们已经知道$B_0(x)A(x)\equiv 1\quad(mod\quad x^{\frac{n}{2}})$，同样地，这里也是上取整。</p>
+<p>下面，我们来推式子：</p>
+<script type="math/tex; mode=display">
+B_0(x)A(x)-1\equiv 0\quad (mod\quad x^{\frac{n}{2}})\\
+B_0^2(x)A^2(x)-2B_0(x)A(x)+1\equiv 0(mod\quad x^{n})</script><p>注意到$B(x)A(x)\equiv 1\quad (mod\quad x^n)$，</p>
+<script type="math/tex; mode=display">
+B_0^2(x)A^2(x)-2B_0(x)A(x)+B(x)A(x)\equiv 0\quad (mod\quad x^n)\\
+B_0^2(x)A(x)-2B_0(x)+B(x)\equiv 0\quad (mod\quad x^n)\\
+B(x)\equiv B_0(x)(2-A(x)B_0(x))\quad (mod\quad x^n)</script><p>就这样一直迭代，每次用一下$NTT$，就好了。</p>
+<p>复杂度$O(nlog_2n)$。</p>
+<p>证明？</p>
+<p>考虑每一次迭代长度为$deg$，那么复杂度为$deglog_2deg$</p>
+<p>总的复杂度为</p>
+<script type="math/tex; mode=display">
+\sum deglog_2deg</script><p>我们把$log_2deg$看得大一点，都看成$log_2n$</p>
+<p>那么式子就变为</p>
+<script type="math/tex; mode=display">
+log_2n*\sum deg</script><p>后面那项相当于$n+n/2+n/4+…=2n$，所以复杂度为$O(nlog_2n)$</p>
+<h1 id="多项式求导"><a href="#多项式求导" class="headerlink" title="多项式求导"></a>多项式求导</h1><p>因为$(x^n)’=nx^{n-1}$</p>
+<p>所以</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) a[i - <span class="number">1</span>] = i * a[i];</span><br></pre></td></tr></table></figure>
+<h1 id="多项式积分"><a href="#多项式积分" class="headerlink" title="多项式积分"></a>多项式积分</h1><p>因为$\int x^n=\frac{1}{n+1}x^{n+1}$</p>
+<p>所以</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) a[i + <span class="number">1</span>] = a[i] * inv[i + <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+<p>但是注意，我们无法知道常数项。</p>
+<h1 id="多项式求ln"><a href="#多项式求ln" class="headerlink" title="多项式求ln"></a>多项式求ln</h1><p>给定多项式$A(x)$，我们现在要求$B(x)\equiv ln(A(x))\quad (mod\quad x^n)$。</p>
+<p>怎么求呢？</p>
+<p>我们先推式子</p>
+<script type="math/tex; mode=display">
+B'(x)\equiv \frac{1}{A(x)}*A'(x)\quad (mod\quad x^n)\\
+B'(x)\equiv \frac{A'(x)}{A(x)}\quad (mod\quad x^n)</script><p>那么，我们将$A(x)$求导，再求逆，然后两个乘起来就得到了$\frac{A’(x)}{A(x)}$，也就是$G’(x)$，然后由于</p>
+<script type="math/tex; mode=display">
+B(x)\equiv \int B'(x)</script><p>所以最后再求个积分即可。</p>
+<p>但是，我们这样会丢失常数项，所以常数项我们要手算，一般题目会给定$a_0=1$，因为这样$ln1=0$比较好算。</p>
+<p>这个贴代码太影响观看体验了，就不贴代码了吧。</p>
+<h1 id="多项式exp"><a href="#多项式exp" class="headerlink" title="多项式exp"></a>多项式exp</h1><p>一般来说，题目中要对生成函数进行什么操作，都是$ln$和$exp$复合再一起的，所以一般$ln$和$exp$放在一起用。</p>
+<p>什么是多项式$exp$？</p>
+<p>给定多项式$A(x)$，求$B(x)\equiv e^{A(x)}\quad (mod\quad x^n)$。</p>
+<p>这个时候，多项式牛顿迭代就派上用场了。</p>
+<p>考虑到$e$非常不好处理，我们两边取$ln$</p>
+<script type="math/tex; mode=display">
+ln(B(x))\equiv A(x)\quad(mod\quad x^n)\\
+ln(B(x))-A(x)\equiv 0\quad(mod\quad x^n)</script><p>那么，我们设$G(x)=ln(x)-A(x)$，$F(x)=B(x)$，那么我们就满足</p>
+<script type="math/tex; mode=display">
+G(F(x))\equiv 0\quad(mod\quad x^n)</script><p>且$G(x)$已知。</p>
+<p>那么，我们就按照多项式牛顿迭代</p>
+<script type="math/tex; mode=display">
+F(x)\equiv F_0(x)-\frac{G(F_0(x))}{G'(F_0(x))}\quad(mod\quad x^n)</script><p>下面，我们来看$G’(F_0(x))$是什么？</p>
+<p><strong>注意，这里的求导是对$F_0(x)$求导而不是对$x$求导，因此，式子中的$F_0(x)$被看成变量，而不是函数，而$A(x)$则被看成常数。</strong></p>
+<p>因此，</p>
+<script type="math/tex; mode=display">
+G'(F_0(x))=\frac{1}{F_0(x)}</script><p>所以</p>
+<script type="math/tex; mode=display">
+F(x)\equiv F_0(x)(1-ln(F_0(x))+A(x))</script><h1 id="多项式开方"><a href="#多项式开方" class="headerlink" title="多项式开方"></a>多项式开方</h1><p>当然，你可以选择$ln$之后$exp$，但是实际上牛顿迭代就可以解决。</p>
+<p>给定$A(x)$，我们要求$B(x)\equiv \sqrt{A(x)}\quad(mod\quad x^n)$。</p>
+<p>首先转化为牛顿迭代形式$B^2(x)-A(x)\equiv 0\quad(mod\quad x^n)$。</p>
+<p>令$F(x)=B(x)$，$G(F(x))=F^2(x)-A(x)$。</p>
+<p>那么</p>
+<script type="math/tex; mode=display">
+G'(F_0(x))=2F_0(x)</script><p>根据牛顿迭代</p>
+<script type="math/tex; mode=display">
+F(x)\equiv F_0(x)-\frac{G(F_0(x))}{G'(F_0(x))}\quad(mod\quad x^n)\\
+F(x)\equiv F_0(x)-\frac{F_0^2(x)-A(x)}{2F_0(x)}\quad(mod\quad x^n)\\
+F(x)\equiv \frac{1}{2}(F_0(x)+\frac{A(x)}{F_0(x)})\quad(mod\quad x^n)</script><p>然后直接多项式求逆牛顿迭代即可。</p>
+<p>注意，不管怎么牛顿迭代（包括这里我们在牛顿迭代求开方的时候还要牛顿迭代求$ln$）时间复杂度都是$O(nlog_2n)$。</p>
+<p>因为都是$T(n)=T(\frac{n}{2})+O(nlog_2n)$。</p>
+<h1 id="多项式快速幂"><a href="#多项式快速幂" class="headerlink" title="多项式快速幂"></a>多项式快速幂</h1><p>给定$A(x),k$，求$B(x)\equiv A^k(x)\quad(mod\quad x^n)$</p>
+<p>这个不用多说，先取$ln$，乘以$k$，然后$exp$。</p>
+
       
     </div>
     
@@ -528,8 +622,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -598,6 +701,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#泰勒公式"><span class="nav-number">1.</span> <span class="nav-text">泰勒公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式牛顿迭代"><span class="nav-number">2.</span> <span class="nav-text">多项式牛顿迭代</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式求逆"><span class="nav-number">3.</span> <span class="nav-text">多项式求逆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式求导"><span class="nav-number">4.</span> <span class="nav-text">多项式求导</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式积分"><span class="nav-number">5.</span> <span class="nav-text">多项式积分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式求ln"><span class="nav-number">6.</span> <span class="nav-text">多项式求ln</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式exp"><span class="nav-number">7.</span> <span class="nav-text">多项式exp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式开方"><span class="nav-number">8.</span> <span class="nav-text">多项式开方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式快速幂"><span class="nav-number">9.</span> <span class="nav-text">多项式快速幂</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
