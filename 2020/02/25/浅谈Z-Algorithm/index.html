@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Z_Algorithm（ex_kmp)什么是$Z$算法？ 对于一个字符串$s$，我们构造出一个数组$z$，$z[i]$表示$s$以$i$为开头的后缀与$s$的最长公共前缀（$lcp$）。 构造这个$z$数组的过程，就称为$Z-Algorithm$。 另外，$Z-Algorithm$是国外的说法，国内把称为$exkmp$，两者实际完全等价。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-25T12:52:42.730Z">
+<meta property="og:updated_time" content="2020-02-25T13:05:02.591Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈Z_Algorithm">
 <meta name="twitter:description" content="Z_Algorithm（ex_kmp)什么是$Z$算法？ 对于一个字符串$s$，我们构造出一个数组$z$，$z[i]$表示$s$以$i$为开头的后缀与$s$的最长公共前缀（$lcp$）。 构造这个$z$数组的过程，就称为$Z-Algorithm$。 另外，$Z-Algorithm$是国外的说法，国内把称为$exkmp$，两者实际完全等价。">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  944
+                  958
                 </span>
               
 
@@ -456,7 +456,7 @@
 <p>所以此时循环不会进行。</p>
 <p>综上，我们证明了每次循环都必定会让$r$增加，而$r$最多只会增长$n$次，所以时间复杂度是$O(n)$的。</p>
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>我们只求出了对于一个字符串$s$的$z$是没有用的，我们要通过这个来求另一个字符串$t$的所有后缀与$s$的最长公共前缀。</p>
-<p>方法很简单，就是我们对$s+’#‘+t$整个跑一遍$Z-Algorithm$，然后对$t$中每个位置直接访问其在新串中的位置的$z$数组就可以了。</p>
+<p>方法很简单，就是我们对$s+a+t$（$a$是某个$s$和$t$都没有的字符）整个跑一遍$Z-Algorithm$，然后对$t$中每个位置直接访问其在新串中的位置的$z$数组就可以了。</p>
 
       
     </div>
@@ -487,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/21/BZOJ4762-最小集合/" rel="next" title="BZOJ4762 最小集合">
-                <i class="fa fa-chevron-left"></i> BZOJ4762 最小集合
+              <a href="/2020/02/21/BZOJ4762-最小集合/" rel="next" title="[BZOJ4762]最小集合">
+                <i class="fa fa-chevron-left"></i> [BZOJ4762]最小集合
               </a>
             
           </div>
@@ -496,6 +496,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/28/ARC096E-Everything-on-it/" rel="prev" title="ARC096E Everything on it">
+                ARC096E Everything on it <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -577,7 +581,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -588,7 +592,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
