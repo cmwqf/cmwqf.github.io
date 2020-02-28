@@ -1,10 +1,9 @@
 ---
-title: Crash的文明世界
+title: '[BZOJ2159]Crash的文明世界'
 date: 2019-03-02 12:36:45
 tags: [dp,组合数学]
+categories: [BZOJ]
 ---
-
-[Crash的文明世界](https://www.luogu.org/problemnew/show/P4827)
 
 # Description
 

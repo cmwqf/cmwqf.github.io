@@ -1,11 +1,9 @@
 ---
-title: DZY Loves Math
+title: '[BZOJ3309]DZY Loves Math'
 date: 2019-03-08 16:55:45
 tags: [数论]
 categories: [BZOJ]
 ---
-
-[DZY Loves Math](https://www.lydsy.com/JudgeOnline/problem.php?id=3309)
 
 # Description
 
