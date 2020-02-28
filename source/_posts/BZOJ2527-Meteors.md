@@ -1,7 +1,8 @@
 ---
-title: '[POI2011]MET-Meteors'
+title: '[BZOJ2527]Meteors'
 date: 2019-09-13 17:13:51
 tags: [整体二分]
+categories: [BZOJ]
 ---
 
 # Description
