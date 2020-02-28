@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="组合数学,生成函数,">
+  <meta name="keywords" content="多项式,概率期望,FWT,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Description要带n个物品，要求： 汉堡：偶数个；可乐：0/1个；鸡腿：0/1/2个；蜜桃：奇数个； 鸡块：4的倍数个；包子0/1/2/3个；土豆：0/1个；面包：3的倍数个。 求所有情况的方案数，对10007取模。 注意：$1&amp;lt;=n&amp;lt;=10^{500}$">
-<meta name="keywords" content="组合数学,生成函数">
+<meta name="description" content="Description刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字$i$的概率是$p[i]$。保证$0&amp;lt;=p[i]&amp;lt;=1$，$\sum p[i]=1$问期望多少秒后，你手上的数字变成$2^n-1$。">
+<meta name="keywords" content="多项式,概率期望,FWT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="食物">
-<meta property="og:url" content="http://cmwqf.github.io/blog/2019/07/24/食物/index.html">
+<meta property="og:title" content="[BZOJ4036]按位或">
+<meta property="og:url" content="http://cmwqf.github.io/blog/2019/07/25/BZOJ4036-按位或/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Description要带n个物品，要求： 汉堡：偶数个；可乐：0/1个；鸡腿：0/1/2个；蜜桃：奇数个； 鸡块：4的倍数个；包子0/1/2/3个；土豆：0/1个；面包：3的倍数个。 求所有情况的方案数，对10007取模。 注意：$1&amp;lt;=n&amp;lt;=10^{500}$">
+<meta property="og:description" content="Description刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字$i$的概率是$p[i]$。保证$0&amp;lt;=p[i]&amp;lt;=1$，$\sum p[i]=1$问期望多少秒后，你手上的数字变成$2^n-1$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-30T08:59:14.116Z">
+<meta property="og:updated_time" content="2020-02-28T06:39:54.043Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="食物">
-<meta name="twitter:description" content="Description要带n个物品，要求： 汉堡：偶数个；可乐：0/1个；鸡腿：0/1/2个；蜜桃：奇数个； 鸡块：4的倍数个；包子0/1/2/3个；土豆：0/1个；面包：3的倍数个。 求所有情况的方案数，对10007取模。 注意：$1&amp;lt;=n&amp;lt;=10^{500}$">
+<meta name="twitter:title" content="[BZOJ4036]按位或">
+<meta name="twitter:description" content="Description刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字$i$的概率是$p[i]$。保证$0&amp;lt;=p[i]&amp;lt;=1$，$\sum p[i]=1$问期望多少秒后，你手上的数字变成$2^n-1$。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://cmwqf.github.io/blog/2019/07/24/食物/">
+  <link rel="canonical" href="http://cmwqf.github.io/blog/2019/07/25/BZOJ4036-按位或/">
 
 
 
 
 
-  <title>食物 | cmwqf's blog</title>
+  <title>[BZOJ4036]按位或 | cmwqf's blog</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/blog/2019/07/24/食物/">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/blog/2019/07/25/BZOJ4036-按位或/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cmwqf">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">食物</h1>
+          <h1 class="post-title" itemprop="name headline">[BZOJ4036]按位或</h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T22:23:49+08:00">
-                2019-07-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T16:04:11+08:00">
+                2019-07-25
               </time>
             
 
@@ -375,8 +375,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/07/24/食物/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/24/食物/" itemprop="commentCount"></span>
+                <a href="/2019/07/25/BZOJ4036-按位或/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/25/BZOJ4036-按位或/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -384,7 +384,7 @@
 
           
           
-             <span id="/2019/07/24/食物/" class="leancloud_visitors" data-flag-title="食物">
+             <span id="/2019/07/25/BZOJ4036-按位或/" class="leancloud_visitors" data-flag-title="[BZOJ4036]按位或">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  615
+                  641
                 </span>
               
 
@@ -451,42 +451,27 @@
       
 
       
-        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>要带n个物品，要求：</p>
-<p>汉堡：偶数个；可乐：0/1个；鸡腿：0/1/2个；蜜桃：奇数个；</p>
-<p>鸡块：4的倍数个；包子0/1/2/3个；土豆：0/1个；面包：3的倍数个。</p>
-<p>求所有情况的方案数，对10007取模。</p>
-<p><strong>注意：</strong>$1&lt;=n&lt;=10^{500}$</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字$i$的概率是$p[i]$。保证$0&lt;=p[i]&lt;=1$，$\sum p[i]=1$问期望多少秒后，你手上的数字变成$2^n-1$。</p>
 <a id="more"></a>
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>考虑生成函数。</p>
-<p>我们对每一种情况搞一个生成函数，其中$x^i$指选i个，前面的系数就是选$i$个的方案数。最后，将它们乘起来，取第$n$项的系数就好了。</p>
-<p>还是不清楚？继续往下看：</p>
-<p>对于第一个汉堡，只有偶数个才会有贡献，所以它的生成函数是</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>我们考虑$Min-max$容斥，题目相当于给我们一个大小为$n$的集合，每个元素为0/1，求这个集合全是1的期望步数，即这个集合最后一个元素变成1的期望步数，我们把它计为$max(S)$。</p>
+<p>根据$Min-max$容斥</p>
 <script type="math/tex; mode=display">
-1+x^2+x^4+...=\frac{1}{1-x^2}</script><p>第二个可乐，只要0/1个，所以它的生成函数是</p>
+E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))</script><p>那么问题就转化为如何求$E(min(T))$。</p>
+<p>考虑$E(min(T))$的意思是一个集合中第一个出现1的元素的期望时间。</p>
+<p>只要一个与这个集合有交的集合与它或，那么它就会出现1。</p>
+<p>那么每步让集合$T$有一个元素变成1的概率就是(此处的$S$不同于上面的$S$)</p>
 <script type="math/tex; mode=display">
-1+x</script><p>同理，后面的也一样，我们把所有的合在一起，分别是：</p>
+P=\sum_{T\cap S}p[S]</script><p>那么，我们考虑这样一个问题，一个事件，我们每步有$P$的概率成功，问这个事件成功的期望步数。</p>
+<p>可以看成走每步会成功$P$次，所以成功1次期望走$\frac{1}{P}$步。</p>
+<p>即</p>
 <script type="math/tex; mode=display">
-\frac{1}{1-x^2}\\
-1+x\\
-1+x+x^2\\
-x+x^3+x^5+...=\frac{x}{1-x^2}\\
-1+x^4+x^8+...=\frac{1}{1-x^4}\\
-1+x+x^2+x^3\\
-1+x\\
-1+x^3+x^6+...=\frac{1}{1-x^3}</script><p>他们乘起来，等于</p>
+E(min(T))=\frac{1}{\sum_{T\cap S}p[S]}</script><p>但这样貌似也不太好弄的样子，所以我们将它进行一个补集转化，变成</p>
 <script type="math/tex; mode=display">
-\frac{x}{(1-x)^4}</script><p>然后，我们要把这个式子转化为普通形式。怎么办？</p>
-<p>原来这个式子可以写成</p>
-<script type="math/tex; mode=display">
-x(1+x+x^2+...)^4</script><p>前面被提出来了一个$x$，那么我们就要求的是后面那个东西第$n-1$项的系数。</p>
-<p>我们考虑它的组合意义，其实，它就是一个生成函数，第$n$项的系数表示把$n$拆成4个数的方案数(可以拆成0）。那么，我们就可以用插板法解决系数了。</p>
-<p>就相当于我们有n个小球，要分成3组，每组可以为空的方案数。</p>
-<p>那么低$n-1$项的系数是$C_{n-1+4-1}^3$，即</p>
-<script type="math/tex; mode=display">
-ans=C_{n+2}^3=\frac{n(n+1)(n+2)}{6}</script><p>本题还有一个难点在于$n$很大，应该怎么读入呢？</p>
-<p>因为</p>
-<script type="math/tex; mode=display">
-(a+b)\quad mod\quad p=a\quad mod\quad p+ b\quad mod\quad p</script><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">500</span> + <span class="number">10</span>, mod = <span class="number">10007</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> n, len;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pow</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(x)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = ans * a % mod;</span><br><span class="line">		a = a * a % mod;</span><br><span class="line">		x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>, s + <span class="number">1</span>);</span><br><span class="line">	len = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">		n = (n * <span class="number">10</span> % mod + s[i] - <span class="string">'0'</span>) % mod;</span><br><span class="line">	<span class="keyword">int</span> inv = <span class="built_in">pow</span>(<span class="number">6</span>, mod - <span class="number">2</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, n * (n + <span class="number">1</span>) % mod * (n + <span class="number">2</span>) % mod * inv % mod);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+\frac{1}{1-\sum_{T\cap S=\varnothing}p[S]}</script><p>然后，我们发现，我们计集合$C$是$T$对全集的补集，那么后面那个东西实际上就是$C$的子集和。</p>
+<p>然后我们就可以用高维前缀和或者$FWT$解决了。</p>
+<p>还有，就是如果所有有值的$p[i]$的$i$或起来不等于$(1 &lt;&lt; n) - 1$，就输出$INF$。</p>
+<p>时间复杂度$O(2^n*n)$。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2e6</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> p[maxN + <span class="number">1</span>], ans;</span><br><span class="line"><span class="keyword">int</span> n, tmp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lf"</span>, &amp;p[i]);</span><br><span class="line">		<span class="keyword">if</span>(p[i] &gt; <span class="number">0</span>) tmp |= i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(tmp != ((<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>)) &#123; <span class="built_in">puts</span>(<span class="string">"INF"</span>); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (<span class="number">1</span> &lt;&lt; n); j++)</span><br><span class="line">			<span class="keyword">if</span>(j &amp; (<span class="number">1</span> &lt;&lt; i)) p[j] += p[j ^ (<span class="number">1</span> &lt;&lt; i)];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp = <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">			<span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j)) tmp = -tmp;</span><br><span class="line">		ans += tmp * <span class="number">1</span> / (<span class="number">1</span> - p[ ((<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>) ^ i ]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%.9lf"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -504,9 +489,11 @@ ans=C_{n+2}^3=\frac{n(n+1)(n+2)}{6}</script><p>本题还有一个难点在于$n$
       
         <div class="post-tags">
           
-            <a href="/tags/组合数学/" rel="tag"># 组合数学</a>
+            <a href="/tags/多项式/" rel="tag"># 多项式</a>
           
-            <a href="/tags/生成函数/" rel="tag"># 生成函数</a>
+            <a href="/tags/概率期望/" rel="tag"># 概率期望</a>
+          
+            <a href="/tags/FWT/" rel="tag"># FWT</a>
           
         </div>
       
@@ -519,8 +506,8 @@ ans=C_{n+2}^3=\frac{n(n+1)(n+2)}{6}</script><p>本题还有一个难点在于$n$
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/23/玩具装箱/" rel="next" title="玩具装箱">
-                <i class="fa fa-chevron-left"></i> 玩具装箱
+              <a href="/2019/07/25/浅谈min-max容斥/" rel="next" title="浅谈min-max容斥">
+                <i class="fa fa-chevron-left"></i> 浅谈min-max容斥
               </a>
             
           </div>
@@ -529,8 +516,8 @@ ans=C_{n+2}^3=\frac{n(n+1)(n+2)}{6}</script><p>本题还有一个难点在于$n$
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/25/Sweet/" rel="prev" title="Sweet">
-                Sweet <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/26/BZOJ2724-蒲公英/" rel="prev" title="[BZOJ2724]蒲公英 ">
+                [BZOJ2724]蒲公英  <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

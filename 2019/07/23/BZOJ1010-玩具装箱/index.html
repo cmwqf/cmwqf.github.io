@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="组合数学,多项式,">
+  <meta name="keywords" content="dp,斜率优化dp,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="BZOJ5093图的价值 很容易地，我们可以推出这么一个式子：  ans=n*2^{C(n-1,2)}*\sum_{i=0}^{n-1}C(n-1,i)*i^k">
-<meta name="keywords" content="组合数学,多项式">
+<meta name="description" content="Description把一个长度为n($1&amp;lt;=n&amp;lt;=50000$)的序列分为若干段，每段[i~j]的费用是  (j-i-L+\sum_{k=i}^jC[k])^2求最小费用是多少？">
+<meta name="keywords" content="dp,斜率优化dp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图的价值">
-<meta property="og:url" content="http://cmwqf.github.io/blog/2019/02/26/图的价值/index.html">
+<meta property="og:title" content="[BZOJ1010]玩具装箱">
+<meta property="og:url" content="http://cmwqf.github.io/blog/2019/07/23/BZOJ1010-玩具装箱/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="BZOJ5093图的价值 很容易地，我们可以推出这么一个式子：  ans=n*2^{C(n-1,2)}*\sum_{i=0}^{n-1}C(n-1,i)*i^k">
+<meta property="og:description" content="Description把一个长度为n($1&amp;lt;=n&amp;lt;=50000$)的序列分为若干段，每段[i~j]的费用是  (j-i-L+\sum_{k=i}^jC[k])^2求最小费用是多少？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-30T08:59:14.106Z">
+<meta property="og:updated_time" content="2020-02-28T06:44:15.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图的价值">
-<meta name="twitter:description" content="BZOJ5093图的价值 很容易地，我们可以推出这么一个式子：  ans=n*2^{C(n-1,2)}*\sum_{i=0}^{n-1}C(n-1,i)*i^k">
+<meta name="twitter:title" content="[BZOJ1010]玩具装箱">
+<meta name="twitter:description" content="Description把一个长度为n($1&amp;lt;=n&amp;lt;=50000$)的序列分为若干段，每段[i~j]的费用是  (j-i-L+\sum_{k=i}^jC[k])^2求最小费用是多少？">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://cmwqf.github.io/blog/2019/02/26/图的价值/">
+  <link rel="canonical" href="http://cmwqf.github.io/blog/2019/07/23/BZOJ1010-玩具装箱/">
 
 
 
 
 
-  <title>图的价值 | cmwqf's blog</title>
+  <title>[BZOJ1010]玩具装箱 | cmwqf's blog</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/blog/2019/02/26/图的价值/">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/blog/2019/07/23/BZOJ1010-玩具装箱/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cmwqf">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">图的价值</h1>
+          <h1 class="post-title" itemprop="name headline">[BZOJ1010]玩具装箱</h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T22:49:13+08:00">
-                2019-02-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-23T15:48:52+08:00">
+                2019-07-23
               </time>
             
 
@@ -375,8 +375,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/26/图的价值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/图的价值/" itemprop="commentCount"></span>
+                <a href="/2019/07/23/BZOJ1010-玩具装箱/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/23/BZOJ1010-玩具装箱/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -384,7 +384,7 @@
 
           
           
-             <span id="/2019/02/26/图的价值/" class="leancloud_visitors" data-flag-title="图的价值">
+             <span id="/2019/07/23/BZOJ1010-玩具装箱/" class="leancloud_visitors" data-flag-title="[BZOJ1010]玩具装箱">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  879
+                  514
                 </span>
               
 
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  2
                 </span>
               
             </div>
@@ -451,33 +451,47 @@
       
 
       
-        <p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=5093" target="_blank" rel="noopener">BZOJ5093图的价值</a></p>
-<p>很容易地，我们可以推出这么一个式子：</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>把一个长度为n($1&lt;=n&lt;=50000$)的序列分为若干段，每段[i~j]的费用是</p>
 <script type="math/tex; mode=display">
-ans=n*2^{C(n-1,2)}*\sum_{i=0}^{n-1}C(n-1,i)*i^k</script><a id="more"></a>
-<p>这个式子的意思就是，我们枚举每一个点向外连的度数，假如度数是$i$,就一共有$C(n-1,i)$种它连接外面的方案，而另外$n-1$个点可以随便练，然后再乘上一个自己的贡献，就是：</p>
+(j-i-L+\sum_{k=i}^jC[k])^2</script><p>求最小费用是多少？</p>
+<a id="more"></a>
+<h1 id="一般的方法"><a href="#一般的方法" class="headerlink" title="一般的方法"></a>一般的方法</h1><p>对于一个式子</p>
 <script type="math/tex; mode=display">
-ans=n*\sum_{i=0}^{n-1}C(n-1,i)*2^{C(n-1,2)}*i^k=n*2^{C(n-1,2)}*\sum_{i=0}^{n-1}C(n-1,i)*i^k</script><p>主要，我们要计算的，就是</p>
+f[i]=f[j]+...</script><p>我们把这个式子分组，写成$f[i]=a[i]*b[j]+c[j]+$（一个只与i有关的常数）。</p>
+<p>$a[i]$表示一个只与$i$有关的数。</p>
+<p>然后，我们移项，写成$-a[i]*b[j]+f[i]=c[j]$。</p>
+<p>这就是一个$y=kx+b$的形式啦。</p>
+<p>这样，我们把$-a[i]$看成斜率$k$，$f[i]$看成截距$b$，那么问题就转化为，我们已知这条直线的斜率为$k$，还有很多个点$(b[j],c[j])$，我们要找出一个点，它构成的直线截距最小。</p>
+<p>然后就可以用单调队列了。</p>
+<h1 id="Sol"><a href="#Sol" class="headerlink" title="Sol"></a>Sol</h1><p>首先，很显然，我们能想出一个暴力dp</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^{n-1}C(n-1,i)*i^k</script><p>根据第二类斯特林数，这个式子可以变形为：</p>
+f[i]=min(f[i],f[j]+(i-j-1+sum[i]-sum[j]-L)^2)</script><p>但这是一个$O(n^2)$的，显然不符合条件。</p>
+<p>可以看到，后面的通过组合可以形成关于$i,j$的一个相同形式：$i+sum[i]$和$j+sum[j]$。于是，我们计$s[i]=i+sum[i]$，再把$L++$，则原式可以写成</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^{n-1}C(n-1,i)*\sum_{j=0}^iS(k,j)*j!*C(i,j)\\
-=\sum_{j=0}^{n-1}S(k,j)*j!*\sum_{i=j}^{n-1}C(n-1,i)*C(i,j)\\</script><p>众所周知，</p>
+f[i]=f[j]+(s[i]-s[j]-L)^2\\
+f[i]=f[j]+s[i]^2+s[j]^2+L^2-2*s[i]*s[j]-2*s[i]*L+2*s[j]*L</script><p>我们考虑刚刚所说的方法：</p>
 <script type="math/tex; mode=display">
-C(n-1,i)*C(i,j)=C(n-1,j)*C(n-1-j,i-j)</script><p>所以，式子变成了</p>
+2*s[i]*s[j]+f[i]=f[j]+s[j]^2+2*s[j]*L+(s[i]-L)^2</script><p>因为后面那个$(s[i]-L)^2$是个常数，我们暂且不管它，最后加上就好了。</p>
+<p>那么，对于每一个$j$，都是一个固定的点$(s[j],f[j]+s[j]^2+2*s[j]*L)$。</p>
+<p>这样，$2*s[i]$就是斜率$k$了。</p>
+<p>我们可以发现，随着$i$的增长，$k$也是递增的且恒大于0。</p>
+<p>我们考虑对于横坐标递增的两个点$A(x1,y1)$和$B(x2,y2)$，必然有$x1&lt;=x2&amp;&amp;y1&lt;=y2$。</p>
+<p>如果$B$比$A$更优的话，当且仅当</p>
 <script type="math/tex; mode=display">
-\sum_{j=0}^{n-1}S(k,j)*j!*\sum_{i=j}^{n-1}C(n-1,j)*C(n-1-j,i-j)\\
-=\sum_{j=0}^{n-1}S(k,j)*j!*C(n-1,j)*\sum_{i=j}^{n-1}C(n-1-j,i-j)\\
-=\sum_{j=0}^{n-1}S(k,j)*j!*C(n-1,j)*\sum_{i=0}^{n-j-1}C(n-j-1,i)\\
-=\sum_{j=0}^{n-1}S(k,j)*j!*C(n-1,j)*2^{n-j-1}</script><p>所以，</p>
+y2-k*x2<y1-k*x1\\
+y2-y1<k*(x2-x1)\\
+\frac{y2-y1}{x2-x1}<k</script><p>也就是说，如果这两个点所构成的直线的斜率小于$k$，那么$A$点就可以直接舍弃了，因为后面的$k$递增，永远都不可能用到$A$点了。</p>
+<p>我们每次选择队里的第一个点来更新。为什么呢？</p>
+<p>首先，可以证明，队里的每一个点与它后面的那一个组成的直线的斜率一定是它和队里它后面所有点组成的直线的斜率中最小的那一个，所以如果一个点比它后面那一个点更优，根据传递性，它一定比它后面所有的点更优。</p>
+<p>假如我们有这样一条直线$AB$满足条件，而且$A,B$是队里前后相邻的两个点。则有：</p>
 <script type="math/tex; mode=display">
-ans=n*2^{C(n-1,2)}*\sum_{i=0}^{n-1}S(k,i)*i!*C(n-1,i)*2^{n-i-1}\\
-=n*2^{C(n-1,2)}*\sum_{i=0}^{min(n-1,k)}S(k,i)*i!*C(n-1,i)*2^{n-i-1}</script><p>我们用NTT求出S，然后再搞一搞就好了。</p>
-<p>emm…</p>
-<p>NTT求S：</p>
-<script type="math/tex; mode=display">
-S(n,m)=\sum_{i=0}^m\frac{(-1)^i}{i!}*\frac{(m-i)^n}{(m-i)!}</script><p>上代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">998244353</span>,maxN=<span class="number">1e6</span> + <span class="number">100</span>,g=<span class="number">3</span>,gi=<span class="number">332748118</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">int</span> S[maxN+<span class="number">1</span>],T[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> fac[maxN+<span class="number">1</span>],inv[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> lim,cnt,r[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> C[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x&amp;<span class="number">1</span>) ans=ans*a%mod;</span><br><span class="line">        a=a*a%mod;</span><br><span class="line">        x&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="keyword">int</span> *a,<span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++)</span><br><span class="line">       <span class="keyword">if</span>(i&lt;r[i]) swap(a[i],a[r[i]]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid=<span class="number">1</span>;mid&lt;lim;mid&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> wn=<span class="built_in">pow</span>(type==<span class="number">1</span> ? g : gi,(mod<span class="number">-1</span>)/(mid&lt;&lt;<span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i+=(mid&lt;&lt;<span class="number">1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> w=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;mid;j++,w=w*wn%mod)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x=a[i+j],y=w*a[i+mid+j]%mod;</span><br><span class="line">                a[i+j]=(x+y)%mod; a[i+mid+j]=((x-y)%mod+mod)%mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=min(n<span class="number">-1</span>,k);i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp=S[i]*fac[i]%mod*C[i]%mod*<span class="built_in">pow</span>(<span class="number">2</span>,n-i<span class="number">-1</span>)%mod;</span><br><span class="line">        ans=(ans+tmp)%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    ans=ans*n%mod*<span class="built_in">pow</span>(<span class="number">2</span>,(n<span class="number">-1</span>)*(n<span class="number">-2</span>)/<span class="number">2</span>)%mod,</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;k);</span><br><span class="line">    fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++) fac[i]=fac[i<span class="number">-1</span>]*i%mod;</span><br><span class="line">    inv[k]=<span class="built_in">pow</span>(fac[k],mod<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=k<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--) inv[i]=inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%mod;</span><br><span class="line">    C[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++) C[i]=C[i<span class="number">-1</span>]*(n-i)%mod*<span class="built_in">pow</span>(i,mod<span class="number">-2</span>)%mod;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=k;i++) S[i]=(i&amp;<span class="number">1</span>) ? -inv[i] : inv[i],T[i]=<span class="built_in">pow</span>(i,k)*inv[i]%mod;</span><br><span class="line">    lim=<span class="number">1</span>;cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(lim&lt;=(<span class="number">2</span>*k)) lim&lt;&lt;=<span class="number">1</span>,cnt++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) r[i]=(r[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>) | ((i&amp;<span class="number">1</span>)&lt;&lt; cnt<span class="number">-1</span>);</span><br><span class="line">    NTT(S,<span class="number">1</span>); NTT(T,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) S[i]=S[i]*T[i]%mod;</span><br><span class="line">    NTT(S,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">int</span> tmp=<span class="built_in">pow</span>(lim,mod<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) S[i]=S[i]*tmp%mod;</span><br><span class="line">    </span><br><span class="line">    work();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+\frac{yb-ya}{xb-xa}>k\\
+ya-k*xa<yb-k*xb</script><p>所以，我们选$A$必然比选$B$更优。</p>
+<p>所以，队头的那个点一定是最优解。</p>
+<p>这样，我们可以确定单调队列里是按照斜率从小到大来排列的。</p>
+<p>我们考虑新加入一个点，从对尾开始不断比较，如果它的斜率小于对尾的斜率，就不断弹出来，就好了。</p>
+<p>复杂度$O(n)$。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> s[maxN + <span class="number">1</span>], n, L;</span><br><span class="line"><span class="keyword">int</span> q[maxN + <span class="number">1</span>], head, tail;</span><br><span class="line"><span class="keyword">int</span> f[maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span>( !<span class="built_in">isdigit</span>( ch ) ) &#123; <span class="keyword">if</span>(ch == <span class="string">'-'</span>) f = <span class="number">-1</span>; ch = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>( <span class="built_in">isdigit</span>( ch ) ) num = (num &lt;&lt; <span class="number">3l</span>l) + (num &lt;&lt; <span class="number">1l</span>l) + (ch ^ <span class="number">48</span>), ch = getchar();</span><br><span class="line">	<span class="keyword">return</span> num * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">X</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123; <span class="keyword">return</span> s[i]; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Y</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123; <span class="keyword">return</span> f[i] + s[i] * s[i] + <span class="number">2</span> * s[i] * L; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (Y(b) - Y(a)) / (X(b) - X(a));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n = read(), L = read() + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) s[i] = s[i - <span class="number">1</span>] + read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) s[i] += i; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(head &lt; tail &amp;&amp; calc(q[head], q[head + <span class="number">1</span>]) &lt; <span class="number">2</span> * s[i]) head ++;</span><br><span class="line">		<span class="keyword">int</span> j = q[head];</span><br><span class="line">		f[i] = f[j] + (s[i] - s[j] - L) * (s[i] - s[j] - L);</span><br><span class="line">		<span class="keyword">while</span>(head &lt; tail &amp;&amp; calc(q[tail - <span class="number">1</span>], q[tail]) &gt; calc(q[tail], i)) tail --;</span><br><span class="line">		q[++ tail] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld"</span>, f[n]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -495,9 +509,9 @@ S(n,m)=\sum_{i=0}^m\frac{(-1)^i}{i!}*\frac{(m-i)^n}{(m-i)!}</script><p>上代码
       
         <div class="post-tags">
           
-            <a href="/tags/组合数学/" rel="tag"># 组合数学</a>
+            <a href="/tags/dp/" rel="tag"># dp</a>
           
-            <a href="/tags/多项式/" rel="tag"># 多项式</a>
+            <a href="/tags/斜率优化dp/" rel="tag"># 斜率优化dp</a>
           
         </div>
       
@@ -510,8 +524,8 @@ S(n,m)=\sum_{i=0}^m\frac{(-1)^i}{i!}*\frac{(m-i)^n}{(m-i)!}</script><p>上代码
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/25/第二类斯特林数相关/" rel="next" title="第二类斯特林数相关">
-                <i class="fa fa-chevron-left"></i> 第二类斯特林数相关
+              <a href="/2019/07/06/浅谈FWT快速沃尔什变换/" rel="next" title="浅谈FWT快速沃尔什变换">
+                <i class="fa fa-chevron-left"></i> 浅谈FWT快速沃尔什变换
               </a>
             
           </div>
@@ -520,8 +534,8 @@ S(n,m)=\sum_{i=0}^m\frac{(-1)^i}{i!}*\frac{(m-i)^n}{(m-i)!}</script><p>上代码
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/28/BZOJ4555-求和/" rel="prev" title="[BZOJ4555]求和">
-                [BZOJ4555]求和 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/24/BZOJ3028-食物/" rel="prev" title="[BZOJ3028]食物">
+                [BZOJ3028]食物 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,8 +591,17 @@ S(n,m)=\sum_{i=0}^m\frac{(-1)^i}{i!}*\frac{(m-i)^n}{(m-i)!}</script><p>上代码
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -647,6 +670,22 @@ S(n,m)=\sum_{i=0}^m\frac{(-1)^i}{i!}*\frac{(m-i)^n}{(m-i)!}</script><p>上代码
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一般的方法"><span class="nav-number">2.</span> <span class="nav-text">一般的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sol"><span class="nav-number">3.</span> <span class="nav-text">Sol</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
