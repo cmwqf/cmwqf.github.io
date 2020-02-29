@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&amp;lt;=i&amp;lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？ 由于每个球是独立的，我们可以把每个答案算出来，最后k次方一下就好了； 问题就转变为开始有一个球，过m天后全部死亡的概率是多少？ 我们设f[i]表示还有i天所有球全部死亡的概率，则有：  f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2">
+<meta name="description" content="Description给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&amp;lt;=i&amp;lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？">
 <meta name="keywords" content="dp,概率期望">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tribles">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2019/01/26/Tribles/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&amp;lt;=i&amp;lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？ 由于每个球是独立的，我们可以把每个答案算出来，最后k次方一下就好了； 问题就转变为开始有一个球，过m天后全部死亡的概率是多少？ 我们设f[i]表示还有i天所有球全部死亡的概率，则有：  f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2">
+<meta property="og:description" content="Description给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&amp;lt;=i&amp;lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-30T08:59:14.104Z">
+<meta property="og:updated_time" content="2020-02-29T05:25:02.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tribles">
-<meta name="twitter:description" content="给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&amp;lt;=i&amp;lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？ 由于每个球是独立的，我们可以把每个答案算出来，最后k次方一下就好了； 问题就转变为开始有一个球，过m天后全部死亡的概率是多少？ 我们设f[i]表示还有i天所有球全部死亡的概率，则有：  f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2">
+<meta name="twitter:description" content="Description给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&amp;lt;=i&amp;lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？">
 
 
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  357
+                  360
                 </span>
               
 
@@ -429,15 +429,16 @@
       
 
       
-        <p>给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&lt;=i&lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？</p>
-<p>由于每个球是独立的，我们可以把每个答案算出来，最后k次方一下就好了；</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给你 k个球，  一个球可以活一天，在它死的时候会有概率pi生出i个小球，（0&lt;=i&lt;n） 现在问你m天后 所有小球全部死亡的概率是多少？</p>
+<a id="more"></a>
+<h1 id="Soltuion"><a href="#Soltuion" class="headerlink" title="Soltuion"></a>Soltuion</h1><p>由于每个球是独立的，我们可以把每个答案算出来，最后k次方一下就好了；</p>
 <p>问题就转变为开始有一个球，过m天后全部死亡的概率是多少？</p>
 <p>我们设f[i]表示<strong>还有i天所有球全部死亡的概率</strong>，则有：</p>
 <script type="math/tex; mode=display">
-f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2...</script><p>为什么是f[i-1]呢？</p>
-<p>因为今天每个球又变成了独立的个体，如果一个球生了j个，那么这j个必然在i-1天后死去，而这j个球也是独立的个体，所以每个球死亡的概率都是f[i-1],所以要j次方；</p>
+f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2...</script><p>为什么是$f[i-1]$呢？</p>
+<p>因为今天每个球又变成了独立的个体，如果一个球生了$j$个，那么这$j$个必然在$i-1$天后死去，而这$j$个球也是独立的个体，所以每个球死亡的概率都是$f[i-1]$,所以要$j$次方。</p>
 <p>最后，统计一下答案，就可以了。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">1000</span> + <span class="number">100</span>;</span><br><span class="line"><span class="keyword">double</span> p[maxN+<span class="number">1</span>],f[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,k,t,cnt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;k,&amp;m);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;p[i]);</span><br><span class="line">		f[<span class="number">0</span>]=<span class="number">0</span>; f[<span class="number">1</span>]=p[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			f[i]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++) f[i]+=p[j]*<span class="built_in">pow</span>(f[i<span class="number">-1</span>],j);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case #%d: %lf\n"</span>,++cnt,<span class="built_in">pow</span>(f[m],k));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">1000</span> + <span class="number">100</span>;</span><br><span class="line"><span class="keyword">double</span> p[maxN+<span class="number">1</span>],f[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,k,t,cnt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;k,&amp;m);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;p[i]);</span><br><span class="line">		f[<span class="number">0</span>]=<span class="number">0</span>; f[<span class="number">1</span>]=p[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			f[i]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++) f[i]+=p[j]*<span class="built_in">pow</span>(f[i<span class="number">-1</span>],j);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case #%d: %lf\n"</span>,++cnt,<span class="built_in">pow</span>(f[m],k));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -537,8 +538,17 @@ f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2...</script><p>为什么是f[i-1]呢？</p>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -555,7 +565,7 @@ f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2...</script><p>为什么是f[i-1]呢？</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -607,6 +617,22 @@ f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2...</script><p>为什么是f[i-1]呢？</p>
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soltuion"><span class="nav-number">2.</span> <span class="nav-text">Soltuion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

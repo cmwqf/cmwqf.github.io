@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="设f(i)为当前数为i是所用的平均步数（期望步数），则根据期望的线性和全期望公式可得：  f(6)=1+f(6)*\frac{1}{3}+f(2)*\frac{1}{3}+f(3)*\frac{1}{3};">
+<meta name="description" content="Description给一个正整数$N$，每次可以在不超过$N$的素数中随机选择一个$P$，如果$P$是$N$的约数，则把$N$变成$N/p$,否则$N$不变，问平均情况下需要多少次随机选择，才能把$N$变成$1$？">
 <meta name="keywords" content="dp,概率期望">
 <meta property="og:type" content="article">
 <meta property="og:title" content="得到1">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2019/01/27/得到1/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="设f(i)为当前数为i是所用的平均步数（期望步数），则根据期望的线性和全期望公式可得：  f(6)=1+f(6)*\frac{1}{3}+f(2)*\frac{1}{3}+f(3)*\frac{1}{3};">
+<meta property="og:description" content="Description给一个正整数$N$，每次可以在不超过$N$的素数中随机选择一个$P$，如果$P$是$N$的约数，则把$N$变成$N/p$,否则$N$不变，问平均情况下需要多少次随机选择，才能把$N$变成$1$？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-30T08:59:14.107Z">
+<meta property="og:updated_time" content="2020-02-29T05:09:08.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="得到1">
-<meta name="twitter:description" content="设f(i)为当前数为i是所用的平均步数（期望步数），则根据期望的线性和全期望公式可得：  f(6)=1+f(6)*\frac{1}{3}+f(2)*\frac{1}{3}+f(3)*\frac{1}{3};">
+<meta name="twitter:description" content="Description给一个正整数$N$，每次可以在不超过$N$的素数中随机选择一个$P$，如果$P$是$N$的约数，则把$N$变成$N/p$,否则$N$不变，问平均情况下需要多少次随机选择，才能把$N$变成$1$？">
 
 
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  359
+                  430
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -429,17 +429,18 @@
       
 
       
-        <p>设f(i)为当前数为i是所用的平均步数（期望步数），则根据期望的线性和全期望公式可得：</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给一个正整数$N$，每次可以在不超过$N$的素数中随机选择一个$P$，如果$P$是$N$的约数，则把$N$变成$N/p$,否则$N$不变，问平均情况下需要多少次随机选择，才能把$N$变成$1$？</p>
+<a id="more"></a>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>设$f(i)$为当前数为$i$是所用的平均步数（期望步数），则根据期望的线性和全期望公式可得：</p>
 <script type="math/tex; mode=display">
-f(6)=1+f(6)*\frac{1}{3}+f(2)*\frac{1}{3}+f(3)*\frac{1}{3};</script><a id="more"></a>
-<p>其中，最前面的1指执行这一步，后面则是后面转移的可能；</p>
+f(6)=1+f(6)*\frac{1}{3}+f(2)*\frac{1}{3}+f(3)*\frac{1}{3};</script><p>其中，最前面的1指执行这一步，后面则是后面转移的可能；</p>
 <p>我们设p(x)为不超过x的素数个数，g(x)为素数中为x的约数的个数；</p>
 <p>则：</p>
 <script type="math/tex; mode=display">
 f(x)=1+f(x)*(1-\frac{g(x)}{p(x)})+\sum_{y|x,y\in prime}f(x/y)*\frac{1}{p(x)}</script><p>整理可得：</p>
 <script type="math/tex; mode=display">
-f(x)=\frac{(\sum_{y|x,y\in prime}f(x/y)) +p(x)}{g(x)}</script><p>由此，我们可以对f(x)进行记忆化搜索，时间复杂度为O(maxnum);</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">1e6</span> + <span class="number">100</span>;</span><br><span class="line"><span class="keyword">double</span> f[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> t,cnt,x;</span><br><span class="line"><span class="keyword">int</span> prime[maxN+<span class="number">1</span>],tot;</span><br><span class="line"><span class="keyword">bool</span> flag[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">	<span class="keyword">if</span>(f[x]) <span class="keyword">return</span> f[x];</span><br><span class="line">	<span class="keyword">int</span> p=<span class="number">0</span>,g=<span class="number">0</span>;<span class="comment">//p:不超过x的素数个数，g:其中x的因子个数 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot&amp;&amp;prime[i]&lt;=x;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p++;</span><br><span class="line">		<span class="keyword">if</span>(x%prime[i]==<span class="number">0</span>) g++,f[x]+=dfs(x/prime[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> f[x]=(f[x]+p)/g;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxN;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!flag[i]) prime[++tot]=i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=tot&amp;&amp;i*prime[j]&lt;maxN;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			flag[i*prime[j]]=<span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case %d: %.8lf\n"</span>,++cnt,dfs(x));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+f(x)=\frac{(\sum_{y|x,y\in prime}f(x/y)) +p(x)}{g(x)}</script><p>由此，我们可以对f(x)进行记忆化搜索，时间复杂度为$O(maxnum)$;</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">1e6</span> + <span class="number">100</span>;</span><br><span class="line"><span class="keyword">double</span> f[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> t,cnt,x;</span><br><span class="line"><span class="keyword">int</span> prime[maxN+<span class="number">1</span>],tot;</span><br><span class="line"><span class="keyword">bool</span> flag[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">	<span class="keyword">if</span>(f[x]) <span class="keyword">return</span> f[x];</span><br><span class="line">	<span class="keyword">int</span> p=<span class="number">0</span>,g=<span class="number">0</span>;<span class="comment">//p:不超过x的素数个数，g:其中x的因子个数 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot&amp;&amp;prime[i]&lt;=x;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p++;</span><br><span class="line">		<span class="keyword">if</span>(x%prime[i]==<span class="number">0</span>) g++,f[x]+=dfs(x/prime[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> f[x]=(f[x]+p)/g;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxN;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!flag[i]) prime[++tot]=i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=tot&amp;&amp;i*prime[j]&lt;maxN;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			flag[i*prime[j]]=<span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case %d: %.8lf\n"</span>,++cnt,dfs(x));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -482,8 +483,8 @@ f(x)=\frac{(\sum_{y|x,y\in prime}f(x/y)) +p(x)}{g(x)}</script><p>由此，我们
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/28/单选错位/" rel="prev" title="单选错位">
-                单选错位 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/28/BZOJ2134-单选错位/" rel="prev" title="[BZOJ2134]单选错位">
+                [BZOJ2134]单选错位 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -539,8 +540,17 @@ f(x)=\frac{(\sum_{y|x,y\in prime}f(x/y)) +p(x)}{g(x)}</script><p>由此，我们
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -557,7 +567,7 @@ f(x)=\frac{(\sum_{y|x,y\in prime}f(x/y)) +p(x)}{g(x)}</script><p>由此，我们
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -609,6 +619,22 @@ f(x)=\frac{(\sum_{y|x,y\in prime}f(x/y)) +p(x)}{g(x)}</script><p>由此，我们
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

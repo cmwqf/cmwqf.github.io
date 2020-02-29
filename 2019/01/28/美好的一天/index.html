@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="虽然毒瘤，但是不得不说，这是一道好题啊 很容易知道，如果一段区间可以组成回文串，则最多有一个字母出现奇数次； 这个奇数偶数的问题，我们便可以想到用状压，开一个1&amp;lt;&amp;lt;26的数组（然而毒瘤卡空间，因为n&amp;lt;=60000，所以可以用unsigned short），用1表示奇数次，用0表示偶数次，这样，只要计算一个区间的异或和就可以了，而区间[l,r]的异或和ans(l,r)=ans(1,">
+<meta name="description" content="Description回归天空是一件庄重的事情，所以卓司决定让大家分批次进行，给每个人给了一个小写字母’a’-&amp;gt;’z’作为编号 一个区间的人如果满足他们的编号重排之后可以成为一个回文串，则他们可以一起回归天空，即这个区间可以回归天空 由于卓司是一个喜欢妄想的人，他妄想了m个区间，每次他想知道每个区间中有多少个子区间可以回归天空">
 <meta name="keywords" content="莫队">
 <meta property="og:type" content="article">
 <meta property="og:title" content="美好的一天">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2019/01/28/美好的一天/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="虽然毒瘤，但是不得不说，这是一道好题啊 很容易知道，如果一段区间可以组成回文串，则最多有一个字母出现奇数次； 这个奇数偶数的问题，我们便可以想到用状压，开一个1&amp;lt;&amp;lt;26的数组（然而毒瘤卡空间，因为n&amp;lt;=60000，所以可以用unsigned short），用1表示奇数次，用0表示偶数次，这样，只要计算一个区间的异或和就可以了，而区间[l,r]的异或和ans(l,r)=ans(1,">
+<meta property="og:description" content="Description回归天空是一件庄重的事情，所以卓司决定让大家分批次进行，给每个人给了一个小写字母’a’-&amp;gt;’z’作为编号 一个区间的人如果满足他们的编号重排之后可以成为一个回文串，则他们可以一起回归天空，即这个区间可以回归天空 由于卓司是一个喜欢妄想的人，他妄想了m个区间，每次他想知道每个区间中有多少个子区间可以回归天空">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-30T08:59:14.115Z">
+<meta property="og:updated_time" content="2020-02-29T05:21:40.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="美好的一天">
-<meta name="twitter:description" content="虽然毒瘤，但是不得不说，这是一道好题啊 很容易知道，如果一段区间可以组成回文串，则最多有一个字母出现奇数次； 这个奇数偶数的问题，我们便可以想到用状压，开一个1&amp;lt;&amp;lt;26的数组（然而毒瘤卡空间，因为n&amp;lt;=60000，所以可以用unsigned short），用1表示奇数次，用0表示偶数次，这样，只要计算一个区间的异或和就可以了，而区间[l,r]的异或和ans(l,r)=ans(1,">
+<meta name="twitter:description" content="Description回归天空是一件庄重的事情，所以卓司决定让大家分批次进行，给每个人给了一个小写字母’a’-&amp;gt;’z’作为编号 一个区间的人如果满足他们的编号重排之后可以成为一个回文串，则他们可以一起回归天空，即这个区间可以回归天空 由于卓司是一个喜欢妄想的人，他妄想了m个区间，每次他想知道每个区间中有多少个子区间可以回归天空">
 
 
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  794
+                  927
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -429,29 +429,31 @@
       
 
       
-        <p>虽然毒瘤，但是不得不说，这是一道好题啊</p>
-<p>很容易知道，如果一段区间可以组成回文串，则最多有一个字母出现奇数次；</p>
-<p>这个奇数偶数的问题，我们便可以想到用状压，开一个1&lt;&lt;26的数组（然而毒瘤卡空间，因为n&lt;=60000，所以可以用unsigned short），用1表示奇数次，用0表示偶数次，这样，只要计算一个区间的异或和就可以了，而区间[l,r]的异或和ans(l,r)=ans(1,r)^ans(1,l-1)，于是，我们就可以记录a数组为这个序列的前缀异或和；</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>回归天空是一件庄重的事情，所以卓司决定让大家分批次进行，给每个人给了一个小写字母’a’-&gt;’z’作为编号</p>
+<p>一个区间的人如果满足他们的<strong>编号重排之后可以成为一个回文串</strong>，则他们可以一起回归天空，即这个区间可以回归天空</p>
+<p>由于卓司是一个喜欢妄想的人，他妄想了m个区间，每次他想知道每个区间中有多少个子区间可以回归天空</p>
 <a id="more"></a>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>虽然毒瘤，但是不得不说，这是一道好题啊</p>
+<p>很容易知道，如果一段区间可以组成回文串，则最多有一个字母出现奇数次；</p>
+<p>这个奇数偶数的问题，我们便可以想到用状压，开一个$1&lt;&lt;26$的数组（然而毒瘤卡空间，因为$n&lt;=60000$，所以可以用$unsigned short$），用1表示奇数次，用0表示偶数次，这样，只要计算一个区间的异或和就可以了，而区间$[l,r]$的异或和$ans(l,r)=ans(1,r)\oplus ans(1,l-1)$，于是，我们就可以记录$a$数组为这个序列的前缀异或和；</p>
 <p>然后，怎么做呢？</p>
-<p>我们考虑从[l,r]转移到[l,r+1]，答案会发生什么变化：</p>
+<p>我们考虑从$[l,r]$转移到$[l,r+1]$，答案会发生什么变化：</p>
 <p>我们只要加上</p>
 <script type="math/tex; mode=display">
 a[x]\oplus a[r+1]==0(x\in[l-1,r])</script><p>或者</p>
 <script type="math/tex; mode=display">
 a[x]\oplus a[r+1]==2^i(x\in[l-1,r])</script><p>的个数就可以了。</p>
-<p>我们怎样找个数呢？我们记录一个cnt数组，cnt[x]代表状态为x的个数有多少个；</p>
+<p>我们怎样找个数呢？我们记录一个$cnt$数组，$cnt[x]$代表状态为$x$的个数有多少个；</p>
 <p>由异或的性质，第一种情况可看成</p>
 <script type="math/tex; mode=display">
-a[r+1]\oplus0==a[x]，即a[r+1]==a[x]</script><p>的个数，此时，ans+=cnt[a[r+1]]即可；</p>
+a[r+1]\oplus0==a[x]，即a[r+1]==a[x]</script><p>的个数，此时，$ans+=cnt[a[r+1]]$即可；</p>
 <p>对于第二种，同样，我们可以写成</p>
 <script type="math/tex; mode=display">
-a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举i（从0到25），ans+=cnt[a[r+1]^(1&lt;&lt;i)]即可；</p>
-<p>这样，就做完了，时间复杂度为<script type="math/tex">O(m\sqrt{n}*26)</script></p>
+a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举$i$（从$0$到$25$），$ans+=cnt[a[r+1]\oplus (1&lt;&lt;i)]$即可；</p>
+<p>这样，就做完了，时间复杂度为$O(26m\sqrt{n})$</p>
 <p><strong>注意</strong>：</p>
-<p>我以前写的莫队模板因为毒瘤的unsigned short变得奇怪起来（我调了好长时间），以后要注意，莫队修改的时候，先add，后del，防止出现cnt负数而导致奇怪的情况。</p>
-<p><del>终于A掉了lxl的毒瘤题，开心</del></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">6e4</span> + <span class="number">100</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> l,r,id;</span><br><span class="line">&#125;q[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">short</span> cnt[(<span class="number">1</span>&lt;&lt;<span class="number">26</span>)+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,ans,res[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> block,belong[maxN+<span class="number">1</span>],a[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">char</span> s[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> num=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch=getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) &#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>; ch=getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch^<span class="number">48</span>),ch=getchar();</span><br><span class="line">	<span class="keyword">return</span> num*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(Node a,Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> belong[a.l]^belong[b.l] ? belong[a.l]&lt;belong[b.l] : belong[a.l]&amp;<span class="number">1</span> ? a.r&lt;b.r : a.r&gt;b.r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cnt[x]--;</span><br><span class="line">	ans-=cnt[x];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++) ans-=cnt[x^(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ans+=cnt[x];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++) ans+=cnt[x^(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">	cnt[x]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> l=<span class="number">0</span>,r=<span class="number">0</span>; cnt[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(l&gt;q[i].l) add(a[--l]);</span><br><span class="line">		<span class="keyword">while</span>(r&lt;q[i].r) add(a[++r]);</span><br><span class="line">		<span class="keyword">while</span>(l&lt;q[i].l) del(a[l++]);</span><br><span class="line">		<span class="keyword">while</span>(r&gt;q[i].r) del(a[r--]);</span><br><span class="line">		res[q[i].id]=ans; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=read(),m=read();</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s+<span class="number">1</span>);</span><br><span class="line">	block=n/<span class="built_in">sqrt</span>(m*<span class="number">2</span>/<span class="number">3</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) a[i]=a[i<span class="number">-1</span>]^(<span class="number">1</span>&lt;&lt;(s[i]-<span class="string">'a'</span>)),belong[i]=(i<span class="number">-1</span>)/block+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++) q[i].l=read()<span class="number">-1</span>,q[i].r=read(),q[i].id=i;</span><br><span class="line">	sort(q+<span class="number">1</span>,q+m+<span class="number">1</span>,comp);</span><br><span class="line">	work();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我以前写的莫队模板因为毒瘤的$unsigned short$变得奇怪起来（我调了好长时间），以后要注意，莫队修改的时候，先$add$，后$del$，防止出现$cnt$负数而导致奇怪的情况。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">6e4</span> + <span class="number">100</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> l,r,id;</span><br><span class="line">&#125;q[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">short</span> cnt[(<span class="number">1</span>&lt;&lt;<span class="number">26</span>)+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,ans,res[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> block,belong[maxN+<span class="number">1</span>],a[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">char</span> s[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> num=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch=getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) &#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>; ch=getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch^<span class="number">48</span>),ch=getchar();</span><br><span class="line">	<span class="keyword">return</span> num*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(Node a,Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> belong[a.l]^belong[b.l] ? belong[a.l]&lt;belong[b.l] : belong[a.l]&amp;<span class="number">1</span> ? a.r&lt;b.r : a.r&gt;b.r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cnt[x]--;</span><br><span class="line">	ans-=cnt[x];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++) ans-=cnt[x^(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ans+=cnt[x];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++) ans+=cnt[x^(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">	cnt[x]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> l=<span class="number">0</span>,r=<span class="number">0</span>; cnt[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(l&gt;q[i].l) add(a[--l]);</span><br><span class="line">		<span class="keyword">while</span>(r&lt;q[i].r) add(a[++r]);</span><br><span class="line">		<span class="keyword">while</span>(l&lt;q[i].l) del(a[l++]);</span><br><span class="line">		<span class="keyword">while</span>(r&gt;q[i].r) del(a[r--]);</span><br><span class="line">		res[q[i].id]=ans; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=read(),m=read();</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s+<span class="number">1</span>);</span><br><span class="line">	block=n/<span class="built_in">sqrt</span>(m*<span class="number">2</span>/<span class="number">3</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) a[i]=a[i<span class="number">-1</span>]^(<span class="number">1</span>&lt;&lt;(s[i]-<span class="string">'a'</span>)),belong[i]=(i<span class="number">-1</span>)/block+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++) q[i].l=read()<span class="number">-1</span>,q[i].r=read(),q[i].id=i;</span><br><span class="line">	sort(q+<span class="number">1</span>,q+m+<span class="number">1</span>,comp);</span><br><span class="line">	work();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -482,8 +484,8 @@ a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举i（从0到25
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/28/单选错位/" rel="next" title="单选错位">
-                <i class="fa fa-chevron-left"></i> 单选错位
+              <a href="/2019/01/28/BZOJ2134-单选错位/" rel="next" title="[BZOJ2134]单选错位">
+                <i class="fa fa-chevron-left"></i> [BZOJ2134]单选错位
               </a>
             
           </div>
@@ -549,8 +551,17 @@ a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举i（从0到25
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -567,7 +578,7 @@ a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举i（从0到25
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -619,6 +630,22 @@ a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举i（从0到25
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
