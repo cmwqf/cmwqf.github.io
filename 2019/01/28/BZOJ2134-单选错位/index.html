@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Descriptiongx 和 lc 去参加 noip 初赛，其中有一种题型叫单项选择题，顾名思义，只有一个选项是正确答案。 试卷上共有 $n$ 道单选题，第 i 道单选题有 $a_i$个选项，这 $a_i$个选项编号是 $1,2,3,\ldots,a_i$，每个选项成为正确答案的概率都是相等的。 lc 采取的策略是每道题目随机写上 $1-ai$ 的某个数作为答案选项，他用不了多少时间就能期望做对">
+<meta name="description" content="Descriptiongx 和 lc 去参加 noip 初赛，其中有一种题型叫单项选择题，顾名思义，只有一个选项是正确答案。 试卷上共有 $n$ 道单选题，第 i 道单选题有 $a_i$个选项，这 $a_i$个选项编号是 $1,2,3,\ldots,a_i$，每个选项成为正确答案的概率都是相等的。 lc 采取的策略是每道题目随机写上 $1,…,a_i$ 的某个数作为答案选项，他用不了多少时间就能期">
 <meta name="keywords" content="概率期望">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[BZOJ2134]单选错位">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2019/01/28/BZOJ2134-单选错位/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Descriptiongx 和 lc 去参加 noip 初赛，其中有一种题型叫单项选择题，顾名思义，只有一个选项是正确答案。 试卷上共有 $n$ 道单选题，第 i 道单选题有 $a_i$个选项，这 $a_i$个选项编号是 $1,2,3,\ldots,a_i$，每个选项成为正确答案的概率都是相等的。 lc 采取的策略是每道题目随机写上 $1-ai$ 的某个数作为答案选项，他用不了多少时间就能期望做对">
+<meta property="og:description" content="Descriptiongx 和 lc 去参加 noip 初赛，其中有一种题型叫单项选择题，顾名思义，只有一个选项是正确答案。 试卷上共有 $n$ 道单选题，第 i 道单选题有 $a_i$个选项，这 $a_i$个选项编号是 $1,2,3,\ldots,a_i$，每个选项成为正确答案的概率都是相等的。 lc 采取的策略是每道题目随机写上 $1,…,a_i$ 的某个数作为答案选项，他用不了多少时间就能期">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-29T05:08:03.721Z">
+<meta property="og:updated_time" content="2020-02-29T05:44:14.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[BZOJ2134]单选错位">
-<meta name="twitter:description" content="Descriptiongx 和 lc 去参加 noip 初赛，其中有一种题型叫单项选择题，顾名思义，只有一个选项是正确答案。 试卷上共有 $n$ 道单选题，第 i 道单选题有 $a_i$个选项，这 $a_i$个选项编号是 $1,2,3,\ldots,a_i$，每个选项成为正确答案的概率都是相等的。 lc 采取的策略是每道题目随机写上 $1-ai$ 的某个数作为答案选项，他用不了多少时间就能期望做对">
+<meta name="twitter:description" content="Descriptiongx 和 lc 去参加 noip 初赛，其中有一种题型叫单项选择题，顾名思义，只有一个选项是正确答案。 试卷上共有 $n$ 道单选题，第 i 道单选题有 $a_i$个选项，这 $a_i$个选项编号是 $1,2,3,\ldots,a_i$，每个选项成为正确答案的概率都是相等的。 lc 采取的策略是每道题目随机写上 $1,…,a_i$ 的某个数作为答案选项，他用不了多少时间就能期">
 
 
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  523
+                  520
                 </span>
               
 
@@ -453,7 +453,7 @@
       
         <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>gx 和 lc 去参加 noip 初赛，其中有一种题型叫单项选择题，顾名思义，只有一个选项是正确答案。</p>
 <p>试卷上共有 $n$ 道单选题，第 i 道单选题有 $a_i$个选项，这 $a_i$个选项编号是 $1,2,3,\ldots,a_i$，每个选项成为正确答案的概率都是相等的。</p>
-<p>lc 采取的策略是每道题目随机写上 $1-a<em>i$ 的某个数作为答案选项，他用不了多少时间就能期望做对 $\sum</em>{i=1}^n \frac{1}{a_i}$道题目。gx 则是认认真真地做完了这 $n$道题目，可是等他做完的时候时间也所剩无几了，于是他匆忙地把答案抄到答题纸上，没想到抄错位了：第 $i$道题目的答案抄到了答题纸上的第$ i+1$ 道题目的位置上，特别地，第 $n$ 道题目的答案抄到了第 $1$ 道题目的位置上。</p>
+<p>lc 采取的策略是每道题目随机写上 $1,…,a_i$ 的某个数作为答案选项，他用不了多少时间就能期望做对 $\sum\frac{1}{a_i}$道题目。gx 则是认认真真地做完了这 $n$道题目，可是等他做完的时候时间也所剩无几了，于是他匆忙地把答案抄到答题纸上，没想到抄错位了：第 $i$道题目的答案抄到了答题纸上的第$ i+1$ 道题目的位置上，特别地，第 $n$ 道题目的答案抄到了第 $1$ 道题目的位置上。</p>
 <p>现在 gx 已经走出考场没法改了，不过他还是想知道自己期望能做对几道题目，这样他就知道会不会被 lc 鄙视了。</p>
 <p>我们假设 gx 没有做错任何题目，只是答案抄错位置了。</p>
 <a id="more"></a>
