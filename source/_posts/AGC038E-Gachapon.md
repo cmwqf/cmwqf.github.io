@@ -170,7 +170,7 @@ int main()
 				if(s < a[i]) continue;
 				for(int t = 0, w = 1; t < b[i] && t <= x; t++, w = 1ll * w * a[i] % mod)
 					f[now][s][x] = SUB(f[now][s][x], 1ll * w * inv[t] % mod * f[now ^ 1][s - a[i]][x - t] % mod);			   
-            }	
+					}	
 	}
 
 	int ans = 0;
