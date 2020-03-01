@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Description有$n$个位置排成一个环，每个位置有一个值$a_i$，还有$n$人，每一个人有一个位置标号$t_i$（不同的人$t_i$可能相同），还有一个值$b_i$。 现在人们按照一定顺序进入场地，当编号为$k$的人进入时，会找到$t_k$的位置，如果这个位置已经有人，那么他会从这个位置顺时针找到第一个空位并坐下。 设$ans$为最后位置上坐着的人的值大于这个位置的值的位置个数。 问通过">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-01T11:47:33.122Z">
+<meta property="og:updated_time" content="2020-03-01T11:51:37.660Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LOJ6047]决斗">
 <meta name="twitter:description" content="Description有$n$个位置排成一个环，每个位置有一个值$a_i$，还有$n$人，每一个人有一个位置标号$t_i$（不同的人$t_i$可能相同），还有一个值$b_i$。 现在人们按照一定顺序进入场地，当编号为$k$的人进入时，会找到$t_k$的位置，如果这个位置已经有人，那么他会从这个位置顺时针找到第一个空位并坐下。 设$ans$为最后位置上坐着的人的值大于这个位置的值的位置个数。 问通过">
@@ -455,6 +455,7 @@
 <p>现在人们按照一定顺序进入场地，当编号为$k$的人进入时，会找到$t_k$的位置，如果这个位置已经有人，那么他会从这个位置顺时针找到第一个空位并坐下。</p>
 <p>设$ans$为最后位置上坐着的人的值大于这个位置的值的位置个数。</p>
 <p>问通过不同的顺序安排方式，最大的$ans$时多少？</p>
+<a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>首先，我们考虑最终的最优方案是什么样子。</p>
 <p>我们设位置标号为$i$的人组成的集合为$s_i$。</p>
 <p>那么必然有一个位置，它的上面坐的人属于$s_i$，且没有属于它之前的位置的人坐到这个位置之后。</p>
