@@ -1,5 +1,5 @@
 ---
-title: 浅谈FWT快速沃尔什变换
+title: 浅谈快速沃尔什变换FWT
 date: 2019-07-06 23:05:27
 tags: [多项式,FWT]
 ---
@@ -74,9 +74,9 @@ $$
 inline void FWT(int *a, int type)
 {
     for(int mid = 1; mid < lim; mid <<= 1)
-        	for(int i = 0; i < lim; i += (mid << 1))
-                	for(int j = 0; j < mid; j++)
-                        a[i + mid + j] += a[i + j] * type;
+        for(int i = 0; i < lim; i += (mid << 1))
+        	for(int j = 0; j < mid; j++)
+            	a[i + mid + j] += a[i + j] * type;
 }
 ```
 
