@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[浅谈快速傅里叶变换FFT]]></title>
+    <url>%2F2020%2F03%2F08%2F%E6%B5%85%E8%B0%88%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT%2F</url>
+    <content type="text"><![CDATA[快速傅里叶变换在$OI$中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？ 设有两个函数$F(x),G(x)$，那么 H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]一般来说，暴力计算这个$H$是$O(n^2)$的，快速傅里叶变换可以将这个过程复杂度降低为$O(nlog_2n)$。 多项式点值表示法我们一般见到的多项式是系数表示法，即 F(x)=a_0+a_1x+a_2x^2+...我们知道，一个$n$次多项式可以由$n+1$个不同点唯一确定，那么我们将这$n+1$个点$(x_i,F(x_i))$看成这个多项式的点值表示法。 而对于点值表示法进行多项式乘法却异常地简单，只需将两个多项式点值表示法中横坐标相同的点的纵坐标相乘即可，复杂度线性。 但是，一般题目中给我们的都是系数表示法，暴力转化成点值表示法依然是$O(n^2)$的。实际上，快速傅里叶变换就是加速将多项式系数表示法转化为点值表示法的过程，将其的复杂度降为$O(nlog_2n)$。 复数相关因为多项式点值表示法并不唯一，我们假设多项式次数为$n-1$，那么带入任意的$n$个$x$都可以得到一组点，那么，我们考虑将$n$个单位根$w_n^0,w_n^1…w_n^{n-1}$带入，得到不同的点值。 那么，单位根是什么？我们从头讲起。 复数单位根是定义在复数意义上的，复数是形如$a+bi(a,b\in R,i=\sqrt{-1})$的形式的数，对应复平面上的 $(a,b)$的向量。 模长：复数的模长定义为$\sqrt{a^2+b^2}$，即该复数在复平面上对应向量到原点的距离。 复数基本运算复数加减：$(a+bi)+(c+di)=(a+c)+(b+d)i$。 复数乘法：$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$（可以暴力展开，将$i^2$看成$-1$即可）。 复数相乘，在复平面上的意义为模长相乘，辅角相加。 共轭复数我们称$a+bi$和$a-bi$为共轭复数，在复平面上，可以看成关于$x$轴对称的两个向量。 单位根单位根，就是满足$z^n=1$的复数（可以看作将复平面上单位圆平均分为$n$个部分的单位复数），记为$w_n$。 $n$次单位根，就是将单位圆平分为$n$个部分的$n$个向量对应的复数。依次记为$w_n^0,w_n^1,w_n^2…w_n^{n-1}$。 我们记$w_n$的辅角为$\theta=\frac{2\pi}{n}$，那么每次$w_n^k-&gt;w_n^{k+1}$在图像上的意义就是$w_n^k$逆时针旋转$\theta$得到的向量。 考虑单位根的时候，一般放在复平面中考虑，更容易理解。 单位根性质性质$1$：$w_{2n}^{2k}=w_n^k$，这个根据复平面上的平分单位圆的概念很直观，不作解释。 性质$2$：$w_n^{k+\frac{n}{2}}=-w_n^k$，相当于将$w_n^k$逆时针转$\pi$得到$w_n^{k+\frac{n}{2}}$，自然横纵坐标都取反。 实际上，$FFT$就是根据这两个简单的性质进行的。 FFT的原理首先，我们将整个多项式次数补为$2^t-1$的形式（$2^t&gt;2n$），设$lim=2^t$，那么相当于多项式乘法在模$x^{lim}$意义下进行，多余的项系数为$0$，以保证后面每次使$lim/2$后都是整数。 DFT所谓$DFT$，就是把系数转化为点值的方法。]]></content>
+      <tags>
+        <tag>生成函数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[[LOJ6047]决斗]]></title>
     <url>%2F2020%2F03%2F01%2FLOJ6047-%E5%86%B3%E6%96%97%2F</url>
     <content type="text"><![CDATA[Description有$n$个位置排成一个环，每个位置有一个值$a_i$，还有$n$人，每一个人有一个位置标号$t_i$（不同的人$t_i$可能相同），还有一个值$b_i$。 现在人们按照一定顺序进入场地，当编号为$k$的人进入时，会找到$t_k$的位置，如果这个位置已经有人，那么他会从这个位置顺时针找到第一个空位并坐下。 设$ans$为最后位置上坐着的人的值大于这个位置的值的位置个数。 问通过不同的顺序安排方式，最大的$ans$时多少？ Solution首先，我们考虑最终的最优方案是什么样子。 我们设位置标号为$i$的人组成的集合为$s_i$。 那么必然有一个位置，它的上面坐的人属于$s_i$，且没有属于它之前的位置的人坐到这个位置之后。 显然我们选择的第一个位置就符合条件。 那么，我们有一个贪心策略，由于后面的数不会影响到当前决策，我们就用$set$维护出当前可用的人的值，然后每到一个位置，把属于当前位置的人的值先加入$set$，然后选择大于等于当前位置的值的最小的数，作为坐在这里的人，然后把它删去，如果没有找到，那么就删去$set$中最小的一个。 这个贪心的正确性是显然的。 但是，我们并不知道我们选择的第一个位置是什么，所以要枚举，再加上贪心，时间复杂度$O(n^2log_2n)$，显然无法通过。 那么，我们能不能不用枚举第一个位置是什么，而直接找呢？ 实际上，存在一个位置，不管按照什么顺序排列，都不会有属于它之前的位置的人坐到这个位置之后。这个位置要满足什么条件呢？ 我们记$x_i=|s_i|-1$，那么，这个位置要满足整个环以这个位置为开头，所有的$x_i$的前缀和都$&gt;=0$。 这是啥？ 我们考虑这个$x_i$的前缀和是什么含义？记其为$sum_i$，它表示处理完前$i$个位置之后还剩下来的可供填的人数。如果在任何时候都有$sum_i&gt;=0$，说明所有位置不会出现人不够填的情况，就不会有后面的位置的人填到前面来。 是不是对于所有的顺序，这个位置记为$k$都不会被跨越呢？ 是的，我们用反证法，如果存在某个位置开头填后，使得$k$被跨越了，那么说明$sum_{k-1}&gt;0$，而所有的数的$x_i$之和显然等于$0$，那么$k$到末尾的位置的$x$之和$&lt;0$，与$k$这个位置的定义矛盾。 所以，对于所有的顺序，这个$k$都不会被跨越，也就是说，我们只要找到这个$k$，就可以放心地把它当作开头来进行贪心。 但是，我们一定能找到这样一个$k$吗，怎样找这样的$k$呢？ 其实，这两个问题可以放在一起解决。 我们考虑随便以一个位置开头，那么$sum_i$的值一定构成了一段折线，中间有可能会突破到$x$轴以下。那么，我们找到这段折线值最小的点（若有多个，任选一个），最小值记为$mn$，这个点为$k$。 我们让这个点$k$之后的那个点$k+1$成为第一个，这个点把当成原点（也是最后一个点），那么，我们相当于把$k$之后的函数图像从向上平移了$|mn|$个单位，这个时候这一段不存在$x$轴以下的点，这个时候我们再把前面那一段给接到这个函数末尾，那么这个函数此时不会有任何一段再$x$轴以下（否则就和$mn$是之前那段函数的最小值矛盾）。 那么，我们不仅证明了这样的点一定存在，还知道了找到$k$的方法。 我们从任何一个点开始（比如从$1$），求$x_i$的前缀和$sum_i$，取$sum$最小的点$k$，然后以$k+1$作为开始点进行贪心即可。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;bits/stdc++.h&gt;using namespace std;const int maxN = 5e5 + 10;int n;int a[maxN + 1], b[maxN + 1];int sum[maxN + 1];set&lt;int&gt; s;vector&lt;int&gt; num[maxN + 1];inline int read()&#123; int num = 0, f = 1; char ch = getchar(); while( !isdigit( ch ) ) &#123; if(ch == '-') f = -1; ch = getchar(); &#125; while( isdigit( ch ) ) num = (num &lt;&lt; 3) + (num &lt;&lt; 1) + (ch ^ 48), ch = getchar(); return num * f;&#125;int main()&#123; n = read(); for(int i = 1; i &lt;= n; i++) num[ read() ].push_back(i); for(int i = 1; i &lt;= n; i++) a[i] = read(); for(int i = 1; i &lt;= n; i++) b[i] = read(); int now = 0; for(int i = 1; i &lt;= n; i++) &#123; sum[i] = sum[i - 1] + num[i].size() - 1; if(sum[i] &lt; sum[now]) now = i; &#125; int ans = 0; now ++; for(int i = 1; i &lt;= n; i++, now++) &#123; if(now &gt; n) now = 1; for(int j = 0; j &lt; num[now].size(); j++) s.insert(b[ num[now][j] ]); set&lt;int&gt;::iterator it = s.lower_bound(a[now]); if(it != s.end()) ans ++, s.erase(it ++); else it = s.begin(), s.erase(it ++); &#125; printf("%d", ans); return 0;&#125; 总结我们经常遇到一个环$x_i$，其总和为$0$，然后我们要以某个位置开头，使得每个前缀和都$&gt;=0$，那么我们可以使用以上的分析方法，必然存在这样的一个点满足条件，而且通过函数图像解题，调整，都是贪心的常用技巧，一定要熟练掌握。]]></content>
@@ -20,8 +28,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>概率期望</tag>
         <tag>容斥原理</tag>
+        <tag>概率期望</tag>
       </tags>
   </entry>
   <entry>
@@ -32,8 +40,8 @@
         <category>Atcoder</category>
       </categories>
       <tags>
-        <tag>容斥原理</tag>
         <tag>组合数学</tag>
+        <tag>容斥原理</tag>
       </tags>
   </entry>
   <entry>
@@ -150,8 +158,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>容斥原理</tag>
         <tag>组合数学</tag>
+        <tag>容斥原理</tag>
       </tags>
   </entry>
   <entry>
@@ -230,8 +238,8 @@
         <category>BZOJ</category>
       </categories>
       <tags>
-        <tag>概率期望</tag>
         <tag>容斥原理</tag>
+        <tag>概率期望</tag>
         <tag>多项式</tag>
         <tag>FWT</tag>
       </tags>
@@ -281,8 +289,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[浅谈FWT快速沃尔什变换]]></title>
-    <url>%2F2019%2F07%2F06%2F%E6%B5%85%E8%B0%88FWT%E5%BF%AB%E9%80%9F%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2%2F</url>
+    <title><![CDATA[浅谈快速沃尔什变换FWT]]></title>
+    <url>%2F2019%2F07%2F06%2F%E6%B5%85%E8%B0%88%E5%BF%AB%E9%80%9F%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2FWT%2F</url>
     <content type="text"><![CDATA[快速沃尔什变换FWT与FFT类似，只不过是进行集合卷积的计算，如： C_k=\sum_{i\oplus j = k} A_i*B_j\\ 其中\oplus是位运算,可以是与,或,异或等 或(or)运算的FWT我们考虑或的FWT，如果我们有一个集合$A_i$，设$FWT(A)=A’$那么$A’_i$的意义就是这个集合所有子集的贡献之和。 A'_i=\sum_{i|j=i}A_j这样，因为$k|(i|j)=k$可以推出$k|i=k,k|j=k$我们可以得到一个结论： C'_k=\sum_{k|t=k}C_t=\sum_{k|t=k}\sum_{i|j=t}A_i*B_j=\sum_{k|(i|j)=k}A_i*B_j\\ =(\sum_{k|i=k}A_i)*(\sum_{k|j=k}B_j)=A'_k*B'_k这样我们来看$A’$是怎么求的。 我们考虑吧$A$长度补为$2^k$，分为两半，$A0$是前面一半，表示第一位是0，$A1$是后面一半，表示第一位是1。 然后，我们也把$A’$分为两半来考虑，前面一半是第一位是0，那么它的子集就是$A0’$（它本身），后面一半第一位是1，它的子集既有$A1‘$(它本身)，还有$A0’$。 所以 A'=merge(A0',A0'+A1')\\ 即FWT(A)=merge(FWT(A_0),FWT(A_0)+FWT(A_1))其中，$merge$就是将两个数组拼接在一起，$+$表示对应下标的数相加。 这样我们就能在$O(nlogn)$的复杂度内求出了$FWT(A)$。 这样，我们就可以算出$FWT(C)$，那么，我们怎么把$FWT(C)$转回来呢？ FWT(A)_0:FWT(A)的前半部分,FWT(A_0):A的前半部分的FWT\\ \because FWT(A)_0=FWT(A_0)\\ \therefore A_0 = IFWT(FWT(A_0))=IFWT(FWT(A)_0)\\ \because FWT(A)_1=FWT(A_0)+FWT(A_1)\\ \therefore A_1=IFWT(FWT(A_1))=IFWT(FWT(A)_1-FWT(A)_0)结论 FWT(A)= \begin{cases} (FWT(A_0),FWT(A_0+A_1))\quad(n\neq 1)\\ A\quad(n=1) \end{cases}下面写$IFWT$，注意，此时大括号后面的$A$是已经$FWT$过后的$A$ IFWT(A)= \begin{cases} (IFWT(A_0),IFWT(A_1-A_0))\quad(n \neq 1)\\ A\quad(n = 1) \end{cases}Code1234567inline void FWT(int *a, int type)&#123; for(int mid = 1; mid &lt; lim; mid &lt;&lt;= 1) for(int i = 0; i &lt; lim; i += (mid &lt;&lt; 1)) for(int j = 0; j &lt; mid; j++) a[i + mid + j] += a[i + j] * type;&#125; 与(and)运算的FWT证明太麻烦了，直接上结论吧，这个和上面或的差不多。 结论 FWT(A)= \begin{cases} (FWT(A_0+A_1),FWT(A_1))\quad(n\neq 1)\\ A\quad (n=1) \end{cases}\\ IFWT(A)= \begin{cases} (IFWT(A_0-A_1),IFWT(A_1))\quad (n\neq 1)\\ A\quad(n=1) \end{cases}Code1234567inline void FWT(int *a, int type)&#123; for(int mid = 1; mid &lt; lim; mid &lt;&lt;= 1) for(int i = 0; i &lt; lim; i += (mid &lt;&lt; 1)) for(int j = 0; j &lt; mid; j++) a[i + j] += a[i + mid + j] * type;&#125; 异或(xor)运算的FWT这个最难。 尝试证明，却失败.jpg 结论 FWT(A)= \begin{cases} (FWT(A_0)+FWT(A_1),FWT(A_0)-FWT(A_1))\quad (n \neq 1)\\ A\quad (n = 1) \end{cases}\\ IFWT(A)= \begin{cases} (\frac{IFWT(A_0)+IFWT(A_1)}{2},\frac{IFWT(A_0)-IFWT(A_1)}{2})\quad(n\neq 1)\\ A\quad(n=1) \end{cases}Code123456789101112inline void FWT(int *a, int type)&#123; for(int mid = 1; mid &lt; lim; mid &lt;&lt;= 1) for(int i = 0; i &lt; lim; i += (mid &lt;&lt; 1)) for(int j = 0; j &lt; mid; j++) &#123; int x = a[i + j], y = a[i + mid + j]; a[i + j] = x + y; a[i + mid + j] = x - y; if(type == -1) a[i + j] /= 2, a[i + mid + j] /= 2; &#125;&#125;]]></content>
       <tags>
         <tag>多项式</tag>

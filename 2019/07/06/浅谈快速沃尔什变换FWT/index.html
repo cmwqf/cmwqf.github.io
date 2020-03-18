@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="字符串,后缀数组,">
+  <meta name="keywords" content="多项式,FWT,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Description给你一个长为N的字符串，求不同的子串的个数 我们定义两个子串不同，当且仅当有这两个子串长度不一样 或者长度一样且有任意一位不一样。 子串的定义：原字符串中连续的一段字符组成的字符串">
-<meta name="keywords" content="字符串,后缀数组">
+<meta name="description" content="快速沃尔什变换FWT与FFT类似，只不过是进行集合卷积的计算，如：  C_k=\sum_{i\oplus j = k} A_i*B_j\\ 其中\oplus是位运算,可以是与,或,异或等">
+<meta name="keywords" content="多项式,FWT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="本质不同的子串数量">
-<meta property="og:url" content="http://cmwqf.github.io/blog/2019/03/11/本质不同的子串数量/index.html">
+<meta property="og:title" content="浅谈快速沃尔什变换FWT">
+<meta property="og:url" content="http://cmwqf.github.io/blog/2019/07/06/浅谈快速沃尔什变换FWT/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Description给你一个长为N的字符串，求不同的子串的个数 我们定义两个子串不同，当且仅当有这两个子串长度不一样 或者长度一样且有任意一位不一样。 子串的定义：原字符串中连续的一段字符组成的字符串">
+<meta property="og:description" content="快速沃尔什变换FWT与FFT类似，只不过是进行集合卷积的计算，如：  C_k=\sum_{i\oplus j = k} A_i*B_j\\ 其中\oplus是位运算,可以是与,或,异或等">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-29T05:10:34.360Z">
+<meta property="og:updated_time" content="2020-03-18T01:22:52.621Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="本质不同的子串数量">
-<meta name="twitter:description" content="Description给你一个长为N的字符串，求不同的子串的个数 我们定义两个子串不同，当且仅当有这两个子串长度不一样 或者长度一样且有任意一位不一样。 子串的定义：原字符串中连续的一段字符组成的字符串">
+<meta name="twitter:title" content="浅谈快速沃尔什变换FWT">
+<meta name="twitter:description" content="快速沃尔什变换FWT与FFT类似，只不过是进行集合卷积的计算，如：  C_k=\sum_{i\oplus j = k} A_i*B_j\\ 其中\oplus是位运算,可以是与,或,异或等">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://cmwqf.github.io/blog/2019/03/11/本质不同的子串数量/">
+  <link rel="canonical" href="http://cmwqf.github.io/blog/2019/07/06/浅谈快速沃尔什变换FWT/">
 
 
 
 
 
-  <title>本质不同的子串数量 | cmwqf's blog</title>
+  <title>浅谈快速沃尔什变换FWT | cmwqf's blog</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/blog/2019/03/11/本质不同的子串数量/">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/blog/2019/07/06/浅谈快速沃尔什变换FWT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cmwqf">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">本质不同的子串数量</h1>
+          <h1 class="post-title" itemprop="name headline">浅谈快速沃尔什变换FWT</h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T22:21:57+08:00">
-                2019-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-06T23:05:27+08:00">
+                2019-07-06
               </time>
             
 
@@ -353,8 +353,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/11/本质不同的子串数量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/11/本质不同的子串数量/" itemprop="commentCount"></span>
+                <a href="/2019/07/06/浅谈快速沃尔什变换FWT/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/06/浅谈快速沃尔什变换FWT/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -362,7 +362,7 @@
 
           
           
-             <span id="/2019/03/11/本质不同的子串数量/" class="leancloud_visitors" data-flag-title="本质不同的子串数量">
+             <span id="/2019/07/06/浅谈快速沃尔什变换FWT/" class="leancloud_visitors" data-flag-title="浅谈快速沃尔什变换FWT">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  470
+                  791
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -429,14 +429,66 @@
       
 
       
-        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给你一个长为N的字符串，求不同的子串的个数</p>
-<p>我们定义两个子串不同，当且仅当有这两个子串长度不一样 或者长度一样且有任意一位不一样。</p>
-<p>子串的定义：原字符串中连续的一段字符组成的字符串</p>
-<a id="more"></a>
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>这是$height$数组的有一大神奇操作。</p>
-<p>我们考虑每一个子串必然是某一个后缀的一个前缀，那么，我们直接用以$sa[i]$开头的后缀的子串个数（为$n-sa[i]+1$）减掉与前一个后缀相同的最长公共前缀就好了，即：</p>
+        <h1 id="快速沃尔什变换"><a href="#快速沃尔什变换" class="headerlink" title="快速沃尔什变换"></a>快速沃尔什变换</h1><p>FWT与FFT类似，只不过是进行集合卷积的计算，如：</p>
 <script type="math/tex; mode=display">
-ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> n, m, p, sa[maxN + <span class="number">1</span>], rk[maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> bin[maxN + <span class="number">1</span>], tp[maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> height[maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Qsort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++) bin[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) bin[ rk[i] ] ++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) bin[i] += bin[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--) sa[ bin[ rk[ tp[i] ] ] -- ] = tp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m = <span class="number">300</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) tp[i] = i, rk[i] = s[i];</span><br><span class="line">    Qsort();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> w = <span class="number">1</span>; p &lt; n; m = p, w &lt;&lt;= <span class="number">1L</span>L)</span><br><span class="line">    &#123;</span><br><span class="line">        p = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n - w + <span class="number">1</span>; i &lt;= n; i++) tp[ ++ p ] = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="keyword">if</span>(sa[i] - w &gt; <span class="number">0</span>) tp[ ++ p ] = sa[i] - w;</span><br><span class="line">        Qsort();</span><br><span class="line">        <span class="built_in">memcpy</span>(tp, rk, <span class="keyword">sizeof</span>(rk));</span><br><span class="line">        rk[ sa[<span class="number">1</span>] ] = p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">            rk[ sa[i] ] = (tp[ sa[i] ] == tp[ sa[i - <span class="number">1</span>] ] &amp;&amp; tp[ sa[i] + w] == tp[ sa[i - <span class="number">1</span>] + w]) ? p : ++p; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(k) k --;</span><br><span class="line">        <span class="keyword">int</span> j = sa[ rk[i] - <span class="number">1</span> ];</span><br><span class="line">        <span class="keyword">while</span>(s[i + k] == s[j + k]) k ++;</span><br><span class="line">        height[ rk[i] ] = k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld %s"</span>, &amp;n, s + <span class="number">1</span>);</span><br><span class="line">    work();</span><br><span class="line">    solve();</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            ans += n - sa[i] + <span class="number">1</span> - height[i];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+C_k=\sum_{i\oplus j = k} A_i*B_j\\
+其中\oplus是位运算,可以是与,或,异或等</script><a id="more"></a>
+<h1 id="或-or-运算的FWT"><a href="#或-or-运算的FWT" class="headerlink" title="或(or)运算的FWT"></a>或(or)运算的FWT</h1><p>我们考虑或的FWT，如果我们有一个集合$A_i$，设$FWT(A)=A’$那么$A’_i$的意义就是这个集合所有子集的贡献之和。</p>
+<script type="math/tex; mode=display">
+A'_i=\sum_{i|j=i}A_j</script><p>这样，因为$k|(i|j)=k$可以推出$k|i=k,k|j=k$我们可以得到一个结论：</p>
+<script type="math/tex; mode=display">
+C'_k=\sum_{k|t=k}C_t=\sum_{k|t=k}\sum_{i|j=t}A_i*B_j=\sum_{k|(i|j)=k}A_i*B_j\\
+=(\sum_{k|i=k}A_i)*(\sum_{k|j=k}B_j)=A'_k*B'_k</script><p>这样我们来看$A’$是怎么求的。</p>
+<p>我们考虑吧$A$长度补为$2^k$，分为两半，$A0$是前面一半，表示第一位是0，$A1$是后面一半，表示第一位是1。</p>
+<p>然后，我们也把$A’$分为两半来考虑，前面一半是第一位是0，那么它的子集就是$A0’$（它本身），后面一半第一位是1，它的子集既有$A1‘$(它本身)，还有$A0’$。</p>
+<p>所以</p>
+<script type="math/tex; mode=display">
+A'=merge(A0',A0'+A1')\\
+即FWT(A)=merge(FWT(A_0),FWT(A_0)+FWT(A_1))</script><p>其中，$merge$就是将两个数组拼接在一起，$+$表示对应下标的数相加。</p>
+<p>这样我们就能在$O(nlogn)$的复杂度内求出了$FWT(A)$。</p>
+<p>这样，我们就可以算出$FWT(C)$，那么，我们怎么把$FWT(C)$转回来呢？</p>
+<script type="math/tex; mode=display">
+FWT(A)_0:FWT(A)的前半部分,FWT(A_0):A的前半部分的FWT\\
+\because FWT(A)_0=FWT(A_0)\\
+\therefore A_0 = IFWT(FWT(A_0))=IFWT(FWT(A)_0)\\
+\because FWT(A)_1=FWT(A_0)+FWT(A_1)\\
+\therefore A_1=IFWT(FWT(A_1))=IFWT(FWT(A)_1-FWT(A)_0)</script><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">
+FWT(A)=
+\begin{cases}
+(FWT(A_0),FWT(A_0+A_1))\quad(n\neq 1)\\
+A\quad(n=1)
+\end{cases}</script><p>下面写$IFWT$，注意，此时大括号后面的$A$是已经$FWT$过后的$A$</p>
+<script type="math/tex; mode=display">
+IFWT(A)=
+\begin{cases}
+(IFWT(A_0),IFWT(A_1-A_0))\quad(n \neq 1)\\
+A\quad(n = 1)
+\end{cases}</script><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">            	a[i + mid + j] += a[i + j] * type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="与-and-运算的FWT"><a href="#与-and-运算的FWT" class="headerlink" title="与(and)运算的FWT"></a>与(and)运算的FWT</h1><p>证明太麻烦了，直接上结论吧，这个和上面或的差不多。</p>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">
+FWT(A)=
+\begin{cases}
+(FWT(A_0+A_1),FWT(A_1))\quad(n\neq 1)\\
+A\quad (n=1)
+\end{cases}\\
+IFWT(A)=
+\begin{cases}
+(IFWT(A_0-A_1),IFWT(A_1))\quad (n\neq 1)\\
+A\quad(n=1)
+\end{cases}</script><h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">				a[i + j] += a[i + mid + j] * type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="异或-xor-运算的FWT"><a href="#异或-xor-运算的FWT" class="headerlink" title="异或(xor)运算的FWT"></a>异或(xor)运算的FWT</h1><p>这个最难。</p>
+<p>尝试证明，却失败.jpg</p>
+<h2 id="结论-2"><a href="#结论-2" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">
+FWT(A)=
+\begin{cases}
+(FWT(A_0)+FWT(A_1),FWT(A_0)-FWT(A_1))\quad (n \neq 1)\\
+A\quad (n = 1)
+\end{cases}\\
+IFWT(A)=
+\begin{cases}
+(\frac{IFWT(A_0)+IFWT(A_1)}{2},\frac{IFWT(A_0)-IFWT(A_1)}{2})\quad(n\neq 1)\\
+A\quad(n=1)
+\end{cases}</script><h2 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x = a[i + j], y = a[i + mid + j];</span><br><span class="line">                a[i + j] = x + y;</span><br><span class="line">                a[i + mid + j] = x - y;</span><br><span class="line">                <span class="keyword">if</span>(type == <span class="number">-1</span>) a[i + j] /= <span class="number">2</span>, a[i + mid + j] /= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -454,9 +506,9 @@ ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class
       
         <div class="post-tags">
           
-            <a href="/tags/字符串/" rel="tag"># 字符串</a>
+            <a href="/tags/多项式/" rel="tag"># 多项式</a>
           
-            <a href="/tags/后缀数组/" rel="tag"># 后缀数组</a>
+            <a href="/tags/FWT/" rel="tag"># FWT</a>
           
         </div>
       
@@ -469,8 +521,8 @@ ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/09/浅谈连通图计数/" rel="next" title="浅谈连通图计数">
-                <i class="fa fa-chevron-left"></i> 浅谈连通图计数
+              <a href="/2019/06/26/伯努利数相关/" rel="next" title="伯努利数相关">
+                <i class="fa fa-chevron-left"></i> 伯努利数相关
               </a>
             
           </div>
@@ -479,8 +531,8 @@ ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/16/浅谈后缀自动机/" rel="prev" title="浅谈后缀自动机">
-                浅谈后缀自动机 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/23/BZOJ1010-玩具装箱/" rel="prev" title="[BZOJ1010]玩具装箱">
+                [BZOJ1010]玩具装箱 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -625,7 +677,7 @@ ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速沃尔什变换"><span class="nav-number">1.</span> <span class="nav-text">快速沃尔什变换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或-or-运算的FWT"><span class="nav-number">2.</span> <span class="nav-text">或(or)运算的FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">2.1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">2.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与-and-运算的FWT"><span class="nav-number">3.</span> <span class="nav-text">与(and)运算的FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结论-1"><span class="nav-number">3.1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-1"><span class="nav-number">3.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异或-xor-运算的FWT"><span class="nav-number">4.</span> <span class="nav-text">异或(xor)运算的FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结论-2"><span class="nav-number">4.1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-2"><span class="nav-number">4.2.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></div>
             
 
           </div>

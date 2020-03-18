@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cmwqf.github.io/blog/"/>
-  <updated>2020-03-01T11:51:37.660Z</updated>
+  <updated>2020-03-08T11:40:47.620Z</updated>
   <id>http://cmwqf.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈快速傅里叶变换FFT</title>
+    <link href="http://cmwqf.github.io/blog/2020/03/08/%E6%B5%85%E8%B0%88%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT/"/>
+    <id>http://cmwqf.github.io/blog/2020/03/08/浅谈快速傅里叶变换FFT/</id>
+    <published>2020-03-08T09:22:12.000Z</published>
+    <updated>2020-03-08T11:40:47.620Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="快速傅里叶变换"><a href="#快速傅里叶变换" class="headerlink" title="快速傅里叶变换"></a>快速傅里叶变换</h1><p>在$OI$中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？</p><p>设有两个函数$F(x),G(x)$，那么</p><script type="math/tex; mode=display">H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]</script><p>一般来说，暴力计算这个$H$是$O(n^2)$的，快速傅里叶变换可以将这个过程复杂度降低为$O(nlog_2n)$。</p><a id="more"></a><h1 id="多项式点值表示法"><a href="#多项式点值表示法" class="headerlink" title="多项式点值表示法"></a>多项式点值表示法</h1><p>我们一般见到的多项式是系数表示法，即</p><script type="math/tex; mode=display">F(x)=a_0+a_1x+a_2x^2+...</script><p>我们知道，一个$n$次多项式可以由$n+1$个不同点唯一确定，那么我们将这$n+1$个点$(x_i,F(x_i))$看成这个多项式的点值表示法。</p><p>而对于点值表示法进行多项式乘法却异常地简单，只需将两个多项式点值表示法中横坐标相同的点的纵坐标相乘即可，复杂度线性。</p><p>但是，一般题目中给我们的都是系数表示法，暴力转化成点值表示法依然是$O(n^2)$的。实际上，快速傅里叶变换就是加速将多项式<strong>系数表示法</strong>转化为<strong>点值表示法</strong>的过程，将其的复杂度降为$O(nlog_2n)$。</p><h1 id="复数相关"><a href="#复数相关" class="headerlink" title="复数相关"></a>复数相关</h1><p>因为多项式点值表示法并不唯一，我们假设多项式次数为$n-1$，那么带入任意的$n$个$x$都可以得到一组点，那么，我们考虑将$n$个单位根$w_n^0,w_n^1…w_n^{n-1}$带入，得到不同的点值。</p><p>那么，单位根是什么？我们从头讲起。</p><h2 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h2><p>单位根是定义在复数意义上的，复数是形如$a+bi(a,b\in R,i=\sqrt{-1})$的形式的数，对应复平面上的</p><p>$(a,b)$的向量。</p><p>模长：复数的模长定义为$\sqrt{a^2+b^2}$，即该复数在复平面上对应向量到原点的距离。</p><h2 id="复数基本运算"><a href="#复数基本运算" class="headerlink" title="复数基本运算"></a>复数基本运算</h2><p>复数加减：$(a+bi)+(c+di)=(a+c)+(b+d)i$。</p><p>复数乘法：$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$（可以暴力展开，将$i^2$看成$-1$即可）。</p><p>复数相乘，在复平面上的意义为<strong>模长相乘，辅角相加</strong>。</p><h2 id="共轭复数"><a href="#共轭复数" class="headerlink" title="共轭复数"></a>共轭复数</h2><p>我们称$a+bi$和$a-bi$为共轭复数，在复平面上，可以看成关于$x$轴对称的两个向量。</p><h2 id="单位根"><a href="#单位根" class="headerlink" title="单位根"></a>单位根</h2><p>单位根，就是满足$z^n=1$的复数（可以看作将复平面上单位圆平均分为$n$个部分的单位复数），记为$w_n$。</p><p>$n$次单位根，就是将单位圆平分为$n$个部分的$n$个向量对应的复数。依次记为$w_n^0,w_n^1,w_n^2…w_n^{n-1}$。</p><p>我们记$w_n$的辅角为$\theta=\frac{2\pi}{n}$，那么每次$w_n^k-&gt;w_n^{k+1}$在图像上的意义就是$w_n^k$逆时针旋转$\theta$得到的向量。</p><p>考虑单位根的时候，一般放在复平面中考虑，更容易理解。</p><h2 id="单位根性质"><a href="#单位根性质" class="headerlink" title="单位根性质"></a>单位根性质</h2><p>性质$1$：$w_{2n}^{2k}=w_n^k$，这个根据复平面上的平分单位圆的概念很直观，不作解释。</p><p>性质$2$：$w_n^{k+\frac{n}{2}}=-w_n^k$，相当于将$w_n^k$逆时针转$\pi$得到$w_n^{k+\frac{n}{2}}$，自然横纵坐标都取反。</p><p>实际上，$FFT$就是根据这两个简单的性质进行的。</p><h1 id="FFT的原理"><a href="#FFT的原理" class="headerlink" title="FFT的原理"></a>FFT的原理</h1><p>首先，我们将整个多项式次数补为$2^t-1$的形式（$2^t&gt;2n$），设$lim=2^t$，那么相当于多项式乘法在模$x^{lim}$意义下进行，多余的项系数为$0$，以保证后面每次使$lim/2$后都是整数。</p><h2 id="DFT"><a href="#DFT" class="headerlink" title="DFT"></a>DFT</h2><p>所谓$DFT$，就是把系数转化为点值的方法。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;快速傅里叶变换&quot;&gt;&lt;a href=&quot;#快速傅里叶变换&quot; class=&quot;headerlink&quot; title=&quot;快速傅里叶变换&quot;&gt;&lt;/a&gt;快速傅里叶变换&lt;/h1&gt;&lt;p&gt;在$OI$中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？&lt;/p&gt;
+&lt;p&gt;设有两个函数$F(x),G(x)$，那么&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]&lt;/script&gt;&lt;p&gt;一般来说，暴力计算这个$H$是$O(n^2)$的，快速傅里叶变换可以将这个过程复杂度降低为$O(nlog_2n)$。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="生成函数" scheme="http://cmwqf.github.io/blog/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>[LOJ6047]决斗</title>
@@ -63,9 +86,9 @@
     
       <category term="dp" scheme="http://cmwqf.github.io/blog/tags/dp/"/>
     
-      <category term="概率期望" scheme="http://cmwqf.github.io/blog/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/"/>
-    
       <category term="容斥原理" scheme="http://cmwqf.github.io/blog/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
+    
+      <category term="概率期望" scheme="http://cmwqf.github.io/blog/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/"/>
     
   </entry>
   
@@ -91,9 +114,9 @@
       <category term="Atcoder" scheme="http://cmwqf.github.io/blog/categories/Atcoder/"/>
     
     
-      <category term="容斥原理" scheme="http://cmwqf.github.io/blog/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
-    
       <category term="组合数学" scheme="http://cmwqf.github.io/blog/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="容斥原理" scheme="http://cmwqf.github.io/blog/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
@@ -372,9 +395,9 @@ f(x)=\frac{f(x_0)}{0!}+\frac{f&#39;(x_0)}{1!}(x-x_0)+...+\frac{f^{n}(x_0)}{n!}(x
     
       <category term="dp" scheme="http://cmwqf.github.io/blog/tags/dp/"/>
     
-      <category term="容斥原理" scheme="http://cmwqf.github.io/blog/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
-    
       <category term="组合数学" scheme="http://cmwqf.github.io/blog/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="容斥原理" scheme="http://cmwqf.github.io/blog/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
@@ -478,32 +501,6 @@ f(ab)=f(a)f(b)&lt;/script&gt;&lt;p&gt;求$\sum_{i=1}^nf(i)\quad mod\quad 1e9+7$&
       <category term="数论" scheme="http://cmwqf.github.io/blog/tags/%E6%95%B0%E8%AE%BA/"/>
     
       <category term="Min_25筛" scheme="http://cmwqf.github.io/blog/tags/Min-25%E7%AD%9B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[BZOJ2173]整数的lqp拆分</title>
-    <link href="http://cmwqf.github.io/blog/2019/07/27/BZOJ2173-%E6%95%B4%E6%95%B0%E7%9A%84lqp%E6%8B%86%E5%88%86/"/>
-    <id>http://cmwqf.github.io/blog/2019/07/27/BZOJ2173-整数的lqp拆分/</id>
-    <published>2019-07-27T09:40:01.000Z</published>
-    <updated>2019-11-30T08:59:14.099Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>一个数$N=a_1+a_2+…+a_m(m&gt;0)$，它的贡献是</p><script type="math/tex; mode=display">Fib{a_1}*Fib{a_2}*...*Fib_{a_m}</script><p>求它的所有整数划分的贡献之和对$1e9+7$取模。</p><a id="more"></a><h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>设$F(x)$是$Fibonacci$数列的生成函数，则答案就是</p><script type="math/tex; mode=display">ans=\sum_{i=1}^{\infty}[x^n]F^i(x)=[x^n]\frac{F(x)}{1-F(x)}</script><p>我们先推一下$Fibonacci$数列（除去第$0$项）的生成函数。</p><script type="math/tex; mode=display">F(x)=x+2x^2+3x^3+5x^4+...\\xF(x)=x^2+2x^3+3x^4+5x^5+...\\(1-x)F(x)=x+x^2+x^3+2x^4+3x^5+...\\(1-x)F(x)=x+x^2F(x)\\F(x)=\frac{x}{1-x-x^2}</script><p>则</p><script type="math/tex; mode=display">ans=[x^n]\frac{x}{1-2x-x^2}</script><p>这个，我们该怎么搞呢？</p><p><del>查看题解后</del>，我们考虑用递推，我们设$G(x)=\frac{x}{1-2x-x^2}$，$g(n)$是第$x^n$前的系数，则</p><script type="math/tex; mode=display">G(x)-2xG(x)-x^2G(x)=x\\G(x)=2xG(x)+x^2G(x)+x</script><p>然后我们考虑第$n$项的系数，$G(x)$的第$n$项显然就是$g(n)$，然后$2xG(x)$第$n$项的系数就是$2*g(n-1)$，$x^2G(x)$第$n$项的系数就是$g(n-2)$，所以</p><script type="math/tex; mode=display">g(n)=2*g(n-1)+g(n-2)</script><p>因为$G(x)$没有常数项，所以通过上面那个$G(x)=2xG(x)+x^2G(x)+x$，我们可以知道$g(1)=1,g(2)=2$。</p><p>然后大力递推就好了。</p><p>真是妙哉，妙哉！！</p><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e6</span> + <span class="number">100</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[maxN + <span class="number">1</span>], n;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;n);</span><br><span class="line">    f[<span class="number">1</span>] = <span class="number">1</span>, f[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) f[i] = (<span class="number">2</span> * f[i - <span class="number">1</span>] + f[i - <span class="number">2</span>]) % mod;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, f[n]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h1&gt;&lt;p&gt;一个数$N=a_1+a_2+…+a_m(m&amp;gt;0)$，它的贡献是&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-Fib{a_1}*Fib{a_2}*...*Fib_{a_m}&lt;/script&gt;&lt;p&gt;求它的所有整数划分的贡献之和对$1e9+7$取模。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="BZOJ" scheme="http://cmwqf.github.io/blog/categories/BZOJ/"/>
-    
-    
-      <category term="组合数学" scheme="http://cmwqf.github.io/blog/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="生成函数" scheme="http://cmwqf.github.io/blog/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
