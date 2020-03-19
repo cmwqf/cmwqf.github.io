@@ -198,6 +198,47 @@ inline void FWT(int *a, int type)
 }
 ```
 
+# 子集卷积
+
+在一些题目中，有的时候要求
+$$
+c[S]=\sum_{T\sub S}a[T]*b[S\oplus T]
+$$
+这个时候应该怎么办呢？
+
+我们考虑如果$i,j$满足$j=k\oplus i$的话，当且仅当$i|j=k, |i|+|j|=|k|$，那么我们就是要求
+$$
+c[k]=\sum_{i|j=k}[|i|+|j|=|k|]*a[i]*b[j]
+$$
+那么，我们多记一维，设$a[t][k]$表示$k$中有$t$个$1$。
+
+每次就是要
+$$
+c[s+t][i|j]+=a[s][i]*b[t][j]
+$$
+最后只要统计所有$c[s][i]$（$i$的位数为$s$）作为$ans[i]$的答案即可。
+
+那么，我们应该怎么算这个东西呢？
+
+我们把第二维都正向地$FWT$一下，然后枚举位数，暴力卷积（可以证明这是对的），具体见代码：
+
+```c++
+inline void work()
+{
+    for(int i = 0; i <= 20; i++) FWTOR(C[i], 1);
+    for(int i = 0; i <= 20; i++)//枚举位数
+    {
+        memset(D, 0, sizeof(D));
+        for(int j = 0; j <= i; j++)
+            for(int s = 0; s < (1 << 20); s++)
+                D[s] = ADD(D[s], 1ll * C[j][s] * C[i - j][s] % mod);
+        FWTOR(D, -1);
+        for(int s = 0; s < (1 << 20); s++)
+            if(bc[s] == i) ans[s] = ADD(ans[s], D[s]);
+    }
+}
+```
+
 
 
 
