@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="组合数学,生成函数,">
+  <meta name="keywords" content="容斥原理,组合数学,生成函数,">
 
 
 
@@ -89,14 +89,14 @@
 
 
 <meta name="description" content="Description有一个$n$个数的序列，每个数取值在$[1,D]$之间，问有多少种可能的序列使得相同的数有至少$m$对（一个数只能出现在一对里面）。 $D\le 1e5,n,m\le 1e9$ 本题来源于CTS2019。">
-<meta name="keywords" content="组合数学,生成函数">
+<meta name="keywords" content="容斥原理,组合数学,生成函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LOJ3120]珍珠">
 <meta property="og:url" content="http://cmwqf.github.io/blog/2020/03/19/LOJ3120-珍珠/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Description有一个$n$个数的序列，每个数取值在$[1,D]$之间，问有多少种可能的序列使得相同的数有至少$m$对（一个数只能出现在一对里面）。 $D\le 1e5,n,m\le 1e9$ 本题来源于CTS2019。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-19T08:19:59.643Z">
+<meta property="og:updated_time" content="2020-03-19T08:34:28.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LOJ3120]珍珠">
 <meta name="twitter:description" content="Description有一个$n$个数的序列，每个数取值在$[1,D]$之间，问有多少种可能的序列使得相同的数有至少$m$对（一个数只能出现在一对里面）。 $D\le 1e5,n,m\le 1e9$ 本题来源于CTS2019。">
@@ -109,7 +109,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -397,11 +397,6 @@
           
 
           
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
 
           
             <div class="post-wordcount">
@@ -503,6 +498,8 @@ f[k]=n!*\binom{D}{k}*[x^n](\frac{e^x-e^{-x}}{2})^k(e^{x})^{D-k}\\
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/容斥原理/" rel="tag"># 容斥原理</a>
           
             <a href="/tags/组合数学/" rel="tag"># 组合数学</a>
           
@@ -649,6 +646,22 @@ f[k]=n!*\binom{D}{k}*[x^n](\frac{e^x-e^{-x}}{2})^k(e^{x})^{D-k}\\
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cmwqf" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="cmwqfcmwqf@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
 
           
           
@@ -679,6 +692,13 @@ f[k]=n!*\binom{D}{k}*[x^n](\frac{e^x-e^{-x}}{2})^k(e^{x})^{D-k}\\
       <!--/noindex-->
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
       
   <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=533245911&auto=1&height=66"></iframe>
     </div>
@@ -751,11 +771,6 @@ f[k]=n!*\binom{D}{k}*[x^n](\frac{e^x-e^{-x}}{2})^k(e^{x})^{D-k}\\
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
