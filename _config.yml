@@ -4,8 +4,8 @@
 
 # Site
 title: cmwqf's blog
-subtitle: 蒟蒻的博客
-description: 愿你走出半生，归来仍是少年
+subtitle: 愿你走出半生，归来仍是少年
+description: 
 keywords:
 author: cmwqf
 language: zh-Hans
@@ -91,7 +91,7 @@ search:
 
 # 添加萌妹子效果
 live2d:
-  enable: true
+  enable: false
   scriptFrom: local  
   model:
     use: live2d-widget-model-shizuku
