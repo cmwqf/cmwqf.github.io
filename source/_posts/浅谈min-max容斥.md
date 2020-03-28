@@ -2,6 +2,7 @@
 title: 浅谈min-max容斥
 date: 2019-07-25 15:46:37
 tags: [组合数学]
+categories: [学习笔记]
 ---
 
 # Min-max容斥

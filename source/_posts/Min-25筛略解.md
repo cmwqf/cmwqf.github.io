@@ -2,6 +2,7 @@
 title: Min_25筛略解
 date: 2019-07-29 19:24:41
 tags: [Min_25筛,数论]
+categories: [学习笔记]
 ---
 
 # Min_25筛

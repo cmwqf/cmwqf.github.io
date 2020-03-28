@@ -1,7 +1,8 @@
 ---
 title: 浅谈K-D Tree
 date: 2019-02-03 09:53:10
-tags: [K-D Tree,暴力]
+tags: [K-D Tree]
+categories: [学习笔记]
 ---
 
 # K-D Tree

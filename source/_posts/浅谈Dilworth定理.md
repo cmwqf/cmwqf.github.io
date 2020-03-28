@@ -2,6 +2,7 @@
 title: 浅谈Dilworth定理
 date: 2019-12-17 17:41:37
 tags: [组合数学]
+categories: [学习笔记]
 ---
 
 # Dilworth定理

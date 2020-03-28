@@ -2,6 +2,7 @@
 title: 浅谈matrix-tree定理
 date: 2019-02-03 11:00:27
 tags: [图论,行列式]
+categories: [学习笔记]
 ---
 
 # 行列式及Matrix-Tree定理

@@ -2,6 +2,7 @@
 title: 浅谈CDQ分治
 date: 2019-01-13 19:31:19
 tags: [CDQ分治]
+categories: [学习笔记]
 ---
 
 据说这个CDQ分治也是某位集训队大爷发明的orz

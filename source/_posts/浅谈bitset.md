@@ -2,6 +2,7 @@
 title: 浅谈bitset
 date: 2019-01-30 08:58:19
 tags: [bitset,莫队]
+categories: [学习笔记]
 ---
 
 # Bitset

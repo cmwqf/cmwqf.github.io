@@ -2,6 +2,7 @@
 title: 浅谈purfer序列
 date: 2019-06-19 15:09:38
 tags: [图论,生成树]
+categories: [学习笔记]
 ---
 
 # 什么是purfer序列
