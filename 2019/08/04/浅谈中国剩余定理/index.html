@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="中国剩余定理中国剩余定理是解决这样一类问题：  \begin{cases} x\equiv a_1\quad(mod\quad m_1)\\ x\equiv a_2\quad(mod\quad m_2)\\ ...\\ x\equiv a_k\quad(mod\quad m_k)\\ \end{cases}求$x$的最小整数解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-11T13:13:26.644Z">
+<meta property="og:updated_time" content="2020-03-28T02:01:08.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈中国剩余定理">
 <meta name="twitter:description" content="中国剩余定理中国剩余定理是解决这样一类问题：  \begin{cases} x\equiv a_1\quad(mod\quad m_1)\\ x\equiv a_2\quad(mod\quad m_2)\\ ...\\ x\equiv a_k\quad(mod\quad m_k)\\ \end{cases}求$x$的最小整数解。">
@@ -345,6 +345,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -381,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  565
+                  557
                 </span>
               
 
@@ -454,7 +476,7 @@ x0*b+y0*(a-(a/b)*b)=gcd\\
 y0*a+(x0-(a/b)*y0)*b=gcd</script><p>所以</p>
 <script type="math/tex; mode=display">
 x1=y0,y1=x0-(a/b)*y0</script><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">ex_gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!b) &#123; x0 = <span class="number">1</span>, y0 = <span class="number">0</span>; <span class="keyword">return</span>; &#125;</span><br><span class="line">    ex_gcd(b, a % b);</span><br><span class="line">    <span class="keyword">int</span> tmp = x0;</span><br><span class="line">    x0 = y0;</span><br><span class="line">    y0 = tmp - a / b * y0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = <span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) M *= m[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ex_gcd(M / m[i], m[i]);</span><br><span class="line">        x0 = (x0 % m[i] + m[i]) % m[i];</span><br><span class="line">        ans = (ans + a[i] * (M / m[i]) * x0) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="扩展中国剩余定理"><a href="#扩展中国剩余定理" class="headerlink" title="扩展中国剩余定理"></a>扩展中国剩余定理</h1>
+
       
     </div>
     
@@ -578,7 +600,7 @@ x1=y0,y1=x0-(a/b)*y0</script><h1 id="Code"><a href="#Code" class="headerlink" ti
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -589,7 +611,7 @@ x1=y0,y1=x0-(a/b)*y0</script><h1 id="Code"><a href="#Code" class="headerlink" ti
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -600,7 +622,7 @@ x1=y0,y1=x0-(a/b)*y0</script><h1 id="Code"><a href="#Code" class="headerlink" ti
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -656,7 +678,7 @@ x1=y0,y1=x0-(a/b)*y0</script><h1 id="Code"><a href="#Code" class="headerlink" ti
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">1.</span> <span class="nav-text">中国剩余定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解法"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ex-gcd求逆元"><span class="nav-number">3.</span> <span class="nav-text">Ex_gcd求逆元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展中国剩余定理"><span class="nav-number">5.</span> <span class="nav-text">扩展中国剩余定理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">1.</span> <span class="nav-text">中国剩余定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解法"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ex-gcd求逆元"><span class="nav-number">3.</span> <span class="nav-text">Ex_gcd求逆元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
 
           </div>
