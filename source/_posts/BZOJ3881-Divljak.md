@@ -15,7 +15,7 @@ categories: [BZOJ]
 
 2. 询问$s_x$是集合$T$中多少个字符串的子串。
 
-保证$\sum |t|\le 2e6,n,m\le 1e5$。
+保证$\sum |t|\le 2e6,n,q\le 1e5$。
 
 <!--more-->
 
