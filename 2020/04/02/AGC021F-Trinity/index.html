@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Description有一个$n\times m$的网格，你要把它每个格子涂成黑或白色，定义$A_i$为第$i$行第一个涂成黑色的列，$B_i$为第$i$列第一个涂成黑色的行，$C_i$表示第$i$列最后一个涂成黑色的行，问有多少种可能的$(A,B,C)$组合？ $n\le 8000,m\le 200$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-02T04:21:22.762Z">
+<meta property="og:updated_time" content="2020-04-02T04:26:04.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AGC021F Trinity">
 <meta name="twitter:description" content="Description有一个$n\times m$的网格，你要把它每个格子涂成黑或白色，定义$A_i$为第$i$行第一个涂成黑色的列，$B_i$为第$i$列第一个涂成黑色的行，$C_i$表示第$i$列最后一个涂成黑色的行，问有多少种可能的$(A,B,C)$组合？ $n\le 8000,m\le 200$">
@@ -487,7 +487,7 @@ c[n]=\sum_{i=0}^{n-1}\frac{1}{(n-1-(i-3))!}*\frac{a[i]}{i!}</script><p>直接$NT
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们对于两个维度限制问题，一般按照限制多的那一维度的顺序进行$dp$，每次考虑当前维度的选择方案。</p>
 <p>对于网格问题，也可以使用<strong>考虑相对顺序，每次插入的方法</strong>。</p>
 <p>实际上，如果我们每次的决策依赖于我们已经选择的东西的顺序情况，但并不知道具体选择了什么东西的时候，就可以考虑插入的方法。</p>
-<p>实际上，我们按照一定顺序进行插入，就是为了去掉一些限制，比如我们按照从大到小插入，我们就钦定了当前插入的元素是所有的元素中最小的，就去掉了大小限制，再比如这道题，我们每次插入，就能知道已经选择的行和当前插入行的顺序关系，便于做题。</p>
+<p>我们按照一定顺序进行插入，就是为了去掉一些限制，比如我们按照从大到小插入，我们就钦定了当前插入的元素是所有的元素中最小的，就去掉了大小限制，再比如这道题，我们每次插入，就能知道已经选择的行和当前插入行的顺序关系，便于做题。</p>
 <p>这个思想非常重要，考试的时候如果没有思路也许可以往插入的方向想一想，有时能直接去掉一些限制。</p>
 
       
