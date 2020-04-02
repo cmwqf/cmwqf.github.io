@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Description有一个$n\times m$的网格，你要把它每个格子涂成黑或白色，定义$A_i$为第$i$行第一个涂成黑色的列，$B_i$为第$i$列第一个涂成黑色的行，$C_i$表示第$i$列最后一个涂成黑色的行，问有多少种可能的$(A,B,C)$组合？ $n\le 8000,m\le 200$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-02T04:15:32.504Z">
+<meta property="og:updated_time" content="2020-04-02T04:21:22.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AGC021F Trinity">
 <meta name="twitter:description" content="Description有一个$n\times m$的网格，你要把它每个格子涂成黑或白色，定义$A_i$为第$i$行第一个涂成黑色的列，$B_i$为第$i$列第一个涂成黑色的行，$C_i$表示第$i$列最后一个涂成黑色的行，问有多少种可能的$(A,B,C)$组合？ $n\le 8000,m\le 200$">
@@ -461,10 +461,13 @@
 <p>首先当前插入的行我们肯定是要选的，那么我们的问题就是原本就存在的行的选择情况。我们发现，只有在<strong>插入的第一个行的上面有多少原来存在的行和插入的最后一行下面有多少原来存在的行才对我们的答案有影响</strong>，不妨设插入的第一个行上面有$c_1$个行，插入的最后一个行下面有$c_2$个行，那么当前插入方案对答案的贡献就是$(c_1+1)(c_2+1)$。</p>
 <p>我们将插入行的方案数和对答案的贡献放在一起考虑，我们假设插入的$k$个行把原来的$j$行分为$k+1$段，那么我们有</p>
 <script type="math/tex; mode=display">
-x_1+x_2+...+x_{k+1}=j</script><p>且$x<em>1,x_2,…x</em>{k+1}\ge 0$。</p>
-<p>对于每种满足条件的方案数，对答案的贡献为$(x<em>1+1)(x</em>{k+1}+1)$。</p>
-<p>这是一个经典的问题了，考虑组合意义，相当于我们要在分出的$k+1$个组的第一个和最后一个组再分为$\ge 0$的两个部分的方案数，不妨设$x<em>1$被分为$x</em>{1,0}$和$x<em>{1,1}$，$x</em>{k+1}$同理。</p>
-<p>那么答案相当于</p>
+x_1+x_2+...+x_{k+1}=j\\x_1,x_2,...,x_{k+1}\ge 0</script><p>对于每种满足条件的方案数，对答案的贡献为</p>
+<script type="math/tex; mode=display">
+(x_1+1)(x_{k+1}+1)</script><p>这是一个经典的问题了，考虑组合意义，相当于我们要在分出的$k+1$个组的第一个和最后一个组再分为$\ge 0$的两个部分的方案数。</p>
+<p>设</p>
+<script type="math/tex; mode=display">
+x_1=x_{1,0}+x_{1,1}\\
+x_{k+1}=x_{k+1,0}+x_{k+1,1}</script><p>那么答案相当于</p>
 <script type="math/tex; mode=display">
 x_{1,0}+x_{1,1}+x_2+x_3+...+x_{k+1,0}+x_{k+1,1}=j</script><p>其中所有元素$\ge 0$的整数解个数，那么显然通过组合数学知识，这个方案数等于$\binom{j+k+2}{k+2}$。</p>
 <p>但是注意，以上的分析仅在$k&gt;0$的时候成立，如果$k=0$，要单独讨论。</p>
