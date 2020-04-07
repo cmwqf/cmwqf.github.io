@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="什么是purfer序列purfer序列是用来表示一棵无根树的，一个purfer序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个purfer序列，一个purfer序列也可以还原出唯一的一个无根树。">
+<meta name="description" content="什么是prufer序列$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。">
 <meta name="keywords" content="图论,生成树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈purfer序列">
-<meta property="og:url" content="http://cmwqf.github.io/2019/06/19/浅谈purfer序列/index.html">
+<meta property="og:title" content="浅谈prufer序列">
+<meta property="og:url" content="http://cmwqf.github.io/2019/06/19/浅谈prufer序列/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="什么是purfer序列purfer序列是用来表示一棵无根树的，一个purfer序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个purfer序列，一个purfer序列也可以还原出唯一的一个无根树。">
+<meta property="og:description" content="什么是prufer序列$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-28T02:00:47.522Z">
+<meta property="og:updated_time" content="2020-04-07T01:48:05.203Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈purfer序列">
-<meta name="twitter:description" content="什么是purfer序列purfer序列是用来表示一棵无根树的，一个purfer序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个purfer序列，一个purfer序列也可以还原出唯一的一个无根树。">
+<meta name="twitter:title" content="浅谈prufer序列">
+<meta name="twitter:description" content="什么是prufer序列$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://cmwqf.github.io/2019/06/19/浅谈purfer序列/">
+  <link rel="canonical" href="http://cmwqf.github.io/2019/06/19/浅谈prufer序列/">
 
 
 
 
 
-  <title>浅谈purfer序列 | cmwqf's blog</title>
+  <title>浅谈prufer序列 | cmwqf's blog</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2019/06/19/浅谈purfer序列/">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2019/06/19/浅谈prufer序列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cmwqf">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈purfer序列</h1>
+          <h1 class="post-title" itemprop="name headline">浅谈prufer序列</h1>
         
 
         <div class="post-meta">
@@ -382,8 +382,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/19/浅谈purfer序列/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/19/浅谈purfer序列/" itemprop="commentCount"></span>
+                <a href="/2019/06/19/浅谈prufer序列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/19/浅谈prufer序列/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  458
+                  453
                 </span>
               
 
@@ -447,20 +447,19 @@
       
 
       
-        <h1 id="什么是purfer序列"><a href="#什么是purfer序列" class="headerlink" title="什么是purfer序列"></a>什么是purfer序列</h1><p>purfer序列是用来表示一棵无根树的，一个purfer序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个purfer序列，一个purfer序列也可以还原出唯一的一个无根树。</p>
+        <h1 id="什么是prufer序列"><a href="#什么是prufer序列" class="headerlink" title="什么是prufer序列"></a>什么是prufer序列</h1><p>$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。</p>
 <a id="more"></a>
-<h1 id="如何构造purfer序列"><a href="#如何构造purfer序列" class="headerlink" title="如何构造purfer序列"></a>如何构造purfer序列</h1><p>对于一棵无根树，我们首先每次找到当前编号最小的叶子节点（无根树中的叶子结点指度为1），然后将其从无根树中删掉，再将所有与这个节点相连的节点编号加入purfer序列末端，不断重复这个步骤，直到最后只剩下两个节点为止。</p>
-<p>因此，$n$个点的purfer序列长度为$n-2$。</p>
-<h1 id="如何还原无根树"><a href="#如何还原无根树" class="headerlink" title="如何还原无根树"></a>如何还原无根树</h1><p>如果已知一个purfer序列，我们是可以根据它还原无根树的，那么，怎么还原呢？</p>
-<p>首先，我们把purfer序列中的每一个节点的度数设为1，然后加上每一个点在序列中出现的次数，作为这个点的度数。然后对于第i步：</p>
-<p>先找出度数为1的所有的点中最小的那一个，设为$u$，将它与purfer序列中第i个节点$v$连边，然后将$u,v$的度数都减1。</p>
+<h1 id="如何构造prufer序列"><a href="#如何构造prufer序列" class="headerlink" title="如何构造prufer序列"></a>如何构造prufer序列</h1><p>对于一棵无根树，我们首先每次找到当前编号最小的叶子节点（无根树中的叶子结点指度为1），然后将其从无根树中删掉，再将所有与这个节点相连的节点编号加入$prufer$序列末端，不断重复这个步骤，直到最后只剩下两个节点为止。</p>
+<p>因此，$n$个点的$prufer$序列长度为$n-2$。</p>
+<h1 id="如何还原无根树"><a href="#如何还原无根树" class="headerlink" title="如何还原无根树"></a>如何还原无根树</h1><p>如果已知一个$prufer$序列，我们是可以根据它还原无根树的，那么，怎么还原呢？</p>
+<p>首先，我们把$prufer$序列中的每一个节点的度数设为1，然后加上每一个点在序列中出现的次数，作为这个点的度数。然后对于第i步：</p>
+<p>先找出度数为1的所有的点中最小的那一个，设为$u$，将它与$prufer$序列中第i个节点$v$连边，然后将$u,v$的度数都减1。</p>
 <p>最后，还剩下两个度数为1的点，将它们连边即可。</p>
 <p>至于正确性，我也不会证明，知道就好了。。。</p>
-<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>purfer序列还有一个重要的性质：</p>
-<p>我们考虑一个节点怎样才会被放入purfer序列里：当与它相连的节点被删除时，就会把它加进去。直到它自己被删除。</p>
+<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>$prufer$序列还有一个重要的性质：</p>
+<p>我们考虑一个节点怎样才会被放入$prufer$序列里：当与它相连的节点被删除时，就会把它加进去。直到它自己被删除。</p>
 <p>因此，我们可以得到：</p>
-<p><strong>无根树中一个点的度数=这个点在purfer序列中出现的次数+1</strong></p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href>bzoj1005明明的烦恼</a></p>
+<p><strong>无根树中一个点的度数=这个点在$prufer$序列中出现的次数+1</strong></p>
 
       
     </div>
@@ -665,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是purfer序列"><span class="nav-number">1.</span> <span class="nav-text">什么是purfer序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何构造purfer序列"><span class="nav-number">2.</span> <span class="nav-text">如何构造purfer序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何还原无根树"><span class="nav-number">3.</span> <span class="nav-text">如何还原无根树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质"><span class="nav-number">4.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">5.</span> <span class="nav-text">例题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是prufer序列"><span class="nav-number">1.</span> <span class="nav-text">什么是prufer序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何构造prufer序列"><span class="nav-number">2.</span> <span class="nav-text">如何构造prufer序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何还原无根树"><span class="nav-number">3.</span> <span class="nav-text">如何还原无根树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质"><span class="nav-number">4.</span> <span class="nav-text">性质</span></a></li></ol></div>
             
 
           </div>
