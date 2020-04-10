@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cmwqf.github.io/2020/04/10/LOJ3284-Exercise/</loc>
+    
+    <lastmod>2020-04-10T06:12:42.807Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cmwqf.github.io/2019/06/19/%E6%B5%85%E8%B0%88prufer%E5%BA%8F%E5%88%97/</loc>
     
     <lastmod>2020-04-07T01:48:05.203Z</lastmod>
@@ -443,14 +450,14 @@
   </url>
   
   <url>
-    <loc>http://cmwqf.github.io/tags/index.html</loc>
+    <loc>http://cmwqf.github.io/categories/index.html</loc>
     
     <lastmod>2019-11-30T08:59:14.117Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cmwqf.github.io/categories/index.html</loc>
+    <loc>http://cmwqf.github.io/tags/index.html</loc>
     
     <lastmod>2019-11-30T08:59:14.117Z</lastmod>
     
