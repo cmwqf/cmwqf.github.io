@@ -41,7 +41,7 @@ $$
 
 那么我们就变为
 $$
-\sum_{k\ge 1}k*\sum_S\sum_{T\sub S}(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]\\
+\sum_{k\ge 1}k*\sum_S\sum_{T\subset S}(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]\\
 =\sum_{k\ge 1}k*\sum_T(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]*coef(T)
 $$
 这个$coef(T)$就是$T$对答案的贡献系数，我们后面再说。
