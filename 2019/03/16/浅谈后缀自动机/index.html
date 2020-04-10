@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="前置知识强烈推荐hihocoder后缀自动机，里面有详细的后缀自动机的基础知识，我们来看里面所说的几个重要的概念： Endpos$endpos(s)$指的是$s$在原串中的所有出现的位置中最后一个字符所在的位置集合； 如原串$aabab$，则$endpos(ab)={3,5}$。 而后缀自动机的每一个状态，就是由有着相同的$endpos$的子串构成的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-30T08:59:14.112Z">
+<meta property="og:updated_time" content="2020-04-10T06:40:14.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈后缀自动机">
 <meta name="twitter:description" content="前置知识强烈推荐hihocoder后缀自动机，里面有详细的后缀自动机的基础知识，我们来看里面所说的几个重要的概念： Endpos$endpos(s)$指的是$s$在原串中的所有出现的位置中最后一个字符所在的位置集合； 如原串$aabab$，则$endpos(ab)={3,5}$。 而后缀自动机的每一个状态，就是由有着相同的$endpos$的子串构成的。">
@@ -352,6 +352,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -430,19 +452,19 @@
 <p>如原串$aabab$，则$endpos(ab)={3,5}$。</p>
 <p>而后缀自动机的每一个状态，就是由有着相同的$endpos$的子串构成的。</p>
 <a id="more"></a>
-<h2 id="重要性质"><a href="#重要性质" class="headerlink" title="重要性质"></a>重要性质</h2><p>我们记$SAM$(后缀自动机)的一个状态$st$所有的子串为$substring(st)$，然后记$longest(st)$为状态为$st$的所有子串中最长的一个，可以证明（这个刚刚链接里面有，就不再赘述），状态为$st$的所有子串都是$longest(st)​$的长度为连续的后缀。</p>
+<h2 id="重要性质"><a href="#重要性质" class="headerlink" title="重要性质"></a>重要性质</h2><p>我们记$SAM$(后缀自动机)的一个状态$st$所有的子串为$substring(st)$，然后记$longest(st)$为状态为$st$的所有子串中最长的一个，可以证明（这个刚刚链接里面有，就不再赘述），状态为$st$的所有子串都是$longest(st)$的长度为连续的后缀。</p>
 <p>为什么不是所有的后缀，而是只有一段连续的后缀呢？</p>
-<p>因为随着子串长度的减小，它有可能还会出现在其他的地方，于是它的$endpos​$就会多一些，就会分到其他的状态里。</p>
+<p>因为随着子串长度的减小，它有可能还会出现在其他的地方，于是它的$endpos$就会多一些，就会分到其他的状态里。</p>
 <h1 id="如何构建SAM"><a href="#如何构建SAM" class="headerlink" title="如何构建SAM"></a>如何构建SAM</h1><h2 id="Len"><a href="#Len" class="headerlink" title="Len"></a>Len</h2><p><strong>len[i]表示SAM中i这个状态的所有字符串的最长的那一个的长度，minlen则相反。</strong></p>
-<p>我们考虑这样一个性质：我们记$shortest(i)$为状态为$i$最短的那个字符串，$longest(i)$为最长的，而$shortest(i)$减去它的第一个字符，必然是另一个状态$j$的$longest(j)$，即必然存在且仅存在一个$j$，使得$minlen[i]=len[j]+1​$。</p>
+<p>我们考虑这样一个性质：我们记$shortest(i)$为状态为$i$最短的那个字符串，$longest(i)$为最长的，而$shortest(i)$减去它的第一个字符，必然是另一个状态$j$的$longest(j)$，即必然存在且仅存在一个$j$，使得$minlen[i]=len[j]+1$。</p>
 <p>为什么呢？</p>
 <p>我们用反证法（<del>是我口胡的</del>），假设$shortest(i)$减去其第一个字符后为$s$，在另一个状态$j$中并不是最长的，那么由之前我们所说的性质可得，它必然是$longest(j)$的一个后缀，那么，$len(j)&gt;=minlen(i)$，且$endpos(s)\supset endpos(shortest(i))$，又$endpos(s)=endpos(longest(j))$，则有$endpos(longest(j))\supset endpos(shortest(i))$，也就是说，以$shortest(i)$的最后一个字符为结尾的还有$longest(j)$，那么由两种可能：</p>
 <p>1.$shortest(i)是longest(j)$的子串，那么显然矛盾，此时$longest(j)$应该在状态$i$里面；</p>
 <p>2.$shortest(i)$不是$longest(j)$的子串，而它们又以同一个位置结尾，而且$len(j)&gt;=minlen(i)$，显然矛盾。</p>
 <p>综上所述，结论成立。</p>
-<h2 id="Parent树"><a href="#Parent树" class="headerlink" title="Parent树"></a>Parent树</h2><p>我们设$link(i)​$为$i​$在$parent​$树上的父亲（或称为后缀链接）</p>
-<p>那么上文所述的$i​$对应另一个节点$j​$，使得$minlen(i)=len(j)+1​$在$parent​$树中就是$link(i)=j​$。</p>
-<p>换句话说，$link(i)​$就是$longest(i)​$（换成$shortest(i)​$也可以）的后缀中与其不属于同一个状态的最长的后缀所属的状态。</p>
+<h2 id="Parent树"><a href="#Parent树" class="headerlink" title="Parent树"></a>Parent树</h2><p>我们设$link(i)$为$i$在$parent$树上的父亲（或称为后缀链接）</p>
+<p>那么上文所述的$i$对应另一个节点$j$，使得$minlen(i)=len(j)+1$在$parent$树中就是$link(i)=j$。</p>
+<p>换句话说，$link(i)$就是$longest(i)$（换成$shortest(i)$也可以）的后缀中与其不属于同一个状态的最长的后缀所属的状态。</p>
 <p><strong>因此，$Parent$树和$SAM$的节点都是一样的，只是边不同而已。</strong></p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>我们定义一个状态，它有这么几条信息：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">state</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> len, link;<span class="comment">//len:最长的长度,link:即上文所述的link</span></span><br><span class="line">    <span class="keyword">int</span> trans[S];<span class="comment">//S:字符集大小,这个就是转移函数,看能转移到哪个状态的,如果节省空间,也可以用map</span></span><br><span class="line">&#125;st[maxN * <span class="number">2</span> + <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
@@ -450,30 +472,30 @@
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>一开始，后缀自动机只包含一个节点$t0$，编号为0（其他状态编号为1，2，…)，为了方便，我们分配给它$len[0]=0,link[0]=-1$（$-1$表示一个虚拟的不存在的状态）。</p>
 <h2 id="添加一个字符"><a href="#添加一个字符" class="headerlink" title="添加一个字符"></a>添加一个字符</h2><p><strong>注：以下文字大多来源于俄文后缀自动机那篇文章的中文翻译</strong></p>
 <ol>
-<li><p>我们令加入这个字符$c​$前的字符串状态为$last​$，（一开始$last=0​$且我们会不断修改$last​$）；</p>
+<li><p>我们令加入这个字符$c$前的字符串状态为$last$，（一开始$last=0$且我们会不断修改$last$）；</p>
 </li>
-<li><p>我们创建一个新的状态$cur​$，并且$len[cur]=len[last]+1​$，此时$link[cur]​$的值还未知。</p>
+<li><p>我们创建一个新的状态$cur$，并且$len[cur]=len[last]+1$，此时$link[cur]$的值还未知。</p>
 </li>
 <li><p>我们的流程：</p>
 <ol>
 <li><p>我们从状态$last$开始遍历$parent$树，如果当前状态还没有到$c$的转移，我们就添加一个到$cur$的转移，如果我们找到某一个节点$p$存在字符$c$的转移，即$trans[p][c]!=0$，我们就停下来。</p>
 </li>
-<li><p>如果我们没有找到$p​$，我们就会达到虚拟状态$-1​$，于是，我们直接对于所有路径上的$v​$，$trans[v][c]=cur​$，然后$link[cur]=-1​$并退出就好了。</p>
+<li><p>如果我们没有找到$p$，我们就会达到虚拟状态$-1$，于是，我们直接对于所有路径上的$v$，$trans[v][c]=cur$，然后$link[cur]=-1$并退出就好了。</p>
 </li>
-<li><p>如果我们找到了某个$p​$使得$trans[p][c]=q​$，这个时候我们就要分情况讨论了：</p>
+<li><p>如果我们找到了某个$p$使得$trans[p][c]=q$，这个时候我们就要分情况讨论了：</p>
 <ol>
-<li><p>如果$longest(q)​$就是$longest(p)​$在末尾加上$c​$这个字符，等价于$len[q]=len[p]+1​$，这个时候，我们只要增加$link[cur]=q​$就好了。</p>
+<li><p>如果$longest(q)$就是$longest(p)$在末尾加上$c$这个字符，等价于$len[q]=len[p]+1$，这个时候，我们只要增加$link[cur]=q$就好了。</p>
 <p>为什么呢？</p>
-<p>我们考虑现在我们要新弄出来一个后缀为$longest(p)+c$，又因为$longest(p)+c==longest(q)$，而又因为$q$中的串都是$longest(q)$的后缀，所以所有到达$q$的串都是新串后缀，而它们的$endpos$都会增加$n$($n$为$c$所在的位置)这个数，所以仍然是在同一个状态，符合$SAM$，又这个$q$是$p$到达的第一个后缀，所以直接$link[cur]=q​$就好了。</p>
+<p>我们考虑现在我们要新弄出来一个后缀为$longest(p)+c$，又因为$longest(p)+c==longest(q)$，而又因为$q$中的串都是$longest(q)$的后缀，所以所有到达$q$的串都是新串后缀，而它们的$endpos$都会增加$n$($n$为$c$所在的位置)这个数，所以仍然是在同一个状态，符合$SAM$，又这个$q$是$p$到达的第一个后缀，所以直接$link[cur]=q$就好了。</p>
 </li>
 <li><p>这就是最麻烦的一个部分了，如果$len[q]!=len[p]+1$，即$len[q]&gt;len[p]+1$，说明至少还有一个串是比$longest(p)+c$的串属于$q$，且这个串必然不是$cur$的后缀。</p>
-<p>如果这个串是$cur​$的后缀，那么这个串去掉$c​$必然是原串的后缀，且长度比$longest(p)​$还长，那么它会被先访问到。矛盾，所以，这个串必然不是$cur​$的后缀。</p>
+<p>如果这个串是$cur$的后缀，那么这个串去掉$c$必然是原串的后缀，且长度比$longest(p)$还长，那么它会被先访问到。矛盾，所以，这个串必然不是$cur$的后缀。</p>
 <p>也就是说，现在的$q$被分为了两类，一类是不大于$len[p]+1$的，它们是$cur$的后缀，还有一类是大于$len[p]+1$的，它们不是。也就是说，现在我们要更新的$q$中一类的$endpos$比另一类多了一个$n$，这时，$q$的这两类实际上不能再被分在一个类里面了（否则就违背了$SAM$)。</p>
 <p>怎么办呢？</p>
 <p>我们考虑把$endpos$含有$n$的那一类提出来，显然，旧的$SAM$没有与之相同的状态。</p>
-<p>所以，我们考虑新建一个节点$nq​$，将$endpos​$中含有$n​$的那一类转移到这个节点上来，$q​$中只保留剩下的点，然后，我们考虑它们的连边。</p>
+<p>所以，我们考虑新建一个节点$nq$，将$endpos$中含有$n$的那一类转移到这个节点上来，$q$中只保留剩下的点，然后，我们考虑它们的连边。</p>
 <p>首先，显然地，$len[nq]=len[p]+1$。</p>
-<p>然后，对于它的$trans​$，可以直接用原来$q​$的$trans​$，也就是说，$nq​$中的字符串和$q​$中的字符串在后面都加一个字符后，仍是一个状态。<del>感性理解一下就好了。</del></p>
+<p>然后，对于它的$trans$，可以直接用原来$q$的$trans$，也就是说，$nq$中的字符串和$q$中的字符串在后面都加一个字符后，仍是一个状态。<del>感性理解一下就好了。</del></p>
 <p>最后，我们考虑$nq$的$link$，原来的$q$被拆成了两个点$q,nq$，$len(link(nq))&lt;len(nq)&lt;len(q)$，又因为$link(nq)$必然等于原串中的$link(q)$，我们就相当于要在这个链表一样的东西里插入$nq$，我们像修改链表一样，让$link(nq)=link(q),link(q)=nq$。</p>
 <p>现在，我们再考虑$cur$的$link$，这个$link[cur]$必然是$q$和$nq$之一，而$q$中都不是$cur$的后缀，所以显然，$link[cur]=nq$。</p>
 <p>不仅如此，我们还要把沿着这条链往上跳$parent$树中所有$trans[i][c]=q$的变成$trans[i][c]=nq$，</p>
