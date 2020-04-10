@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="Description给定$n,m$，设一个$1$到$n$的置换$P$，定义$f(P)$是满足$P^x=I$的最小的$x$（$I$是单位置换），求$\prod_P f(P)\quad mod\quad m$。 $n\le 7500,1e8\le m\le 1e9+7$，且$m$为质数。 本题来源于USACO 2020 US Open Platinum T2。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-10T06:12:42.807Z">
+<meta property="og:updated_time" content="2020-04-10T06:17:23.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LOJ3284]Exercise">
 <meta name="twitter:description" content="Description给定$n,m$，设一个$1$到$n$的置换$P$，定义$f(P)$是满足$P^x=I$的最小的$x$（$I$是单位置换），求$\prod_P f(P)\quad mod\quad m$。 $n\le 7500,1e8\le m\le 1e9+7$，且$m$为质数。 本题来源于USACO 2020 US Open Platinum T2。">
@@ -464,7 +464,7 @@
 <p>想不到吧，$min-max$容斥不仅能用在期望上，有时还能优化复杂度！</p>
 <p>那么我们就变为</p>
 <script type="math/tex; mode=display">
-\sum_{k\ge 1}k*\sum_S\sum_{T\sub S}(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]\\
+\sum_{k\ge 1}k*\sum_S\sum_{T\subset S}(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]\\
 =\sum_{k\ge 1}k*\sum_T(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]*coef(T)</script><p>这个$coef(T)$就是$T$对答案的贡献系数，我们后面再说。</p>
 <p>我们发现这个$k$非常地不好弄，那么我们还有一个常用办法，把式子转变成：</p>
 <script type="math/tex; mode=display">
