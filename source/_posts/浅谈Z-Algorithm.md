@@ -2,6 +2,7 @@
 title: 浅谈Z_Algorithm
 date: 2020-02-25 09:38:59
 tags: [字符串]
+categories: [学习笔记]
 ---
 
 # Z_Algorithm（ex_kmp)
