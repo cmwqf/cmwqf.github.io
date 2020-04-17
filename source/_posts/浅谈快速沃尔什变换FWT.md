@@ -203,7 +203,7 @@ inline void FWT(int *a, int type)
 
 在一些题目中，有的时候要求
 $$
-c[S]=\sum_{T\sub S}a[T]*b[S\oplus T]
+c[S]=\sum_{T\subset S}a[T]*b[S\oplus T]
 $$
 这个时候应该怎么办呢？
 
