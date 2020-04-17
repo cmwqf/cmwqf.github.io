@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="虚树有的时候，题目给你一棵树，然后又$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。">
+<meta name="description" content="虚树有的时候，题目给你一棵树，然后有$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。">
 <meta name="keywords" content="dp,虚树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈虚树">
 <meta property="og:url" content="http://cmwqf.github.io/2020/04/17/浅谈虚树/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="虚树有的时候，题目给你一棵树，然后又$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。">
+<meta property="og:description" content="虚树有的时候，题目给你一棵树，然后有$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-17T10:17:08.053Z">
+<meta property="og:updated_time" content="2020-04-17T10:19:37.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈虚树">
-<meta name="twitter:description" content="虚树有的时候，题目给你一棵树，然后又$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。">
+<meta name="twitter:description" content="虚树有的时候，题目给你一棵树，然后有$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。">
 
 
 
@@ -447,7 +447,7 @@
       
 
       
-        <h1 id="虚树"><a href="#虚树" class="headerlink" title="虚树"></a>虚树</h1><p>有的时候，题目给你一棵树，然后又$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。</p>
+        <h1 id="虚树"><a href="#虚树" class="headerlink" title="虚树"></a>虚树</h1><p>有的时候，题目给你一棵树，然后有$q$组询问，每组询问为与树上有关的$k$个点的相关问题，而这个问题如果只有一个询问的话，可以用树形$dp$轻松解决，那么我们可以考虑每次只在这$k$个点及相关的点构成的树上进行$dp$，时间复杂度为$O(\sum klog_2 k)$。</p>
 <a id="more"></a>
 <h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><p>虚树是由哪些点组成的呢？</p>
 <p>我们姑且称每次询问的$k$个点为关键节点，虚树由这$k$个点和任意两点的$LCA$构成。</p>
