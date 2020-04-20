@@ -18,8 +18,8 @@
   
   <entry>
     <title>浅谈询问分块</title>
-    <link href="http://cmwqf.github.io/2020/04/20/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E5%AF%B9%E8%AF%A2%E9%97%AE%E5%88%86%E5%9D%97/"/>
-    <id>http://cmwqf.github.io/2020/04/20/浅谈一类对询问分块/</id>
+    <link href="http://cmwqf.github.io/2020/04/20/%E6%B5%85%E8%B0%88%E8%AF%A2%E9%97%AE%E5%88%86%E5%9D%97/"/>
+    <id>http://cmwqf.github.io/2020/04/20/浅谈询问分块/</id>
     <published>2020-04-20T03:48:25.000Z</published>
     <updated>2020-04-20T04:18:13.851Z</updated>
     
@@ -29,31 +29,6 @@
     
       &lt;h1 id=&quot;询问分块&quot;&gt;&lt;a href=&quot;#询问分块&quot; class=&quot;headerlink&quot; title=&quot;询问分块&quot;&gt;&lt;/a&gt;询问分块&lt;/h1&gt;&lt;p&gt;什么是询问分块？&lt;/p&gt;
 &lt;p&gt;对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，&lt;strong&gt;对询问分块，定期重构&lt;/strong&gt;，使复杂度降为$\sqrt{n}$级别。&lt;/p&gt;
-&lt;p&gt;注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对询问分块的方法。&lt;/p&gt;
-&lt;p&gt;实际上，对询问分块可以看成一种强大的暴力。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="http://cmwqf.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="分块" scheme="http://cmwqf.github.io/tags/%E5%88%86%E5%9D%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈询问分块</title>
-    <link href="http://cmwqf.github.io/2020/04/20/%E6%B5%85%E8%B0%88%E8%AF%A2%E9%97%AE%E5%88%86%E5%9D%97/"/>
-    <id>http://cmwqf.github.io/2020/04/20/浅谈询问分块/</id>
-    <published>2020-04-20T03:48:25.000Z</published>
-    <updated>2020-04-20T03:57:32.766Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="询问分块"><a href="#询问分块" class="headerlink" title="询问分块"></a>询问分块</h1><p>什么是询问分块？</p><p>对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。</p><p>注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对询问分块的方法。</p><p>实际上，对询问分块可以看成一种强大的暴力。</p><a id="more"></a><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>我们考虑两种暴力：</p><p>第一种，对于一个修改，我们用它暴力更新所有答案（例如单点加，区间查询，我们每加一个数，就修改所有前缀和）；第二种，对于一个询问，我们暴力枚举前面所有的修改，计算其对当前询问的影响。</p><p>这两种暴力，时间复杂度都是$O(1)-O(n)$的，只不过第一种使询问$O(1)$，修改$O(n)$，第二种为询问$O(n)$，修改$O(1)$。那么，我们能不能把这两种暴力</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;询问分块&quot;&gt;&lt;a href=&quot;#询问分块&quot; class=&quot;headerlink&quot; title=&quot;询问分块&quot;&gt;&lt;/a&gt;询问分块&lt;/h1&gt;&lt;p&gt;什么是询问分块？&lt;/p&gt;
-&lt;p&gt;对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。&lt;/p&gt;
 &lt;p&gt;注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对询问分块的方法。&lt;/p&gt;
 &lt;p&gt;实际上，对询问分块可以看成一种强大的暴力。&lt;/p&gt;
     
@@ -536,6 +511,32 @@ f(x)=\frac{f(x_0)}{0!}+\frac{f&#39;(x_0)}{1!}(x-x_0)+...+\frac{f^{n}(x_0)}{n!}(x
     </summary>
     
       <category term="BZOJ" scheme="http://cmwqf.github.io/categories/BZOJ/"/>
+    
+    
+      <category term="数论" scheme="http://cmwqf.github.io/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈原根及其应用</title>
+    <link href="http://cmwqf.github.io/2020/01/08/%E6%B5%85%E8%B0%88%E5%8E%9F%E6%A0%B9%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/"/>
+    <id>http://cmwqf.github.io/2020/01/08/浅谈原根及其应用/</id>
+    <published>2020-01-08T15:18:50.000Z</published>
+    <updated>2020-03-28T02:01:14.583Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h1><p>要想了解原根，先了解什么是阶。</p><p>数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。</p><p>而原根，就是定义在阶的基础上的：</p><p>如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。</p><p>如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。</p><a id="more"></a><h1 id="原根的性质"><a href="#原根的性质" class="headerlink" title="原根的性质"></a>原根的性质</h1><p>原根有什么性质？<br>以下我们都讨论$p$为质数的情况，合数则只要把$p-1$换成$\phi(p)$即可。</p><p><strong>对于$\forall 1 \le i,j \le p-1,i\neq j$，都有$g^i\not\equiv g^j \quad(mod\quad p)$。</strong></p><p>证明：</p><p>考虑反证法，如果存在$1\le i,j\le p-1,i\neq j$，有$g^i\equiv g^j\quad (mod \quad p)$，不妨设$i&lt;j$，那么就有$g^{j-i}\equiv 1\quad (mod\quad p)$，而$0&lt;j-i&lt;p-1$，这与原根的定义矛盾，所以假设不成立。</p><p>证毕。</p><p>这是一个非常好的性质，为后面作为单位根做铺垫。</p><h1 id="原根的应用"><a href="#原根的应用" class="headerlink" title="原根的应用"></a>原根的应用</h1><p>单位根。</p><p>复数的单位根，指的是将$2\pi$平均分为$k$份，而复数$(cos(\frac{2\pi}{k}),sin(\frac{2\pi}{k}))$就是单位根，记为$w_k$。它有什么性质呢？</p><p>由其在复平面上的性质，我们可以发现$w_k^i,0\le i\le k-1$两两不同（考虑在单位圆中旋转，每次旋转$\frac{2\pi}{k}$，在此范围内不会重合）。而$FFT$也是利用了这个性质（将$n$个不同的数带入多项式，将多项式转为点值表示法）。</p><p>那么，在模意义下的单位根，原根就派上了用场。</p><p>记$w_k=g^{\frac{p-1}{k}}$，前提是$k|p-1$，这也是$NTT$模数必须是$2^mp+1$的形式的重要原因（也因此，$NTT$不能处理长度为$1e7$的数列，因为这样会使$k$过大而无法满足$k| p - 1$)。</p><p><strong>那么，我们依然有$0\le i\le k-1,w_k^i$两两不同。</strong></p><p>证明也很显然，因为$\frac{i(p-1)}{k}&lt;p-1$，根据原根的性质，必然是两两不同的。</p><p>这也是$NTT$所依赖的性质。</p><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>如果我们要求某个值，给定$n,k,p$,且保证$k|p-1$</p><script type="math/tex; mode=display">\sum_{i=0}^n[k|i]F(i)\quad(mod\quad p)</script><p>怎么办？</p><p>意思就是说，当$k|i$时才对答案产生贡献，否则不产生贡献。</p><p>那么我们要构造一个函数，使得当$k|i$时，这个函数值为$1$，否则为$0$。</p><p>考虑单位根$w_k=g^{\frac{p-1}{k}}$，构造</p><script type="math/tex; mode=display">\sum_{j=0}^{k-1}w_k^{ij}</script><p>可以发现，如果$k|i$，那么每一项都是$1$，这个数就等于$k$。</p><p>否则，根据等比数列求和，它等于</p><script type="math/tex; mode=display">\frac{w_k^{ki}-1}{w^i-1}=\frac{1-1}{w^i-1}=0</script><p>这样，</p><script type="math/tex; mode=display">\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij}</script><p>就能完美地满足我们的要求了。</p><p>是不是很巧妙呢？</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;原根&quot;&gt;&lt;a href=&quot;#原根&quot; class=&quot;headerlink&quot; title=&quot;原根&quot;&gt;&lt;/a&gt;原根&lt;/h1&gt;&lt;p&gt;要想了解原根，先了解什么是阶。&lt;/p&gt;
+&lt;p&gt;数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。&lt;/p&gt;
+&lt;p&gt;而原根，就是定义在阶的基础上的：&lt;/p&gt;
+&lt;p&gt;如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。&lt;/p&gt;
+&lt;p&gt;如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="http://cmwqf.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="数论" scheme="http://cmwqf.github.io/tags/%E6%95%B0%E8%AE%BA/"/>
