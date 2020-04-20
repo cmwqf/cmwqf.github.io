@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="分块,">
 
 
 
@@ -88,13 +88,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="cmwqf&#39;s blog">
-<meta property="og:url" content="http://cmwqf.github.io/archives/2019/12/index.html">
+<meta name="description" content="询问分块什么是询问分块？ 对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。 注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对">
+<meta name="keywords" content="分块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈询问分块">
+<meta property="og:url" content="http://cmwqf.github.io/2020/04/20/浅谈一类对询问分块/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
+<meta property="og:description" content="询问分块什么是询问分块？ 对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。 注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-20T04:18:13.851Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cmwqf&#39;s blog">
+<meta name="twitter:title" content="浅谈询问分块">
+<meta name="twitter:description" content="询问分块什么是询问分块？ 对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。 注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对">
 
 
 
@@ -124,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://cmwqf.github.io/archives/2019/12/">
+  <link rel="canonical" href="http://cmwqf.github.io/2020/04/20/浅谈一类对询问分块/">
 
 
 
 
 
-  <title>归档 | cmwqf's blog</title>
+  <title>浅谈询问分块 | cmwqf's blog</title>
   
 
 
@@ -149,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -293,71 +298,232 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-          
-        好! 目前共计 77 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2020/04/20/浅谈一类对询问分块/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cmwqf">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cmwqf's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/12/17/浅谈Dilworth定理/" itemprop="url">
-              
-                <span itemprop="name">浅谈Dilworth定理</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">浅谈询问分块</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-12-17T17:41:37+08:00" content="2019-12-17">
-          12-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-20T11:48:25+08:00">
+                2020-04-20
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/20/浅谈一类对询问分块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/20/浅谈一类对询问分块/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  717
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h1 id="询问分块"><a href="#询问分块" class="headerlink" title="询问分块"></a>询问分块</h1><p>什么是询问分块？</p>
+<p>对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，<strong>对询问分块，定期重构</strong>，使复杂度降为$\sqrt{n}$级别。</p>
+<p>注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对询问分块的方法。</p>
+<p>实际上，对询问分块可以看成一种强大的暴力。</p>
+<a id="more"></a>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>我们考虑两种暴力：</p>
+<p>第一种，对于一个修改，我们用它暴力更新所有答案（例如单点加，区间查询，我们每加一个数，就修改所有前缀和）；第二种，对于一个询问，我们暴力枚举前面所有的修改，计算其对当前询问的影响。</p>
+<p>这两种暴力，时间复杂度都是$O(1)-O(n)$的，只不过第一种使询问$O(1)$，修改$O(n)$，第二种为询问$O(n)$，修改$O(1)$。那么，我们能不能把这两种暴力结合起来呢？</p>
+<p>实际上，对操作分块，定期重构，就是这两种暴力的结合。</p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>我们将所有的操作（查询和修改）分块，然后对于一个块的修改，我们暴力更新这个块内的所有询问（或者，对于一个块的询问，我们暴力遍历这个块的所有修改，计算贡献）。当这一个块结束的时候，我们用这个块内所有修改，重构所有的答案。</p>
+<p>这就是整个流程，是不是非常简单？</p>
+<p>时间复杂度呢？我们考虑设$B$个元素为一个块。</p>
+<p>那么，对于第一种操作，每个修改会更新$B$个询问（或者每个询问会访问$B$个修改），这一部分时间复杂度为$O(nB)$；对于第二种操作，每次重构答案是$O(n)$，所以第二种操作复杂度为$O(n\frac{n}{B})$。</p>
+<p>那么总复杂度为$O(nB+n\frac{n}{B})$，由均值不等式得当$B=\sqrt{n}$时时间复杂度为$O(n\sqrt{n})$。</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>对于许多一般性问题，可以直接应用此思想。</p>
+<p>对于有些树上问题，每次修改对询问的影响涉及所有点的更新，我们可以对整棵树在这个块内涉及的修改点建成一棵虚树，每次修改在虚树上面跑，也可以保证复杂度。</p>
+<p>如果读者实在想不出有什么问题要建虚树，请看这道经典<strong>虚树加操作分块</strong>的题：</p>
+<p><a href="https://codeforces.com/contest/966/problem/E" target="_blank" rel="noopener">CF966E May Holidays</a></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/分块/" rel="tag"># 分块</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/20/浅谈询问分块/" rel="next" title="浅谈询问分块">
+                <i class="fa fa-chevron-left"></i> 浅谈询问分块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -365,6 +531,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -385,8 +558,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -471,6 +653,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#询问分块"><span class="nav-number">1.</span> <span class="nav-text">询问分块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">3.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用"><span class="nav-number">4.</span> <span class="nav-text">应用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -632,6 +830,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
