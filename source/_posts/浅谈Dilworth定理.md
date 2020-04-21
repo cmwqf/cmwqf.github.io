@@ -53,7 +53,7 @@ $$
 
 # 例题
 
-[TJOI2015 组合数学](https://www.lydsy.com/JudgeOnline/problem.php?id=3997)
+[TJOI2015 组合数学](http://www.lydsy.com/JudgeOnline/problem.php?id=3997)
 
 看起来很不好做，对吧？
 
