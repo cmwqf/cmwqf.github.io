@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cmwqf.github.io/"/>
-  <updated>2020-04-21T02:08:59.387Z</updated>
+  <updated>2020-04-22T11:25:43.891Z</updated>
   <id>http://cmwqf.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈竞赛图</title>
+    <link href="http://cmwqf.github.io/2020/04/22/%E6%B5%85%E8%B0%88%E7%AB%9E%E8%B5%9B%E5%9B%BE/"/>
+    <id>http://cmwqf.github.io/2020/04/22/浅谈竞赛图/</id>
+    <published>2020-04-22T09:36:37.000Z</published>
+    <updated>2020-04-22T11:25:43.891Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="竞赛图"><a href="#竞赛图" class="headerlink" title="竞赛图"></a>竞赛图</h1><p>定义：$n$个点的有向图，若满足<strong>任意两点都有且仅有一条有向边</strong>，就称此有向图为竞赛图。</p><p>为什么竞赛图要专门分析呢？因为竞赛图有很多非常有趣的性质。</p><a id="more"></a><h1 id="性质一"><a href="#性质一" class="headerlink" title="性质一"></a>性质一</h1><p>将竞赛图缩点之后，缩成的所有强连通分量按照出度从小到大排成的序列，一定满足第$i$个连通块与所有$j&gt;i$的连通块$j$都有一条$i-&gt;j$的边。</p><p>证明：考虑归纳，我们加进来一个新的强连通分量，如果当前所有连通块都连向它，那么将它放在序列尾；如果它连向所有连通块，那么将它放在序列头；否则，所有它连向的连通块一定在连向它的连通块的后面（否则就有环，矛盾），那么将它放在对应的分界点处即可。</p><h1 id="性质二"><a href="#性质二" class="headerlink" title="性质二"></a>性质二</h1><p>竞赛图的所有强连通分量都存在一条哈密顿回路。</p><p>证明：考虑归纳，仍然考虑当前连通块构成的序列（即性质一所述的那个序列），目前所有连通块都满足存在一条哈密顿回路。现在我们加入一个点，如果它自己构成一个单独的连通块，那么将它直接加入序列（类似性质一）；否则，我们找到最左边的它连向的那个连通块$x$，再找到最右边的连向它的连通块$y$，那么所有$x,y$之间的及当前这个点构成了一个新的连通块，那么显然这个新连通块也存在一条哈密顿回路（考虑从当前点走到最左边连通块某个点开始每次先把其内部的点走一遍再走到下一个连通块的某个点，一直走到最右边连通块，然后走到当前点本身）。</p><h1 id="性质三"><a href="#性质三" class="headerlink" title="性质三"></a>性质三</h1><p>竞赛图存在一条<strong>哈密顿路径</strong>。</p><p>证明：因为每个连通块都有一条哈密顿回路，直接沿哈密顿回路走完每个连通块的所有点然后再走向下个连通块即可。</p><h1 id="性质四"><a href="#性质四" class="headerlink" title="性质四"></a>性质四</h1><p>竞赛图里，任意大小为$n&gt;1$的联通块中，大小为$[3,n]$的环均存在。</p><p>证明：首先，$n=3$成立，那么$n\ge 4$时，我们只需证明存在大小为$n-1$的环（即存在大小为$n-1$的强连通块）即可。</p><p>考虑我们从联通块中提出一个点，如果剩下的只有一个联通块，那么大小为$n-1$的环已经出现。</p><p>否则，剩下的联通块一定构成一个性质一所述的序列，根据性质三，这个序列存在一条曼哈顿路径，我们按照原来构造的路径上某个联通分量的最后一个点不走，直接跳到下一个联通分量，这样一条新的路径加上我们提出来的这个点，就构成了一个大小为$n-1$的环。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;竞赛图&quot;&gt;&lt;a href=&quot;#竞赛图&quot; class=&quot;headerlink&quot; title=&quot;竞赛图&quot;&gt;&lt;/a&gt;竞赛图&lt;/h1&gt;&lt;p&gt;定义：$n$个点的有向图，若满足&lt;strong&gt;任意两点都有且仅有一条有向边&lt;/strong&gt;，就称此有向图为竞赛图。&lt;/p&gt;
+&lt;p&gt;为什么竞赛图要专门分析呢？因为竞赛图有很多非常有趣的性质。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="http://cmwqf.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="图论" scheme="http://cmwqf.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>浅谈询问分块</title>
@@ -511,32 +534,6 @@ f(x)=\frac{f(x_0)}{0!}+\frac{f&#39;(x_0)}{1!}(x-x_0)+...+\frac{f^{n}(x_0)}{n!}(x
     </summary>
     
       <category term="BZOJ" scheme="http://cmwqf.github.io/categories/BZOJ/"/>
-    
-    
-      <category term="数论" scheme="http://cmwqf.github.io/tags/%E6%95%B0%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈原根及其应用</title>
-    <link href="http://cmwqf.github.io/2020/01/08/%E6%B5%85%E8%B0%88%E5%8E%9F%E6%A0%B9%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/"/>
-    <id>http://cmwqf.github.io/2020/01/08/浅谈原根及其应用/</id>
-    <published>2020-01-08T15:18:50.000Z</published>
-    <updated>2020-03-28T02:01:14.583Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h1><p>要想了解原根，先了解什么是阶。</p><p>数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。</p><p>而原根，就是定义在阶的基础上的：</p><p>如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。</p><p>如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。</p><a id="more"></a><h1 id="原根的性质"><a href="#原根的性质" class="headerlink" title="原根的性质"></a>原根的性质</h1><p>原根有什么性质？<br>以下我们都讨论$p$为质数的情况，合数则只要把$p-1$换成$\phi(p)$即可。</p><p><strong>对于$\forall 1 \le i,j \le p-1,i\neq j$，都有$g^i\not\equiv g^j \quad(mod\quad p)$。</strong></p><p>证明：</p><p>考虑反证法，如果存在$1\le i,j\le p-1,i\neq j$，有$g^i\equiv g^j\quad (mod \quad p)$，不妨设$i&lt;j$，那么就有$g^{j-i}\equiv 1\quad (mod\quad p)$，而$0&lt;j-i&lt;p-1$，这与原根的定义矛盾，所以假设不成立。</p><p>证毕。</p><p>这是一个非常好的性质，为后面作为单位根做铺垫。</p><h1 id="原根的应用"><a href="#原根的应用" class="headerlink" title="原根的应用"></a>原根的应用</h1><p>单位根。</p><p>复数的单位根，指的是将$2\pi$平均分为$k$份，而复数$(cos(\frac{2\pi}{k}),sin(\frac{2\pi}{k}))$就是单位根，记为$w_k$。它有什么性质呢？</p><p>由其在复平面上的性质，我们可以发现$w_k^i,0\le i\le k-1$两两不同（考虑在单位圆中旋转，每次旋转$\frac{2\pi}{k}$，在此范围内不会重合）。而$FFT$也是利用了这个性质（将$n$个不同的数带入多项式，将多项式转为点值表示法）。</p><p>那么，在模意义下的单位根，原根就派上了用场。</p><p>记$w_k=g^{\frac{p-1}{k}}$，前提是$k|p-1$，这也是$NTT$模数必须是$2^mp+1$的形式的重要原因（也因此，$NTT$不能处理长度为$1e7$的数列，因为这样会使$k$过大而无法满足$k| p - 1$)。</p><p><strong>那么，我们依然有$0\le i\le k-1,w_k^i$两两不同。</strong></p><p>证明也很显然，因为$\frac{i(p-1)}{k}&lt;p-1$，根据原根的性质，必然是两两不同的。</p><p>这也是$NTT$所依赖的性质。</p><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>如果我们要求某个值，给定$n,k,p$,且保证$k|p-1$</p><script type="math/tex; mode=display">\sum_{i=0}^n[k|i]F(i)\quad(mod\quad p)</script><p>怎么办？</p><p>意思就是说，当$k|i$时才对答案产生贡献，否则不产生贡献。</p><p>那么我们要构造一个函数，使得当$k|i$时，这个函数值为$1$，否则为$0$。</p><p>考虑单位根$w_k=g^{\frac{p-1}{k}}$，构造</p><script type="math/tex; mode=display">\sum_{j=0}^{k-1}w_k^{ij}</script><p>可以发现，如果$k|i$，那么每一项都是$1$，这个数就等于$k$。</p><p>否则，根据等比数列求和，它等于</p><script type="math/tex; mode=display">\frac{w_k^{ki}-1}{w^i-1}=\frac{1-1}{w^i-1}=0</script><p>这样，</p><script type="math/tex; mode=display">\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij}</script><p>就能完美地满足我们的要求了。</p><p>是不是很巧妙呢？</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;原根&quot;&gt;&lt;a href=&quot;#原根&quot; class=&quot;headerlink&quot; title=&quot;原根&quot;&gt;&lt;/a&gt;原根&lt;/h1&gt;&lt;p&gt;要想了解原根，先了解什么是阶。&lt;/p&gt;
-&lt;p&gt;数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。&lt;/p&gt;
-&lt;p&gt;而原根，就是定义在阶的基础上的：&lt;/p&gt;
-&lt;p&gt;如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。&lt;/p&gt;
-&lt;p&gt;如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="http://cmwqf.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="数论" scheme="http://cmwqf.github.io/tags/%E6%95%B0%E8%AE%BA/"/>

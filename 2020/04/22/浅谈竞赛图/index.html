@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="图论,生成树,">
+  <meta name="keywords" content="图论,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="什么是prufer序列$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。">
-<meta name="keywords" content="图论,生成树">
+<meta name="description" content="竞赛图定义：$n$个点的有向图，若满足任意两点都有且仅有一条有向边，就称此有向图为竞赛图。 为什么竞赛图要专门分析呢？因为竞赛图有很多非常有趣的性质。">
+<meta name="keywords" content="图论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈prufer序列">
-<meta property="og:url" content="http://cmwqf.github.io/2019/06/19/浅谈prufer序列/index.html">
+<meta property="og:title" content="浅谈竞赛图">
+<meta property="og:url" content="http://cmwqf.github.io/2020/04/22/浅谈竞赛图/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="什么是prufer序列$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。">
+<meta property="og:description" content="竞赛图定义：$n$个点的有向图，若满足任意两点都有且仅有一条有向边，就称此有向图为竞赛图。 为什么竞赛图要专门分析呢？因为竞赛图有很多非常有趣的性质。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-07T01:48:05.203Z">
+<meta property="og:updated_time" content="2020-04-22T11:25:43.891Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈prufer序列">
-<meta name="twitter:description" content="什么是prufer序列$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。">
+<meta name="twitter:title" content="浅谈竞赛图">
+<meta name="twitter:description" content="竞赛图定义：$n$个点的有向图，若满足任意两点都有且仅有一条有向边，就称此有向图为竞赛图。 为什么竞赛图要专门分析呢？因为竞赛图有很多非常有趣的性质。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://cmwqf.github.io/2019/06/19/浅谈prufer序列/">
+  <link rel="canonical" href="http://cmwqf.github.io/2020/04/22/浅谈竞赛图/">
 
 
 
 
 
-  <title>浅谈prufer序列 | cmwqf's blog</title>
+  <title>浅谈竞赛图 | cmwqf's blog</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2019/06/19/浅谈prufer序列/">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2020/04/22/浅谈竞赛图/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cmwqf">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈prufer序列</h1>
+          <h1 class="post-title" itemprop="name headline">浅谈竞赛图</h1>
         
 
         <div class="post-meta">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T15:09:38+08:00">
-                2019-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-22T17:36:37+08:00">
+                2020-04-22
               </time>
             
 
@@ -382,8 +382,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/19/浅谈prufer序列/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/19/浅谈prufer序列/" itemprop="commentCount"></span>
+                <a href="/2020/04/22/浅谈竞赛图/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/22/浅谈竞赛图/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  453
+                  779
                 </span>
               
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -447,19 +447,19 @@
       
 
       
-        <h1 id="什么是prufer序列"><a href="#什么是prufer序列" class="headerlink" title="什么是prufer序列"></a>什么是prufer序列</h1><p>$prufer$序列是用来表示一棵无根树的，一个$prufer$序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个$prufer$序列，一个$prufer$序列也可以还原出唯一的一个无根树。</p>
+        <h1 id="竞赛图"><a href="#竞赛图" class="headerlink" title="竞赛图"></a>竞赛图</h1><p>定义：$n$个点的有向图，若满足<strong>任意两点都有且仅有一条有向边</strong>，就称此有向图为竞赛图。</p>
+<p>为什么竞赛图要专门分析呢？因为竞赛图有很多非常有趣的性质。</p>
 <a id="more"></a>
-<h1 id="如何构造prufer序列"><a href="#如何构造prufer序列" class="headerlink" title="如何构造prufer序列"></a>如何构造prufer序列</h1><p>对于一棵无根树，我们首先每次找到当前编号最小的叶子节点（无根树中的叶子结点指度为1），然后将其从无根树中删掉，再将所有与这个节点相连的节点编号加入$prufer$序列末端，不断重复这个步骤，直到最后只剩下两个节点为止。</p>
-<p>因此，$n$个点的$prufer$序列长度为$n-2$。</p>
-<h1 id="如何还原无根树"><a href="#如何还原无根树" class="headerlink" title="如何还原无根树"></a>如何还原无根树</h1><p>如果已知一个$prufer$序列，我们是可以根据它还原无根树的，那么，怎么还原呢？</p>
-<p>首先，我们把$prufer$序列中的每一个节点的度数设为1，然后加上每一个点在序列中出现的次数，作为这个点的度数。然后对于第i步：</p>
-<p>先找出度数为1的所有的点中最小的那一个，设为$u$，将它与$prufer$序列中第i个节点$v$连边，然后将$u,v$的度数都减1。</p>
-<p>最后，还剩下两个度数为1的点，将它们连边即可。</p>
-<p>至于正确性，我也不会证明，知道就好了。。。</p>
-<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>$prufer$序列还有一个重要的性质：</p>
-<p>我们考虑一个节点怎样才会被放入$prufer$序列里：当与它相连的节点被删除时，就会把它加进去。直到它自己被删除。</p>
-<p>因此，我们可以得到：</p>
-<p><strong>无根树中一个点的度数=这个点在$prufer$序列中出现的次数+1</strong></p>
+<h1 id="性质一"><a href="#性质一" class="headerlink" title="性质一"></a>性质一</h1><p>将竞赛图缩点之后，缩成的所有强连通分量按照出度从小到大排成的序列，一定满足第$i$个连通块与所有$j&gt;i$的连通块$j$都有一条$i-&gt;j$的边。</p>
+<p>证明：考虑归纳，我们加进来一个新的强连通分量，如果当前所有连通块都连向它，那么将它放在序列尾；如果它连向所有连通块，那么将它放在序列头；否则，所有它连向的连通块一定在连向它的连通块的后面（否则就有环，矛盾），那么将它放在对应的分界点处即可。</p>
+<h1 id="性质二"><a href="#性质二" class="headerlink" title="性质二"></a>性质二</h1><p>竞赛图的所有强连通分量都存在一条哈密顿回路。</p>
+<p>证明：考虑归纳，仍然考虑当前连通块构成的序列（即性质一所述的那个序列），目前所有连通块都满足存在一条哈密顿回路。现在我们加入一个点，如果它自己构成一个单独的连通块，那么将它直接加入序列（类似性质一）；否则，我们找到最左边的它连向的那个连通块$x$，再找到最右边的连向它的连通块$y$，那么所有$x,y$之间的及当前这个点构成了一个新的连通块，那么显然这个新连通块也存在一条哈密顿回路（考虑从当前点走到最左边连通块某个点开始每次先把其内部的点走一遍再走到下一个连通块的某个点，一直走到最右边连通块，然后走到当前点本身）。</p>
+<h1 id="性质三"><a href="#性质三" class="headerlink" title="性质三"></a>性质三</h1><p>竞赛图存在一条<strong>哈密顿路径</strong>。</p>
+<p>证明：因为每个连通块都有一条哈密顿回路，直接沿哈密顿回路走完每个连通块的所有点然后再走向下个连通块即可。</p>
+<h1 id="性质四"><a href="#性质四" class="headerlink" title="性质四"></a>性质四</h1><p>竞赛图里，任意大小为$n&gt;1$的联通块中，大小为$[3,n]$的环均存在。</p>
+<p>证明：首先，$n=3$成立，那么$n\ge 4$时，我们只需证明存在大小为$n-1$的环（即存在大小为$n-1$的强连通块）即可。</p>
+<p>考虑我们从联通块中提出一个点，如果剩下的只有一个联通块，那么大小为$n-1$的环已经出现。</p>
+<p>否则，剩下的联通块一定构成一个性质一所述的序列，根据性质三，这个序列存在一条曼哈顿路径，我们按照原来构造的路径上某个联通分量的最后一个点不走，直接跳到下一个联通分量，这样一条新的路径加上我们提出来的这个点，就构成了一个大小为$n-1$的环。</p>
 
       
     </div>
@@ -479,8 +479,6 @@
           
             <a href="/tags/图论/" rel="tag"># 图论</a>
           
-            <a href="/tags/生成树/" rel="tag"># 生成树</a>
-          
         </div>
       
 
@@ -492,8 +490,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/16/浅谈后缀自动机/" rel="next" title="浅谈后缀自动机">
-                <i class="fa fa-chevron-left"></i> 浅谈后缀自动机
+              <a href="/2020/04/20/浅谈询问分块/" rel="next" title="浅谈询问分块">
+                <i class="fa fa-chevron-left"></i> 浅谈询问分块
               </a>
             
           </div>
@@ -501,10 +499,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/26/BZOJ3601-一个人的数论/" rel="prev" title="[BZOJ3601]一个人的数论">
-                [BZOJ3601]一个人的数论 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -664,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是prufer序列"><span class="nav-number">1.</span> <span class="nav-text">什么是prufer序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何构造prufer序列"><span class="nav-number">2.</span> <span class="nav-text">如何构造prufer序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何还原无根树"><span class="nav-number">3.</span> <span class="nav-text">如何还原无根树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质"><span class="nav-number">4.</span> <span class="nav-text">性质</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#竞赛图"><span class="nav-number">1.</span> <span class="nav-text">竞赛图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质一"><span class="nav-number">2.</span> <span class="nav-text">性质一</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质二"><span class="nav-number">3.</span> <span class="nav-text">性质二</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质三"><span class="nav-number">4.</span> <span class="nav-text">性质三</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质四"><span class="nav-number">5.</span> <span class="nav-text">性质四</span></a></li></ol></div>
             
 
           </div>
