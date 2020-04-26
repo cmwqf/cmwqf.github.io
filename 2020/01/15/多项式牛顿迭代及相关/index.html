@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="泰勒公式多项式牛顿迭代是很多多项式有关算法的基础，而要了解多项式牛顿迭代，首先要知道泰勒展开公式。 泰勒公式定义如下： 如果$f(x)$在某个包含$x_0$的闭区间$[a,b]$存在$n$阶导数，且在开区间$(a,b)$上存在$n+1$阶导数，则对于$[a,b]$中任意一点$x$，有如下式子成立  f(x)=\frac{f(x_0)}{0!}+\frac{f&apos;(x_0)}{1!}(x-x_0)+.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-28T01:59:34.926Z">
+<meta property="og:updated_time" content="2020-04-26T12:18:14.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多项式牛顿迭代及相关">
 <meta name="twitter:description" content="泰勒公式多项式牛顿迭代是很多多项式有关算法的基础，而要了解多项式牛顿迭代，首先要知道泰勒展开公式。 泰勒公式定义如下： 如果$f(x)$在某个包含$x_0$的闭区间$[a,b]$存在$n$阶导数，且在开区间$(a,b)$上存在$n+1$阶导数，则对于$[a,b]$中任意一点$x$，有如下式子成立  f(x)=\frac{f(x_0)}{0!}+\frac{f&apos;(x_0)}{1!}(x-x_0)+.">
@@ -463,7 +463,7 @@ f(x)=\frac{f(x_0)}{0!}+\frac{f'(x_0)}{1!}(x-x_0)+...+\frac{f^{n}(x_0)}{n!}(x-x_0
 <p><strong>注意，这里简写的$\frac{n}{2}$实际上是上取整，即$\lceil \frac{n}{2}\rceil$，以下所有的$\frac{n}{2}$均指上取整。</strong></p>
 <p>我们考虑$G(F(x))$在$F_0(x)$处的泰勒展开：</p>
 <script type="math/tex; mode=display">
-G(F(x))\equiv G(F_0(x))+\frac{G'(F_0(x))}{1!}(F(x)-F_0(x))\\+\frac{G''(F_0(x))}{2!}(F(x)-F_0(x))^2+...\quad (mod\quad x^n)</script><p>我们观察$(F(x)-F_0(x))^2$，由定义可知，$F(x)$和$F_0(x)$前$\frac{n}{2}-1$项是相同的那么$F(x)-F_0(x)$第一个非零之处是第$\frac{n}{2}$项，而平方一下就是第$n$项（因为上取整，所以也有可能是第$n+1$项），此时我们发现，因为是在$mod\quad x^n$意义下进行，所以这一项是没有用的。也就是说，在二阶导及其后面的所有项在$mod\quad x^n$下都是$0$，可以直接省略！</p>
+G(F(x))\equiv G(F_0(x))+\frac{G'(F_0(x))}{1!}(F(x)-F_0(x))\\+\frac{G''(F_0(x))}{2!}(F(x)-F_0(x))^2+...\quad (mod\quad x^n)</script><p>我们观察$(F(x)-F_0(x))^2$，由定义可知，$F(x)$和$F_0(x)$前$\frac{n}{2}-1$项是相同的，那么$F(x)-F_0(x)$第一个非零之处是第$\frac{n}{2}$项，而平方一下就是第$n$项（因为上取整，所以也有可能是第$n+1$项），此时我们发现，因为是在$mod\quad x^n$意义下进行，所以这一项是没有用的。也就是说，在二阶导及其后面的所有项在$mod\quad x^n$下都是$0$，可以直接省略！</p>
 <p>那么，式子就变成了</p>
 <script type="math/tex; mode=display">
 G(F(x))\equiv G(F_0(x))+G'(F_0(x))(F(x)-F_0(x))\quad (mod\quad x^n)</script><p>而我们知道$G(F(x))\equiv 0\quad (mod\quad x^n)$，所以我们有</p>
@@ -667,7 +667,7 @@ F(x)\equiv \frac{1}{2}(F_0(x)+\frac{A(x)}{F_0(x)})\quad(mod\quad x^n)</script><p
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
