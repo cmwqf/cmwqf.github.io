@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-">
+<meta name="description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\pmod {p}$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。">
 <meta name="keywords" content="数论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈原根及其应用">
 <meta property="og:url" content="http://cmwqf.github.io/2020/01/08/浅谈原根及其应用/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-">
+<meta property="og:description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\pmod {p}$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-28T02:01:14.583Z">
+<meta property="og:updated_time" content="2020-05-06T02:07:54.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈原根及其应用">
-<meta name="twitter:description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-">
+<meta name="twitter:description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\pmod {p}$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&amp;lt;g&amp;lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。">
 
 
 
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  760
+                  751
                 </span>
               
 
@@ -448,15 +448,15 @@
 
       
         <h1 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h1><p>要想了解原根，先了解什么是阶。</p>
-<p>数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\quad (mod \quad p)$的最小的正整数$r$，称为$a$模$p$的阶。</p>
+<p>数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\pmod {p}$的最小的正整数$r$，称为$a$模$p$的阶。</p>
 <p>而原根，就是定义在阶的基础上的：</p>
 <p>如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。</p>
 <p>如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。</p>
 <a id="more"></a>
 <h1 id="原根的性质"><a href="#原根的性质" class="headerlink" title="原根的性质"></a>原根的性质</h1><p>原根有什么性质？<br>以下我们都讨论$p$为质数的情况，合数则只要把$p-1$换成$\phi(p)$即可。</p>
-<p><strong>对于$\forall 1 \le i,j \le p-1,i\neq j$，都有$g^i\not\equiv g^j \quad(mod\quad p)$。</strong></p>
+<p><strong>对于$\forall 1 \le i,j \le p-1,i\neq j$，都有$g^i\not\equiv g^j \pmod{p}$。</strong></p>
 <p>证明：</p>
-<p>考虑反证法，如果存在$1\le i,j\le p-1,i\neq j$，有$g^i\equiv g^j\quad (mod \quad p)$，不妨设$i&lt;j$，那么就有$g^{j-i}\equiv 1\quad (mod\quad p)$，而$0&lt;j-i&lt;p-1$，这与原根的定义矛盾，所以假设不成立。</p>
+<p>考虑反证法，如果存在$1\le i,j\le p-1,i\neq j$，有$g^i\equiv g^j\pmod{p}$，不妨设$i&lt;j$，那么就有$g^{j-i}\equiv 1\pmod{p}$，而$0&lt;j-i&lt;p-1$，这与原根的定义矛盾，所以假设不成立。</p>
 <p>证毕。</p>
 <p>这是一个非常好的性质，为后面作为单位根做铺垫。</p>
 <h1 id="原根的应用"><a href="#原根的应用" class="headerlink" title="原根的应用"></a>原根的应用</h1><p>单位根。</p>
@@ -467,9 +467,9 @@
 <p><strong>那么，我们依然有$0\le i\le k-1,w_k^i$两两不同。</strong></p>
 <p>证明也很显然，因为$\frac{i(p-1)}{k}&lt;p-1$，根据原根的性质，必然是两两不同的。</p>
 <p>这也是$NTT$所依赖的性质。</p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>如果我们要求某个值，给定$n,k,p$,且保证$k|p-1$</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>如果我们要求某个值，给定$n,k,p$,且保证$k|p-1$，求</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^n[k|i]F(i)\quad(mod\quad p)</script><p>怎么办？</p>
+\sum_{i=0}^n[k|i]F(i)\mod{p}</script><p>怎么办？</p>
 <p>意思就是说，当$k|i$时才对答案产生贡献，否则不产生贡献。</p>
 <p>那么我们要构造一个函数，使得当$k|i$时，这个函数值为$1$，否则为$0$。</p>
 <p>考虑单位根$w_k=g^{\frac{p-1}{k}}$，构造</p>

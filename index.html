@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  998
+                  982
                 </span>
               
 
@@ -441,11 +441,11 @@
 
       
         
-          <h1 id="卢卡斯定理"><a href="#卢卡斯定理" class="headerlink" title="卢卡斯定理"></a>卢卡斯定理</h1><p>卢卡斯定理是用来快速计算组合数的。在一些题目中，我们要求$\binom{n}{m}\quad mod\quad P$，但是$n,m$很大，$P$却很小（$P\le 10^5$），那么卢卡斯定理就是用来加速这个过程的。</p>
+          <h1 id="卢卡斯定理"><a href="#卢卡斯定理" class="headerlink" title="卢卡斯定理"></a>卢卡斯定理</h1><p>卢卡斯定理是用来快速计算组合数的。在一些题目中，我们要求$\binom{n}{m}\bmod P$，但是$n,m$很大，$P$却很小（$P\le 10^5$），那么卢卡斯定理就是用来加速这个过程的。</p>
 <p>普通的卢卡斯定理要求$P$为质数，而扩展卢卡斯中$P$可以是合数。</p>
 <p>卢卡斯定理十分简洁：</p>
 <script type="math/tex; mode=display">
-\binom{n}{m}\quad mod\quad P=\binom{\lfloor\frac{n}{P}\rfloor}{\lfloor\frac{m}{P}\rfloor}*\binom{n\quad mod\quad P}{m\quad mod\quad P}\quad mod\quad P</script>
+\binom{n}{m}\bmod P=\binom{\lfloor\frac{n}{P}\rfloor}{\lfloor\frac{m}{P}\rfloor}*\binom{n\bmod P}{m\bmod P}\bmod P</script>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/04/26/浅谈卢卡斯定理及扩展/#more" rel="contents">
@@ -1197,7 +1197,7 @@
 
       
         
-          <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定$n,m$，设一个$1$到$n$的置换$P$，定义$f(P)$是满足$P^x=I$的最小的$x$（$I$是单位置换），求$\prod_P f(P)\quad mod\quad m$。</p>
+          <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定$n,m$，设一个$1$到$n$的置换$P$，定义$f(P)$是满足$P^x=I$的最小的$x$（$I$是单位置换），求$\prod_P f(P)\mod m$。</p>
 <p>$n\le 7500,1e8\le m\le 1e9+7$，且$m$为质数。</p>
 <p><strong>本题来源于USACO 2020 US Open Platinum T2。</strong></p>
           <!--noindex-->
