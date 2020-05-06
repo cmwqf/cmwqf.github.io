@@ -7,7 +7,7 @@ categories: [LOJ]
 
 # Description
 
-给定$n,m$，设一个$1$到$n$的置换$P$，定义$f(P)$是满足$P^x=I$的最小的$x$（$I$是单位置换），求$\prod_P f(P)\quad mod\quad m$。
+给定$n,m$，设一个$1$到$n$的置换$P$，定义$f(P)$是满足$P^x=I$的最小的$x$（$I$是单位置换），求$\prod_P f(P)\mod m$。
 
 $n\le 7500,1e8\le m\le 1e9+7$，且$m$为质数。
 
