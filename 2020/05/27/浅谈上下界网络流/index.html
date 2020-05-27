@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="上下界网络流在一类网络流问题中，我们对每条边的流量，不仅有上界限制，还有下界限制，即第$i$条边流量要在$[l_i,r_i]$中，由此引申出来的一些问题（可行流，最大流），我们可以用上下界网络流来解决。 实际上，一个可行的网络流满足以下条件：  每条边的流量在流量限制内。  对于$\forall u\neq s,t$，都有$\sum w(v,u)=\sum w(u,v)$，即每个点的流入流量等于流">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-27T08:55:28.276Z">
+<meta property="og:updated_time" content="2020-05-27T09:03:37.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈上下界网络流">
 <meta name="twitter:description" content="上下界网络流在一类网络流问题中，我们对每条边的流量，不仅有上界限制，还有下界限制，即第$i$条边流量要在$[l_i,r_i]$中，由此引申出来的一些问题（可行流，最大流），我们可以用上下界网络流来解决。 实际上，一个可行的网络流满足以下条件：  每条边的流量在流量限制内。  对于$\forall u\neq s,t$，都有$\sum w(v,u)=\sum w(u,v)$，即每个点的流入流量等于流">
@@ -469,7 +469,7 @@
 <h2 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h2><p>这个模型和前者区别仅在于它有一个源点$s$和一个汇点$t$，而这两个点是不满足流量守恒的。</p>
 <p>那么，我们想办法让这两个点也满足流量守恒，这样就可以转化为无源汇的问题了。</p>
 <p>为了使$s$和$t$满足流量守恒，我们需有边流入$s$，且有边流出$t$。注意到$s$流出的流量等于流入$t$的流量，因此我们只需连一条从$t$到$s$，下界为$0$上界为$+\infty$的边即可。最后我们只需拆掉加入的$(t,s)$边，剩下的就是一个可行的有源汇网络流了。</p>
-<p>最后网络流的流量是多少呢？应该是$s$连出去的边（不包括连向$tt$的边）上的流量加上它们的下界之和。但是我们有一个更简单的做法，注意到$s$会像$tt$连一条限制为$w$的边，而$w$正是$s$连出去的边的下界之和，而如果可行，这条边最后一定是满流，所以我们只需要统计$s$连 出去的所有边的流量和即可，而根据流量守恒，它等于连向$s$所有边的流量之和。而连向$s$的边只有$(t,s)$一条，因此答案就是$(t,s)$这条边上的流量，也就是其反向边最后的$val$。</p>
+<p>最后网络流的流量是多少呢？应该是$s$连出去的边（不包括连向$tt$的边）上的流量加上它们的下界之和。但是我们有一个更简单的做法，注意到$s$会向$tt$连一条限制为$w$的边，而$w$正是$s$连出去的边的下界之和，而如果可行，这条边最后一定是满流，所以我们只需要统计$s$连出去的所有边的流量和即可，那么根据流量守恒，它等于连向$s$所有边的流量之和。而连向$s$的边只有$(t,s)$一条，因此答案就是$(t,s)$这条边上的流量，也就是其反向边最后的$val$。</p>
 <h1 id="有源汇上下界最大流"><a href="#有源汇上下界最大流" class="headerlink" title="有源汇上下界最大流"></a>有源汇上下界最大流</h1><h2 id="Description-2"><a href="#Description-2" class="headerlink" title="Description"></a>Description</h2><p>有一个有源汇的网络，在第$i$条边流量要求在$[l_i,r_i]$之间，且流量守恒的前提下，要求流量最大。</p>
 <h2 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h2><p>首先我们先用上面的方法跑出一个可行流。但是可行流不一定是最大流。</p>
 <p>然后，我们只需在去掉$(t,s)$这条边的残量网络上跑一遍从$s$到$t$的最大流再加上原来可行流即可（注意$s,t$和$ss,tt$的区别）。</p>
