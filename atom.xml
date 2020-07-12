@@ -519,9 +519,9 @@ H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]&lt;/script&gt;&lt;p&gt;一般来说，暴
     
       <category term="dp" scheme="http://cmwqf.github.io/tags/dp/"/>
     
-      <category term="容斥原理" scheme="http://cmwqf.github.io/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
-    
       <category term="概率期望" scheme="http://cmwqf.github.io/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/"/>
+    
+      <category term="容斥原理" scheme="http://cmwqf.github.io/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
