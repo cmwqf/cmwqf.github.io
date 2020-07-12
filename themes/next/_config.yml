@@ -197,6 +197,14 @@ sidebar:
   # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
   offset: 12
 
+  back2top:
+  # 回到顶部按钮
+  enable: true
+  # true，按钮显示在侧边栏；false，按钮显示在右下角
+  sidebar: false
+  # 按钮上显示百分比
+  scrollpercent: true
+
   # Back to top in sidebar (only for Pisces | Gemini).
   b2t: false
 
