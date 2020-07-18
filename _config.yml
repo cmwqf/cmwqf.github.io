@@ -8,7 +8,7 @@ subtitle: 愿你出走半生，归来仍是少年
 description: 
 keywords:
 author: cmwqf
-language: zh-Hans
+language: zh-CN
 timezone:
 avactor: https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg
 
@@ -80,7 +80,7 @@ feed:
   path: atom.xml
   limit: 20
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: next-new
 
 #搜索
 search:
