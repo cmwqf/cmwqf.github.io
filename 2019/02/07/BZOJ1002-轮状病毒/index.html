@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="DescriptionN轮状病毒的产生规律是在一个N轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有16个不同的3轮状病毒。 现给定n(N&amp;lt;=100)，编程计算有多少个不同的n轮状病毒。">
+<meta name="description" content="Description$n$轮状病毒的产生规律是在一个$n$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$16$个不同的$3$轮状病毒。 现给定$n&amp;lt;=100$，编程计算有多少个不同的$n$轮状病毒。">
 <meta name="keywords" content="dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[BZOJ1002]轮状病毒">
 <meta property="og:url" content="http://cmwqf.github.io/2019/02/07/BZOJ1002-轮状病毒/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="DescriptionN轮状病毒的产生规律是在一个N轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有16个不同的3轮状病毒。 现给定n(N&amp;lt;=100)，编程计算有多少个不同的n轮状病毒。">
+<meta property="og:description" content="Description$n$轮状病毒的产生规律是在一个$n$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$16$个不同的$3$轮状病毒。 现给定$n&amp;lt;=100$，编程计算有多少个不同的$n$轮状病毒。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-21T13:26:01.396Z">
+<meta property="og:updated_time" content="2020-07-18T13:29:41.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[BZOJ1002]轮状病毒">
-<meta name="twitter:description" content="DescriptionN轮状病毒的产生规律是在一个N轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有16个不同的3轮状病毒。 现给定n(N&amp;lt;=100)，编程计算有多少个不同的n轮状病毒。">
+<meta name="twitter:description" content="Description$n$轮状病毒的产生规律是在一个$n$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$16$个不同的$3$轮状病毒。 现给定$n&amp;lt;=100$，编程计算有多少个不同的$n$轮状病毒。">
 
 
 
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  918
+                  915
                 </span>
               
 
@@ -447,13 +447,13 @@
       
 
       
-        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>N轮状病毒的产生规律是在一个N轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有16个不同的3轮状病毒。</p>
-<p>现给定n(N&lt;=100)，编程计算有多少个不同的n轮状病毒。</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>$n$轮状病毒的产生规律是在一个$n$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$16$个不同的$3$轮状病毒。</p>
+<p>现给定$n&lt;=100$，编程计算有多少个不同的$n$轮状病毒。</p>
 <a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>其实刚刚看到这一题，就想到了一个东西：<strong>矩阵树定理</strong>。这不是矩阵树定理的裸题吗？</p>
 <p>刚刚准备敲代码的时候，偷偷瞄了一眼题解，突然意识到这一题答案太大了，用矩阵树定理，要用高斯消元，而高斯消元要用long double来存储，而答案一大，long double就爆掉了。。。</p>
 <p>果断放弃了矩阵树，怎么办呢？</p>
-<p>这时，我们<del>考虑看题解</del>，发现可以打表找规律，于是，我拿出草稿纸，大力画图，最终，得出一个结果：</p>
+<p>这时，我们发现可以打表找规律，于是，我拿出草稿纸，大力画图，最终，得出一个结果：</p>
 <div class="table-container">
 <table>
 <thead>

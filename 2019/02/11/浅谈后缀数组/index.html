@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="cmwqf&#39;s blog">
 <meta property="og:description" content="后缀数组的基础后缀定义对于一个字符串为$s$，我们记$suf[i]$为$[i,n]$这一段字符串，称为后缀。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-10T06:40:04.745Z">
+<meta property="og:updated_time" content="2020-07-18T13:42:33.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈后缀数组">
 <meta name="twitter:description" content="后缀数组的基础后缀定义对于一个字符串为$s$，我们记$suf[i]$为$[i,n]$这一段字符串，称为后缀。">
@@ -477,7 +477,7 @@ bin[i]:指排名第i的后缀出现的个数</script><p>我们来更新这个以
 <p>首先，我们用bin[i]统计个数，然后，我们做一次前缀和，这样，我们就可以算出排名为i的后缀的真正的排名（因为会有重复的）。</p>
 <p>最后，i从n-&gt;1，tp[i]指的是第二关键字排名第i的位置（这样保证了第二关键字的有序），再取一个rk，算出这个位置第一关键字的排名，最后再取一个bin，求出其真正的排名，并将它赋值为tp[i]，bin要—，以便计算下一个。</p>
 <h3 id="更新rk"><a href="#更新rk" class="headerlink" title="更新rk"></a>更新rk</h3><p>一样的，先上代码以便理解：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memcpy</span>(tp,rk,<span class="keyword">sizeof</span>(rk));</span><br><span class="line">rk[sa[<span class="number">1</span>]]=p=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">   	rk[sa[i]]=(tp[sa[i<span class="number">-1</span>]]==tp[sa[i]]&amp;&amp;tp[sa[i<span class="number">-1</span>]+w]==tp[sa[i]+w]) ? p : ++p;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memcpy</span>(tp,rk,<span class="keyword">sizeof</span>(rk));</span><br><span class="line">rk[sa[<span class="number">1</span>]]=p=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">   	rk[sa[i]]=(tp[sa[i<span class="number">-1</span>]]==tp[sa[i]]&amp;&amp;tp[sa[i<span class="number">-1</span>]+w]==tp[sa[i]+w]) ? p : ++p;</span><br></pre></td></tr></table></figure></div>
 <p>首先，第一名是没有什么可比较的，设为1。</p>
 <p>因为现在tp已经没有用了，而rk又要用于更新，不能直接用，就要用一个临时数组存起来，所以就用tp代替旧的rk。</p>
 <p>p就是一个计数器，也可以更新m的值（后面再说）。那一大坨东西是什么？</p>
