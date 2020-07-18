@@ -555,6 +555,7 @@ m\%a_{p_1}\%a_{p_2}...\%a_{p_n}</script><p>的值最大，输出最大值，并�
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -562,6 +563,7 @@ m\%a_{p_1}\%a_{p_2}...\%a_{p_n}</script><p>的值最大，输出最大值，并�
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

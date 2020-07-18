@@ -545,6 +545,7 @@ B_n=-\frac{1}{n+1}\sum_{k=0}^{n-1}C(n+1,k)*B_k</script><p>还有一种求B的方
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -552,6 +553,7 @@ B_n=-\frac{1}{n+1}\sum_{k=0}^{n-1}C(n+1,k)*B_k</script><p>还有一种求B的方
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

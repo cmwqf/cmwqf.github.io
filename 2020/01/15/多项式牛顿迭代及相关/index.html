@@ -626,6 +626,7 @@ F(x)\equiv \frac{1}{2}(F_0(x)+\frac{A(x)}{F_0(x)})\pmod{x^n}</script><p>然后�
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -633,6 +634,7 @@ F(x)\equiv \frac{1}{2}(F_0(x)+\frac{A(x)}{F_0(x)})\pmod{x^n}</script><p>然后�
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

@@ -556,6 +556,7 @@ S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}P_i-(h(n,|P|)-(j-1))+...</script><p>后面的就
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -563,6 +564,7 @@ S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}P_i-(h(n,|P|)-(j-1))+...</script><p>后面的就
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

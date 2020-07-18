@@ -573,6 +573,7 @@ ya-k*xa<yb-k*xb</script><p>所以，我们选$A$必然比选$B$更优。</p>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -580,6 +581,7 @@ ya-k*xa<yb-k*xb</script><p>所以，我们选$A$必然比选$B$更优。</p>
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

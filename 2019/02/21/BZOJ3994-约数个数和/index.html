@@ -560,6 +560,7 @@ d(ij)=\sum_{x|i}\sum_{y|j}[gcd(x,y)==1]</script><p>证明如下：</p>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -567,6 +568,7 @@ d(ij)=\sum_{x|i}\sum_{y|j}[gcd(x,y)==1]</script><p>证明如下：</p>
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

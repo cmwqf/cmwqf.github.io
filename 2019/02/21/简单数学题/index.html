@@ -572,6 +572,7 @@ H(n)=\sum_{i=1}^ni^2*F(n/i)\\
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -579,6 +580,7 @@ H(n)=\sum_{i=1}^ni^2*F(n/i)\\
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

@@ -1275,6 +1275,7 @@ H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]</script><p>一般来说，暴力计算这
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -1282,6 +1283,7 @@ H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]</script><p>一般来说，暴力计算这
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

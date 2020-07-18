@@ -594,6 +594,7 @@ W=\frac{S}{S_T}</script><p>我们现在的问题，就是求对于某个$s$，$P
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -601,6 +602,7 @@ W=\frac{S}{S_T}</script><p>我们现在的问题，就是求对于某个$s$，$P
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

@@ -570,6 +570,7 @@ f[k]=n!*\binom{D}{k}*[x^n](\frac{e^x-e^{-x}}{2})^k(e^{x})^{D-k}\\
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -577,6 +578,7 @@ f[k]=n!*\binom{D}{k}*[x^n](\frac{e^x-e^{-x}}{2})^k(e^{x})^{D-k}\\
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

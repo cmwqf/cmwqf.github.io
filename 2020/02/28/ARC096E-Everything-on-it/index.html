@@ -568,6 +568,7 @@ ans=\sum_{m=0}^n(-1)^mC(n,m)2^{2^{n-m}}\sum_{j=0}^m2^{j(n-m)}S(m +1,j+1)</script
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -575,6 +576,7 @@ ans=\sum_{m=0}^n(-1)^mC(n,m)2^{2^{n-m}}\sum_{j=0}^m2^{j(n-m)}S(m +1,j+1)</script
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

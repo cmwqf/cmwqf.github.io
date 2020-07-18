@@ -550,6 +550,7 @@ c_1,c_2,c_3,...,c_{len}</script><p>那么首先，很显然地$\sum c_i\le m$（
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -557,6 +558,7 @@ c_1,c_2,c_3,...,c_{len}</script><p>那么首先，很显然地$\sum c_i\le m$（
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

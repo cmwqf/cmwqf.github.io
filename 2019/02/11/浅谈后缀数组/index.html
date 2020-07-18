@@ -585,6 +585,7 @@ h[i]>=h[i-1]-1</script><p>证明（<del>口胡</del>）：</p>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -592,6 +593,7 @@ h[i]>=h[i-1]-1</script><p>证明（<del>口胡</del>）：</p>
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

@@ -531,6 +531,7 @@ ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
+          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -538,6 +539,7 @@ ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {
