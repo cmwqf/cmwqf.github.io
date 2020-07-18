@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cmwqf.github.io/"/>
-  <updated>2020-07-18T13:33:53.362Z</updated>
+  <updated>2020-07-18T14:32:35.614Z</updated>
   <id>http://cmwqf.github.io/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈Berlekamp-Massey算法</title>
+    <link href="http://cmwqf.github.io/2020/07/18/%E6%B5%85%E8%B0%88Berlekamp-Massey%E7%AE%97%E6%B3%95/"/>
+    <id>http://cmwqf.github.io/2020/07/18/%E6%B5%85%E8%B0%88Berlekamp-Massey%E7%AE%97%E6%B3%95/</id>
+    <published>2020-07-18T14:32:35.000Z</published>
+    <updated>2020-07-18T14:32:35.614Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>浅谈带权二分</title>
@@ -541,35 +556,6 @@ H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]&lt;/script&gt;&lt;p&gt;一般来说，暴
       <category term="容斥原理" scheme="http://cmwqf.github.io/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
     
       <category term="概率期望" scheme="http://cmwqf.github.io/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ARC096E Everything on it</title>
-    <link href="http://cmwqf.github.io/2020/02/28/ARC096E-Everything-on-it/"/>
-    <id>http://cmwqf.github.io/2020/02/28/ARC096E-Everything-on-it/</id>
-    <published>2020-02-28T05:06:07.000Z</published>
-    <updated>2020-07-18T13:28:53.237Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有一个面馆，一共有$n$种调料，我们要选若干碗面，满足：</p><p>1、没有$2$种面放的调料的集合相同</p><p>2、每种调料至少出现在$2$碗面中</p><p>求选择的方案数，答案对$mod$取模。</p><p>其中$mod$为质数，$n\le 3000$。</p><a id="more"></a><h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>直接算很难算，所以我们考虑计算补集。</p><p>但是，因为它要求每一个都满足这个条件，补集为存在某一个不满足这个条件，仍然不好直接算。</p><p>因此，我们考虑容斥。</p><p>我们钦定$m$个元素不满足这个条件，即有至少$m$个元素出现在$0/1$个集合中。</p><p>首先，这个选择方案数显然是$C(n,m)$。</p><p>然后，因为选出来的这些有的出现$0$次，有的出现$1$次，所以我们把它们分开。</p><p>我们枚举$i$表示$m$中有$i$个是出现$1$次的，这个选择有$C(m,i)$种，我们再枚举分成$j$个集合，那么这一部分钦定的方案数就是</p><script type="math/tex; mode=display">C(n,m)\sum_{i=0}^m C(m,i)\sum_{j=1}^i S(i,j)</script><p>其中，$S(n,m)$是第二类斯特林数。</p><p>接下来，我们考虑剩下的$n-m$个随便选。</p><p>首先，其中一种情况，是只由剩下的元素组成的集合，这个方案数是$2^{2^{n-m}}$，因为剩下的$n-m$个元素可以组成$2^{n-m}$集合，然后每个集合选不选就是$2^{2^{n-m}}$。</p><p>还有一种情况，就是剩下的元素和我们钦定的一些元素构成一个集合。</p><p>考虑我们钦定的元素已经构成了$j$个集合，而且每个集合是独立的，我们现在让这$j$个集合中的每个集合去选剩下的$n-m$个元素有哪些和它组成集合。显然，每个集合的选择方案数是$2^{n-m}$，那么总的选择方案数就是$(2^{n-m})^j=2^{j(n-m)}$。</p><p>所以随便选的方案数就是$2^{2^{n-m}}·2^{j(n-m)}$。</p><p>那么，总的方案数就是</p><script type="math/tex; mode=display">ans=\sum_{m=0}^n(-1)^mC(n,m)\sum_{i=0}^mC(m,i)\sum_{j=1}^iS(i,j)·2^{2^{n-m}}·2^{j(n-m)}</script><p>时间复杂度$O(n^3)$，并不能通过。</p><p>我们考虑优化这个过程，观察整个式子，我们把式子变化一下</p><script type="math/tex; mode=display">ans=\sum_{m=0}^n(-1)^mC(n,m)2^{2^{n-m}}\sum_{j=1}^m2^{j(n-m)}\sum_{i=j}^mS(i,j)C(m,i)</script><p>考虑化简最后那一个式子，它的组合意义是从$m$个中选出若干个分成$j$个集合的方案数，我们可以往里面多加一个元素$0$，然后把这$m+1$个元素分为$j+1$组，与$0$为一组的我们视为不选（即不出现在集合中），与这个式子等价，那么，最后那个式子就可以变成$S(m+1,j+1)$。</p><p>整个式子变成了</p><script type="math/tex; mode=display">ans=\sum_{m=0}^n(-1)^mC(n,m)2^{2^{n-m}}\sum_{j=0}^m2^{j(n-m)}S(m +1,j+1)</script><p>注意此时$j$变为了从$0$开始，因为我们会多出来一个集合放不选的。</p><p>那么，我们预处理一下$2^k$的值和$S$直接做就好了。</p><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">3005</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> n, mod;</span><br><span class="line"><span class="keyword">int</span> S[maxN + <span class="number">1</span>][maxN + <span class="number">1</span>], C[maxN + <span class="number">1</span>][maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> pw[maxN * maxN + <span class="number">1</span>];</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ADD</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x + y &gt;= mod ? x + y - mod : x + y; &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">SUB</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x - y &lt; <span class="number">0</span> ? x - y + mod : x - y; &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mpow</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> x, <span class="keyword">int</span> mod)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = <span class="number">1l</span>l * ans * a % mod;</span><br><span class="line">        a = <span class="number">1l</span>l * a * a % mod;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;mod);</span><br><span class="line"> </span><br><span class="line">    S[<span class="number">0</span>][<span class="number">0</span>] = C[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        C[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++)</span><br><span class="line">            C[i][j] = ADD(C[i - <span class="number">1</span>][j], C[i - <span class="number">1</span>][j - <span class="number">1</span>]),</span><br><span class="line">            S[i][j] = ADD(S[i - <span class="number">1</span>][j - <span class="number">1</span>], <span class="number">1l</span>l * j * S[i - <span class="number">1</span>][j] % mod);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    pw[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n * n; i++)</span><br><span class="line">        pw[i] = <span class="number">2l</span>l * pw[i - <span class="number">1</span>] % mod;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++)</span><br><span class="line">            res = ADD(res, <span class="number">1l</span>l * pw[j * (n - i)] * S[i + <span class="number">1</span>][j + <span class="number">1</span>] % mod);</span><br><span class="line">        res = <span class="number">1l</span>l * res * C[n][i] % mod * mpow(<span class="number">2</span>, mpow(<span class="number">2</span>, n - i, mod - <span class="number">1</span>), mod) % mod;</span><br><span class="line">        ans = (i &amp; <span class="number">1</span>) ? SUB(ans, res) : ADD(ans, res);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从这道题里，我们学到了什么？</p><p>首先，如果遇到每个元素都满足什么条件并且不好搞的话，考虑<strong>正难则反</strong>，如果其补集很好算的话就直接算，如果还是不好算的话，考虑<strong>容斥</strong>，钦定一些东西不满足条件，然后别的随便选。</p><p>然后，对于一些式子有的时候我们无从下手来化简，这个时候我们可以考虑组合意义，比如我们不选的东西可以看成划分成一个额外的集合，然后钦定那个集合不选，有的时候就能化简复杂度。</p><p>另外，一定要搞清楚集合之间是否独立，例如本题中，我们钦定的元素分出来的集合是独立的，两两不同，可以随便选我们未钦定的元素构成的集合，互不干扰，这些关系一定要弄清楚再推式子。</p><p>容斥好难啊，还要多加练习！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h1&gt;&lt;p&gt;有一个面馆，一共有$n$种调料，我们要选若干碗面，满足：&lt;/p&gt;
-&lt;p&gt;1、没有$2$种面放的调料的集合相同&lt;/p&gt;
-&lt;p&gt;2、每种调料至少出现在$2$碗面中&lt;/p&gt;
-&lt;p&gt;求选择的方案数，答案对$mod$取模。&lt;/p&gt;
-&lt;p&gt;其中$mod$为质数，$n\le 3000$。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Atcoder" scheme="http://cmwqf.github.io/categories/Atcoder/"/>
-    
-    
-      <category term="组合数学" scheme="http://cmwqf.github.io/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="容斥原理" scheme="http://cmwqf.github.io/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
