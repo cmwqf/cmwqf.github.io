@@ -288,19 +288,10 @@ custom_logo:
   enabled: false
   image:
 
-codeblock:
-  # Code Highlight theme
-  # Available value: normal | night | night eighties | night blue | night bright
-  # https://github.com/chriskempson/tomorrow-theme
-  highlight_theme: night eighties
-  # Add copy button on codeblock
-  copy_button:
-    enable: true                 # 在每个代码块显示复制按钮
-    # Show text copy result.
-    show_result: true            # 复制成功后，显示提示信息
-    # Available values: default | flat | mac
-    style: mac                   # 复制按钮风格
-
+# Code Highlight theme
+# Available value: normal | night | night eighties | night blue | night bright
+# https://github.com/chriskempson/tomorrow-theme
+highlight_theme: night eighties
 
 # ---------------------------------------------------------------
 # Font Settings
