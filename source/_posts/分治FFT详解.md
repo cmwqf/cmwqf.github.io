@@ -55,88 +55,112 @@ f[x]+=w[x]，即f[x]+=a[x-l-1]
 $$
 因此，我们所需要计算的数组的长度为$$r-l-1$$，时间复杂度为$$O(nlog^2n)$$
 
-# 模板题与代码
-
-题目：[分治FFT](https://www.luogu.org/problemnew/show/P4721)
-
-代码：
+# Code
 
 ```c++
-#include<cstdio>
-#include<iostream>
-#define LL long long
+#include <bits/stdc++.h>
 using namespace std;
-const LL maxN=5e6 + 100,G=3,Gi=332748118,mod=998244353;
-LL a[maxN+1],b[maxN+1];
-LL f[maxN+1],g[maxN+1];
-int n,m;
-int R[maxN+1];
-inline LL read()
+
+const int maxN = 1 << 20 | 5, mod = 998244353;
+
+int n;
+int a[maxN + 1], b[maxN + 1];
+int A[maxN + 1], B[maxN + 1];
+int wn[maxN + 1], R[maxN + 1];
+
+inline int read()
 {
-	int num=0,f=1;
-	char ch=getchar();
-	while(!isdigit(ch)) {if(ch=='-') f=-1; ch=getchar();}
-	while(isdigit(ch)) num=(num<<3)+(num<<1)+(ch^48),ch=getchar();
-	return num*f;
+	int num = 0, f = 1;
+	char ch = getchar();
+	while( !isdigit( ch ) ) { if(ch == '-') f = -1; ch = getchar(); }
+	while( isdigit( ch ) ) num = (num << 3) + (num << 1) + (ch ^ 48), ch = getchar();
+	return num * f;
 }
-inline LL pow(LL a,LL x)
+
+inline int ADD(int x, int y) { return x + y >= mod ? x + y - mod : x + y; }
+
+inline int SUB(int x, int y) { return x - y < 0 ? x - y + mod : x - y; }
+
+inline int mpow(int a, int x)
 {
-	LL ans=1;
+	int ans = 1;
 	while(x)
 	{
-		if(x&1) ans=ans*a%mod;
-		a=a*a%mod;
-		x>>=1;
+		if(x & 1) ans = 1ll * ans * a % mod;
+		a = 1ll * a * a % mod;
+		x >>= 1;
 	}
 	return ans;
 }
-inline void NTT(LL *a,int type,LL lim)
+
+inline void pre()
 {
-	for(int i=0;i<lim;i++)
-	   if(i<R[i]) swap(a[i],a[R[i]]);
-	for(int mid=1;mid<lim;mid<<=1)
+	int lim = 1, cnt = 0;
+	while(lim <= 2 * n) lim <<= 1, cnt ++;
+	for(int mid = 1; mid < lim; mid <<= 1)
 	{
-		LL wn=pow(type==1 ? G : Gi,(mod-1)/(mid<<1));
-		for(int i=0;i<lim;i+=(mid<<1))
-		{
-			LL w=1;
-			for(int j=0;j<mid;j++,w=w*wn%mod)
-			{
-				int x=a[i+j],y=a[i+mid+j]*w%mod;
-				a[i+j]=(x+y)%mod,a[i+mid+j]=(x-y+mod)%mod;
-			}
-		}
+		int W = mpow(3, (mod - 1) / (mid << 1));
+		wn[mid] = 1;
+		for(int j = 1; j < mid; j++) wn[mid + j] = 1ll * wn[mid + j - 1] * W % mod;
 	}
 }
-inline void calc(LL lim)
+
+inline void NTT(int *a, int type, int lim)
 {
-	NTT(a,1,lim); NTT(b,1,lim);
-	for(int i=0;i<lim;i++) a[i]=a[i]*b[i]%mod;
-	NTT(a,-1,lim);
-	LL inv=pow(lim,mod-2);
-	for(int i=0;i<lim;i++) a[i]=a[i]*inv%mod;
+	for(int i = 0; i < lim; i++)
+		if(i < R[i]) swap(a[i], a[ R[i] ]);
+	for(int mid = 1; mid < lim; mid <<= 1)
+		for(int i = 0; i < lim; i += (mid << 1))
+			for(int j = 0; j < mid; j++)
+			{
+				int x = a[i + j], y = 1ll * a[i + mid + j] * wn[mid + j] % mod;
+				a[i + j] = ADD(x, y); a[i + mid + j] = SUB(x, y);
+			}
+	if(type == -1)
+	{
+		int INV = mpow(lim, mod - 2);
+		for(int i = 0; i < lim; i++) a[i] = 1ll * a[i] * INV % mod;
+		reverse(a + 1, a + lim);
+	}
 }
-inline void cdqFFT(int l,int r)
+
+inline void solve(int l, int r)
 {
-	if(l==r) return;
-	int mid=(l+r)>>1;
-	cdqFFT(l,mid);
-	LL lim=1,cnt=0;
-	while(lim<=(r-l-1)) lim<<=1,cnt++;
-	for(int i=0;i<lim;i++) R[i]=(R[i>>1]>>1) | ((i&1) << cnt-1);
-	for(int i=0;i<lim;i++) a[i]=b[i]=0;
-	for(int i=0;i<=mid-l;i++) a[i]=f[i+l];
-	for(int i=0;i<=r-l-1;i++) b[i]=g[i+1];
-	calc(lim);
-	for(int i=mid+1;i<=r;i++) f[i]=(f[i]+a[i-l-1])%mod;
-	cdqFFT(mid+1,r);
-} 
+	if(l == r) return;
+
+	int mid = (l + r) >> 1;
+	solve(l, mid);
+
+	for(int i = l; i <= mid; i++) A[i - l] = a[i];
+	for(int i = 1; i <= r - l; i++) B[i - 1] = b[i];
+
+	int lim = 1, cnt = 0;
+	while(lim <= r - l + mid - l + 1) lim <<= 1, cnt ++;
+	for(int i = 0; i < lim; i++) R[i] = (R[i >> 1] >> 1) | ((i & 1) << cnt - 1);
+	
+	NTT(A, 1, lim); NTT(B, 1, lim);
+	for(int i = 0; i < lim; i++) A[i] = 1ll * A[i] * B[i] % mod;
+	NTT(A, -1, lim);
+
+	for(int i = mid - l; i <= r - l - 1; i++) a[i + l + 1] = ADD(a[i + l + 1], A[i]);	
+
+	for(int i = 0; i < lim; i++) A[i] = B[i] = 0;
+
+	solve(mid + 1, r);
+}
+
 int main()
 {
-	n=read(); f[0]=1;
-	for(int i=1;i<n;i++) g[i]=read();
-	cdqFFT(0,n-1); 
-	for(int i=0;i<n;i++) printf("%lld ",f[i]);
+	n = read();
+	for(int i = 1; i <= n - 1; i++) b[i] = read();
+
+	pre();
+	
+	a[0] = 1;
+	solve(0, n - 1);
+
+	for(int i = 0; i < n; i++) printf("%d ", a[i]);
+	puts("");
 	return 0;
 }
 ```
