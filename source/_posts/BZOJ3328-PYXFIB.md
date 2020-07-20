@@ -11,7 +11,7 @@ categories: [BZOJ]
 $$
 \sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}
 $$
-$$Fib$$指斐波那契数列。其中$$n\le 1e18,k\le 2e5,p\le 1e9$$。
+其中$$Fib$$指斐波那契数列，$$n\le 1e18,k\le 2e5,p\le 1e9$$。
 
 <!--more-->
 
