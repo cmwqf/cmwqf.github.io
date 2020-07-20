@@ -576,7 +576,6 @@ g[u][t]=g[pa][t]+g[pa][t-1]+f[pa][t]+f[pa][t-1]-f[u][t]-2*f[u][t-1]-f[u][t-2]</s
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
-          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -584,7 +583,6 @@ g[u][t]=g[pa][t]+g[pa][t-1]+f[pa][t]+f[pa][t-1]-f[u][t]-2*f[u][t-1]-f[u][t-2]</s
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
-          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

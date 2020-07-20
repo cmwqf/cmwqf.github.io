@@ -1273,7 +1273,6 @@ n=\prod_{i=1}^wpi^{ai}</script>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
-          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -1281,7 +1280,6 @@ n=\prod_{i=1}^wpi^{ai}</script>
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
-          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

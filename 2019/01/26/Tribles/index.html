@@ -533,7 +533,6 @@ f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2...</script><p>为什么是$f[i-1]$呢？</p>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
-          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -541,7 +540,6 @@ f[i]=p0+p1*f[i-1]^1+p2*f[i-1]^2...</script><p>为什么是$f[i-1]$呢？</p>
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
-          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {
