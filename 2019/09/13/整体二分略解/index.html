@@ -28,7 +28,7 @@
 <meta property="og:description" content="整体二分什么是整体二分？ 如果你有一个操作序列（包括修改和查询），每次询问可以通过二分来解决，但是如果每次都二分的话时间复杂度就爆掉了，这个时候，也许就能使用——整体二分。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-09-13T08:31:39.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:42:22.661Z">
+<meta property="article:modified_time" content="2020-07-20T03:17:52.223Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="整体二分">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:42:22" itemprop="dateModified" datetime="2020-07-18T21:42:22+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:17:52" itemprop="dateModified" datetime="2020-07-20T11:17:52+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,14 +275,14 @@
 <a id="more"></a>
 <h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>整体二分的函数一般都写成：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br></pre></td></tr></table></figure>
-<p>其中，$l,r$是答案区间，而$x,y$是操作区间。其中的含义就是操作$[x,y]$中询问的答案或修改的数的权值都在$[l,r]$之间。这个时候，有人会问了：你怎么知道答案或修改的值属于$[l,r]$的操作都是连续的呢？这个，我们后面再解决。</p>
+<p>其中，<script type="math/tex">l,r</script>是答案区间，而<script type="math/tex">x,y</script>是操作区间。其中的含义就是操作<script type="math/tex">[x,y]</script>中询问的答案或修改的数的权值都在<script type="math/tex">[l,r]</script>之间。这个时候，有人会问了：你怎么知道答案或修改的值属于<script type="math/tex">[l,r]</script>的操作都是连续的呢？这个，我们后面再解决。</p>
 <p>先考虑怎么分治：</p>
-<p>像普通二分一样，先计算出$mid=(l+r)&gt;&gt;1$，然后，对于修改操作，按照$&lt;=mid$或$&gt;mid$分成左右两边，如果修改的数$&lt;=mid$，就在树状数组上加以修改，这个主要是为了询问的分类做准备。对于询问操作，先通过树状数组计算出现在的贡献$tmp$。如果$tmp&gt;=num$（$num$指需要的权值），就分为左边一组，否则，就让询问的权值$num$减掉$tmp$，再分到右边那一组。</p>
-<p>最后把分类的结果$copy$到原来的数组中即可。</p>
-<p>经过这么一通分类操作，就可以保证$[l,r]$之间的操作是连续的了。</p>
+<p>像普通二分一样，先计算出<script type="math/tex">mid=(l+r)>>1</script>，然后，对于修改操作，按照<script type="math/tex"><=mid</script>或<script type="math/tex">>mid</script>分成左右两边，如果修改的数<script type="math/tex"><=mid</script>，就在树状数组上加以修改，这个主要是为了询问的分类做准备。对于询问操作，先通过树状数组计算出现在的贡献<script type="math/tex">tmp</script>。如果<script type="math/tex">tmp>=num</script>（<script type="math/tex">num</script>指需要的权值），就分为左边一组，否则，就让询问的权值<script type="math/tex">num</script>减掉<script type="math/tex">tmp</script>，再分到右边那一组。</p>
+<p>最后把分类的结果<script type="math/tex">copy</script>到原来的数组中即可。</p>
+<p>经过这么一通分类操作，就可以保证<script type="math/tex">[l,r]</script>之间的操作是连续的了。</p>
 <p>接下来，我们就递归</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solve(l, mid, x, x + t1 - <span class="number">1</span>); solve(mid + <span class="number">1</span>, r, x + t1, r);</span><br><span class="line"><span class="comment">//t1:分类到左边的操作的个数</span></span><br></pre></td></tr></table></figure>
-<p>其实过程很像$cdq$分治，但是$cdq$分治是在操作之前递归，然后统计前面区间对后面区间的贡献，本质上还是区别挺大的，但是写法上却差不多。。。</p>
+<p>其实过程很像<script type="math/tex">cdq</script>分治，但是<script type="math/tex">cdq</script>分治是在操作之前递归，然后统计前面区间对后面区间的贡献，本质上还是区别挺大的，但是写法上却差不多。。。</p>
 <p>边界条件？</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(l &gt; r || x &gt; y) <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">if</span>(l == r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &lt;= y; i++) ans[ q[i].id ] = l;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>完结撒花。</p>
@@ -542,8 +542,6 @@
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

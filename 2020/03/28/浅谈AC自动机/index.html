@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="AC自动机所谓$AC$自动机，实际上就是在$Trie$树上建立$KMP$，在多串匹配时有重要的作用。">
+  <meta name="description" content="AC自动机所谓AC自动机，实际上就是在Trie树上建立KMP，在多串匹配时有重要的作用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈AC自动机">
 <meta property="og:url" content="http://cmwqf.github.io/2020/03/28/%E6%B5%85%E8%B0%88AC%E8%87%AA%E5%8A%A8%E6%9C%BA/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="AC自动机所谓$AC$自动机，实际上就是在$Trie$树上建立$KMP$，在多串匹配时有重要的作用。">
+<meta property="og:description" content="AC自动机所谓AC自动机，实际上就是在Trie树上建立KMP，在多串匹配时有重要的作用。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-28T01:58:41.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:41:29.178Z">
+<meta property="article:modified_time" content="2020-07-20T03:29:51.725Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="AC自动机">
 <meta property="article:tag" content="字符串">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:41:29" itemprop="dateModified" datetime="2020-07-18T21:41:29+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:29:51" itemprop="dateModified" datetime="2020-07-20T11:29:51+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,30 +271,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="AC自动机"><a href="#AC自动机" class="headerlink" title="AC自动机"></a>AC自动机</h1><p>所谓$AC$自动机，实际上就是在$Trie$树上建立$KMP$，在多串匹配时有重要的作用。</p>
+        <h1 id="AC自动机"><a href="#AC自动机" class="headerlink" title="AC自动机"></a>AC自动机</h1><p>所谓<script type="math/tex">AC</script>自动机，实际上就是在<script type="math/tex">Trie</script>树上建立<script type="math/tex">KMP</script>，在多串匹配时有重要的作用。</p>
 <a id="more"></a>
-<h1 id="Fail指针"><a href="#Fail指针" class="headerlink" title="Fail指针"></a>Fail指针</h1><p>$AC$自动机最重要的，就是这个$fail$指针了。这个$fail$指针类似于$KMP$的$nxt$数组，只不过因为会有多个串，所以$fail$指针指的位置可能不是当前这个串的前缀，而是别的某个字符串的前缀。</p>
-<p>一个节点的$fail$指针的定义，即整个$Trie$树上所有节点代表的字符串中（都是给定的那些串的前缀），<strong>是当前节点接受的字符串后缀，且是所有符合这个条件的节点中长度最长的那个串的节点。</strong></p>
-<p>类比一下$nxt$数组，含义就非常清晰了。</p>
-<p>在做匹配的时候，如果这个点没有$ch[c]$这个孩子，那么就不断地跳$fail$指针，直到有一个$ch[c]$的节点停下。类似于$KMP$时跳$nxt$的过程，非常清晰。</p>
-<p>但实际上，在$Trie$树上如果暴力跳$fail$，时间复杂度是不对的，然而我们在构建$AC$自动机时有一种非常巧妙的方法，既能完美地构建出自动机，又能巧妙地解决时间问题。</p>
-<p>我们想到，既然每次如果找不到$ch[c]$就要暴力往上跳找到第一个有$ch[c]$的节点，那么我们何不直接将当前节点的$ch[c]$直接指向按照$fail$往上跳时第一个由$ch[c]$的节点的$ch[c]$呢（如果没有这样的$ch[c]$就直接指向根节点）？这样一来，每次就不用暴力往上跳了。而此时，这个东西显然不是一棵树，而是一张有向图。</p>
-<p>但是，怎么构建这张图呢？这就是$AC$自动机的妙处。</p>
-<h1 id="构建AC自动机"><a href="#构建AC自动机" class="headerlink" title="构建AC自动机"></a>构建AC自动机</h1><p>一个显然的性质时，在$Trie$树上，所有节点的$fail$指针指的节点的深度一定比当前节点要小。</p>
-<p>那么，我们考虑用$bfs$来构建$AC$自动机。</p>
+<h1 id="Fail指针"><a href="#Fail指针" class="headerlink" title="Fail指针"></a>Fail指针</h1><p><script type="math/tex">AC</script>自动机最重要的，就是这个<script type="math/tex">fail</script>指针了。这个<script type="math/tex">fail</script>指针类似于<script type="math/tex">KMP</script>的<script type="math/tex">nxt</script>数组，只不过因为会有多个串，所以<script type="math/tex">fail</script>指针指的位置可能不是当前这个串的前缀，而是别的某个字符串的前缀。</p>
+<p>一个节点的<script type="math/tex">fail</script>指针的定义，即整个<script type="math/tex">Trie</script>树上所有节点代表的字符串中（都是给定的那些串的前缀），<strong>是当前节点接受的字符串后缀，且是所有符合这个条件的节点中长度最长的那个串的节点。</strong></p>
+<p>类比一下<script type="math/tex">nxt</script>数组，含义就非常清晰了。</p>
+<p>在做匹配的时候，如果这个点没有<script type="math/tex">ch[c]</script>这个孩子，那么就不断地跳<script type="math/tex">fail</script>指针，直到有一个<script type="math/tex">ch[c]</script>的节点停下。类似于<script type="math/tex">KMP</script>时跳<script type="math/tex">nxt</script>的过程，非常清晰。</p>
+<p>但实际上，在<script type="math/tex">Trie</script>树上如果暴力跳<script type="math/tex">fail</script>，时间复杂度是不对的，然而我们在构建<script type="math/tex">AC</script>自动机时有一种非常巧妙的方法，既能完美地构建出自动机，又能巧妙地解决时间问题。</p>
+<p>我们想到，既然每次如果找不到<script type="math/tex">ch[c]</script>就要暴力往上跳找到第一个有<script type="math/tex">ch[c]</script>的节点，那么我们何不直接将当前节点的<script type="math/tex">ch[c]</script>直接指向按照<script type="math/tex">fail</script>往上跳时第一个由<script type="math/tex">ch[c]</script>的节点的<script type="math/tex">ch[c]</script>呢（如果没有这样的<script type="math/tex">ch[c]</script>就直接指向根节点）？这样一来，每次就不用暴力往上跳了。而此时，这个东西显然不是一棵树，而是一张有向图。</p>
+<p>但是，怎么构建这张图呢？这就是<script type="math/tex">AC</script>自动机的妙处。</p>
+<h1 id="构建AC自动机"><a href="#构建AC自动机" class="headerlink" title="构建AC自动机"></a>构建AC自动机</h1><p>一个显然的性质时，在<script type="math/tex">Trie</script>树上，所有节点的<script type="math/tex">fail</script>指针指的节点的深度一定比当前节点要小。</p>
+<p>那么，我们考虑用<script type="math/tex">bfs</script>来构建<script type="math/tex">AC</script>自动机。</p>
 <p>初始情况自然是</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">    <span class="keyword">if</span>(st[root].ch[i]) st[ st[root].ch[i] ].fail = root, q.push(st[root].ch[i]);</span><br></pre></td></tr></table></figure>
-<p>然后我们开始$bfs$，考虑如果我们当前出队的节点是$x$，那么所有深度小于$x$的节点一定全部处理完了，所谓处理完了，就是已经求出了$fail$指针，且$ch[c]$已经指向了往上跳$fail$时遇到的第一个$ch[c]$。</p>
-<p>那么，我们考虑扩展到所有的$ch[x][c]$，$ch[x][c]$存在的话，那么就计算它的$fail$，显然$fail[ch[x][c]]=ch[fail[x]][c]$，然后将$ch[x][c]$压入队中。否则，如果不存在的话，那么直接将其设为$ch[x][c]=ch[fail[x]][c]$。因为此时$fail[x]$的深度一定小于$x$，所以$fail[x]$的所有信息都已经计算完了，所以这样做一定是对的。</p>
-<p>那么构建$AC$自动机的代码就很简单了：</p>
+<p>然后我们开始<script type="math/tex">bfs</script>，考虑如果我们当前出队的节点是<script type="math/tex">x</script>，那么所有深度小于<script type="math/tex">x</script>的节点一定全部处理完了，所谓处理完了，就是已经求出了<script type="math/tex">fail</script>指针，且<script type="math/tex">ch[c]</script>已经指向了往上跳<script type="math/tex">fail</script>时遇到的第一个<script type="math/tex">ch[c]</script>。</p>
+<p>那么，我们考虑扩展到所有的<script type="math/tex">ch[x][c]</script>，<script type="math/tex">ch[x][c]</script>存在的话，那么就计算它的<script type="math/tex">fail</script>，显然<script type="math/tex">fail[ch[x][c]]=ch[fail[x]][c]</script>，然后将<script type="math/tex">ch[x][c]</script>压入队中。否则，如果不存在的话，那么直接将其设为<script type="math/tex">ch[x][c]=ch[fail[x]][c]</script>。因为此时<script type="math/tex">fail[x]</script>的深度一定小于<script type="math/tex">x</script>，所以<script type="math/tex">fail[x]</script>的所有信息都已经计算完了，所以这样做一定是对的。</p>
+<p>那么构建<script type="math/tex">AC</script>自动机的代码就很简单了：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">get_fail</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">        <span class="keyword">if</span>(st[root].ch[i]) st[ st[root].ch[i] ].fail = root, q.push(st[root].ch[i]);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x = q.front(); q.pop();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">            <span class="keyword">if</span>(st[x].ch[i]) st[ st[x].ch[i] ].fail = st[ st[x].fail ].ch[i], q.push(st[x].ch[i]);</span><br><span class="line">        	<span class="keyword">else</span> st[x].ch[i] = st[ st[x].fail ].ch[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="AC自动机用法"><a href="#AC自动机用法" class="headerlink" title="AC自动机用法"></a>AC自动机用法</h1><h2 id="例一"><a href="#例一" class="headerlink" title="例一"></a>例一</h2><p>多模式串匹配自然不用多说了，直接每次在$Trie$图上跑即可。</p>
+<h1 id="AC自动机用法"><a href="#AC自动机用法" class="headerlink" title="AC自动机用法"></a>AC自动机用法</h1><h2 id="例一"><a href="#例一" class="headerlink" title="例一"></a>例一</h2><p>多模式串匹配自然不用多说了，直接每次在<script type="math/tex">Trie</script>图上跑即可。</p>
 <h2 id="例二"><a href="#例二" class="headerlink" title="例二"></a>例二</h2><p>如果统计每个模式串在文本串出现的次数，怎么做呢？</p>
-<p>考虑我们构建出来的$fail$指针和所有节点，显然构成了一棵树（每个节点都由且仅有唯一一个$fail$指针），我们把这棵树给建出来，观察性质。</p>
+<p>考虑我们构建出来的<script type="math/tex">fail</script>指针和所有节点，显然构成了一棵树（每个节点都由且仅有唯一一个<script type="math/tex">fail</script>指针），我们把这棵树给建出来，观察性质。</p>
 <p><strong>我们发现每个节点代表的字符串都是其所有子树代表字符串的后缀，也可以说，一个节点所有祖先代表的字符串都是这个节点代表字符串的后缀。</strong></p>
-<p>那么，我们用文本串在$Trie$图上跑的时候，如果经过了某个节点，实际上的贡献应该是这个节点所有祖先的权值之和（我们让每个$Trie$树上的字符串在它成为文本串的某个前缀的后缀时产生贡献，请读者仔细理解）。那么利用树上差分，我们将经过的所有节点计数器加一，最后遍历整棵树统计一下答案即可。</p>
-<p>这个$fail$树的性质非常重要，可以说是精髓所在，请读者仔细理解其中含义。</p>
-<p>实际上，对于$KMP$我们也可以建立这样一棵类似的树（每个点的$nxt$都存在且唯一），也有类似的性质。</p>
+<p>那么，我们用文本串在<script type="math/tex">Trie</script>图上跑的时候，如果经过了某个节点，实际上的贡献应该是这个节点所有祖先的权值之和（我们让每个<script type="math/tex">Trie</script>树上的字符串在它成为文本串的某个前缀的后缀时产生贡献，请读者仔细理解）。那么利用树上差分，我们将经过的所有节点计数器加一，最后遍历整棵树统计一下答案即可。</p>
+<p>这个<script type="math/tex">fail</script>树的性质非常重要，可以说是精髓所在，请读者仔细理解其中含义。</p>
+<p>实际上，对于<script type="math/tex">KMP</script>我们也可以建立这样一棵类似的树（每个点的<script type="math/tex">nxt</script>都存在且唯一），也有类似的性质。</p>
 <p>另外，在统计贡献的时候，统计所有当前节点后缀的节点的贡献，能做到不重不漏。</p>
 
     </div>
@@ -552,8 +552,6 @@
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

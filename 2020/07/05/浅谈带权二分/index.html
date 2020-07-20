@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="带权二分带权二分，又称为wqs二分或凸优化，它适用于一类dp的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。 具体地，带权二分一般适用于这样一类问题：有$n$个物品，要求从里面选恰好$m$个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用$wqs$二分。 那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？">
+  <meta name="description" content="带权二分带权二分，又称为wqs二分或凸优化，它适用于一类dp的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。 具体地，带权二分一般适用于这样一类问题：有n个物品，要求从里面选恰好m个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用wqs二分。 那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈带权二分">
 <meta property="og:url" content="http://cmwqf.github.io/2020/07/05/%E6%B5%85%E8%B0%88%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="带权二分带权二分，又称为wqs二分或凸优化，它适用于一类dp的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。 具体地，带权二分一般适用于这样一类问题：有$n$个物品，要求从里面选恰好$m$个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用$wqs$二分。 那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？">
+<meta property="og:description" content="带权二分带权二分，又称为wqs二分或凸优化，它适用于一类dp的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。 具体地，带权二分一般适用于这样一类问题：有n个物品，要求从里面选恰好m个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用wqs二分。 那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-05T07:28:05.000Z">
-<meta property="article:modified_time" content="2020-07-20T02:27:17.257Z">
+<meta property="article:modified_time" content="2020-07-20T03:11:42.484Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-20 10:27:17" itemprop="dateModified" datetime="2020-07-20T10:27:17+08:00">2020-07-20</time>
+                <time title="修改时间：2020-07-20 11:11:42" itemprop="dateModified" datetime="2020-07-20T11:11:42+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,24 +271,24 @@
 
       
         <h1 id="带权二分"><a href="#带权二分" class="headerlink" title="带权二分"></a>带权二分</h1><p>带权二分，又称为<script type="math/tex">wqs</script>二分或凸优化，它适用于一类<script type="math/tex">dp</script>的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。</p>
-<p>具体地，带权二分一般适用于这样一类问题：有$n$个物品，要求从里面选恰好$m$个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用$wqs$二分。</p>
+<p>具体地，带权二分一般适用于这样一类问题：有<script type="math/tex">n</script>个物品，要求从里面选恰好<script type="math/tex">m</script>个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用<script type="math/tex">wqs</script>二分。</p>
 <p>那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？</p>
 <a id="more"></a>
-<h1 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h1><p>什么情况下，我们可以使用带权二分呢？注意我们上面提出的这一类问题，一般我们会设计状态为设$f[i][j]$表示前$i$个物品，选了$j$个的最优结果是什么。显然最后的答案是$f[n][m]$。</p>
-<p>如果我们把$f[n]$画成图像：即我们画一张图像，每个点为$(i,f[n][i])$，并顺次连接。如果这个图像是凸的（不管是上凸还是下凸），我们就可以使用带权二分。</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>我们的思想是去掉选择个数的条件，即我们去掉“恰好选$m$个”，下面我们不妨设问题让我们求最大值，$f[n]$的图像为上凸函数。</p>
-<p>设$g[i]$表示$f[i][j]$的最大值，然后我们来$dp$出$g$，这个的时间复杂度显然就要优秀的多。但是，我们最后并不能通过$g$知道$f[n][m]$，因为$g[n]$代表的只是$f[n][i]$的最大值。</p>
-<p>这个时候，我们考虑$f[n]$图像的导函数，由于是上凸函数，其导函数一定是递减的。其导函数与$x$轴的交点横坐标就是$f[n]$取最大值时的横坐标。</p>
-<p>我们考虑给$f[n]$加上一个正比例函数$y=kx$，那么，这个时候其导函数会加上$k$，那么其与$x$轴的交点会往右移，换句话说，$f[n]$的最值点会往右移。那么，我们可以通过加上正比例函数，使得$f$的最值点位置调整。因为$g[n]$求的是$f[n][i]$的最值点，那么我们只需要调整$k$使得$f[n]$的最值点变到$x=m$上，那么此时的$g[n]-mk$就是答案。</p>
-<p>怎样使得整个函数加上$kx$呢？注意$kx$的实际意义是每多选一个物品，我们就多获得$k$的价值，所以我们只需在$dp$的时候修改一下价值即可。</p>
-<p>那么，我们怎么调整$k$呢？注意到$k$显然是可二分的，因此我们只需二分$k$（$k$的值域为$f[n]$导函数的值域），然后我们在$dp$的时候很容易记录$g[i]$取这个最优值时最少要选多少个物品（只需转移时稍微记录一下即可），设为$s[i]$，那么如果最后$s[n]&gt;m$那么说明$k$要调小，否则说明$k$要调大。</p>
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>最后二分出来的$k$会是小数吗？</p>
-<p>不会，我们只需在整数上进行二分即可。因为$k$的值域是$f[n]$导函数的值域。实际上$f[n]$是由一些折线构成的，相邻两个点的斜率为$f[n][i]-f[n][i-1]$，故只要$f[n]$中不存在小数，那么其导函数（即斜率的值）不可能会是小数。</p>
-<p>如果最后二分出来的$k$中$s[n]\neq m$怎么办？</p>
-<p>由上文所述，$k$不会是小数，因此如果最后$s[n]\neq m$，一定是因为$f[n]$导函数中$m$周围点的导函数与$m$相同，那么，注意$s[i]$的定义是当$g[i]$取最优值时<strong>最少</strong>要选多少物品，因此我们只需保留$s[n]\le m$中$s[n]$最大的所对应的$k$即可。</p>
-<p>如果读者无法理解，可以想象导函数图像，是一些递减的水平线段，最后的$s[n]$即$x=m$时导函数上那个点所在线段的左端点的横坐标。</p>
+<h1 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h1><p>什么情况下，我们可以使用带权二分呢？注意我们上面提出的这一类问题，一般我们会设计状态为设<script type="math/tex">f[i][j]</script>表示前<script type="math/tex">i</script>个物品，选了<script type="math/tex">j</script>个的最优结果是什么。显然最后的答案是<script type="math/tex">f[n][m]</script>。</p>
+<p>如果我们把<script type="math/tex">f[n]</script>画成图像：即我们画一张图像，每个点为<script type="math/tex">(i,f[n][i])</script>，并顺次连接。如果这个图像是凸的（不管是上凸还是下凸），我们就可以使用带权二分。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>我们的思想是去掉选择个数的条件，即我们去掉“恰好选<script type="math/tex">m</script>个”，下面我们不妨设问题让我们求最大值，<script type="math/tex">f[n]</script>的图像为上凸函数。</p>
+<p>设<script type="math/tex">g[i]</script>表示<script type="math/tex">f[i][j]</script>的最大值，然后我们来<script type="math/tex">dp</script>出<script type="math/tex">g</script>，这个的时间复杂度显然就要优秀的多。但是，我们最后并不能通过<script type="math/tex">g</script>知道<script type="math/tex">f[n][m]</script>，因为<script type="math/tex">g[n]</script>代表的只是<script type="math/tex">f[n][i]</script>的最大值。</p>
+<p>这个时候，我们考虑<script type="math/tex">f[n]</script>图像的导函数，由于是上凸函数，其导函数一定是递减的。其导函数与<script type="math/tex">x</script>轴的交点横坐标就是<script type="math/tex">f[n]</script>取最大值时的横坐标。</p>
+<p>我们考虑给<script type="math/tex">f[n]</script>加上一个正比例函数<script type="math/tex">y=kx</script>，那么，这个时候其导函数会加上<script type="math/tex">k</script>，那么其与<script type="math/tex">x</script>轴的交点会往右移，换句话说，<script type="math/tex">f[n]</script>的最值点会往右移。那么，我们可以通过加上正比例函数，使得<script type="math/tex">f</script>的最值点位置调整。因为<script type="math/tex">g[n]</script>求的是<script type="math/tex">f[n][i]</script>的最值点，那么我们只需要调整<script type="math/tex">k</script>使得<script type="math/tex">f[n]</script>的最值点变到<script type="math/tex">x=m</script>上，那么此时的<script type="math/tex">g[n]-mk</script>就是答案。</p>
+<p>怎样使得整个函数加上<script type="math/tex">kx</script>呢？注意<script type="math/tex">kx</script>的实际意义是每多选一个物品，我们就多获得<script type="math/tex">k</script>的价值，所以我们只需在<script type="math/tex">dp</script>的时候修改一下价值即可。</p>
+<p>那么，我们怎么调整<script type="math/tex">k</script>呢？注意到<script type="math/tex">k</script>显然是可二分的，因此我们只需二分<script type="math/tex">k</script>（<script type="math/tex">k</script>的值域为<script type="math/tex">f[n]</script>导函数的值域），然后我们在<script type="math/tex">dp</script>的时候很容易记录<script type="math/tex">g[i]</script>取这个最优值时最少要选多少个物品（只需转移时稍微记录一下即可），设为<script type="math/tex">s[i]</script>，那么如果最后<script type="math/tex">s[n]>m</script>那么说明<script type="math/tex">k</script>要调小，否则说明<script type="math/tex">k</script>要调大。</p>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>最后二分出来的<script type="math/tex">k</script>会是小数吗？</p>
+<p>不会，我们只需在整数上进行二分即可。因为<script type="math/tex">k</script>的值域是<script type="math/tex">f[n]</script>导函数的值域。实际上<script type="math/tex">f[n]</script>是由一些折线构成的，相邻两个点的斜率为<script type="math/tex">f[n][i]-f[n][i-1]</script>，故只要<script type="math/tex">f[n]</script>中不存在小数，那么其导函数（即斜率的值）不可能会是小数。</p>
+<p>如果最后二分出来的<script type="math/tex">k</script>中<script type="math/tex">s[n]\neq m</script>怎么办？</p>
+<p>由上文所述，<script type="math/tex">k</script>不会是小数，因此如果最后<script type="math/tex">s[n]\neq m</script>，一定是因为<script type="math/tex">f[n]</script>导函数中<script type="math/tex">m</script>周围点的导函数与<script type="math/tex">m</script>相同，那么，注意<script type="math/tex">s[i]</script>的定义是当<script type="math/tex">g[i]</script>取最优值时<strong>最少</strong>要选多少物品，因此我们只需保留<script type="math/tex">s[n]\le m</script>中<script type="math/tex">s[n]</script>最大的所对应的<script type="math/tex">k</script>即可。</p>
+<p>如果读者无法理解，可以想象导函数图像，是一些递减的水平线段，最后的<script type="math/tex">s[n]</script>即<script type="math/tex">x=m</script>时导函数上那个点所在线段的左端点的横坐标。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>那么，在考试的时候，我们怎样才能想到带权二分？</p>
-<p>首先，明确带权二分是$dp$的优化，所以我们要先想到朴素的$dp$，然后如果发现这个$dp$无法获得满分，我们尝试把$f[n][i]$的表打出来，观察是否是凸的。如果是，尝试通过归纳法证明，实在无法证明可以进行大胆猜想，写完以后对拍验证。不放心的话，最后还是和前面的暴力$dp$数据分治一下。</p>
+<p>首先，明确带权二分是<script type="math/tex">dp</script>的优化，所以我们要先想到朴素的<script type="math/tex">dp</script>，然后如果发现这个<script type="math/tex">dp</script>无法获得满分，我们尝试把<script type="math/tex">f[n][i]</script>的表打出来，观察是否是凸的。如果是，尝试通过归纳法证明，实在无法证明可以进行大胆猜想，写完以后对拍验证。不放心的话，最后还是和前面的暴力<script type="math/tex">dp</script>数据分治一下。</p>
 
     </div>
 
@@ -544,8 +544,6 @@
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="后缀数组的基础后缀定义对于一个字符串为$s$，我们记$suf[i]$为$[i,n]$这一段字符串，称为后缀。">
+  <meta name="description" content="后缀数组的基础后缀定义对于一个字符串为s，我们记suf[i]为[i,n]这一段字符串，称为后缀。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈后缀数组">
 <meta property="og:url" content="http://cmwqf.github.io/2019/02/11/%E6%B5%85%E8%B0%88%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="后缀数组的基础后缀定义对于一个字符串为$s$，我们记$suf[i]$为$[i,n]$这一段字符串，称为后缀。">
+<meta property="og:description" content="后缀数组的基础后缀定义对于一个字符串为s，我们记suf[i]为[i,n]这一段字符串，称为后缀。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-02-11T11:29:39.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:42:33.178Z">
+<meta property="article:modified_time" content="2020-07-20T03:17:30.020Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="字符串">
 <meta property="article:tag" content="后缀数组">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:42:33" itemprop="dateModified" datetime="2020-07-18T21:42:33+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:17:30" itemprop="dateModified" datetime="2020-07-20T11:17:30+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,14 +271,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="后缀数组的基础"><a href="#后缀数组的基础" class="headerlink" title="后缀数组的基础"></a>后缀数组的基础</h1><h2 id="后缀定义"><a href="#后缀定义" class="headerlink" title="后缀定义"></a>后缀定义</h2><p>对于一个字符串为$s$，我们记$suf[i]$为$[i,n]$这一段字符串，称为后缀。</p>
+        <h1 id="后缀数组的基础"><a href="#后缀数组的基础" class="headerlink" title="后缀数组的基础"></a>后缀数组的基础</h1><h2 id="后缀定义"><a href="#后缀定义" class="headerlink" title="后缀定义"></a>后缀定义</h2><p>对于一个字符串为<script type="math/tex">s</script>，我们记<script type="math/tex">suf[i]</script>为<script type="math/tex">[i,n]</script>这一段字符串，称为后缀。</p>
 <a id="more"></a>
-<h2 id="后缀数组是什么"><a href="#后缀数组是什么" class="headerlink" title="后缀数组是什么"></a>后缀数组是什么</h2><p>就我个人的理解来看，后缀数组其实就两个方面，一个记为$sa$，一个记为$rk$，它们代表什么意思呢？</p>
+<h2 id="后缀数组是什么"><a href="#后缀数组是什么" class="headerlink" title="后缀数组是什么"></a>后缀数组是什么</h2><p>就我个人的理解来看，后缀数组其实就两个方面，一个记为<script type="math/tex">sa</script>，一个记为<script type="math/tex">rk</script>，它们代表什么意思呢？</p>
 <script type="math/tex; mode=display">
 rk[i]:指s中第i项的后缀在所有后缀中的字典序排名\\
 sa[i]:与rk[i]相对应的，指s所有后缀中第i名后缀所在的位置</script><p>当然，这两个数组都是为height数组服务的，但height数组是什么，我们后面再说。</p>
-<p>这个算法想法离奇，主要就是为了求解<script type="math/tex">sa[i]和rk[i]</script>服务的。</p>
-<p>其实，<script type="math/tex">sa[i]和rk[i]</script>只要求解一个就可以了，由定义可知：</p>
+<p>这个算法想法离奇，主要就是为了求解<script type="math/tex">sa[i],rk[i]</script>服务的。</p>
+<p>其实，<script type="math/tex">sa[i],rk[i]</script>只要求解一个就可以了，由定义可知：</p>
 <script type="math/tex; mode=display">
 sa[rk[i]]=i,rk[sa[i]]=i</script><h2 id="求解后缀数组"><a href="#求解后缀数组" class="headerlink" title="求解后缀数组"></a>求解后缀数组</h2><p>那么，怎么求这个东西呢？</p>
 <p>首先，这个算法是基于“<strong>基数排序</strong>”之上的，那么基数排序是什么呢？</p>
@@ -310,18 +310,18 @@ bin[i]:指排名第i的后缀出现的个数</script><p>我们来更新这个以
 <p>题目：<a href="https://www.luogu.org/problemnew/show/P3809" target="_blank" rel="noopener">后缀排序</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">1e6</span> + <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span> tp[maxN+<span class="number">1</span>],rk[maxN+<span class="number">1</span>],sa[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> bin[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,p;</span><br><span class="line"><span class="keyword">char</span> s[maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Qsort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=m;i++) bin[i]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) bin[rk[i]]++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++) bin[i]+=bin[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">1</span>;i--) sa[bin[rk[tp[i]]]--]=tp[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m=<span class="string">'Z'</span>;<span class="comment">//字符从'0'~'Z'，映射成ASCLL码表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) tp[i]=i,rk[i]=s[i]-<span class="string">'0'</span>+<span class="number">1</span>;</span><br><span class="line">    Qsort();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> w = <span class="number">1</span>; p &lt; n; m = p,w &lt;&lt;= <span class="number">1</span>)<span class="comment">//不断更新m的值，另外，如果排名数==n，就不用再找了</span></span><br><span class="line">    &#123;</span><br><span class="line">        p=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n-w+<span class="number">1</span>;i&lt;=n;i++) tp[++p]=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span>(sa[i]&gt;w) tp[++p]=sa[i]-w;</span><br><span class="line">        Qsort();</span><br><span class="line">        <span class="built_in">memcpy</span>(tp, rk, <span class="keyword">sizeof</span>(rk));</span><br><span class="line">        rk[ sa[<span class="number">1</span>] ] = p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">           rk[ sa[i] ] = (tp[ sa[i - <span class="number">1</span>] ] == tp[ sa[i] ] &amp;&amp; tp[ sa[i - <span class="number">1</span>] + w ] == tp[ sa[i] + w ]) ? p : ++p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">printf</span>(<span class="string">"%d "</span>,sa[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s+<span class="number">1</span>);</span><br><span class="line">    n=<span class="built_in">strlen</span>(s+<span class="number">1</span>);</span><br><span class="line">    work();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="后缀数组的进阶"><a href="#后缀数组的进阶" class="headerlink" title="后缀数组的进阶"></a>后缀数组的进阶</h1><h2 id="height数组"><a href="#height数组" class="headerlink" title="height数组"></a>height数组</h2><p>大家一定会想，就计算这两个数组，有什么用处呢?</p>
-<p>其实，就是为了$height和h$数组做铺垫的。</p>
-<p>我们定义：$i$号后缀为以第$i$个字符开头的后缀。</p>
-<p>我们设$lcp(x,y)$为以第$x$号后缀和第$y$号后缀的最长公共前缀，那么</p>
+<p>其实，就是为了<script type="math/tex">height和h</script>数组做铺垫的。</p>
+<p>我们定义：<script type="math/tex">i</script>号后缀为以第<script type="math/tex">i</script>个字符开头的后缀。</p>
+<p>我们设<script type="math/tex">lcp(x,y)</script>为以第<script type="math/tex">x</script>号后缀和第<script type="math/tex">y</script>号后缀的最长公共前缀，那么</p>
 <script type="math/tex; mode=display">
 height[i]=lcp(sa[i],sa[i-1])，即排名为i的后缀和其排名前一位的后缀的最长公共前缀\\
 h[i]=height[rk[i]]，即第i号后缀与它排名的前一名的后缀的公共前缀</script><p>这个一定要搞清楚。</p>
 <p>我们有一个很重要的性质：</p>
 <script type="math/tex; mode=display">
 h[i]>=h[i-1]-1</script><p>证明（<del>口胡</del>）：</p>
-<p>如果$h[i-1]&gt;1$，假设第$i-1$号后缀与第$k$号后缀的最长公共前缀为$h[i-1]$，且不止是第一个字符相同，则第$k+1$号后缀与第$i$号后缀有$h[i-1]-1$的公共前缀（除去$k,i-1$后就是$h[i-1]-1$），而第$k+1$号后缀会排在第$i$号后缀前面。为什么呢？因为此时，第$i-1$号后缀和第$k$号后缀第一个字符必然相同，那么，第$i$号后缀和第$k-1$号后缀仅仅是去掉了一个相同的字符，所以$k-1$号后缀必然在$i$号后缀前面，否则就与之前矛盾了。</p>
-<p>如果$h[i-1]&lt;=1$，那么$h[i-1]-1&lt;=0$，即$h[i]&gt;=0$，这显然正确。</p>
-<p>有了这个结论，求解$h$数组也就很简单了：</p>
+<p>如果<script type="math/tex">h[i-1]>1</script>，假设第<script type="math/tex">i-1</script>号后缀与第<script type="math/tex">k</script>号后缀的最长公共前缀为<script type="math/tex">h[i-1]</script>，且不止是第一个字符相同，则第<script type="math/tex">k+1</script>号后缀与第<script type="math/tex">i</script>号后缀有<script type="math/tex">h[i-1]-1</script>的公共前缀（除去<script type="math/tex">k,i-1</script>后就是<script type="math/tex">h[i-1]-1</script>），而第<script type="math/tex">k+1</script>号后缀会排在第<script type="math/tex">i</script>号后缀前面。为什么呢？因为此时，第<script type="math/tex">i-1</script>号后缀和第<script type="math/tex">k</script>号后缀第一个字符必然相同，那么，第<script type="math/tex">i</script>号后缀和第<script type="math/tex">k-1</script>号后缀仅仅是去掉了一个相同的字符，所以<script type="math/tex">k-1</script>号后缀必然在<script type="math/tex">i</script>号后缀前面，否则就与之前矛盾了。</p>
+<p>如果<script type="math/tex">h[i-1]<=1</script>，那么<script type="math/tex">h[i-1]-1<=0</script>，即<script type="math/tex">h[i]>=0</script>，这显然正确。</p>
+<p>有了这个结论，求解<script type="math/tex">h</script>数组也就很简单了：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(k) k --;</span><br><span class="line">        <span class="keyword">int</span> j = sa[rk[i] - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">while</span>(s[i + k] == s[j + k]) k ++;</span><br><span class="line">        h[i] = height[rk[i]] = k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="height数组的重要应用"><a href="#height数组的重要应用" class="headerlink" title="height数组的重要应用"></a>height数组的重要应用</h2><p>1.<a href="https://cmwqf.github.io/2019/03/11/%E6%9C%AC%E8%B4%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AD%90%E4%B8%B2%E6%95%B0%E9%87%8F/#more">本质不同的子串数量</a></p>
 
@@ -580,8 +580,6 @@ h[i]>=h[i-1]-1</script><p>证明（<del>口胡</del>）：</p>
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

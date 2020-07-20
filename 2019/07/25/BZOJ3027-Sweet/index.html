@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Description有$n$种糖果，每种有$m_i$个，求一共吃$a-&gt;b$个糖果的方案数之和（对2004取模）。">
+  <meta name="description" content="Description有n种糖果，每种有m_i个，求一共吃a-&gt;b个糖果的方案数之和（对2004取模）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[BZOJ3027]Sweet">
 <meta property="og:url" content="http://cmwqf.github.io/2019/07/25/BZOJ3027-Sweet/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Description有$n$种糖果，每种有$m_i$个，求一共吃$a-&gt;b$个糖果的方案数之和（对2004取模）。">
+<meta property="og:description" content="Description有n种糖果，每种有m_i个，求一共吃a-&gt;b个糖果的方案数之和（对2004取模）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-25T00:34:11.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:35:50.459Z">
+<meta property="article:modified_time" content="2020-07-20T03:32:28.554Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="组合数学">
 <meta property="article:tag" content="生成函数">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:35:50" itemprop="dateModified" datetime="2020-07-18T21:35:50+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:32:28" itemprop="dateModified" datetime="2020-07-20T11:32:28+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,26 +271,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有$n$种糖果，每种有$m_i$个，求一共吃$a-&gt;b$个糖果的方案数之和（对2004取模）。</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有<script type="math/tex">n</script>种糖果，每种有<script type="math/tex">m_i</script>个，求一共吃<script type="math/tex">a->b</script>个糖果的方案数之和（对2004取模）。</p>
 <a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>考虑生成函数，对于每种糖果，它的生成函数是</p>
 <script type="math/tex; mode=display">
 1+x+x^2+...+x^{m_i}=\frac{1-x^{m_i+1}}{1-x}</script><p>所有的乘起来，再变换一下，就是</p>
 <script type="math/tex; mode=display">
-(1+x+x^2+...)^n\prod_{i=1}^n(1-x^{m_i+1})</script><p>我们要求的，就是这个式子$x$次数为$a-&gt;b$的前面的系数之和。</p>
-<p>怎么办呢？我们发现，后面那个式子最多只有$2^n$项，所以我们可以暴力展开，$dfs$枚举每一项。</p>
-<p>注意前面那个式子$x^i$前面的系数是$C_{i+n-1}^{n-1}$</p>
-<p>假设我们现在枚举到了$t*x^k$，那么这一项对答案的贡献就是：</p>
+(1+x+x^2+...)^n\prod_{i=1}^n(1-x^{m_i+1})</script><p>我们要求的，就是这个式子<script type="math/tex">x</script>次数为<script type="math/tex">a->b</script>的前面的系数之和。</p>
+<p>怎么办呢？我们发现，后面那个式子最多只有<script type="math/tex">2^n</script>项，所以我们可以暴力展开，<script type="math/tex">dfs</script>枚举每一项。</p>
+<p>注意前面那个式子<script type="math/tex">x^i</script>前面的系数是<script type="math/tex">C_{i+n-1}^{n-1}</script></p>
+<p>假设我们现在枚举到了<script type="math/tex">t*x^k</script>，那么这一项对答案的贡献就是：</p>
 <script type="math/tex; mode=display">
 t*(C_{a-k+n-1}^{n-1}+...+C_{b-k+n-1}^{n-1})</script><p>我们知道</p>
 <script type="math/tex; mode=display">
 C_{n-1}^{n-1}+...+C_{i+n-1}^{n-1}=C_{i+n}^n</script><p>所以对答案的贡献可以写成</p>
 <script type="math/tex; mode=display">
 t*(C_{b-k+n}^n-C_{a-k+n-1}^n)</script><p>那么，问题来了，因为2004是个合数，所以可能不存在逆元，那么我们怎么算后面这个东西呢？</p>
-<p>我们考虑暴力计算$(n-m+1)*…*n$，这样，我们就剩下要除以一个$n!$了。</p>
-<p>首先，前面那个式子一定有$n!$这个因子，设为$(k*mod+r)*n!$，那么答案应该就是$r$，现在因为我们不能直接除以$n!$，所以我们改为将它模$mod*n!$。</p>
-<p>这样，我们算出来的答案就是$r*n!$，然后我们再除以$n!$就好了。</p>
-<p><del>不仅拍手：妙啊</del></p>
+<p>我们考虑暴力计算<script type="math/tex">(n-m+1)*...*n</script>，这样，我们就剩下要除以一个<script type="math/tex">n!</script>了。</p>
+<p>首先，前面那个式子一定有<script type="math/tex">n!</script>这个因子，设为<script type="math/tex">(k*mod+r)*n!</script>，那么答案应该就是<script type="math/tex">r</script>，现在因为我们不能直接除以<script type="math/tex">n!</script>，所以我们改为将它模<script type="math/tex">mod*n!</script>。</p>
+<p>这样，我们算出来的答案就是<script type="math/tex">r*n!</script>，然后我们再除以<script type="math/tex">n!</script>就好了。</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">500</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> m[maxN + <span class="number">1</span>], mod = <span class="number">2004</span>;</span><br><span class="line"><span class="keyword">int</span> tmp = <span class="number">1</span>, ans;</span><br><span class="line"><span class="keyword">int</span> n, a, b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; m) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n - m + <span class="number">1</span>; i &lt;= n; i++) ans = ans * i % mod;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> lim, <span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lim &gt; b) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &gt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += num * ( C(b - lim + n, n) - C(a - lim + n - <span class="number">1</span>, n) ) % mod;</span><br><span class="line">        ans %= mod;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(x + <span class="number">1</span>, lim, num);</span><br><span class="line">    dfs(x + <span class="number">1</span>, lim + m[x] + <span class="number">1</span>, -num);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld %lld %lld"</span>, &amp;n, &amp;a, &amp;b);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;m[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) tmp *= i;</span><br><span class="line">    mod *= tmp;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    ans /= tmp;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, (ans % <span class="number">2004</span> + <span class="number">2004</span>) % <span class="number">2004</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -548,8 +547,6 @@ t*(C_{b-k+n}^n-C_{a-k+n-1}^n)</script><p>那么，问题来了，因为2004是�
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

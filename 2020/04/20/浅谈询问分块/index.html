@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="询问分块什么是询问分块？ 对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。 注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对">
+  <meta name="description" content="询问分块什么是询问分块？ 对于一些题目，它的操作我们无法用高级数据结构在$$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。 注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈询问分块">
 <meta property="og:url" content="http://cmwqf.github.io/2020/04/20/%E6%B5%85%E8%B0%88%E8%AF%A2%E9%97%AE%E5%88%86%E5%9D%97/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="询问分块什么是询问分块？ 对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。 注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对">
+<meta property="og:description" content="询问分块什么是询问分块？ 对于一些题目，它的操作我们无法用高级数据结构在$$log_2n$时间复杂度内解决，那么，我们可以考虑，对询问分块，定期重构，使复杂度降为$\sqrt{n}$级别。 注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-20T03:48:25.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:33:35.234Z">
+<meta property="article:modified_time" content="2020-07-20T03:23:45.509Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="分块">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:33:35" itemprop="dateModified" datetime="2020-07-18T21:33:35+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:23:45" itemprop="dateModified" datetime="2020-07-20T11:23:45+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,7 +271,7 @@
 
       
         <h1 id="询问分块"><a href="#询问分块" class="headerlink" title="询问分块"></a>询问分块</h1><p>什么是询问分块？</p>
-<p>对于一些题目，它的操作我们无法用高级数据结构在$log_2n$时间复杂度内解决，那么，我们可以考虑，<strong>对询问分块，定期重构</strong>，使复杂度降为$\sqrt{n}$级别。</p>
+<p>对于一些题目，它的操作我们无法用高级数据结构在$$log_2n$时间复杂度内解决，那么，我们可以考虑，<strong>对询问分块，定期重构</strong>，使复杂度降为$\sqrt{n}$级别。</p>
 <p>注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为$O(n)$，且对于一个修改，我们能很快，如在$O(1)$或$O(log_2n)$的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对询问分块的方法。</p>
 <p>实际上，对询问分块可以看成一种强大的暴力。</p>
 <a id="more"></a>
@@ -543,8 +543,6 @@
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

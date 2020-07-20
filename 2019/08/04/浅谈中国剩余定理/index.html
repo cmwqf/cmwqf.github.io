@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="中国剩余定理中国剩余定理是解决这样一类问题：  \begin{cases} x\equiv a_1\quad(mod\quad m_1)\\ x\equiv a_2\quad(mod\quad m_2)\\ ...\\ x\equiv a_k\quad(mod\quad m_k)\\ \end{cases}求$x$的最小整数解。">
+  <meta name="description" content="中国剩余定理中国剩余定理是解决这样一类问题：  \begin{cases} x\equiv a_1\quad(mod\quad m_1)\\ x\equiv a_2\quad(mod\quad m_2)\\ ...\\ x\equiv a_k\quad(mod\quad m_k)\\ \end{cases}求x的最小整数解。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈中国剩余定理">
 <meta property="og:url" content="http://cmwqf.github.io/2019/08/04/%E6%B5%85%E8%B0%88%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="中国剩余定理中国剩余定理是解决这样一类问题：  \begin{cases} x\equiv a_1\quad(mod\quad m_1)\\ x\equiv a_2\quad(mod\quad m_2)\\ ...\\ x\equiv a_k\quad(mod\quad m_k)\\ \end{cases}求$x$的最小整数解。">
+<meta property="og:description" content="中国剩余定理中国剩余定理是解决这样一类问题：  \begin{cases} x\equiv a_1\quad(mod\quad m_1)\\ x\equiv a_2\quad(mod\quad m_2)\\ ...\\ x\equiv a_k\quad(mod\quad m_k)\\ \end{cases}求x的最小整数解。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-08-04T12:46:35.000Z">
-<meta property="article:modified_time" content="2020-03-28T02:01:08.167Z">
+<meta property="article:modified_time" content="2020-07-20T03:20:58.981Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="数论">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-28 10:01:08" itemprop="dateModified" datetime="2020-03-28T10:01:08+08:00">2020-03-28</time>
+                <time title="修改时间：2020-07-20 11:20:58" itemprop="dateModified" datetime="2020-07-20T11:20:58+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,30 +277,30 @@ x\equiv a_1\quad(mod\quad m_1)\\
 x\equiv a_2\quad(mod\quad m_2)\\
 ...\\
 x\equiv a_k\quad(mod\quad m_k)\\
-\end{cases}</script><p>求$x$的最小整数解。</p>
+\end{cases}</script><p>求<script type="math/tex">x</script>的最小整数解。</p>
 <a id="more"></a>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>我们考虑先给出一种可行解，我们记$M=\prod m_i$，然后，我们考虑第$i$个式子，我们让只有这个式子有影响，而让别的式子都没有影响。即我们可以求出</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>我们考虑先给出一种可行解，我们记<script type="math/tex">M=\prod m_i</script>，然后，我们考虑第<script type="math/tex">i</script>个式子，我们让只有这个式子有影响，而让别的式子都没有影响。即我们可以求出</p>
 <script type="math/tex; mode=display">
-\frac{M}{m_i}t_i\equiv 1\quad(mod\quad m_i)</script><p>其中$t_i$的一个可行值。考虑这个时候，其他的方程都是</p>
+\frac{M}{m_i}t_i\equiv 1\quad(mod\quad m_i)</script><p>其中<script type="math/tex">t_i</script>的一个可行值。考虑这个时候，其他的方程都是</p>
 <script type="math/tex; mode=display">
-\frac{M}{m_i}t_i\equiv 0\quad(mod\quad m_j)(j\neq i)</script><p>所以，其他的方程对于$t_i$的取值没有影响。然后，</p>
+\frac{M}{m_i}t_i\equiv 0\quad(mod\quad m_j)(j\neq i)</script><p>所以，其他的方程对于<script type="math/tex">t_i</script>的取值没有影响。然后，</p>
 <script type="math/tex; mode=display">
 a_i\frac{M}{m_i}t_i\equiv a_i\quad(mod\quad m_i)</script><p>所以，这就满足了这个方程的条件。</p>
-<p>那么，最后的一个可行解就是$x=\sum_{i=1}^ka_i\frac{M}{m_i}t_i$。</p>
-<p>我们考虑这个解配对到第$i$个方程，$x$中只有$a_i\frac{M}{m_i}t_i$是有效的，别的都是$0$，所以方程成立。这个思想，在拉格朗日插值中也有应用。</p>
+<p>那么，最后的一个可行解就是<script type="math/tex">x=\sum_{i=1}^ka_i\frac{M}{m_i}t_i</script>。</p>
+<p>我们考虑这个解配对到第<script type="math/tex">i</script>个方程，<script type="math/tex">x</script>中只有<script type="math/tex">a_i\frac{M}{m_i}t_i</script>是有效的，别的都是<script type="math/tex">0</script>，所以方程成立。这个思想，在拉格朗日插值中也有应用。</p>
 <p>然后，至于要求最小的非负整数解，就是 </p>
 <script type="math/tex; mode=display">
-(x\quad mod\quad M+M)\quad mod\quad M</script><p>怎么求$t_i$呢？当然用$exgcd$了！</p>
-<h1 id="Ex-gcd求逆元"><a href="#Ex-gcd求逆元" class="headerlink" title="Ex_gcd求逆元"></a>Ex_gcd求逆元</h1><p>其实这是很$noip$的知识了，只是我到现在还不会推，所以来写一下（我太弱了）。</p>
-<p>我们考虑辗转相除法的过程$gcd(a,b)=gcd(b,a\quad mod\quad b)$。</p>
-<p>我们到了最后一层，此时的$a$就是$gcd$，而$b$等于$0$，那么我们有</p>
+(x\quad mod\quad M+M)\quad mod\quad M</script><p>怎么求<script type="math/tex">t_i</script>呢？当然用<script type="math/tex">exgcd</script>了！</p>
+<h1 id="Ex-gcd求逆元"><a href="#Ex-gcd求逆元" class="headerlink" title="Ex_gcd求逆元"></a>Ex_gcd求逆元</h1><p>其实这是很<script type="math/tex">noip</script>的知识了，只是我到现在还不会推，所以来写一下（我太弱了）。</p>
+<p>我们考虑辗转相除法的过程<script type="math/tex">gcd(a,b)=gcd(b,a\quad mod\quad b)</script>。</p>
+<p>我们到了最后一层，此时的<script type="math/tex">a</script>就是<script type="math/tex">gcd</script>，而<script type="math/tex">b</script>等于<script type="math/tex">0</script>，那么我们有</p>
 <script type="math/tex; mode=display">
-a*1+b*0=gcd</script><p>所以初始的时候$x0=1,y0=0$。</p>
+a*1+b*0=gcd</script><p>所以初始的时候<script type="math/tex">x0=1,y0=0</script>。</p>
 <p>然后，我们考虑我们已经知道了</p>
 <script type="math/tex; mode=display">
 x0*b+y0*(a\%b)=gcd</script><p>如何求</p>
 <script type="math/tex; mode=display">
-a*x1+b*y1=gcd</script><p>的$x1,y1$呢？</p>
+a*x1+b*y1=gcd</script><p>的<script type="math/tex">x1,y1</script>呢？</p>
 <script type="math/tex; mode=display">
 x0*b+y0*(a-(a/b)*b)=gcd\\
 y0*a+(x0-(a/b)*y0)*b=gcd</script><p>所以</p>
@@ -561,8 +561,6 @@ x1=y0,y1=x0-(a/b)*y0</script><h1 id="Code"><a href="#Code" class="headerlink" ti
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

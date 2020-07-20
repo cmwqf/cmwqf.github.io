@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="快速傅里叶变换在$OI$中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？ 设有两个函数$F(x),G(x)$，那么  H[n]&#x3D;(F*G)[n]&#x3D;\sum_{i&#x3D;0}^n F[i]*G[n-i]一般来说，暴力计算这个$H$是$O(n^2)$的，快速傅里叶变换可以将这个过程复杂度降低为$O(nlog_2n)$。">
+  <meta name="description" content="快速傅里叶变换在OI中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？ 设有两个函数F(x),G(x)，那么  H[n]&#x3D;(F*G)[n]&#x3D;\sum_{i&#x3D;0}^n F[i]*G[n-i]一般来说，暴力计算这个H是O(n^2)的，快速傅里叶变换可以将这个过程复杂度降低为O(nlog_2n)。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈快速傅里叶变换FFT">
 <meta property="og:url" content="http://cmwqf.github.io/2020/03/08/%E6%B5%85%E8%B0%88%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="快速傅里叶变换在$OI$中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？ 设有两个函数$F(x),G(x)$，那么  H[n]&#x3D;(F*G)[n]&#x3D;\sum_{i&#x3D;0}^n F[i]*G[n-i]一般来说，暴力计算这个$H$是$O(n^2)$的，快速傅里叶变换可以将这个过程复杂度降低为$O(nlog_2n)$。">
+<meta property="og:description" content="快速傅里叶变换在OI中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？ 设有两个函数F(x),G(x)，那么  H[n]&#x3D;(F*G)[n]&#x3D;\sum_{i&#x3D;0}^n F[i]*G[n-i]一般来说，暴力计算这个H是O(n^2)的，快速傅里叶变换可以将这个过程复杂度降低为O(nlog_2n)。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-08T09:22:12.000Z">
-<meta property="article:modified_time" content="2020-03-30T06:10:55.475Z">
+<meta property="article:modified_time" content="2020-07-20T03:21:15.855Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="生成函数">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-30 14:10:55" itemprop="dateModified" datetime="2020-03-30T14:10:55+08:00">2020-03-30</time>
+                <time title="修改时间：2020-07-20 11:21:15" itemprop="dateModified" datetime="2020-07-20T11:21:15+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,55 +270,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="快速傅里叶变换"><a href="#快速傅里叶变换" class="headerlink" title="快速傅里叶变换"></a>快速傅里叶变换</h1><p>在$OI$中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？</p>
-<p>设有两个函数$F(x),G(x)$，那么</p>
+        <h1 id="快速傅里叶变换"><a href="#快速傅里叶变换" class="headerlink" title="快速傅里叶变换"></a>快速傅里叶变换</h1><p>在<script type="math/tex">OI</script>中，快速傅里叶变换一般是用来解决多项式乘法（卷积）问题的，什么是卷积？</p>
+<p>设有两个函数<script type="math/tex">F(x),G(x)</script>，那么</p>
 <script type="math/tex; mode=display">
-H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]</script><p>一般来说，暴力计算这个$H$是$O(n^2)$的，快速傅里叶变换可以将这个过程复杂度降低为$O(nlog_2n)$。</p>
+H[n]=(F*G)[n]=\sum_{i=0}^n F[i]*G[n-i]</script><p>一般来说，暴力计算这个<script type="math/tex">H</script>是<script type="math/tex">O(n^2)</script>的，快速傅里叶变换可以将这个过程复杂度降低为<script type="math/tex">O(nlog_2n)</script>。</p>
 <a id="more"></a>
 <h1 id="多项式点值表示法"><a href="#多项式点值表示法" class="headerlink" title="多项式点值表示法"></a>多项式点值表示法</h1><p>我们一般见到的多项式是系数表示法，即</p>
 <script type="math/tex; mode=display">
-F(x)=a_0+a_1x+a_2x^2+...</script><p>我们知道，一个$n$次多项式可以由$n+1$个不同点唯一确定，那么我们将这$n+1$个点$(x_i,F(x_i))$看成这个多项式的点值表示法。</p>
+F(x)=a_0+a_1x+a_2x^2+...</script><p>我们知道，一个<script type="math/tex">n</script>次多项式可以由<script type="math/tex">n+1</script>个不同点唯一确定，那么我们将这<script type="math/tex">n+1</script>个点<script type="math/tex">(x_i,F(x_i))</script>看成这个多项式的点值表示法。</p>
 <p>而对于点值表示法进行多项式乘法却异常地简单，只需将两个多项式点值表示法中横坐标相同的点的纵坐标相乘即可，复杂度线性。</p>
-<p>但是，一般题目中给我们的都是系数表示法，暴力转化成点值表示法依然是$O(n^2)$的。实际上，快速傅里叶变换就是加速将多项式<strong>系数表示法</strong>转化为<strong>点值表示法</strong>的过程，将其的复杂度降为$O(nlog_2n)$。</p>
-<h1 id="复数相关"><a href="#复数相关" class="headerlink" title="复数相关"></a>复数相关</h1><p>因为多项式点值表示法并不唯一，我们假设多项式次数为$n-1$，那么带入任意的$n$个$x$都可以得到一组点，那么，我们考虑将$n$个单位根$w_n^0,w_n^1…w_n^{n-1}$带入，得到不同的点值。</p>
+<p>但是，一般题目中给我们的都是系数表示法，暴力转化成点值表示法依然是<script type="math/tex">O(n^2)</script>的。实际上，快速傅里叶变换就是加速将多项式<strong>系数表示法</strong>转化为<strong>点值表示法</strong>的过程，将其的复杂度降为<script type="math/tex">O(nlog_2n)</script>。</p>
+<h1 id="复数相关"><a href="#复数相关" class="headerlink" title="复数相关"></a>复数相关</h1><p>因为多项式点值表示法并不唯一，我们假设多项式次数为<script type="math/tex">n-1</script>，那么带入任意的<script type="math/tex">n</script>个<script type="math/tex">x</script>都可以得到一组点，那么，我们考虑将<script type="math/tex">n</script>个单位根<script type="math/tex">w_n^0,w_n^1...w_n^{n-1}</script>带入，得到不同的点值。</p>
 <p>那么，单位根是什么？我们从头讲起。</p>
-<h2 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h2><p>单位根是定义在复数意义上的，复数是形如$a+bi(a,b\in R,i=\sqrt{-1})$的形式的数，对应复平面上的</p>
-<p>$(a,b)$的向量。</p>
-<p>模长：复数的模长定义为$\sqrt{a^2+b^2}$，即该复数在复平面上对应向量到原点的距离。</p>
-<h2 id="复数基本运算"><a href="#复数基本运算" class="headerlink" title="复数基本运算"></a>复数基本运算</h2><p>复数加减：$(a+bi)+(c+di)=(a+c)+(b+d)i$。</p>
-<p>复数乘法：$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$（可以暴力展开，将$i^2$看成$-1$即可）。</p>
-<p>复数相乘，在复平面上的意义为<strong>模长相乘，辅角相加</strong>。</p>
-<h2 id="共轭复数"><a href="#共轭复数" class="headerlink" title="共轭复数"></a>共轭复数</h2><p>我们称$a+bi$和$a-bi$为共轭复数，在复平面上，可以看成关于$x$轴对称的两个向量。</p>
-<h2 id="单位根"><a href="#单位根" class="headerlink" title="单位根"></a>单位根</h2><p>单位根，就是满足$z^n=1$的复数（可以看作将复平面上单位圆平均分为$n$个部分的单位复数），记为$w_n$。</p>
-<p>$n$次单位根，就是将单位圆平分为$n$个部分的$n$个向量对应的复数。依次记为$w_n^0,w_n^1,w_n^2…w_n^{n-1}$。</p>
-<p>我们记$w_n$的辅角为$\theta=\frac{2\pi}{n}$，那么每次$w_n^k-&gt;w_n^{k+1}$在图像上的意义就是$w_n^k$逆时针旋转$\theta$得到的向量。</p>
-<p>考虑单位根的时候，一般放在复平面中考虑，更容易理解。</p>
-<h2 id="单位根性质"><a href="#单位根性质" class="headerlink" title="单位根性质"></a>单位根性质</h2><p>性质$1$：$w_{2n}^{2k}=w_n^k$，这个根据复平面上的平分单位圆的概念很直观，不作解释。</p>
-<p>性质$2$：$w_n^{k+\frac{n}{2}}=-w_n^k$，相当于将$w_n^k$逆时针转$\pi$得到$w_n^{k+\frac{n}{2}}$，自然横纵坐标都取反。</p>
-<p>实际上，$FFT$就是根据这两个简单的性质进行的。</p>
-<h1 id="FFT的原理"><a href="#FFT的原理" class="headerlink" title="FFT的原理"></a>FFT的原理</h1><p>首先，我们将整个多项式次数补为$2^t-1$的形式（$2^t&gt;2n$），设$lim=2^t$，那么相当于多项式乘法在模$x^{lim}$意义下进行，多余的项系数为$0$，以保证后面每次使$lim/2$后都是整数。</p>
-<h2 id="DFT"><a href="#DFT" class="headerlink" title="DFT"></a>DFT</h2><p>所谓$DFT$，就是把系数转化为点值的方法。</p>
-<p>我们现在要把$w_n^0,w_n^1,…w_n^{n-1}$带入多项式，计算其点值。</p>
-<p>我们令$m=\frac{n}{2}$，因为$n$是$2$的整数次幂，所以$m$也一定是整数。</p>
-<p>我们设</p>
+<h2 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h2><p>单位根是定义在复数意义上的，复数是形如<script type="math/tex">a+bi(a,b\in R,i=\sqrt{-1})</script>的形式的数，对应复平面上的</p>
+<script type="math/tex; mode=display">(a,b)$$的向量。
+
+模长：复数的模长定义为$$\sqrt{a^2+b^2}$$，即该复数在复平面上对应向量到原点的距离。
+
+## 复数基本运算
+
+复数加减：$$(a+bi)+(c+di)=(a+c)+(b+d)i$$。
+
+复数乘法：$$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$$（可以暴力展开，将$$i^2$$看成$$-1$$即可）。
+
+复数相乘，在复平面上的意义为**模长相乘，辅角相加**。
+
+## 共轭复数
+
+我们称$$a+bi$$和$$a-bi$$为共轭复数，在复平面上，可以看成关于$$x$$轴对称的两个向量。
+
+## 单位根
+
+单位根，就是满足$$z^n=1$$的复数（可以看作将复平面上单位圆平均分为$$n$$个部分的单位复数），记为$$w_n$$。
+
+$$n$$次单位根，就是将单位圆平分为$$n$$个部分的$$n$$个向量对应的复数。依次记为$$w_n^0,w_n^1,w_n^2...w_n^{n-1}$$。
+
+我们记$$w_n$$的辅角为$$\theta=\frac{2\pi}{n}$$，那么每次$$w_n^k->w_n^{k+1}$$在图像上的意义就是$$w_n^k$$逆时针旋转$$\theta$$得到的向量。
+
+考虑单位根的时候，一般放在复平面中考虑，更容易理解。
+
+## 单位根性质
+
+性质$$1$$：$$w_{2n}^{2k}=w_n^k$$，这个根据复平面上的平分单位圆的概念很直观，不作解释。
+
+性质$$2$$：$$w_n^{k+\frac{n}{2}}=-w_n^k$$，相当于将$$w_n^k$$逆时针转$$\pi$$得到$$w_n^{k+\frac{n}{2}}$$，自然横纵坐标都取反。
+
+实际上，$$FFT$$就是根据这两个简单的性质进行的。
+
+# FFT的原理
+
+首先，我们将整个多项式次数补为$$2^t-1$$的形式（$$2^t>2n$$），设$$lim=2^t$$，那么相当于多项式乘法在模$$x^{lim}$$意义下进行，多余的项系数为$$0$$，以保证后面每次使$$lim/2$$后都是整数。
+
+## DFT
+
+所谓$$DFT$$，就是把系数转化为点值的方法。
+
+我们现在要把$$w_n^0,w_n^1,...w_n^{n-1}$$带入多项式，计算其点值。
+
+我们令$$m=\frac{n}{2}$$，因为$$n$$是$$2$$的整数次幂，所以$$m$$也一定是整数。
+
+我们设</script><p>A(w_n^k)=\sum_{i=0}^{n-1}a[i]w_n^i</p>
 <script type="math/tex; mode=display">
-A(w_n^k)=\sum_{i=0}^{n-1}a[i]w_n^i</script><p>注意，这里的$a[i]$和原来多项式中的$a[i]$不同，只是由上一层递归下来得到的$n$个数，后面我们会知道是什么。</p>
-<p>那么，对于$k&lt;\frac{n}{2}$，即$k&lt;m$，我们有</p>
+注意，这里的$$a[i]$$和原来多项式中的$$a[i]$$不同，只是由上一层递归下来得到的$$n$$个数，后面我们会知道是什么。
+
+那么，对于$$k<\frac{n}{2}$$，即$$k<m$$，我们有</script><p>A(w_n^k)=\sum_{i=0}^{n-1}a<a href="w_n^{k}">i</a>^i\\<br>=\sum_{i=0}^{m-1}a<a href="w_n^k">2i</a>^{2i}+\sum_{i=0}^{m-1}a<a href="w_n^k">2i+1</a>^{2i+1}\\<br>=\sum_{i=0}^{m-1}a[2i]w_n^{2ki}+\sum_{i=0}^{m-1}a[2i+1]w_n^{2ki+k}\\<br>=\sum_{i=0}^{m-1}a[2i]w_{2m}^{2ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_{2m}^{2ki}</p>
 <script type="math/tex; mode=display">
-A(w_n^k)=\sum_{i=0}^{n-1}a[i](w_n^{k})^i\\
-=\sum_{i=0}^{m-1}a[2i](w_n^k)^{2i}+\sum_{i=0}^{m-1}a[2i+1](w_n^k)^{2i+1}\\
-=\sum_{i=0}^{m-1}a[2i]w_n^{2ki}+\sum_{i=0}^{m-1}a[2i+1]w_n^{2ki+k}\\
-=\sum_{i=0}^{m-1}a[2i]w_{2m}^{2ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_{2m}^{2ki}</script><p>根据上面所说的性质一，$w_{2n}^{2i}=w_n^i$可知</p>
+根据上面所说的性质一，$$w_{2n}^{2i}=w_n^i$$可知</script><p>A(w_n^k)=\sum_{i=0}^{m-1}a[2i]w_m^{ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</p>
 <script type="math/tex; mode=display">
-A(w_n^k)=\sum_{i=0}^{m-1}a[2i]w_m^{ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</script><p>又由性质三，我们可以知道：</p>
+又由性质三，我们可以知道：</script><p>A(w_n^{k+\frac{n}{2}})=(-1)^{\frac{n}{2}}\sum_{i=0}^{m-1}a[2i]w_m^{ki}+(-1)^{\frac{n}{2}}w_n^{k+\frac{n}{2}}\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}\\<br>=\sum_{i=0}^{m-1}a[2i]w_m^{ki}-w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</p>
 <script type="math/tex; mode=display">
-A(w_n^{k+\frac{n}{2}})=(-1)^{\frac{n}{2}}\sum_{i=0}^{m-1}a[2i]w_m^{ki}+(-1)^{\frac{n}{2}}w_n^{k+\frac{n}{2}}\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}\\
-=\sum_{i=0}^{m-1}a[2i]w_m^{ki}-w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</script><p>我们递归到下一层的时候分别<strong>分治偶数项和奇数项</strong>计算对应的点值，设为$A_0,A_1$，那么显然有</p>
-<script type="math/tex; mode=display">
-A(w_n^k)=A_0(w_\frac{n}{2}^k)+w_n^kA_1(w_{\frac{n}{2}}^k)\\
-A(w_n^{k+\frac{n}{2}})=A_0(w_\frac{n}{2}^k)-w_n^kA_1(w_{\frac{n}{2}}^k)</script><p>那么，实际上我们每次递归到的一层的$a$是上一层$a$的奇数项或偶数项。</p>
-<p>这样，时间复杂度是$O(nlog_2n)$。</p>
-<p>由于递归效率不高，所以一般采用迭代的方式来实现这个过程，即注意到多项式的$i$次项到分治边界时的下标为$r[i]$，$r[i]$是$i$二进制翻转后的数，所以我们每次从下往上迭代即可。</p>
+我们递归到下一层的时候分别**分治偶数项和奇数项**计算对应的点值，设为$$A_0,A_1$$，那么显然有</script><p>A(w_n^k)=A_0(w_\frac{n}{2}^k)+w_n^kA_1(w_{\frac{n}{2}}^k)\\<br>A(w_n^{k+\frac{n}{2}})=A_0(w_\frac{n}{2}^k)-w_n^kA_1(w_{\frac{n}{2}}^k)</p>
+<p><script type="math/tex">那么，实际上我们每次递归到的一层的</script>a<script type="math/tex">是上一层</script>a$$的奇数项或偶数项。</p>
+<p>这样，时间复杂度是<script type="math/tex">O(nlog_2n)</script>。</p>
+<p>由于递归效率不高，所以一般采用迭代的方式来实现这个过程，即注意到多项式的<script type="math/tex">i</script>次项到分治边界时的下标为<script type="math/tex">r[i]</script>，<script type="math/tex">r[i]</script>是<script type="math/tex">i</script>二进制翻转后的数，所以我们每次从下往上迭代即可。</p>
 <h2 id="IDFT"><a href="#IDFT" class="headerlink" title="IDFT"></a>IDFT</h2>
     </div>
 
@@ -403,7 +427,7 @@ A(w_n^{k+\frac{n}{2}})=A_0(w_\frac{n}{2}^k)-w_n^kA_1(w_{\frac{n}{2}}^k)</script>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速傅里叶变换"><span class="nav-number">1.</span> <span class="nav-text">快速傅里叶变换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式点值表示法"><span class="nav-number">2.</span> <span class="nav-text">多项式点值表示法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复数相关"><span class="nav-number">3.</span> <span class="nav-text">复数相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复数"><span class="nav-number">3.1.</span> <span class="nav-text">复数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复数基本运算"><span class="nav-number">3.2.</span> <span class="nav-text">复数基本运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共轭复数"><span class="nav-number">3.3.</span> <span class="nav-text">共轭复数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单位根"><span class="nav-number">3.4.</span> <span class="nav-text">单位根</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单位根性质"><span class="nav-number">3.5.</span> <span class="nav-text">单位根性质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FFT的原理"><span class="nav-number">4.</span> <span class="nav-text">FFT的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFT"><span class="nav-number">4.1.</span> <span class="nav-text">DFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDFT"><span class="nav-number">4.2.</span> <span class="nav-text">IDFT</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速傅里叶变换"><span class="nav-number">1.</span> <span class="nav-text">快速傅里叶变换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式点值表示法"><span class="nav-number">2.</span> <span class="nav-text">多项式点值表示法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复数相关"><span class="nav-number">3.</span> <span class="nav-text">复数相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复数"><span class="nav-number">3.1.</span> <span class="nav-text">复数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDFT"><span class="nav-number">3.2.</span> <span class="nav-text">IDFT</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -574,8 +598,6 @@ A(w_n^{k+\frac{n}{2}})=A_0(w_\frac{n}{2}^k)-w_n^kA_1(w_{\frac{n}{2}}^k)</script>
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

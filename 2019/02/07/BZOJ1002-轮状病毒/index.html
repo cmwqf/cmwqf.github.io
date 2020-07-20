@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Description$n$轮状病毒的产生规律是在一个$n$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$16$个不同的$3$轮状病毒。 现给定$n&lt;&#x3D;100$，编程计算有多少个不同的$n$轮状病毒。">
+  <meta name="description" content="Descriptionn$$轮状病毒的产生规律是在一个$$n$$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$$16$$个不同的$$3$$轮状病毒。  现给定$$n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[BZOJ1002]轮状病毒">
 <meta property="og:url" content="http://cmwqf.github.io/2019/02/07/BZOJ1002-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Description$n$轮状病毒的产生规律是在一个$n$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$16$个不同的$3$轮状病毒。 现给定$n&lt;&#x3D;100$，编程计算有多少个不同的$n$轮状病毒。">
+<meta property="og:description" content="Descriptionn$$轮状病毒的产生规律是在一个$$n$$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$$16$$个不同的$$3$$轮状病毒。  现给定$$n">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-02-07T05:53:51.000Z">
-<meta property="article:modified_time" content="2020-07-18T14:30:28.720Z">
+<meta property="article:modified_time" content="2020-07-20T03:06:08.877Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 22:30:28" itemprop="dateModified" datetime="2020-07-18T22:30:28+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:06:08" itemprop="dateModified" datetime="2020-07-20T11:06:08+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,47 +270,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>$n$轮状病毒的产生规律是在一个$n$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$16$个不同的$3$轮状病毒。</p>
-<p>现给定$n&lt;=100$，编程计算有多少个不同的$n$轮状病毒。</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><script type="math/tex; mode=display">n$$轮状病毒的产生规律是在一个$$n$$轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有$$16$$个不同的$$3$$轮状病毒。
+
+现给定$$n<=100$$，编程计算有多少个不同的$$n$$轮状病毒。
+
 <a id="more"></a>
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>其实刚刚看到这一题，就想到了一个东西：<strong>矩阵树定理</strong>。这不是矩阵树定理的裸题吗？</p>
-<p>刚刚准备敲代码的时候，偷偷瞄了一眼题解，突然意识到这一题答案太大了，用矩阵树定理，要用高斯消元，而高斯消元要用long double来存储，而答案一大，long double就爆掉了。。。</p>
-<p>果断放弃了矩阵树，怎么办呢？</p>
-<p>这时，我们发现可以打表找规律，于是，我拿出草稿纸，大力画图，最终，得出一个结果：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">1</th>
-<th style="text-align:center">2</th>
-<th style="text-align:center">3</th>
-<th style="text-align:center">4</th>
-<th style="text-align:center">5</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">16</td>
-<td style="text-align:center">45</td>
-<td style="text-align:center">121</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>额，看起来好像并没有什么规律，但仔细一看，好像奇数号都是完全平方数，例如</p>
+
+# Solution
+
+其实刚刚看到这一题，就想到了一个东西：**矩阵树定理**。这不是矩阵树定理的裸题吗？
+
+刚刚准备敲代码的时候，偷偷瞄了一眼题解，突然意识到这一题答案太大了，用矩阵树定理，要用高斯消元，而高斯消元要用long double来存储，而答案一大，long double就爆掉了。。。
+
+果断放弃了矩阵树，怎么办呢？
+
+这时，我们发现可以打表找规律，于是，我拿出草稿纸，大力画图，最终，得出一个结果：
+
+|  1   |  2   |  3   |  4   |  5   |
+| :--: | :--: | :--: | :--: | :--: |
+|  1   |  5   |  16  |  45  | 121  |
+
+额，看起来好像并没有什么规律，但仔细一看，好像奇数号都是完全平方数，例如</script><p>1=1^2,16=4^2,121=11^2</p>
 <script type="math/tex; mode=display">
-1=1^2,16=4^2,121=11^2</script><p>然而，还是看不出什么规律，我们再将完全平方数联系第二个和第四个，又惊奇地发现:</p>
+然而，还是看不出什么规律，我们再将完全平方数联系第二个和第四个，又惊奇地发现:</script><p>5=3^2-4,45=7^2-4</p>
 <script type="math/tex; mode=display">
-5=3^2-4,45=7^2-4</script><p>我们再把跟平方数有关的放在一起：</p>
-<script type="math/tex; mode=display">
-1,3,4,7,11...</script><p>有没有发现什么？这就是以1,3开头的另一种斐波那契数列啊！！我们只要打出这一串数列，然后分类讨论一下：如果n是奇数，就直接平方，否则就平方再减四。</p>
-<p><del>经测验得，此规律正确</del></p>
+我们再把跟平方数有关的放在一起：</script><p>1,3,4,7,11…</p>
+<p><script type="math/tex">有没有发现什么？这就是以</script>1,3$$开头的另一种斐波那契数列啊！！我们只要打出这一串数列，然后分类讨论一下：如果n是奇数，就直接平方，否则就平方再减四。</p>
 <p>嗯，我觉得在考场上，我也许是能想出这个的，因为矩阵树定理可以帮我们把1~50（或更多）的表给打出来，然后一个一个找规律……</p>
 <p>还有，这一题要高精度，可惜我高精度都不会了，重载运算符经过多人指点，终于调对了，这也可以当高精度运算的板子吧：</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">1000</span> + <span class="number">100</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">big</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a[maxN+<span class="number">1</span>],len;</span><br><span class="line">    big() &#123; len=<span class="number">1</span>; <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a)); &#125;</span><br><span class="line">    big <span class="keyword">operator</span> + (big rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        big ans;</span><br><span class="line">        ans.len=max(len,rhs.len);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=ans.len;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp=a[i]+rhs.a[i];</span><br><span class="line">            ans.a[i]+=tmp%<span class="number">10</span>;</span><br><span class="line">            ans.a[i+<span class="number">1</span>]+=tmp/<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(ans.a[ans.len+<span class="number">1</span>]) ans.len++;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    big <span class="keyword">operator</span> * (big rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        big ans;</span><br><span class="line">        ans.len=len+rhs.len<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=len;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=rhs.len;j++) ans.a[i+j<span class="number">-1</span>]+=a[i]*rhs.a[j];</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(ans.a[i]||i&lt;=ans.len)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.a[i+<span class="number">1</span>]+=ans.a[i]/<span class="number">10</span>;</span><br><span class="line">            ans.a[i]%=<span class="number">10</span>; i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!ans.a[i]) i--;</span><br><span class="line">        ans.len=i;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    big <span class="keyword">operator</span> - (big rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        big ans;</span><br><span class="line">        ans.len=max(len,rhs.len);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=ans.len;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.a[i]+=a[i]-rhs.a[i];</span><br><span class="line">            <span class="keyword">if</span>(ans.a[i]&lt;<span class="number">0</span>) ans.a[i]+=<span class="number">10</span>,ans.a[i+<span class="number">1</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(ans.a[ans.len+<span class="number">1</span>]) ans.len++;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;<span class="comment">//高精度的板子</span></span><br><span class="line">big f[<span class="number">105</span>],ans;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(big ans)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=ans.len;i&gt;=<span class="number">1</span>;i--) <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans.a[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    f[<span class="number">1</span>].a[<span class="number">1</span>]=<span class="number">1</span>; f[<span class="number">2</span>].a[<span class="number">1</span>]=<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i++) f[i]=f[i<span class="number">-1</span>]+f[i<span class="number">-2</span>];</span><br><span class="line">    ans=f[n]*f[n];</span><br><span class="line">    big tmp; tmp.a[<span class="number">1</span>]=<span class="number">4</span>;</span><br><span class="line">    <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>) ans=ans-tmp;</span><br><span class="line">    print(ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>所以，除了打表找规律以外，这一题对于我来说的难度就是高精度了（捂脸），我感觉高精度已经很不熟练了呢，不过，近年来考高精度的频率到是越来越少了呢~~</p>
+<p>所以，除了打表找规律以外，这一题对于我来说的难度就是高精度了（捂脸），我感觉高精度已经很不熟练了呢，不过，近年来考高精度的频率到是越来越少了呢。</p>
 <p>总之，综合性的题目还是很重要的，毕竟考试不太可能出裸题吧。。。</p>
 
     </div>
@@ -396,7 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">2.</span> <span class="nav-text">Code</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -567,8 +556,6 @@
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

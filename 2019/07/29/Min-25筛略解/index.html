@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Min_25筛大名鼎鼎的$Min25$筛，是用来干什么的呢？ 它是用来求积性函数前缀和$\sum f(i)$的，而且复杂度很优，是$O(\frac{N^\frac{3}{4}}{log_2N})$。使用它要满足一下几个条件：  1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来">
+  <meta name="description" content="Min_25筛大名鼎鼎的Min25筛，是用来干什么的呢？ 它是用来求积性函数前缀和\sum f(i)的，而且复杂度很优，是O(\frac{N^\frac{3}{4}}{log_2N})。使用它要满足一下几个条件：  1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Min_25筛略解">
 <meta property="og:url" content="http://cmwqf.github.io/2019/07/29/Min-25%E7%AD%9B%E7%95%A5%E8%A7%A3/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Min_25筛大名鼎鼎的$Min25$筛，是用来干什么的呢？ 它是用来求积性函数前缀和$\sum f(i)$的，而且复杂度很优，是$O(\frac{N^\frac{3}{4}}{log_2N})$。使用它要满足一下几个条件：  1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来">
+<meta property="og:description" content="Min_25筛大名鼎鼎的Min25筛，是用来干什么的呢？ 它是用来求积性函数前缀和\sum f(i)的，而且复杂度很优，是O(\frac{N^\frac{3}{4}}{log_2N})。使用它要满足一下几个条件：  1.f是积性函数\\ 2.f(p)(p\in Prime)是简单多项式形式\\ 3.f(p^k)(p\in prime)可以很快地算出来">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-29T11:24:41.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:32:07.896Z">
+<meta property="article:modified_time" content="2020-07-20T03:25:49.160Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="数论">
 <meta property="article:tag" content="Min_25筛">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:32:07" itemprop="dateModified" datetime="2020-07-18T21:32:07+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:25:49" itemprop="dateModified" datetime="2020-07-20T11:25:49+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,40 +271,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Min-25筛"><a href="#Min-25筛" class="headerlink" title="Min_25筛"></a>Min_25筛</h1><p>大名鼎鼎的$Min25$筛，是用来干什么的呢？</p>
-<p>它是用来求积性函数前缀和$\sum f(i)$的，而且复杂度很优，是$O(\frac{N^\frac{3}{4}}{log_2N})$。使用它要满足一下几个条件：</p>
+        <h1 id="Min-25筛"><a href="#Min-25筛" class="headerlink" title="Min_25筛"></a>Min_25筛</h1><p>大名鼎鼎的<script type="math/tex">Min25</script>筛，是用来干什么的呢？</p>
+<p>它是用来求积性函数前缀和<script type="math/tex">\sum f(i)</script>的，而且复杂度很优，是<script type="math/tex">O(\frac{N^\frac{3}{4}}{log_2N})</script>。使用它要满足一下几个条件：</p>
 <script type="math/tex; mode=display">
 1.f是积性函数\\
 2.f(p)(p\in Prime)是简单多项式形式\\
 3.f(p^k)(p\in prime)可以很快地算出来</script><a id="more"></a>
-<p>对于第二个条件，我的理解是如果遇到一个类似$p^{a1}+p^{a2}+…$，把每一项分开来算（后面的例题可以看出），这样才能算出来，也就是说，即使一个函数$f$是积性函数，比如$f(p)=p-1(p\in Prime),f(ab)=f(a)f(b)$，也不能直接拿$f(p)=p-1$来筛，而是把它拆成两个$f1(p)=p,f2(p)=1$，再来算。</p>
+<p>对于第二个条件，我的理解是如果遇到一个类似<script type="math/tex">p^{a1}+p^{a2}+...</script>，把每一项分开来算（后面的例题可以看出），这样才能算出来，也就是说，即使一个函数<script type="math/tex">f</script>是积性函数，比如<script type="math/tex">f(p)=p-1(p\in Prime),f(ab)=f(a)f(b)</script>，也不能直接拿<script type="math/tex">f(p)=p-1</script>来筛，而是把它拆成两个<script type="math/tex">f1(p)=p,f2(p)=1</script>，再来算。</p>
 <h1 id="求解g"><a href="#求解g" class="headerlink" title="求解g"></a>求解g</h1><p>我们考虑先设</p>
 <script type="math/tex; mode=display">
-g(n,j)=\sum_{i=1}^n[i\in Prime\quad or\quad min(p)>Prime_j,p|i,p\in Prime]f(i)</script><p>换句话说，$g(n,j)$就是$1$到$n$中是质数或最小质因子大于$Prime_j$的贡献和。</p>
-<p>然后，我们计算出对于所有$x=\lfloor\frac{n}{i}\rfloor$的$g(x,j)$的值。我们考虑怎么计算转移。</p>
+g(n,j)=\sum_{i=1}^n[i\in Prime\quad or\quad min(p)>Prime_j,p|i,p\in Prime]f(i)</script><p>换句话说，<script type="math/tex">g(n,j)</script>就是<script type="math/tex">1</script>到<script type="math/tex">n</script>中是质数或最小质因子大于<script type="math/tex">Prime_j</script>的贡献和。</p>
+<p>然后，我们计算出对于所有<script type="math/tex">x=\lfloor\frac{n}{i}\rfloor</script>的<script type="math/tex">g(x,j)</script>的值。我们考虑怎么计算转移。</p>
 <ol>
-<li><p>如果$Prime_j^2&gt;x$，那么答案不会产生变化。</p>
+<li><p>如果<script type="math/tex">Prime_j^2>x</script>，那么答案不会产生变化。</p>
 </li>
-<li><p>如果$Prime_j^2&lt;=x$，那么答案相较于$g(x,j-1)$会减少，减少的量容斥一下就好了。</p>
+<li><p>如果<script type="math/tex">Prime_j^2<=x</script>，那么答案相较于<script type="math/tex">g(x,j-1)</script>会减少，减少的量容斥一下就好了。</p>
 </li>
 </ol>
-<p>后面的$Prime_j$用$P_j$表示。</p>
+<p>后面的<script type="math/tex">Prime_j</script>用<script type="math/tex">P_j</script>表示。</p>
 <script type="math/tex; mode=display">
 g(x,j)=
 \begin{cases}
 g(x,j-1)\quad (P_j^2>x)\\
 g(x,j-1)-f(P_j)*(g(\lfloor\frac{x}{P_j}\rfloor,j-1)-\sum_{i=1}^{j-1}f(P_i))\quad (P_j^2<=x)
-\end{cases}</script><p>理解起来也很简单，我们要减去的，就是之前最小因子为$P_j$的数的$f$，所以，我们把$f(P_j)$提出来，然后，先把所有的去掉$P_j$的答案去掉，但是这样会多算第$j-1$以内的所有质数的$f$，减掉就好了。</p>
+\end{cases}</script><p>理解起来也很简单，我们要减去的，就是之前最小因子为<script type="math/tex">P_j</script>的数的<script type="math/tex">f</script>，所以，我们把<script type="math/tex">f(P_j)</script>提出来，然后，先把所有的去掉<script type="math/tex">P_j</script>的答案去掉，但是这样会多算第<script type="math/tex">j-1</script>以内的所有质数的<script type="math/tex">f</script>，减掉就好了。</p>
 <p>然后，边界条件是什么？</p>
-<p>$g(x,0)$表示所有的数都当成质数带入$f(p)$的值之和。</p>
-<p>最后，我们只要求出$g(n,|P|)$即可，根据转移的过程，我们发现$g$只需要开一维。</p>
-<h1 id="求解S"><a href="#求解S" class="headerlink" title="求解S"></a>求解S</h1><p>上一步我们求出了$g$。</p>
-<p>其实，我们只需要用到$g(n,|P|)$这一个值，表示所有质数的$f$之和。</p>
-<p>然后，我们设$S(n,j)$</p>
-<script type="math/tex; mode=display">
+<script type="math/tex; mode=display">g(x,0)$$表示所有的数都当成质数带入$$f(p)$$的值之和。
+
+最后，我们只要求出$$g(n,|P|)$$即可，根据转移的过程，我们发现$$g$$只需要开一维。
+
+# 求解S
+
+上一步我们求出了$$g$$。
+
+其实，我们只需要用到$$g(n,|P|)$$这一个值，表示所有质数的$$f$$之和。
+
+然后，我们设$$S(n,j)</script><script type="math/tex; mode=display">
 S(n,j)=\sum_{i=1}^n[min(p)>=P_j]f(i)</script><p>这个怎么转移呢？我们先把质数的算出来，然后考虑合数，我们可以枚举它的最小质因子和它出现的次数，就可以转移了。</p>
 <script type="math/tex; mode=display">
-S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n}(S(\lfloor\frac{n}{P_k^e}\rfloor,k+1)*f(P_k^e)+f(P_k^{e+1}))</script><p>然后，就没有了，最后的答案就是$S(n,1)+f(1)$。</p>
+S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n}(S(\lfloor\frac{n}{P_k^e}\rfloor,k+1)*f(P_k^e)+f(P_k^{e+1}))</script><p>然后，就没有了，最后的答案就是<script type="math/tex">S(n,1)+f(1)</script>。</p>
 <h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://cmwqf.github.io/2019/07/29/LOJ6053-%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%BD%E6%95%B0/">简单的函数</a></p>
 
     </div>
@@ -391,7 +396,7 @@ S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Min-25筛"><span class="nav-number">1.</span> <span class="nav-text">Min_25筛</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解g"><span class="nav-number">2.</span> <span class="nav-text">求解g</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解S"><span class="nav-number">3.</span> <span class="nav-text">求解S</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">4.</span> <span class="nav-text">例题</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Min-25筛"><span class="nav-number">1.</span> <span class="nav-text">Min_25筛</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解g"><span class="nav-number">2.</span> <span class="nav-text">求解g</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">3.</span> <span class="nav-text">例题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -562,8 +567,6 @@ S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

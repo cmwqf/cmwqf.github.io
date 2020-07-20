@@ -28,7 +28,7 @@
 <meta property="og:description" content="Description小 B 有一个很大的数 S，长度达到了 N 位；这个数可以看成是一个串，它可能有前导 0，例如00009312345。小B还有一个素数P。现在，小 B 提出了 M 个询问，每个询问求 S 的一个子串中有多少子串是 P 的倍数（0 也是P 的倍数）。例如 S为0077时，其子串 007有6个子串：0,0,7,00,07,007；显然0077的子串007有6个子串都是素数7的倍数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-01-25T12:35:25.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:39:05.909Z">
+<meta property="article:modified_time" content="2020-07-20T03:38:17.066Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="莫队">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:39:05" itemprop="dateModified" datetime="2020-07-18T21:39:05+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:38:17" itemprop="dateModified" datetime="2020-07-20T11:38:17+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,29 +273,29 @@
         <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>小 B 有一个很大的数 S，长度达到了 N 位；这个数可以看成是一个串，它可能有前导 0，例如00009312345。小B还有一个素数P。现在，小 B 提出了 M 个询问，每个询问求 S 的一个子串中有多少子串是 P 的倍数（0 也是P 的倍数）。例如 S为0077时，其子串 007有6个子串：0,0,7,00,07,007；显然0077的子串007有6个子串都是素数7的倍数。</p>
 <a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>根据某位大神的叙述，如果碰到统计序列的子序列的问题，要么是用扫描线，要么使用莫队；</p>
-<p>首先，我们考虑用$num[i]$表示$[i,n]$的数，则如果一个子序列$[l,r]$是$p$的倍数，则必有</p>
+<p>首先，我们考虑用<script type="math/tex">num[i]</script>表示<script type="math/tex">[i,n]</script>的数，则如果一个子序列<script type="math/tex">[l,r]</script>是<script type="math/tex">p</script>的倍数，则必有</p>
 <script type="math/tex; mode=display">
 \frac{num[l]-num[r+1]}{10^{n-r}}\equiv 0 (mod \quad p)</script><p>即</p>
 <script type="math/tex; mode=display">
 num[l]-num[r+1]\equiv0(mod \quad p)</script><script type="math/tex; mode=display">
-num[l]\equiv num[r+1](mod\quad p)</script><p>所以，我们不妨设$num[i]=num[i]%p$，这样我们只需要统计在$[l,r]$这个区间中</p>
+num[l]\equiv num[r+1](mod\quad p)</script><p>所以，我们不妨设<script type="math/tex">num[i]=num[i]%p</script>，这样我们只需要统计在<script type="math/tex">[l,r]</script>这个区间中</p>
 <script type="math/tex; mode=display">
 num[i]==num[j](i,j\in[l,r],i\ne j)</script><p>的个数就可以了；</p>
-<p>我们把取模过后的$num$离散化一下，这样，记$cnt[x]$为$num[i]==x$的个数，就可以在莫队的时候转移了：</p>
+<p>我们把取模过后的<script type="math/tex">num</script>离散化一下，这样，记<script type="math/tex">cnt[x]</script>为<script type="math/tex">num[i]==x</script>的个数，就可以在莫队的时候转移了：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;ans+=cnt[x]; cnt[x]++;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;ans-=cnt[x]<span class="number">-1</span>; cnt[x]--;&#125;</span><br></pre></td></tr></table></figure>
-<p>为什么$ans-=cnt[x]-1$呢？因为当时把这个即将要删除的数$x$加入的时候，$ans$加上的是目前的$cnt[x]-1$,所以减的时候，就要和原来一样，减去$cnt[x]-1$；</p>
+<p>为什么<script type="math/tex">ans-=cnt[x]-1</script>呢？因为当时把这个即将要删除的数<script type="math/tex">x</script>加入的时候，<script type="math/tex">ans</script>加上的是目前的<script type="math/tex">cnt[x]-1</script>,所以减的时候，就要和原来一样，减去<script type="math/tex">cnt[x]-1</script>；</p>
 <p>这就很简单了，就是一个裸的莫队了；</p>
 <p>难道结束了吗？ naive！！</p>
 <p>这个时候兴致勃勃地提交上去，你就会获得95分的好成绩，多么优（抠）秀（脚）的算法！为什么呢？</p>
-<p>我们的同余方程中，把那个分母去掉的条件是$(p,10)==1$，然而，问题来了，如果$p==2$或$5$怎么办呢？</p>
+<p>我们的同余方程中，把那个分母去掉的条件是<script type="math/tex">(p,10)==1</script>，然而，问题来了，如果<script type="math/tex">p==2</script>或<script type="math/tex">5</script>怎么办呢？</p>
 <p>特判！！</p>
-<p>我们抛开前面所有的东西，重新回到起点，可以发现，$2$和$5$的倍数很有特点，就是这个数最后一位如果是$2$或$5$的倍数，那么整个这个数便就是$2$或$5$的倍数；我们采用前缀和的思想：</p>
-<p>我们用$pre[i]$记录$[1,i]$中是$p$的倍数的子序列有多少个，$sum[i]$记录$[1,i]$中有多少个数（单独的数字）是$p$的倍数，$pre$和$sum$也很好转移；</p>
+<p>我们抛开前面所有的东西，重新回到起点，可以发现，<script type="math/tex">2</script>和<script type="math/tex">5</script>的倍数很有特点，就是这个数最后一位如果是<script type="math/tex">2</script>或<script type="math/tex">5</script>的倍数，那么整个这个数便就是<script type="math/tex">2</script>或<script type="math/tex">5</script>的倍数；我们采用前缀和的思想：</p>
+<p>我们用<script type="math/tex">pre[i]</script>记录<script type="math/tex">[1,i]</script>中是<script type="math/tex">p</script>的倍数的子序列有多少个，<script type="math/tex">sum[i]</script>记录<script type="math/tex">[1,i]</script>中有多少个数（单独的数字）是<script type="math/tex">p</script>的倍数，<script type="math/tex">pre</script>和<script type="math/tex">sum</script>也很好转移；</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pre[i]=pre[i<span class="number">-1</span>],sum[i]=sum[i<span class="number">-1</span>];</span><br><span class="line"><span class="keyword">if</span>((ch[i]-<span class="string">'0'</span>)%p==<span class="number">0</span>) pre[i]+=i,sum[i]++;</span><br></pre></td></tr></table></figure>
-<p>这样，我们就可以直接计算出$[l,r]$中的$p$的倍数的子序列：</p>
+<p>这样，我们就可以直接计算出<script type="math/tex">[l,r]</script>中的<script type="math/tex">p</script>的倍数的子序列：</p>
 <script type="math/tex; mode=display">
 ans=pre[r]-pre[l-1]-(sum[r]-sum[l-1])\times(l-1);</script><p>为什么呢？</p>
-<p>首先，$pre[r]$是以$[1,r]$中$p$的倍数的子序列个数，减去$pre[l]$剔除了$[1,l]$中$p$的倍数的子序列个数，但是，这并没有去除完，因为</p>
+<p>首先，<script type="math/tex">pre[r]</script>是以<script type="math/tex">[1,r]</script>中<script type="math/tex">p</script>的倍数的子序列个数，减去<script type="math/tex">pre[l]</script>剔除了<script type="math/tex">[1,l]</script>中<script type="math/tex">p</script>的倍数的子序列个数，但是，这并没有去除完，因为</p>
 <script type="math/tex; mode=display">
 数[l,r](l\in[1,l-1],r\in [l,r])还没有被排除掉</script><p>所以，我们必须把这些也给排除，这些有多少个呢？就是有</p>
 <script type="math/tex; mode=display">
@@ -557,8 +557,6 @@ ans=pre[r]-pre[l-1]-(sum[r]-sum[l-1])\times(l-1);</script><p>为什么呢？</p>
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

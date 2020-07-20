@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Description刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字$i$的概率是$p[i]$。保证$0&lt;&#x3D;p[i]&lt;&#x3D;1$，$\sum p[i]&#x3D;1$问期望多少秒后，你手上的数字变成$2^n-1$。">
+  <meta name="description" content="Description刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字i的概率是p[i]。保证0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[BZOJ4036]按位或">
 <meta property="og:url" content="http://cmwqf.github.io/2019/07/25/BZOJ4036-%E6%8C%89%E4%BD%8D%E6%88%96/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="Description刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字$i$的概率是$p[i]$。保证$0&lt;&#x3D;p[i]&lt;&#x3D;1$，$\sum p[i]&#x3D;1$问期望多少秒后，你手上的数字变成$2^n-1$。">
+<meta property="og:description" content="Description刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字i的概率是p[i]。保证0">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-25T08:04:11.000Z">
-<meta property="article:modified_time" content="2020-07-18T13:39:57.051Z">
+<meta property="article:modified_time" content="2020-07-20T03:22:24.974Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="容斥原理">
 <meta property="article:tag" content="概率期望">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 21:39:57" itemprop="dateModified" datetime="2020-07-18T21:39:57+08:00">2020-07-18</time>
+                <time title="修改时间：2020-07-20 11:22:24" itemprop="dateModified" datetime="2020-07-20T11:22:24+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,26 +273,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字$i$的概率是$p[i]$。保证$0&lt;=p[i]&lt;=1$，$\sum p[i]=1$问期望多少秒后，你手上的数字变成$2^n-1$。</p>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>刚开始你有一个数字0，每一秒钟你会随机选择一个[0,2^n-1]的数字，与你手上的数字进行或操作。选择数字<script type="math/tex">i</script>的概率是<script type="math/tex">p[i]</script>。保证<script type="math/tex">0<=p[i]<=1</script>，<script type="math/tex">\sum p[i]=1</script>问期望多少秒后，你手上的数字变成<script type="math/tex">2^n-1</script>。</p>
 <a id="more"></a>
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>我们考虑$Min-max$容斥，题目相当于给我们一个大小为$n$的集合，每个元素为0/1，求这个集合全是1的期望步数，即这个集合最后一个元素变成1的期望步数，我们把它计为$max(S)$。</p>
-<p>根据$Min-max$容斥</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>我们考虑<script type="math/tex">Min-max</script>容斥，题目相当于给我们一个大小为<script type="math/tex">n</script>的集合，每个元素为0/1，求这个集合全是1的期望步数，即这个集合最后一个元素变成1的期望步数，我们把它计为<script type="math/tex">max(S)</script>。</p>
+<p>根据<script type="math/tex">Min-max</script>容斥</p>
 <script type="math/tex; mode=display">
-E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))</script><p>那么问题就转化为如何求$E(min(T))$。</p>
-<p>考虑$E(min(T))$的意思是一个集合中第一个出现1的元素的期望时间。</p>
+E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))</script><p>那么问题就转化为如何求<script type="math/tex">E(min(T))</script>。</p>
+<p>考虑<script type="math/tex">E(min(T))</script>的意思是一个集合中第一个出现1的元素的期望时间。</p>
 <p>只要一个与这个集合有交的集合与它或，那么它就会出现1。</p>
-<p>那么每步让集合$T$有一个元素变成1的概率就是(此处的$S$不同于上面的$S$)</p>
+<p>那么每步让集合<script type="math/tex">T</script>有一个元素变成1的概率就是(此处的<script type="math/tex">S</script>不同于上面的<script type="math/tex">S</script>)</p>
 <script type="math/tex; mode=display">
-P=\sum_{T\cap S}p[S]</script><p>那么，我们考虑这样一个问题，一个事件，我们每步有$P$的概率成功，问这个事件成功的期望步数。</p>
-<p>可以看成走每步会成功$P$次，所以成功1次期望走$\frac{1}{P}$步。</p>
+P=\sum_{T\cap S}p[S]</script><p>那么，我们考虑这样一个问题，一个事件，我们每步有<script type="math/tex">P</script>的概率成功，问这个事件成功的期望步数。</p>
+<p>可以看成走每步会成功<script type="math/tex">P</script>次，所以成功1次期望走<script type="math/tex">\frac{1}{P}</script>步。</p>
 <p>即</p>
 <script type="math/tex; mode=display">
 E(min(T))=\frac{1}{\sum_{T\cap S}p[S]}</script><p>但这样貌似也不太好弄的样子，所以我们将它进行一个补集转化，变成</p>
 <script type="math/tex; mode=display">
-\frac{1}{1-\sum_{T\cap S=\varnothing}p[S]}</script><p>然后，我们发现，我们计集合$C$是$T$对全集的补集，那么后面那个东西实际上就是$C$的子集和。</p>
-<p>然后我们就可以用高维前缀和或者$FWT$解决了。</p>
-<p>还有，就是如果所有有值的$p[i]$的$i$或起来不等于$(1 &lt;&lt; n) - 1$，就输出$INF$。</p>
-<p>时间复杂度$O(2^n*n)$。</p>
+\frac{1}{1-\sum_{T\cap S=\varnothing}p[S]}</script><p>然后，我们发现，我们计集合<script type="math/tex">C</script>是<script type="math/tex">T</script>对全集的补集，那么后面那个东西实际上就是<script type="math/tex">C</script>的子集和。</p>
+<p>然后我们就可以用高维前缀和或者<script type="math/tex">FWT</script>解决了。</p>
+<p>还有，就是如果所有有值的<script type="math/tex">p[i]</script>的<script type="math/tex">i</script>或起来不等于<script type="math/tex">(1 << n) - 1</script>，就输出<script type="math/tex">INF</script>。</p>
+<p>时间复杂度<script type="math/tex">O(2^n*n)</script>。</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2e6</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> p[maxN + <span class="number">1</span>], ans;</span><br><span class="line"><span class="keyword">int</span> n, tmp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lf"</span>, &amp;p[i]);</span><br><span class="line">        <span class="keyword">if</span>(p[i] &gt; <span class="number">0</span>) tmp |= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(tmp != ((<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>)) &#123; <span class="built_in">puts</span>(<span class="string">"INF"</span>); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (<span class="number">1</span> &lt;&lt; n); j++)</span><br><span class="line">            <span class="keyword">if</span>(j &amp; (<span class="number">1</span> &lt;&lt; i)) p[j] += p[j ^ (<span class="number">1</span> &lt;&lt; i)];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">            <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j)) tmp = -tmp;</span><br><span class="line">        ans += tmp * <span class="number">1</span> / (<span class="number">1</span> - p[ ((<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>) ^ i ]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.9lf"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -552,8 +552,6 @@ E(min(T))=\frac{1}{\sum_{T\cap S}p[S]}</script><p>但这样貌似也不太好弄
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {

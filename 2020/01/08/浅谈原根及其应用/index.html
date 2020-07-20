@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\pmod {p}$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。">
+  <meta name="description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数a,p，使得a^r\equiv 1\pmod {p}的最小的正整数r，称为a模p的阶。 而原根，就是定义在阶的基础上的： 如果一个数1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈原根及其应用">
 <meta property="og:url" content="http://cmwqf.github.io/2020/01/08/%E6%B5%85%E8%B0%88%E5%8E%9F%E6%A0%B9%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\pmod {p}$的最小的正整数$r$，称为$a$模$p$的阶。 而原根，就是定义在阶的基础上的： 如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。 如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。">
+<meta property="og:description" content="原根要想了解原根，先了解什么是阶。 数论中，阶一般定义为对于两个互质的整数a,p，使得a^r\equiv 1\pmod {p}的最小的正整数r，称为a模p的阶。 而原根，就是定义在阶的基础上的： 如果一个数1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-08T15:18:50.000Z">
-<meta property="article:modified_time" content="2020-05-06T02:07:54.871Z">
+<meta property="article:modified_time" content="2020-07-20T03:25:03.089Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="数论">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 10:07:54" itemprop="dateModified" datetime="2020-05-06T10:07:54+08:00">2020-05-06</time>
+                <time title="修改时间：2020-07-20 11:25:03" itemprop="dateModified" datetime="2020-07-20T11:25:03+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,33 +271,33 @@
 
       
         <h1 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h1><p>要想了解原根，先了解什么是阶。</p>
-<p>数论中，阶一般定义为对于两个互质的整数$a,p$，使得$a^r\equiv 1\pmod {p}$的最小的正整数$r$，称为$a$模$p$的阶。</p>
+<p>数论中，阶一般定义为对于两个互质的整数<script type="math/tex">a,p</script>，使得<script type="math/tex">a^r\equiv 1\pmod {p}</script>的最小的正整数<script type="math/tex">r</script>，称为<script type="math/tex">a</script>模<script type="math/tex">p</script>的阶。</p>
 <p>而原根，就是定义在阶的基础上的：</p>
-<p>如果一个数$1&lt;g&lt;p$，且$g$模$p$的阶是$\phi(p)$，那么$g$就称为$p$的原根。</p>
-<p>如果$p$是质数，那么就有$g$模$p$的阶为$p-1$。</p>
+<p>如果一个数<script type="math/tex">1<g<p</script>，且<script type="math/tex">g</script>模<script type="math/tex">p</script>的阶是<script type="math/tex">\phi(p)</script>，那么<script type="math/tex">g</script>就称为<script type="math/tex">p</script>的原根。</p>
+<p>如果<script type="math/tex">p</script>是质数，那么就有<script type="math/tex">g</script>模<script type="math/tex">p</script>的阶为<script type="math/tex">p-1</script>。</p>
 <a id="more"></a>
-<h1 id="原根的性质"><a href="#原根的性质" class="headerlink" title="原根的性质"></a>原根的性质</h1><p>原根有什么性质？<br>以下我们都讨论$p$为质数的情况，合数则只要把$p-1$换成$\phi(p)$即可。</p>
-<p><strong>对于$\forall 1 \le i,j \le p-1,i\neq j$，都有$g^i\not\equiv g^j \pmod{p}$。</strong></p>
+<h1 id="原根的性质"><a href="#原根的性质" class="headerlink" title="原根的性质"></a>原根的性质</h1><p>原根有什么性质？<br>以下我们都讨论<script type="math/tex">p</script>为质数的情况，合数则只要把<script type="math/tex">p-1</script>换成<script type="math/tex">\phi(p)</script>即可。</p>
+<p><strong>对于<script type="math/tex">\forall 1 \le i,j \le p-1,i\neq j</script>，都有<script type="math/tex">g^i\not\equiv g^j \pmod{p}</script>。</strong></p>
 <p>证明：</p>
-<p>考虑反证法，如果存在$1\le i,j\le p-1,i\neq j$，有$g^i\equiv g^j\pmod{p}$，不妨设$i&lt;j$，那么就有$g^{j-i}\equiv 1\pmod{p}$，而$0&lt;j-i&lt;p-1$，这与原根的定义矛盾，所以假设不成立。</p>
+<p>考虑反证法，如果存在<script type="math/tex">1\le i,j\le p-1,i\neq j</script>，有<script type="math/tex">g^i\equiv g^j\pmod{p}</script>，不妨设<script type="math/tex">i<j</script>，那么就有<script type="math/tex">g^{j-i}\equiv 1\pmod{p}</script>，而<script type="math/tex">0<j-i<p-1</script>，这与原根的定义矛盾，所以假设不成立。</p>
 <p>证毕。</p>
 <p>这是一个非常好的性质，为后面作为单位根做铺垫。</p>
 <h1 id="原根的应用"><a href="#原根的应用" class="headerlink" title="原根的应用"></a>原根的应用</h1><p>单位根。</p>
-<p>复数的单位根，指的是将$2\pi$平均分为$k$份，而复数$(cos(\frac{2\pi}{k}),sin(\frac{2\pi}{k}))$就是单位根，记为$w_k$。它有什么性质呢？</p>
-<p>由其在复平面上的性质，我们可以发现$w_k^i,0\le i\le k-1$两两不同（考虑在单位圆中旋转，每次旋转$\frac{2\pi}{k}$，在此范围内不会重合）。而$FFT$也是利用了这个性质（将$n$个不同的数带入多项式，将多项式转为点值表示法）。</p>
+<p>复数的单位根，指的是将<script type="math/tex">2\pi</script>平均分为<script type="math/tex">k</script>份，而复数<script type="math/tex">(cos(\frac{2\pi}{k}),sin(\frac{2\pi}{k}))</script>就是单位根，记为<script type="math/tex">w_k</script>。它有什么性质呢？</p>
+<p>由其在复平面上的性质，我们可以发现<script type="math/tex">w_k^i,0\le i\le k-1</script>两两不同（考虑在单位圆中旋转，每次旋转<script type="math/tex">\frac{2\pi}{k}</script>，在此范围内不会重合）。而<script type="math/tex">FFT</script>也是利用了这个性质（将<script type="math/tex">n</script>个不同的数带入多项式，将多项式转为点值表示法）。</p>
 <p>那么，在模意义下的单位根，原根就派上了用场。</p>
-<p>记$w_k=g^{\frac{p-1}{k}}$，前提是$k|p-1$，这也是$NTT$模数必须是$2^mp+1$的形式的重要原因（也因此，$NTT$不能处理长度为$1e7$的数列，因为这样会使$k$过大而无法满足$k| p - 1$)。</p>
-<p><strong>那么，我们依然有$0\le i\le k-1,w_k^i$两两不同。</strong></p>
-<p>证明也很显然，因为$\frac{i(p-1)}{k}&lt;p-1$，根据原根的性质，必然是两两不同的。</p>
-<p>这也是$NTT$所依赖的性质。</p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>如果我们要求某个值，给定$n,k,p$,且保证$k|p-1$，求</p>
+<p>记<script type="math/tex">w_k=g^{\frac{p-1}{k}}</script>，前提是<script type="math/tex">k|p-1</script>，这也是<script type="math/tex">NTT</script>模数必须是<script type="math/tex">2^mp+1</script>的形式的重要原因（也因此，<script type="math/tex">NTT</script>不能处理长度为<script type="math/tex">1e7</script>的数列，因为这样会使<script type="math/tex">k</script>过大而无法满足<script type="math/tex">k| p - 1</script>)。</p>
+<p><strong>那么，我们依然有<script type="math/tex">0\le i\le k-1,w_k^i</script>两两不同。</strong></p>
+<p>证明也很显然，因为<script type="math/tex">\frac{i(p-1)}{k}<p-1</script>，根据原根的性质，必然是两两不同的。</p>
+<p>这也是<script type="math/tex">NTT</script>所依赖的性质。</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>如果我们要求某个值，给定<script type="math/tex">n,k,p</script>,且保证<script type="math/tex">k|p-1</script>，求</p>
 <script type="math/tex; mode=display">
 \sum_{i=0}^n[k|i]F(i)\mod{p}</script><p>怎么办？</p>
-<p>意思就是说，当$k|i$时才对答案产生贡献，否则不产生贡献。</p>
-<p>那么我们要构造一个函数，使得当$k|i$时，这个函数值为$1$，否则为$0$。</p>
-<p>考虑单位根$w_k=g^{\frac{p-1}{k}}$，构造</p>
+<p>意思就是说，当<script type="math/tex">k|i</script>时才对答案产生贡献，否则不产生贡献。</p>
+<p>那么我们要构造一个函数，使得当<script type="math/tex">k|i</script>时，这个函数值为<script type="math/tex">1</script>，否则为<script type="math/tex">0</script>。</p>
+<p>考虑单位根<script type="math/tex">w_k=g^{\frac{p-1}{k}}</script>，构造</p>
 <script type="math/tex; mode=display">
-\sum_{j=0}^{k-1}w_k^{ij}</script><p>可以发现，如果$k|i$，那么每一项都是$1$，这个数就等于$k$。</p>
+\sum_{j=0}^{k-1}w_k^{ij}</script><p>可以发现，如果<script type="math/tex">k|i</script>，那么每一项都是<script type="math/tex">1</script>，这个数就等于<script type="math/tex">k</script>。</p>
 <p>否则，根据等比数列求和，它等于</p>
 <script type="math/tex; mode=display">
 \frac{w_k^{ki}-1}{w^i-1}=\frac{1-1}{w^i-1}=0</script><p>这样，</p>
@@ -559,8 +559,6 @@
 
   
       
-
-s
 
 <script>
   if (typeof MathJax === 'undefined') {
