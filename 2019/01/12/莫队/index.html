@@ -283,7 +283,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">comp</span><span class="params">(Node a,Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> belong[a.l]^belong[b.l] ? belong[a.l] &lt; belong[b.l] : belong[a.l]&amp;<span class="number">1</span> ? a.r&lt;b.r : a.r&gt;b.r; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样会快很多，还有就是$block$的大小跟代码速度有巨大关系，$block=n/sqrt(m*2/3)$时，是最快的（目前）；</p>
 <h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.org/problemnew/show/P1494" target="_blank" rel="noopener">小Z的袜子</a></p>
-<p>我们考虑对于一个区间$[l,r]$,设$cnt[x]$为此区间中颜色为x的个数，则选到相同袜子的情况有$\sum C<em>{cnt[x]}^2$种，而任意选两个，一共有$C</em>{r-l+1}^2$种选法，两者相除即为答案。</p>
+<p>我们考虑对于一个区间$[l,r]$,设$cnt[x]$为此区间中颜色为x的个数，则选到相同袜子的情况有$\sum C_{cnt[x]}^2$种，而任意选两个，一共有$C_{r-l+1}^2$种选法，两者相除即为答案。</p>
 <p>由公式<script type="math/tex">C_n^2=\frac{n!}{2!*(n - 2)!} = \frac{n*(n - 1)}{2}</script>并整理得</p>
 <p>设$len=r-l+1$,则答案为</p>
 <p>$\frac{\sum cnt[x]^2-\sum cnt[x]}{len\times(len-1)}$</p>
