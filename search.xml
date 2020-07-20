@@ -2670,44 +2670,33 @@ F(x)=a_0+a_1x+a_2x^2+...</script><p>我们知道，一个<script type="math/tex"
 <p>复数相乘，在复平面上的意义为<strong>模长相乘，辅角相加</strong>。</p>
 <h2 id="共轭复数"><a href="#共轭复数" class="headerlink" title="共轭复数"></a>共轭复数</h2><p>我们称<script type="math/tex">a+bi</script>和<script type="math/tex">a-bi</script>为共轭复数，在复平面上，可以看成关于<script type="math/tex">x</script>轴对称的两个向量。</p>
 <h2 id="单位根"><a href="#单位根" class="headerlink" title="单位根"></a>单位根</h2><p>单位根，就是满足<script type="math/tex">z^n=1</script>的复数（可以看作将复平面上单位圆平均分为<script type="math/tex">n</script>个部分的单位复数），记为<script type="math/tex">w_n</script>。</p>
-<script type="math/tex; mode=display">n$$次单位根，就是将单位圆平分为$$n$$个部分的$$n$$个向量对应的复数。依次记为$$w_n^0,w_n^1,w_n^2...w_n^{n-1}$$。
-
-我们记$$w_n$$的辅角为$$\theta=\frac{2\pi}{n}$$，那么每次$$w_n^k->w_n^{k+1}$$在图像上的意义就是$$w_n^k$$逆时针旋转$$\theta$$得到的向量。
-
-考虑单位根的时候，一般放在复平面中考虑，更容易理解。
-
-## 单位根性质
-
-性质$$1$$：$$w_{2n}^{2k}=w_n^k$$，这个根据复平面上的平分单位圆的概念很直观，不作解释。
-
-性质$$2$$：$$w_n^{k+\frac{n}{2}}=-w_n^k$$，相当于将$$w_n^k$$逆时针转$$\pi$$得到$$w_n^{k+\frac{n}{2}}$$，自然横纵坐标都取反。
-
-实际上，$$FFT$$就是根据这两个简单的性质进行的。
-
-# FFT的原理
-
-首先，我们将整个多项式次数补为$$2^t-1$$的形式（$$2^t>2n$$），设$$lim=2^t$$，那么相当于多项式乘法在模$$x^{lim}$$意义下进行，多余的项系数为$$0$$，以保证后面每次使$$lim/2$$后都是整数。
-
-## DFT
-
-所谓$$DFT$$，就是把系数转化为点值的方法。
-
-我们现在要把$$w_n^0,w_n^1,...w_n^{n-1}$$带入多项式，计算其点值。
-
-我们令$$m=\frac{n}{2}$$，因为$$n$$是$$2$$的整数次幂，所以$$m$$也一定是整数。
-
-我们设</script><p>A(w_n^k)=\sum_{i=0}^{n-1}a[i]w_n^i</p>
+<p>所谓<script type="math/tex">n</script>次单位根，就是将单位圆平分为<script type="math/tex">n</script>个部分的<script type="math/tex">n</script>个向量对应的复数。依次记为<script type="math/tex">w_n^0,w_n^1,w_n^2...w_n^{n-1}</script>。</p>
+<p>我们记<script type="math/tex">w_n</script>的辅角为<script type="math/tex">\theta=\frac{2\pi}{n}</script>，那么每次<script type="math/tex">w_n^k->w_n^{k+1}</script>在图像上的意义就是<script type="math/tex">w_n^k</script>逆时针旋转<script type="math/tex">\theta</script>得到的向量。</p>
+<p>考虑单位根的时候，一般放在复平面中考虑，更容易理解。</p>
+<h2 id="单位根性质"><a href="#单位根性质" class="headerlink" title="单位根性质"></a>单位根性质</h2><p>性质<script type="math/tex">1</script>：<script type="math/tex">w_{2n}^{2k}=w_n^k</script>，这个根据复平面上的平分单位圆的概念很直观，不作解释。</p>
+<p>性质<script type="math/tex">2</script>：<script type="math/tex">w_n^{k+\frac{n}{2}}=-w_n^k</script>，相当于将<script type="math/tex">w_n^k</script>逆时针转<script type="math/tex">\pi</script>得到<script type="math/tex">w_n^{k+\frac{n}{2}}</script>，自然横纵坐标都取反。</p>
+<p>实际上，<script type="math/tex">FFT</script>就是根据这两个简单的性质进行的。</p>
+<h1 id="FFT的原理"><a href="#FFT的原理" class="headerlink" title="FFT的原理"></a>FFT的原理</h1><p>首先，我们将整个多项式次数补为<script type="math/tex">2^t-1</script>的形式（<script type="math/tex">2^t>2n</script>），设<script type="math/tex">lim=2^t</script>，那么相当于多项式乘法在模<script type="math/tex">x^{lim}</script>意义下进行，多余的项系数为<script type="math/tex">0</script>，以保证后面每次使<script type="math/tex">lim/2</script>后都是整数。</p>
+<h2 id="DFT"><a href="#DFT" class="headerlink" title="DFT"></a>DFT</h2><p>所谓<script type="math/tex">DFT</script>，就是把系数转化为点值的方法。</p>
+<p>我们现在要把<script type="math/tex">w_n^0,w_n^1,...w_n^{n-1}</script>带入多项式，计算其点值。</p>
+<p>我们令<script type="math/tex">m=\frac{n}{2}</script>，因为<script type="math/tex">n</script>是<script type="math/tex">2</script>的整数次幂，所以<script type="math/tex">m</script>也一定是整数。</p>
+<p>我们设</p>
 <script type="math/tex; mode=display">
-注意，这里的$$a[i]$$和原来多项式中的$$a[i]$$不同，只是由上一层递归下来得到的$$n$$个数，后面我们会知道是什么。
-
-那么，对于$$k<\frac{n}{2}$$，即$$k<m$$，我们有</script><p>A(w_n^k)=\sum_{i=0}^{n-1}a<a href="w_n^{k}">i</a>^i\\<br>=\sum_{i=0}^{m-1}a<a href="w_n^k">2i</a>^{2i}+\sum_{i=0}^{m-1}a<a href="w_n^k">2i+1</a>^{2i+1}\\<br>=\sum_{i=0}^{m-1}a[2i]w_n^{2ki}+\sum_{i=0}^{m-1}a[2i+1]w_n^{2ki+k}\\<br>=\sum_{i=0}^{m-1}a[2i]w_{2m}^{2ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_{2m}^{2ki}</p>
+A(w_n^k)=\sum_{i=0}^{n-1}a[i]w_n^i</script><p>注意，这里的<script type="math/tex">a[i]</script>和原来多项式中的<script type="math/tex">a[i]</script>不同，只是由上一层递归下来得到的<script type="math/tex">n</script>个数，后面我们会知道是什么。</p>
+<p>那么，对于<script type="math/tex">k<\frac{n}{2}</script>，即<script type="math/tex">k<m</script>，我们有</p>
 <script type="math/tex; mode=display">
-根据上面所说的性质一，$$w_{2n}^{2i}=w_n^i$$可知</script><p>A(w_n^k)=\sum_{i=0}^{m-1}a[2i]w_m^{ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</p>
+A(w_n^k)=\sum_{i=0}^{n-1}a[i](w_n^{k})^i\\
+=\sum_{i=0}^{m-1}a[2i](w_n^k)^{2i}+\sum_{i=0}^{m-1}a[2i+1](w_n^k)^{2i+1}\\
+=\sum_{i=0}^{m-1}a[2i]w_n^{2ki}+\sum_{i=0}^{m-1}a[2i+1]w_n^{2ki+k}\\
+=\sum_{i=0}^{m-1}a[2i]w_{2m}^{2ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_{2m}^{2ki}</script><p>根据上面所说的性质一，<script type="math/tex">w_{2n}^{2i}=w_n^i</script>可知</p>
 <script type="math/tex; mode=display">
-又由性质三，我们可以知道：</script><p>A(w_n^{k+\frac{n}{2}})=(-1)^{\frac{n}{2}}\sum_{i=0}^{m-1}a[2i]w_m^{ki}+(-1)^{\frac{n}{2}}w_n^{k+\frac{n}{2}}\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}\\<br>=\sum_{i=0}^{m-1}a[2i]w_m^{ki}-w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</p>
+A(w_n^k)=\sum_{i=0}^{m-1}a[2i]w_m^{ki}+w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</script><p>又由性质三，我们可以知道：</p>
 <script type="math/tex; mode=display">
-我们递归到下一层的时候分别**分治偶数项和奇数项**计算对应的点值，设为$$A_0,A_1$$，那么显然有</script><p>A(w_n^k)=A_0(w_\frac{n}{2}^k)+w_n^kA_1(w_{\frac{n}{2}}^k)\\<br>A(w_n^{k+\frac{n}{2}})=A_0(w_\frac{n}{2}^k)-w_n^kA_1(w_{\frac{n}{2}}^k)</p>
-<p><script type="math/tex">那么，实际上我们每次递归到的一层的</script>a<script type="math/tex">是上一层</script>a$$的奇数项或偶数项。</p>
+A(w_n^{k+\frac{n}{2}})=(-1)^{\frac{n}{2}}\sum_{i=0}^{m-1}a[2i]w_m^{ki}+(-1)^{\frac{n}{2}}w_n^{k+\frac{n}{2}}\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}\\
+=\sum_{i=0}^{m-1}a[2i]w_m^{ki}-w_n^k\sum_{i=0}^{m-1}a[2i+1]w_m^{ki}</script><p>我们递归到下一层的时候分别<strong>分治偶数项和奇数项</strong>计算对应的点值，设为<script type="math/tex">A_0,A_1</script>，那么显然有</p>
+<script type="math/tex; mode=display">
+A(w_n^k)=A_0(w_\frac{n}{2}^k)+w_n^kA_1(w_{\frac{n}{2}}^k)\\
+A(w_n^{k+\frac{n}{2}})=A_0(w_\frac{n}{2}^k)-w_n^kA_1(w_{\frac{n}{2}}^k)</script><p>那么，实际上我们每次递归到的一层的<script type="math/tex">a</script>是上一层<script type="math/tex">a</script>的奇数项或偶数项。</p>
 <p>这样，时间复杂度是<script type="math/tex">O(nlog_2n)</script>。</p>
 <p>由于递归效率不高，所以一般采用迭代的方式来实现这个过程，即注意到多项式的<script type="math/tex">i</script>次项到分治边界时的下标为<script type="math/tex">r[i]</script>，<script type="math/tex">r[i]</script>是<script type="math/tex">i</script>二进制翻转后的数，所以我们每次从下往上迭代即可。</p>
 <h2 id="IDFT"><a href="#IDFT" class="headerlink" title="IDFT"></a>IDFT</h2>]]></content>
