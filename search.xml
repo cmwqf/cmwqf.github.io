@@ -734,31 +734,38 @@ d=p1^{b1}*p2^{b2}*...*pk^{bk}</script><p>根据<script type="math/tex">\mu</scri
     <url>/2020/01/09/BZOJ3328-PYXFIB/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定<script type="math/tex">n,k,p</script>且保证<script type="math/tex">k|p-1</script>，求</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}</script><script type="math/tex; mode=display">Fib$$指斐波那契数列。其中$$n\le 1e18,k\le 2e5,p\le 1e9$$。
-
+\sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}</script><p>其中<script type="math/tex">Fib</script>指斐波那契数列，<script type="math/tex">n\le 1e18,k\le 2e5,p\le 1e9</script>。</p>
 <a id="more"></a>
-
-# Solution
-
-又一次被打败了。。。
-
-看这个式子形式就很不好搞，我们换一种</script><p>\sum_{i=0}^n[k|i]C_n^iFib_i</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>又一次被打败了。。。</p>
+<p>看这个式子形式就很不好搞，我们换一种</p>
 <script type="math/tex; mode=display">
-一般看到组合数和某个数相乘之和，首先想到二项式定理，考虑把$$Fib_i$$化成$$x^i$$的形式。
-
-注意到</script><p>Fib_i=(A^i)_{1,1}</p>
+\sum_{i=0}^n[k|i]C_n^iFib_i</script><p>一般看到组合数和某个数相乘之和，首先想到二项式定理，考虑把<script type="math/tex">Fib_i</script>化成<script type="math/tex">x^i</script>的形式。</p>
+<p>注意到</p>
 <script type="math/tex; mode=display">
-
-，其中</script><p>A=\left[<br>\begin{matrix}<br>1 &amp; 1\\<br>1 &amp; 0<br>\end{matrix}<br>\right]</p>
+Fib_i=(A^i)_{1,1}</script><p>，其中</p>
 <script type="math/tex; mode=display">
-这样，将二项式定理推广到矩阵形式，我们有</script><p>\sum_{i=0}^nC_n^iFib_i=(A+I)^n_{1,1},<br>I=<br>\left[<br>\begin{matrix}<br>1 &amp; 0\\<br>0 &amp; 1<br>\end{matrix}<br>\right]</p>
+A=\left[
+\begin{matrix}
+1 & 1\\
+1 & 0
+\end{matrix}
+\right]</script><p>这样，将二项式定理推广到矩阵形式，我们有</p>
 <script type="math/tex; mode=display">
-然而，那个$$[k|i]$$有什么用呢？
-
-如果你看了上面那篇**原根及其应用**，你就会明白，</script><p>[k|i]=\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij},w_k=g^{\frac{p-1}{k}}</p>
+\sum_{i=0}^nC_n^iFib_i=(A+I)^n_{1,1},
+I=
+\left[
+\begin{matrix}
+1 & 0\\
+0 & 1
+\end{matrix}
+\right]</script><p>然而，那个<script type="math/tex">[k|i]</script>有什么用呢？</p>
+<p>如果你看了上面那篇<strong>原根及其应用</strong>，你就会明白，</p>
 <script type="math/tex; mode=display">
-这样，原式等于</script><p>\frac{1}{k}\sum_{i=0}^n\sum_{j=0}^{k-1}w_k^{ij}C_n^iFib_i\\<br>=\frac{1}{k}\sum_{j=0}^{k-1}\sum_{i=0}^{n}w_k^{ij}C_n^iFib_i\\<br>=\frac{1}{k}\sum_{j=0}^{k-1}(A*w_k^{j}+I)^n_{1,1}</p>
-<p>$$<br>然后直接矩阵快速幂即可。</p>
+[k|i]=\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij},w_k=g^{\frac{p-1}{k}}</script><p>这样，原式等于</p>
+<script type="math/tex; mode=display">
+\frac{1}{k}\sum_{i=0}^n\sum_{j=0}^{k-1}w_k^{ij}C_n^iFib_i\\
+=\frac{1}{k}\sum_{j=0}^{k-1}\sum_{i=0}^{n}w_k^{ij}C_n^iFib_i\\
+=\frac{1}{k}\sum_{j=0}^{k-1}(A*w_k^{j}+I)^n_{1,1}</script><p>然后直接矩阵快速幂即可。</p>
 <p>复杂度<script type="math/tex">O(klogn)</script>。</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line">LL mod, n, k;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">matrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    LL a[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"> </span><br><span class="line">    matrix() &#123; <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a)); &#125;</span><br><span class="line"> </span><br><span class="line">    matrix <span class="keyword">operator</span> * (matrix rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        matrix ans;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                    ans.a[i][j] = (ans.a[i][j] + a[i][k] * rhs.a[k][j] % mod) % mod;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">mpow</span><span class="params">(LL a, LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = ans * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">check</span><span class="params">(LL g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL x = mod - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">2</span>; i * i &lt;= x; i++)</span><br><span class="line">        <span class="keyword">if</span>(x % i == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(mpow(g, (mod - <span class="number">1</span>) / i) == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">while</span>(x % i == <span class="number">0</span>) x /= i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(x != <span class="number">1</span> &amp;&amp; mpow(g, (mod - <span class="number">1</span>) / x) == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">solve</span><span class="params">(LL w, LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    matrix a;</span><br><span class="line">    a.a[<span class="number">0</span>][<span class="number">0</span>] = w + <span class="number">1</span>, a.a[<span class="number">0</span>][<span class="number">1</span>] = w;</span><br><span class="line">    a.a[<span class="number">1</span>][<span class="number">0</span>] = w, a.a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    matrix ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) ans.a[i][i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = ans * a;</span><br><span class="line">        a = a * a;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans.a[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T --)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld %lld %lld"</span>, &amp;n, &amp;k, &amp;mod);</span><br><span class="line">        LL ans = <span class="number">0</span>, g = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>( !check(g) ) g ++;</span><br><span class="line">        LL w = <span class="number">1</span>, wn = mpow(g, (mod - <span class="number">1</span>) / k);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++, w = w * wn % mod) ans = (ans + solve(w, n)) % mod;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans * mpow(k, mod - <span class="number">2</span>) % mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -1986,22 +1993,16 @@ f(i)=(a_j<=a_i \&\&b_j<=b_i\&\&c_j<=c_i)</script><p>的<script type="math/tex">j
   <entry>
     <title>浅谈Dilworth定理</title>
     <url>/2019/12/17/%E6%B5%85%E8%B0%88Dilworth%E5%AE%9A%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Dilworth定理"><a href="#Dilworth定理" class="headerlink" title="Dilworth定理"></a>Dilworth定理</h1><script type="math/tex; mode=display">Dilworth$$定理是组合数学的一个重要定理，它是定义在偏序集上的，在解决实际问题时非常有效。比如经典的题目“导弹拦截”。现在，我们就来对它一探究竟。
-
-# 内容
-
-**偏序集上最小链划分中链的数量等于其反链长度的最大值。**
-
+    <content><![CDATA[<h1 id="Dilworth定理"><a href="#Dilworth定理" class="headerlink" title="Dilworth定理"></a>Dilworth定理</h1><p>Dilworth定理是组合数学的一个重要定理，它是定义在偏序集上的，在解决实际问题时非常有效。比如经典的题目“导弹拦截”。现在，我们就来对它一探究竟。</p>
+<h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><p><strong>偏序集上最小链划分中链的数量等于其反链长度的最大值。</strong></p>
 <a id="more"></a>
-
-# 理解
-
-是不是一脸懵？
-
-$$Dilworth$$定理是定义在偏序集上的，什么是偏序集？我们定义一种比较关系，使得两种元素之间进行比较，例如对于元素为二元组$$(a,b),(c,d)$$我们定义$$(a,b)<=(c,d)$$当且仅当$$a<=c,b<=d$$，那么这两个元素就可比了，但是如果$$a>c,b<=d$$，那么这两个元素就不可比了。
-
-偏序集可以允许不可比的元素存在，但是整个偏序集$$S$$要满足一下几个性质：</script><p>1.自反性： \forall a \in S,a&lt;=a\\<br>2.对称性： \forall a,b\in S,若a&lt;=b,则b&gt;=a\\<br>3.传递性： 若a&lt;=b,b&lt;=c,则a&lt;=c</p>
-<p><script type="math/tex">如果对于每个</script>a,b<script type="math/tex">，若</script>a&lt;=b<script type="math/tex">，我们连一条</script>a-&gt;b<script type="math/tex">的边，那么显然，整个偏序集构成一个</script>DAG$$。</p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>是不是一脸懵？</p>
+<p>Dilworth定理是定义在偏序集上的，什么是偏序集？我们定义一种比较关系，使得两种元素之间进行比较，例如对于元素为二元组<script type="math/tex">(a,b),(c,d)</script>我们定义<script type="math/tex">(a,b)<=(c,d)</script>当且仅当<script type="math/tex">a<=c,b<=d</script>，那么这两个元素就可比了，但是如果<script type="math/tex">a>c,b<=d</script>，那么这两个元素就不可比了。</p>
+<p>偏序集可以允许不可比的元素存在，但是整个偏序集<script type="math/tex">S</script>要满足一下几个性质：</p>
+<script type="math/tex; mode=display">
+1.自反性： \forall a \in S,a<=a\\
+2.对称性： \forall a,b\in S,若a<=b,则b>=a\\
+3.传递性： 若a<=b,b<=c,则a<=c</script><p>如果对于每个<script type="math/tex">a,b</script>，若<script type="math/tex">a<=b</script>，我们连一条<script type="math/tex">a->b</script>的边，那么显然，整个偏序集构成一个<script type="math/tex">DAG</script>。</p>
 <p>我们现在来理解一下<script type="math/tex">Dilworth</script>定理的内容，什么叫最小链划分？</p>
 <p>我们将<script type="math/tex">S</script>中的所有元素划分成若干条链，使每个元素都在且仅在唯一一条链中，叫链划分。</p>
 <h2 id="链"><a href="#链" class="headerlink" title="链"></a>链</h2><p>什么是链？</p>
