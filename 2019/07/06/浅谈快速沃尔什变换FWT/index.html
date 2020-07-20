@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="快速沃尔什变换FWT$$与$$FFT$$类似，只不过是进行集合卷积的计算，如：C_k&#x3D;\sum_{i\oplus j &#x3D; k} A_i*B_j\\其中\oplus是位运算,可以是与,或,异或等">
+  <meta name="description" content="快速沃尔什变换其实FWT与FFT类似，只不过是进行集合卷积的计算，如：  C_k&#x3D;\sum_{i\oplus j &#x3D; k} A_i*B_j\\ 其中\oplus是位运算,可以是与,或,异或等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈快速沃尔什变换FWT">
 <meta property="og:url" content="http://cmwqf.github.io/2019/07/06/%E6%B5%85%E8%B0%88%E5%BF%AB%E9%80%9F%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2FWT/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="快速沃尔什变换FWT$$与$$FFT$$类似，只不过是进行集合卷积的计算，如：C_k&#x3D;\sum_{i\oplus j &#x3D; k} A_i*B_j\\其中\oplus是位运算,可以是与,或,异或等">
+<meta property="og:description" content="快速沃尔什变换其实FWT与FFT类似，只不过是进行集合卷积的计算，如：  C_k&#x3D;\sum_{i\oplus j &#x3D; k} A_i*B_j\\ 其中\oplus是位运算,可以是与,或,异或等">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-06T15:05:27.000Z">
-<meta property="article:modified_time" content="2020-07-20T03:30:42.067Z">
+<meta property="article:modified_time" content="2020-07-20T03:56:18.691Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="多项式">
 <meta property="article:tag" content="FWT">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-20 11:30:42" itemprop="dateModified" datetime="2020-07-20T11:30:42+08:00">2020-07-20</time>
+                <time title="修改时间：2020-07-20 11:56:18" itemprop="dateModified" datetime="2020-07-20T11:56:18+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,52 +271,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="快速沃尔什变换"><a href="#快速沃尔什变换" class="headerlink" title="快速沃尔什变换"></a>快速沃尔什变换</h1><script type="math/tex; mode=display">FWT$$与$$FFT$$类似，只不过是进行集合卷积的计算，如：</script><p>C_k=\sum_{i\oplus j = k} A_i*B_j\\<br>其中\oplus是位运算,可以是与,或,异或等</p>
+        <h1 id="快速沃尔什变换"><a href="#快速沃尔什变换" class="headerlink" title="快速沃尔什变换"></a>快速沃尔什变换</h1><p>其实<script type="math/tex">FWT</script>与<script type="math/tex">FFT</script>类似，只不过是进行集合卷积的计算，如：</p>
 <script type="math/tex; mode=display">
-<a id="more"></a>
-
-之前看到一个形象的比喻，所谓这些变换，就是相当于你要过一条马路，但是直接过不好走，那么我们要上一个天桥（正变换），然后从天桥上走过去，最后再走下来（逆变换）。
-
-# 或(or)运算的FWT
-
-我们考虑或的$$FWT$$，如果我们有一个集合$$A_i$$，设$$FWT(A)=A'$$那么$$A'_i$$的意义就是这个集合所有子集的贡献之和。</script><p>A’_i=\sum_{i|j=i}A_j</p>
+C_k=\sum_{i\oplus j = k} A_i*B_j\\
+其中\oplus是位运算,可以是与,或,异或等</script><a id="more"></a>
+<p>之前看到一个形象的比喻，所谓这些变换，就是相当于你要过一条马路，但是直接过不好走，那么我们要上一个天桥（正变换），然后从天桥上走过去，最后再走下来（逆变换）。</p>
+<h1 id="或-or-运算的FWT"><a href="#或-or-运算的FWT" class="headerlink" title="或(or)运算的FWT"></a>或(or)运算的FWT</h1><p>我们考虑或的<script type="math/tex">FWT</script>，如果我们有一个集合<script type="math/tex">A_i</script>，设<script type="math/tex">FWT(A)=A'</script>那么<script type="math/tex">A'_i</script>的意义就是这个集合所有子集的贡献之和。</p>
 <script type="math/tex; mode=display">
-这样，因为$$k|(i|j)=k$$可以推出$$k|i=k,k|j=k$$我们可以得到一个结论：</script><p>C’_k=\sum_{k|t=k}C_t=\sum_{k|t=k}\sum_{i|j=t}A_i<em>B_j=\sum_{k|(i|j)=k}A_i</em>B_j\\<br>=(\sum_{k|i=k}A_i)<em>(\sum_{k|j=k}B_j)=A’_k</em>B’_k</p>
+A'_i=\sum_{i|j=i}A_j</script><p>这样，因为<script type="math/tex">k|(i|j)=k</script>可以推出<script type="math/tex">k|i=k,k|j=k</script>我们可以得到一个结论：</p>
 <script type="math/tex; mode=display">
-这样我们来看$$A'$$是怎么求的。
-
-我们考虑吧$$A$$长度补为$$2^k$$，分为两半，$$A0$$是前面一半，表示第一位是0，$$A1$$是后面一半，表示第一位是1。
-
-然后，我们也把$$A'$$分为两半来考虑，前面一半是第一位是0，那么它的子集就是$$A0'$$（它本身），后面一半第一位是1，它的子集既有$$A1'$$(它本身)，还有$$A0’$$。
-
-所以</script><p>A’=merge(A0’,A0’+A1’)\\<br>即FWT(A)=merge(FWT(A_0),FWT(A_0)+FWT(A_1))</p>
+C'_k=\sum_{k|t=k}C_t=\sum_{k|t=k}\sum_{i|j=t}A_i*B_j=\sum_{k|(i|j)=k}A_i*B_j\\
+=(\sum_{k|i=k}A_i)*(\sum_{k|j=k}B_j)=A'_k*B'_k</script><p>这样我们来看<script type="math/tex">A'</script>是怎么求的。</p>
+<p>我们考虑吧<script type="math/tex">A</script>长度补为<script type="math/tex">2^k</script>，分为两半，<script type="math/tex">A0</script>是前面一半，表示第一位是0，<script type="math/tex">A1</script>是后面一半，表示第一位是1。</p>
+<p>然后，我们也把<script type="math/tex">A'</script>分为两半来考虑，前面一半是第一位是0，那么它的子集就是<script type="math/tex">A0'</script>（它本身），后面一半第一位是1，它的子集既有<script type="math/tex">A1'</script>(它本身)，还有<script type="math/tex">A0’</script>。</p>
+<p>所以</p>
 <script type="math/tex; mode=display">
-其中，$$merge$$就是将两个数组拼接在一起，$$+$$表示对应下标的数相加。
-
-这样我们就能在$$O(nlogn)$$的复杂度内求出了$$FWT(A)$$。
-
-这样，我们就可以算出$$FWT(C)$$，那么，我们怎么把$$FWT(C)$$转回来呢？</script><p>FWT(A)_0:FWT(A)的前半部分,FWT(A_0):A的前半部分的FWT\\<br>\because FWT(A)_0=FWT(A_0)\\<br>\therefore A_0 = IFWT(FWT(A_0))=IFWT(FWT(A)_0)\\<br>\because FWT(A)_1=FWT(A_0)+FWT(A_1)\\<br>\therefore A_1=IFWT(FWT(A_1))=IFWT(FWT(A)_1-FWT(A)_0)</p>
+A'=merge(A0',A0'+A1')\\
+即FWT(A)=merge(FWT(A_0),FWT(A_0)+FWT(A_1))</script><p>其中，<script type="math/tex">merge</script>就是将两个数组拼接在一起，<script type="math/tex">+</script>表示对应下标的数相加。</p>
+<p>这样我们就能在<script type="math/tex">O(nlogn)</script>的复杂度内求出了<script type="math/tex">FWT(A)</script>。</p>
+<p>这样，我们就可以算出<script type="math/tex">FWT(C)</script>，那么，我们怎么把<script type="math/tex">FWT(C)</script>转回来呢？</p>
 <script type="math/tex; mode=display">
-
-实际上，写那么多式子令人烦躁，考虑因为是$$or$$运算，所以递归每一位的时候，只有当前这一位是$$0$$的对后面相对应的这一位是$$1$$的产生贡献，然后逆变换就是反过来。
-
-但是这个时候就会有个疑惑，正变换是先处理左右两边再算贡献，那么逆变换要把过程反过来，不应该先算贡献再递归左右两边吗，为什么还是一个函数？
-
-实际上，因为考虑正变换时每一位的顺序是无所谓的，我们按位正着算和倒着算是等价的。
-
-所以我们逆变换便假设正变换是倒着枚举每一位来计算的，那么先递归左右两边再计算贡献就是合理的了，这个要仔细思考。
-
-## 结论</script><p>FWT(A)=<br>\begin{cases}<br>(FWT(A_0),FWT(A_0+A_1))\quad(n\neq 1)\\<br>A\quad(n=1)<br>\end{cases}</p>
+FWT(A)_0:FWT(A)的前半部分,FWT(A_0):A的前半部分的FWT\\
+\because FWT(A)_0=FWT(A_0)\\
+\therefore A_0 = IFWT(FWT(A_0))=IFWT(FWT(A)_0)\\
+\because FWT(A)_1=FWT(A_0)+FWT(A_1)\\
+\therefore A_1=IFWT(FWT(A_1))=IFWT(FWT(A)_1-FWT(A)_0)</script><p>实际上，写那么多式子令人烦躁，考虑因为是<script type="math/tex">or</script>运算，所以递归每一位的时候，只有当前这一位是<script type="math/tex">0</script>的对后面相对应的这一位是<script type="math/tex">1</script>的产生贡献，然后逆变换就是反过来。</p>
+<p>但是这个时候就会有个疑惑，正变换是先处理左右两边再算贡献，那么逆变换要把过程反过来，不应该先算贡献再递归左右两边吗，为什么还是一个函数？</p>
+<p>实际上，因为考虑正变换时每一位的顺序是无所谓的，我们按位正着算和倒着算是等价的。</p>
+<p>所以我们逆变换便假设正变换是倒着枚举每一位来计算的，那么先递归左右两边再计算贡献就是合理的了，这个要仔细思考。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">
+FWT(A)=
+\begin{cases}
+(FWT(A_0),FWT(A_0+A_1))\quad(n\neq 1)\\
+A\quad(n=1)
+\end{cases}</script><p>下面写<script type="math/tex">IFWT</script>，注意，此时大括号后面的<script type="math/tex">A</script>是已经<script type="math/tex">FWT</script>过后的<script type="math/tex">A</script></p>
 <script type="math/tex; mode=display">
-
-下面写$$IFWT$$，注意，此时大括号后面的$$A$$是已经$$FWT$$过后的$$A</script><script type="math/tex; mode=display">
 IFWT(A)=
 \begin{cases}
 (IFWT(A_0),IFWT(A_1-A_0))\quad(n \neq 1)\\
 A\quad(n = 1)
 \end{cases}</script><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">                a[i + mid + j] += a[i + j] * type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="与-and-运算的FWT"><a href="#与-and-运算的FWT" class="headerlink" title="与(and)运算的FWT"></a>与(and)运算的FWT</h1><p>证明太麻烦了，直接上结论吧，这个和上面或的差不多，与的话就是正好反过来，让这一位是<script type="math/tex">1</script>的对这一位是<script type="math/tex">0</script>的进行贡献。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">
 FWT(A)=
 \begin{cases}
 (FWT(A_0+A_1),FWT(A_1))\quad(n\neq 1)\\
@@ -342,37 +338,34 @@ C_n=\sum_{n\otimes k=0}c_k-\sum_{n\otimes k=1}c_k\\
 =(\sum_{n\otimes i=0}a_i-\sum_{n\otimes i=1}a_j)*(\sum_{n\otimes i=0}a_i-\sum_{n\otimes i=1}a_j)\\
 =A_n*B_n</script><p>那么，这个怎么<script type="math/tex">FWT</script>呢？</p>
 <p>正变换，依然考虑分治，分为<script type="math/tex">A_0</script>，<script type="math/tex">A_1</script>，表示当前这一位（<script type="math/tex">i</script>）是<script type="math/tex">0/1</script>，这个时候，我们考虑<script type="math/tex">j</script>和<script type="math/tex">j+2^i</script>，（<script type="math/tex">j</script>的第<script type="math/tex">i</script>位为<script type="math/tex">0</script>），我们设<script type="math/tex">[i,j]</script>表示<script type="math/tex">i</script>这一层<script type="math/tex">j</script>的值，那么有如下几种转移（考虑位数中<script type="math/tex">1</script>的变化）：</p>
-<script type="math/tex; mode=display">[i-1,j]->[i,j]$$位数增加的为$$0\& 0=0$$，所以贡献为$$+1$$。
-
-$$[i-1,j+2^i]->[i,j]$$增加的为$$1\& 0=0$$，贡献也为$$+1$$。
-
-$$[i-1,j]->[i,j+2^i]$$增加的为$$0\& 1=0$$，贡献是$$+1$$。
-
-$$[i-1,j+2^i]->[i,j+2^i]$$增加的为$$1\& 1=1$$，位数中$$1$$奇偶性发生变化，符号取反，贡献为$$-1$$。
-
-因此，就有</script><p>A=merge(A_0+A_1,A_0-A_1)</p>
+<p>第一，<script type="math/tex">[i-1,j]->[i,j]</script>位数增加的为<script type="math/tex">0\& 0=0</script>，所以贡献为<script type="math/tex">+1</script>。</p>
+<p>第二，<script type="math/tex">[i-1,j+2^i]->[i,j]</script>增加的为<script type="math/tex">1\& 0=0</script>，贡献也为<script type="math/tex">+1</script>。</p>
+<p>第三，<script type="math/tex">[i-1,j]->[i,j+2^i]</script>增加的为<script type="math/tex">0\& 1=0</script>，贡献是<script type="math/tex">+1</script>。</p>
+<p>第四，<script type="math/tex">[i-1,j+2^i]->[i,j+2^i]</script>增加的为<script type="math/tex">1\& 1=1</script>，位数中<script type="math/tex">1</script>奇偶性发生变化，符号取反，贡献为<script type="math/tex">-1</script>。</p>
+<p>因此，就有</p>
 <script type="math/tex; mode=display">
-那么逆变换也就很简单了，</script><p>c=merge(\frac{c_0+c_1}{2},\frac{c_0-c_1}{2})</p>
+A=merge(A_0+A_1,A_0-A_1)</script><p>那么逆变换也就很简单了，</p>
 <script type="math/tex; mode=display">
-
-## 结论</script><p>FWT(A)=<br>\begin{cases}<br>(FWT(A_0)+FWT(A_1),FWT(A_0)-FWT(A_1))\quad (n \neq 1)\\<br>A\quad (n = 1)<br>\end{cases}\\<br>IFWT(A)=<br>\begin{cases}<br>(\frac{IFWT(A_0)+IFWT(A_1)}{2},\frac{IFWT(A_0)-IFWT(A_1)}{2})\quad(n\neq 1)\\<br>A\quad(n=1)<br>\end{cases}</p>
+c=merge(\frac{c_0+c_1}{2},\frac{c_0-c_1}{2})</script><h2 id="结论-2"><a href="#结论-2" class="headerlink" title="结论"></a>结论</h2><script type="math/tex; mode=display">
+FWT(A)=
+\begin{cases}
+(FWT(A_0)+FWT(A_1),FWT(A_0)-FWT(A_1))\quad (n \neq 1)\\
+A\quad (n = 1)
+\end{cases}\\
+IFWT(A)=
+\begin{cases}
+(\frac{IFWT(A_0)+IFWT(A_1)}{2},\frac{IFWT(A_0)-IFWT(A_1)}{2})\quad(n\neq 1)\\
+A\quad(n=1)
+\end{cases}</script><h2 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x = a[i + j], y = a[i + mid + j];</span><br><span class="line">                a[i + j] = x + y;</span><br><span class="line">                a[i + mid + j] = x - y;</span><br><span class="line">                <span class="keyword">if</span>(type == <span class="number">-1</span>) a[i + j] /= <span class="number">2</span>, a[i + mid + j] /= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="子集卷积"><a href="#子集卷积" class="headerlink" title="子集卷积"></a>子集卷积</h1><p>在一些题目中，有的时候要求</p>
 <script type="math/tex; mode=display">
-## Code
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">1</span>; mid &lt; lim; mid &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; i += (mid &lt;&lt; <span class="number">1</span>))</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mid; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x = a[i + j], y = a[i + mid + j];</span><br><span class="line">                a[i + j] = x + y;</span><br><span class="line">                a[i + mid + j] = x - y;</span><br><span class="line">                <span class="keyword">if</span>(type == <span class="number">-1</span>) a[i + j] /= <span class="number">2</span>, a[i + mid + j] /= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-# 子集卷积
-
-在一些题目中，有的时候要求</script><p>c[S]=\sum_{T\subset S}a[T]*b[S\oplus T]</p>
+c[S]=\sum_{T\subset S}a[T]*b[S\oplus T]</script><p>这个时候应该怎么办呢？</p>
+<p>我们考虑如果<script type="math/tex">i,j</script>满足<script type="math/tex">j=k\oplus i</script>的话，当且仅当<script type="math/tex">i|j=k, |i|+|j|=|k|</script>，那么我们就是要求</p>
 <script type="math/tex; mode=display">
-这个时候应该怎么办呢？
-
-我们考虑如果$$i,j$$满足$$j=k\oplus i$$的话，当且仅当$$i|j=k, |i|+|j|=|k|$$，那么我们就是要求</script><p>c[k]=\sum_{i|j=k}[|i|+|j|=|k|]<em>a[i]</em>b[j]</p>
+c[k]=\sum_{i|j=k}[|i|+|j|=|k|]*a[i]*b[j]</script><p>那么，我们多记一维，设<script type="math/tex">a[t][k]</script>表示<script type="math/tex">k</script>中有<script type="math/tex">t</script>个<script type="math/tex">1</script>。</p>
+<p>每次就是要</p>
 <script type="math/tex; mode=display">
-那么，我们多记一维，设$$a[t][k]$$表示$$k$$中有$$t$$个$$1$$。
-
-每次就是要</script><p>c[s+t][i|j]+=a[s][i]*b[t][j]</p>
-<p><script type="math/tex">最后只要统计所有</script>c[s][i]<script type="math/tex">（</script>i<script type="math/tex">的位数为</script>s<script type="math/tex">）作为</script>ans[i]$$的答案即可。</p>
+c[s+t][i|j]+=a[s][i]*b[t][j]</script><p>最后只要统计所有<script type="math/tex">c[s][i]</script>（<script type="math/tex">i</script>的位数为<script type="math/tex">s</script>）作为<script type="math/tex">ans[i]</script>的答案即可。</p>
 <p>那么，我们应该怎么算这个东西呢？</p>
 <p>我们把第二维都正向地<script type="math/tex">FWT</script>一下，然后枚举位数，暴力卷积（可以证明这是对的），具体见代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">20</span>; i++) FWTOR(C[i], <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">20</span>; i++)<span class="comment">//枚举位数</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(D, <span class="number">0</span>, <span class="keyword">sizeof</span>(D));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; (<span class="number">1</span> &lt;&lt; <span class="number">20</span>); s++)</span><br><span class="line">                D[s] = ADD(D[s], <span class="number">1l</span>l * C[j][s] * C[i - j][s] % mod);</span><br><span class="line">        FWTOR(D, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; (<span class="number">1</span> &lt;&lt; <span class="number">20</span>); s++)</span><br><span class="line">            <span class="keyword">if</span>(bc[s] == i) ans[s] = ADD(ans[s], D[s]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -461,7 +454,7 @@ $$[i-1,j+2^i]->[i,j+2^i]$$增加的为$$1\& 1=1$$，位数中$$1$$奇偶性发�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速沃尔什变换"><span class="nav-number">1.</span> <span class="nav-text">快速沃尔什变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">1.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与-and-运算的FWT"><span class="nav-number">2.</span> <span class="nav-text">与(and)运算的FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">2.1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-1"><span class="nav-number">2.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异或-xor-运算的FWT"><span class="nav-number">3.</span> <span class="nav-text">异或(xor)运算的FWT</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速沃尔什变换"><span class="nav-number">1.</span> <span class="nav-text">快速沃尔什变换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或-or-运算的FWT"><span class="nav-number">2.</span> <span class="nav-text">或(or)运算的FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">2.1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">2.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与-and-运算的FWT"><span class="nav-number">3.</span> <span class="nav-text">与(and)运算的FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结论-1"><span class="nav-number">3.1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-1"><span class="nav-number">3.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异或-xor-运算的FWT"><span class="nav-number">4.</span> <span class="nav-text">异或(xor)运算的FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结论-2"><span class="nav-number">4.1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-2"><span class="nav-number">4.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子集卷积"><span class="nav-number">5.</span> <span class="nav-text">子集卷积</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
