@@ -1503,18 +1503,12 @@ g(x,j)=
 g(x,j-1)\quad (P_j^2>x)\\
 g(x,j-1)-f(P_j)*(g(\lfloor\frac{x}{P_j}\rfloor,j-1)-\sum_{i=1}^{j-1}f(P_i))\quad (P_j^2<=x)
 \end{cases}</script><p>理解起来也很简单，我们要减去的，就是之前最小因子为<script type="math/tex">P_j</script>的数的<script type="math/tex">f</script>，所以，我们把<script type="math/tex">f(P_j)</script>提出来，然后，先把所有的去掉<script type="math/tex">P_j</script>的答案去掉，但是这样会多算第<script type="math/tex">j-1</script>以内的所有质数的<script type="math/tex">f</script>，减掉就好了。</p>
-<p>然后，边界条件是什么？</p>
-<script type="math/tex; mode=display">g(x,0)$$表示所有的数都当成质数带入$$f(p)$$的值之和。
-
-最后，我们只要求出$$g(n,|P|)$$即可，根据转移的过程，我们发现$$g$$只需要开一维。
-
-# 求解S
-
-上一步我们求出了$$g$$。
-
-其实，我们只需要用到$$g(n,|P|)$$这一个值，表示所有质数的$$f$$之和。
-
-然后，我们设$$S(n,j)</script><script type="math/tex; mode=display">
+<p>然后，边界条件是什么？<script type="math/tex">g(x,0)</script>表示所有的数都当成质数带入<script type="math/tex">f(p)</script>的值之和。</p>
+<p>最后，我们只要求出<script type="math/tex">g(n,|P|)</script>即可，根据转移的过程，我们发现<script type="math/tex">g</script>只需要开一维。</p>
+<h1 id="求解S"><a href="#求解S" class="headerlink" title="求解S"></a>求解S</h1><p>上一步我们求出了<script type="math/tex">g</script>。</p>
+<p>其实，我们只需要用到<script type="math/tex">g(n,|P|)</script>这一个值，表示所有质数的<script type="math/tex">f</script>之和。</p>
+<p>然后，我们设<script type="math/tex">S(n,j)</script></p>
+<script type="math/tex; mode=display">
 S(n,j)=\sum_{i=1}^n[min(p)>=P_j]f(i)</script><p>这个怎么转移呢？我们先把质数的算出来，然后考虑合数，我们可以枚举它的最小质因子和它出现的次数，就可以转移了。</p>
 <script type="math/tex; mode=display">
 S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n}(S(\lfloor\frac{n}{P_k^e}\rfloor,k+1)*f(P_k^e)+f(P_k^{e+1}))</script><p>然后，就没有了，最后的答案就是<script type="math/tex">S(n,1)+f(1)</script>。</p>
