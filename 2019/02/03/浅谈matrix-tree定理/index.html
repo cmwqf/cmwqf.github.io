@@ -20,21 +20,20 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="行列式及Matrix-Tree定理行列式行列式的定义行列式指一个n阶方阵（行数和列数相等），其值记为det(A)或|A|，它代表一个固定的值，我们就来探究行列式值的求法。 行列式求值的公式为:  det(K)&#x3D;\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})">
+  <meta name="description" content="行列式定义行列式指一个n阶方阵（行数和列数相等）的值，记为det(A)或|A|。 求行列式的公式为:  det(K)&#x3D;\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})其中，P为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈matrix-tree定理">
-<meta property="og:url" content="http://cmwqf.github.io/2019/02/03/%E6%B5%85%E8%B0%88matrix-tree%E5%AE%9A%E7%90%86/index.html">
+<meta property="og:title" content="浅谈Matrix-Tree定理">
+<meta property="og:url" content="http://cmwqf.github.io/2019/02/03/%E6%B5%85%E8%B0%88Matrix-Tree%E5%AE%9A%E7%90%86/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="行列式及Matrix-Tree定理行列式行列式的定义行列式指一个n阶方阵（行数和列数相等），其值记为det(A)或|A|，它代表一个固定的值，我们就来探究行列式值的求法。 行列式求值的公式为:  det(K)&#x3D;\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})">
+<meta property="og:description" content="行列式定义行列式指一个n阶方阵（行数和列数相等）的值，记为det(A)或|A|。 求行列式的公式为:  det(K)&#x3D;\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})其中，P为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-02-03T03:00:27.000Z">
-<meta property="article:modified_time" content="2020-07-20T03:33:01.120Z">
+<meta property="article:modified_time" content="2020-07-20T08:58:45.482Z">
 <meta property="article:author" content="cmwqf">
-<meta property="article:tag" content="图论">
-<meta property="article:tag" content="行列式">
+<meta property="article:tag" content="线性代数">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://cmwqf.github.io/2019/02/03/%E6%B5%85%E8%B0%88matrix-tree%E5%AE%9A%E7%90%86/">
+<link rel="canonical" href="http://cmwqf.github.io/2019/02/03/%E6%B5%85%E8%B0%88Matrix-Tree%E5%AE%9A%E7%90%86/">
 
 
 <script id="page-configurations">
@@ -47,7 +46,7 @@
   };
 </script>
 
-  <title>浅谈matrix-tree定理 | cmwqf's blog</title>
+  <title>浅谈Matrix-Tree定理 | cmwqf's blog</title>
   
 
 
@@ -197,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2019/02/03/%E6%B5%85%E8%B0%88matrix-tree%E5%AE%9A%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2019/02/03/%E6%B5%85%E8%B0%88Matrix-Tree%E5%AE%9A%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
@@ -210,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          浅谈matrix-tree定理
+          浅谈Matrix-Tree定理
         </h1>
 
         <div class="post-meta">
@@ -227,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-20 11:33:01" itemprop="dateModified" datetime="2020-07-20T11:33:01+08:00">2020-07-20</time>
+                <time title="修改时间：2020-07-20 16:58:45" itemprop="dateModified" datetime="2020-07-20T16:58:45+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,8 +254,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/02/03/%E6%B5%85%E8%B0%88matrix-tree%E5%AE%9A%E7%90%86/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/02/03/%E6%B5%85%E8%B0%88matrix-tree%E5%AE%9A%E7%90%86/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/02/03/%E6%B5%85%E8%B0%88Matrix-Tree%E5%AE%9A%E7%90%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/02/03/%E6%B5%85%E8%B0%88Matrix-Tree%E5%AE%9A%E7%90%86/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -271,15 +270,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="行列式及Matrix-Tree定理"><a href="#行列式及Matrix-Tree定理" class="headerlink" title="行列式及Matrix-Tree定理"></a>行列式及Matrix-Tree定理</h1><h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><h3 id="行列式的定义"><a href="#行列式的定义" class="headerlink" title="行列式的定义"></a>行列式的定义</h3><p>行列式指一个n阶方阵（行数和列数相等），其值记为<script type="math/tex">det(A)</script>或<script type="math/tex">|A|</script>，它代表一个固定的值，我们就来探究行列式值的求法。</p>
-<p>行列式求值的公式为:</p>
+        <h1 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>行列式指一个n阶方阵（行数和列数相等）的值，记为<script type="math/tex">det(A)</script>或<script type="math/tex">|A|</script>。</p>
+<p>求行列式的公式为:</p>
 <script type="math/tex; mode=display">
-det(K)=\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})</script><a id="more"></a>
-<p>其中，P为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合（其实我也不懂），但跟我们内容也没太大关系</p>
-<h3 id="行列式的性质"><a href="#行列式的性质" class="headerlink" title="行列式的性质"></a>行列式的性质</h3><h4 id="1-交换矩阵的两行（列），行列式变号"><a href="#1-交换矩阵的两行（列），行列式变号" class="headerlink" title="1.交换矩阵的两行（列），行列式变号"></a>1.交换矩阵的两行（列），行列式变号</h4><p>这个性质要证明起来还是挺麻烦的，不会~~</p>
-<h4 id="2-如果矩阵有两行（列）完全相同，则行列式为0"><a href="#2-如果矩阵有两行（列）完全相同，则行列式为0" class="headerlink" title="2.如果矩阵有两行（列）完全相同，则行列式为0"></a>2.如果矩阵有两行（列）完全相同，则行列式为0</h4><p>由性质1可知，交换这两行（列），行列式应该变号，而因为这两行（列）相同，所以值应该不变，<script type="math/tex">det(A)=-det(A)</script>那么它的值为0；</p>
-<h4 id="3-如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k"><a href="#3-如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k" class="headerlink" title="3.如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k"></a>3.如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k</h4><h4 id="4-如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0"><a href="#4-如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0" class="headerlink" title="4.如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0"></a>4.如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0</h4><h4 id="5-如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变"><a href="#5-如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变" class="headerlink" title="5.如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变"></a>5.如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变</h4><p>好吧这个我也不会证（丢人了），但是与我们的主题有关的也就这个性质了。。。</p>
-<h3 id="优化行列式的求法"><a href="#优化行列式的求法" class="headerlink" title="优化行列式的求法"></a>优化行列式的求法</h3><p>对于一个行列式，我们根据<strong>性质5</strong>，将它转化为一个上三角矩阵（左下半部分全是0），那么，<strong>其行列式的值就等于对角线上数的乘积</strong>（记住就好了）</p>
+det(K)=\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})</script><p>其中，P为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合。</p>
+<a id="more"></a>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ol>
+<li><p>交换矩阵的两行（列），行列式变号</p>
+</li>
+<li><p>如果矩阵有两行（列）完全相同，则行列式为0</p>
+</li>
+<li><p>如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k</p>
+</li>
+<li><p>如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0</p>
+</li>
+<li><p>如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变</p>
+</li>
+</ol>
+<h2 id="求法"><a href="#求法" class="headerlink" title="求法"></a>求法</h2><p>对于一个行列式，我们根据<strong>性质5</strong>，将它转化为一个上三角矩阵（左下半部分全是0），那么，<strong>其行列式的值就等于对角线上数的乘积</strong>（带入求行列式公式即证）。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -314,16 +322,15 @@ det(K)=\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})</script><a id="more"></a>
 </div>
 <p>这就是一个上三角矩阵。</p>
 <p>这样，我们通过高斯消元的办法，把一个矩阵化成这个形式，再把对角线乘起来就可以了。</p>
-<p>如果矩阵不可以出现实数，且要取模的话，就要用辗转相除高斯消元法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">det</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)<span class="comment">//行数和列数为tot</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=tot;j++)<span class="comment">//把i+1-&gt;tot行的第i列全部消成0 </span></span><br><span class="line">            <span class="keyword">while</span>(a[j][i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp=a[i][i]/a[j][i];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;=tot;k++) </span><br><span class="line">                &#123;</span><br><span class="line">                    a[i][k]=((a[i][k]-tmp*a[j][k])%mod+mod)%mod;</span><br><span class="line">                    swap(a[i][k],a[j][k]);</span><br><span class="line">                &#125;</span><br><span class="line">                ans*=<span class="number">-1</span>;<span class="comment">//交换两行，值取反</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[i][i]==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        ans=(ans*a[i][i]%mod+mod)%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (ans%mod+mod)%mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Matrix-Tree定理"><a href="#Matrix-Tree定理" class="headerlink" title="Matrix-Tree定理"></a>Matrix-Tree定理</h2><p>这是一个计算一个图的生成树个数的定理，它的计算规则如下：</p>
+<p>如果矩阵不可以出现实数，且要取模的话，就要用辗转相除高斯消元法。</p>
+<h1 id="Matrix-Tree定理"><a href="#Matrix-Tree定理" class="headerlink" title="Matrix-Tree定理"></a>Matrix-Tree定理</h1><p>这是一个计算一个图的生成树个数的定理，它的计算规则如下：</p>
 <p>设D为度数矩阵，其中</p>
 <script type="math/tex; mode=display">
 D[i][j]=0(i\ne j),D[i][i]=i号点的度数</script><p>还有一个邻接矩阵A（这个大家都知道是啥吧）</p>
 <script type="math/tex; mode=display">
-A[i][i]=0,A[i][j]=A[j][i]=i,j的边数</script><p>然后有一个叫<strong>基尔霍夫矩阵</strong>K=D-A</p>
+A[i][i]=0,A[i][j]=A[j][i]=i,j的边数</script><p>定义<strong>基尔霍夫矩阵</strong>K=D-A</p>
 <p>那么，最后的答案就是K<strong>去掉第i行和第i列后的行列式（称为余子式）的值</strong>。</p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="https://www.luogu.org/problemnew/show/P4111" target="_blank" rel="noopener">小Z的房间</a></p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.org/problemnew/show/P4111" target="_blank" rel="noopener">小Z的房间</a></p>
 <p>就是一个裸的Matrix-Tree定理的模板。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">5000</span>,mod=<span class="number">1e9</span>,step[<span class="number">2</span>][<span class="number">2</span>]=&#123;&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">int</span> tot,n,m;</span><br><span class="line"><span class="keyword">int</span> a[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>],id[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">char</span> G[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">det</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=tot;j++)<span class="comment">//把i+1-&gt;tot行的第i列全部消成0 </span></span><br><span class="line">            <span class="keyword">while</span>(a[j][i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp=a[i][i]/a[j][i];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;=tot;k++) </span><br><span class="line">                &#123;</span><br><span class="line">                    a[i][k]=((a[i][k]-tmp*a[j][k])%mod+mod)%mod;</span><br><span class="line">                    swap(a[i][k],a[j][k]);</span><br><span class="line">                &#125;</span><br><span class="line">                ans*=<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[i][i]==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        ans=(ans*a[i][i]%mod+mod)%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (ans%mod+mod)%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,G[i]+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>(G[i][j]==<span class="string">'.'</span>) id[i][j]=++tot;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>(G[i][j]==<span class="string">'.'</span>)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;<span class="number">2</span>;k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">int</span> x=i+step[k][<span class="number">0</span>],y=j+step[k][<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span>(x&lt;<span class="number">1</span>||y&lt;<span class="number">1</span>||x&gt;n||y&gt;m||G[x][y]==<span class="string">'*'</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">int</span> u=id[i][j],v=id[x][y];</span><br><span class="line">                    a[u][u]++; a[v][v]++;</span><br><span class="line">                    a[u][v]--; a[v][u]--;</span><br><span class="line">                &#125;</span><br><span class="line">    tot--;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,det());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -335,8 +342,7 @@ A[i][i]=0,A[i][j]=A[j][i]=i,j的边数</script><p>然后有一个叫<strong>基�
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
-              <a href="/tags/%E8%A1%8C%E5%88%97%E5%BC%8F/" rel="tag"># 行列式</a>
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" rel="tag"># 线性代数</a>
           </div>
 
         
@@ -411,7 +417,7 @@ A[i][i]=0,A[i][j]=A[j][i]=i,j的边数</script><p>然后有一个叫<strong>基�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#行列式及Matrix-Tree定理"><span class="nav-number">1.</span> <span class="nav-text">行列式及Matrix-Tree定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#行列式"><span class="nav-number">1.1.</span> <span class="nav-text">行列式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行列式的定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">行列式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行列式的性质"><span class="nav-number">1.1.2.</span> <span class="nav-text">行列式的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-交换矩阵的两行（列），行列式变号"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">1.交换矩阵的两行（列），行列式变号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-如果矩阵有两行（列）完全相同，则行列式为0"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2.如果矩阵有两行（列）完全相同，则行列式为0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">3.如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">4.如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">5.如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化行列式的求法"><span class="nav-number">1.1.3.</span> <span class="nav-text">优化行列式的求法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-Tree定理"><span class="nav-number">1.2.</span> <span class="nav-text">Matrix-Tree定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题"><span class="nav-number">1.3.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#行列式"><span class="nav-number">1.</span> <span class="nav-text">行列式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">1.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求法"><span class="nav-number">1.3.</span> <span class="nav-text">求法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matrix-Tree定理"><span class="nav-number">2.</span> <span class="nav-text">Matrix-Tree定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">3.</span> <span class="nav-text">例题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

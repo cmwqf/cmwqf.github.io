@@ -2139,112 +2139,6 @@ O(kn^{1-\frac{1}{k}}+logn)</script><p>其中k是维数，如果是1维，就是l
       </tags>
   </entry>
   <entry>
-    <title>浅谈matrix-tree定理</title>
-    <url>/2019/02/03/%E6%B5%85%E8%B0%88matrix-tree%E5%AE%9A%E7%90%86/</url>
-    <content><![CDATA[<h1 id="行列式及Matrix-Tree定理"><a href="#行列式及Matrix-Tree定理" class="headerlink" title="行列式及Matrix-Tree定理"></a>行列式及Matrix-Tree定理</h1><h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><h3 id="行列式的定义"><a href="#行列式的定义" class="headerlink" title="行列式的定义"></a>行列式的定义</h3><p>行列式指一个n阶方阵（行数和列数相等），其值记为<script type="math/tex">det(A)</script>或<script type="math/tex">|A|</script>，它代表一个固定的值，我们就来探究行列式值的求法。</p>
-<p>行列式求值的公式为:</p>
-<script type="math/tex; mode=display">
-det(K)=\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})</script><a id="more"></a>
-<p>其中，P为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合（其实我也不懂），但跟我们内容也没太大关系</p>
-<h3 id="行列式的性质"><a href="#行列式的性质" class="headerlink" title="行列式的性质"></a>行列式的性质</h3><h4 id="1-交换矩阵的两行（列），行列式变号"><a href="#1-交换矩阵的两行（列），行列式变号" class="headerlink" title="1.交换矩阵的两行（列），行列式变号"></a>1.交换矩阵的两行（列），行列式变号</h4><p>这个性质要证明起来还是挺麻烦的，不会~~</p>
-<h4 id="2-如果矩阵有两行（列）完全相同，则行列式为0"><a href="#2-如果矩阵有两行（列）完全相同，则行列式为0" class="headerlink" title="2.如果矩阵有两行（列）完全相同，则行列式为0"></a>2.如果矩阵有两行（列）完全相同，则行列式为0</h4><p>由性质1可知，交换这两行（列），行列式应该变号，而因为这两行（列）相同，所以值应该不变，<script type="math/tex">det(A)=-det(A)</script>那么它的值为0；</p>
-<h4 id="3-如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k"><a href="#3-如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k" class="headerlink" title="3.如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k"></a>3.如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k</h4><h4 id="4-如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0"><a href="#4-如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0" class="headerlink" title="4.如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0"></a>4.如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0</h4><h4 id="5-如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变"><a href="#5-如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变" class="headerlink" title="5.如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变"></a>5.如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变</h4><p>好吧这个我也不会证（丢人了），但是与我们的主题有关的也就这个性质了。。。</p>
-<h3 id="优化行列式的求法"><a href="#优化行列式的求法" class="headerlink" title="优化行列式的求法"></a>优化行列式的求法</h3><p>对于一个行列式，我们根据<strong>性质5</strong>，将它转化为一个上三角矩阵（左下半部分全是0），那么，<strong>其行列式的值就等于对角线上数的乘积</strong>（记住就好了）</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">2</th>
-<th style="text-align:center">2</th>
-<th style="text-align:center">3</th>
-<th style="text-align:center">1</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">3</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">4</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>这就是一个上三角矩阵。</p>
-<p>这样，我们通过高斯消元的办法，把一个矩阵化成这个形式，再把对角线乘起来就可以了。</p>
-<p>如果矩阵不可以出现实数，且要取模的话，就要用辗转相除高斯消元法：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">det</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)<span class="comment">//行数和列数为tot</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=tot;j++)<span class="comment">//把i+1-&gt;tot行的第i列全部消成0 </span></span><br><span class="line">            <span class="keyword">while</span>(a[j][i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp=a[i][i]/a[j][i];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;=tot;k++) </span><br><span class="line">                &#123;</span><br><span class="line">                    a[i][k]=((a[i][k]-tmp*a[j][k])%mod+mod)%mod;</span><br><span class="line">                    swap(a[i][k],a[j][k]);</span><br><span class="line">                &#125;</span><br><span class="line">                ans*=<span class="number">-1</span>;<span class="comment">//交换两行，值取反</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[i][i]==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        ans=(ans*a[i][i]%mod+mod)%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (ans%mod+mod)%mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Matrix-Tree定理"><a href="#Matrix-Tree定理" class="headerlink" title="Matrix-Tree定理"></a>Matrix-Tree定理</h2><p>这是一个计算一个图的生成树个数的定理，它的计算规则如下：</p>
-<p>设D为度数矩阵，其中</p>
-<script type="math/tex; mode=display">
-D[i][j]=0(i\ne j),D[i][i]=i号点的度数</script><p>还有一个邻接矩阵A（这个大家都知道是啥吧）</p>
-<script type="math/tex; mode=display">
-A[i][i]=0,A[i][j]=A[j][i]=i,j的边数</script><p>然后有一个叫<strong>基尔霍夫矩阵</strong>K=D-A</p>
-<p>那么，最后的答案就是K<strong>去掉第i行和第i列后的行列式（称为余子式）的值</strong>。</p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="https://www.luogu.org/problemnew/show/P4111" target="_blank" rel="noopener">小Z的房间</a></p>
-<p>就是一个裸的Matrix-Tree定理的模板。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">5000</span>,mod=<span class="number">1e9</span>,step[<span class="number">2</span>][<span class="number">2</span>]=&#123;&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">int</span> tot,n,m;</span><br><span class="line"><span class="keyword">int</span> a[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>],id[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">char</span> G[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">det</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=tot;j++)<span class="comment">//把i+1-&gt;tot行的第i列全部消成0 </span></span><br><span class="line">            <span class="keyword">while</span>(a[j][i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp=a[i][i]/a[j][i];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;=tot;k++) </span><br><span class="line">                &#123;</span><br><span class="line">                    a[i][k]=((a[i][k]-tmp*a[j][k])%mod+mod)%mod;</span><br><span class="line">                    swap(a[i][k],a[j][k]);</span><br><span class="line">                &#125;</span><br><span class="line">                ans*=<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[i][i]==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        ans=(ans*a[i][i]%mod+mod)%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (ans%mod+mod)%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,G[i]+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>(G[i][j]==<span class="string">'.'</span>) id[i][j]=++tot;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>(G[i][j]==<span class="string">'.'</span>)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;<span class="number">2</span>;k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">int</span> x=i+step[k][<span class="number">0</span>],y=j+step[k][<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span>(x&lt;<span class="number">1</span>||y&lt;<span class="number">1</span>||x&gt;n||y&gt;m||G[x][y]==<span class="string">'*'</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">int</span> u=id[i][j],v=id[x][y];</span><br><span class="line">                    a[u][u]++; a[v][v]++;</span><br><span class="line">                    a[u][v]--; a[v][u]--;</span><br><span class="line">                &#125;</span><br><span class="line">    tot--;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,det());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>图论</tag>
-        <tag>行列式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈min-max容斥</title>
-    <url>/2019/07/25/%E6%B5%85%E8%B0%88min-max%E5%AE%B9%E6%96%A5/</url>
-    <content><![CDATA[<h1 id="Min-max容斥"><a href="#Min-max容斥" class="headerlink" title="Min-max容斥"></a>Min-max容斥</h1><p>早就听闻Min-max容斥的大名，今天学习了一下，感觉妙不可言。</p>
-<p>给定集合<script type="math/tex">S</script>，设<script type="math/tex">max(S)</script>为<script type="math/tex">S</script>中的最大值，<script type="math/tex">min(S)</script>为<script type="math/tex">S</script>中的最小值，那么我们可以得到：</p>
-<script type="math/tex; mode=display">
-max(S)=\sum_{T\subset S}(-1)^{|T|-1}min(T)</script><a id="more"></a>
-<p>举个例子：</p>
-<script type="math/tex; mode=display">
-max(a,b)=min(a)+min(b)-min(a,b)\\
-max(a,b,c)=min(a)+min(b)+min(c)-min(a,b)-min(b,c)-min(a,c)+min(a,b,c)</script><p>我们来看一下，假设<script type="math/tex">a<=b<=c</script>，则后面那个式子右边等于</p>
-<script type="math/tex; mode=display">
-a+b+c-a-b-a+a=c=max(a,b,c)</script><p>是不是感觉很神奇？</p>
-<p><strong>证明：</strong></p>
-<p>我们考虑化简右边。</p>
-<p>我们将集合中所有元素从小到大排好序，然后考虑每个元素的贡献。</p>
-<p>首先，最大的那个元素贡献显然为<script type="math/tex">1</script>，因为只有只存在它本身的集合的<script type="math/tex">min</script>才是它。</p>
-<p>那么，其他的元素的贡献是什么呢？</p>
-<p>是它在排好序的序列中右边的数构成的所有子集（因为这样的话最小值才是它）。</p>
-<p>当<script type="math/tex">n</script>为奇数时，我们考虑每个子集的贡献，对于任意一个子集，我们考虑它的补集，这个补集大小的奇偶性必然与这个子集相反，且每个子集和它的补集时一一对应的，所以只要有一个子集对答案有贡献，它的子集就立刻会产生相反的贡献，相互抵消，显然等式成立。</p>
-<p>当<script type="math/tex">n</script>为偶数时（不为<script type="math/tex">0</script>），我们考虑集合中的一个数<script type="math/tex">x</script>，如果我们选的子集不包括<script type="math/tex">x</script>，剩下的数为奇数个，贡献为<script type="math/tex">0</script>，如果选了<script type="math/tex">x</script>，剩下的数还是为奇数，贡献也是<script type="math/tex">0</script>，所以等式仍然成立。</p>
-<p>我们考虑对偶数的讨论中，我们必须要选出一个数再对剩下的数进行讨论，所以<script type="math/tex">0</script>不适用于这个证明，只有<script type="math/tex">0</script>是例外。</p>
-<p>这样，我们就证明了结论。</p>
-<p>其实，我们还证明了对于<script type="math/tex">\forall n>0</script>，有<script type="math/tex">C(n,0)+C(n,2)+...=C(n,1)+C(n,3)+...</script>。</p>
-<h1 id="K-th-min-max容斥"><a href="#K-th-min-max容斥" class="headerlink" title="K-th min-max容斥"></a>K-th min-max容斥</h1><p>我们计<script type="math/tex">max_k(S)</script>表示<script type="math/tex">S</script>中第<script type="math/tex">k</script>大的元素，那么我们有：</p>
-<script type="math/tex; mode=display">
-max_k(S)=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)min(T)</script><p>具体的证明什么的，我当然看不懂了，记住就好了。</p>
-<h1 id="期望的min-max容斥"><a href="#期望的min-max容斥" class="headerlink" title="期望的min-max容斥"></a>期望的min-max容斥</h1><p>由于期望的线性性，<script type="math/tex">min-max</script>容斥适用于期望。</p>
-<script type="math/tex; mode=display">
-E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))\\
-E(max_k(S))=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)E(min(T))</script><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://cmwqf.github.io/2019/07/25/%E6%8C%89%E4%BD%8D%E6%88%96/">HAOI2015按位或</a></p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>组合数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>浅谈prufer序列</title>
     <url>/2019/06/19/%E6%B5%85%E8%B0%88prufer%E5%BA%8F%E5%88%97/</url>
     <content><![CDATA[<h1 id="什么是prufer序列"><a href="#什么是prufer序列" class="headerlink" title="什么是prufer序列"></a>什么是prufer序列</h1><p><script type="math/tex">prufer</script>序列是用来表示一棵无根树的，一个<script type="math/tex">prufer</script>序列与一个无根树一一对应，换句话说，一个无根树对应唯一一个<script type="math/tex">prufer</script>序列，一个<script type="math/tex">prufer</script>序列也可以还原出唯一的一个无根树。</p>
@@ -3503,6 +3397,119 @@ a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举<script type=
       </categories>
       <tags>
         <tag>莫队</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈Min-max容斥</title>
+    <url>/2019/07/25/%E6%B5%85%E8%B0%88Min-max%E5%AE%B9%E6%96%A5/</url>
+    <content><![CDATA[<h1 id="Min-max容斥"><a href="#Min-max容斥" class="headerlink" title="Min-max容斥"></a>Min-max容斥</h1><p>早就听闻Min-max容斥的大名，今天学习了一下，感觉妙不可言。</p>
+<p>给定集合<script type="math/tex">S</script>，设<script type="math/tex">max(S)</script>为<script type="math/tex">S</script>中的最大值，<script type="math/tex">min(S)</script>为<script type="math/tex">S</script>中的最小值，那么我们可以得到：</p>
+<script type="math/tex; mode=display">
+max(S)=\sum_{T\subset S}(-1)^{|T|-1}min(T)</script><a id="more"></a>
+<p>举个例子：</p>
+<script type="math/tex; mode=display">
+max(a,b)=min(a)+min(b)-min(a,b)\\
+max(a,b,c)=min(a)+min(b)+min(c)-min(a,b)-min(b,c)-min(a,c)+min(a,b,c)</script><p>我们来看一下，假设<script type="math/tex">a<=b<=c</script>，则后面那个式子右边等于</p>
+<script type="math/tex; mode=display">
+a+b+c-a-b-a+a=c=max(a,b,c)</script><p>是不是感觉很神奇？</p>
+<p><strong>证明：</strong></p>
+<p>我们考虑化简右边。</p>
+<p>我们将集合中所有元素从小到大排好序，然后考虑每个元素的贡献。</p>
+<p>首先，最大的那个元素贡献显然为<script type="math/tex">1</script>，因为只有只存在它本身的集合的<script type="math/tex">min</script>才是它。</p>
+<p>那么，其他的元素的贡献是什么呢？</p>
+<p>是它在排好序的序列中右边的数构成的所有子集（因为这样的话最小值才是它）。</p>
+<p>当<script type="math/tex">n</script>为奇数时，我们考虑每个子集的贡献，对于任意一个子集，我们考虑它的补集，这个补集大小的奇偶性必然与这个子集相反，且每个子集和它的补集时一一对应的，所以只要有一个子集对答案有贡献，它的子集就立刻会产生相反的贡献，相互抵消，显然等式成立。</p>
+<p>当<script type="math/tex">n</script>为偶数时（不为<script type="math/tex">0</script>），我们考虑集合中的一个数<script type="math/tex">x</script>，如果我们选的子集不包括<script type="math/tex">x</script>，剩下的数为奇数个，贡献为<script type="math/tex">0</script>，如果选了<script type="math/tex">x</script>，剩下的数还是为奇数，贡献也是<script type="math/tex">0</script>，所以等式仍然成立。</p>
+<p>我们考虑对偶数的讨论中，我们必须要选出一个数再对剩下的数进行讨论，所以<script type="math/tex">0</script>不适用于这个证明，只有<script type="math/tex">0</script>是例外。</p>
+<p>这样，我们就证明了结论。</p>
+<p>其实，我们还证明了对于<script type="math/tex">\forall n>0</script>，有<script type="math/tex">C(n,0)+C(n,2)+...=C(n,1)+C(n,3)+...</script>。</p>
+<h1 id="K-th-min-max容斥"><a href="#K-th-min-max容斥" class="headerlink" title="K-th min-max容斥"></a>K-th min-max容斥</h1><p>我们计<script type="math/tex">max_k(S)</script>表示<script type="math/tex">S</script>中第<script type="math/tex">k</script>大的元素，那么我们有：</p>
+<script type="math/tex; mode=display">
+max_k(S)=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)min(T)</script><p>具体的证明什么的，我当然看不懂了，记住就好了。</p>
+<h1 id="期望的min-max容斥"><a href="#期望的min-max容斥" class="headerlink" title="期望的min-max容斥"></a>期望的min-max容斥</h1><p>由于期望的线性性，<script type="math/tex">min-max</script>容斥适用于期望。</p>
+<script type="math/tex; mode=display">
+E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))\\
+E(max_k(S))=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)E(min(T))</script><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://cmwqf.github.io/2019/07/25/%E6%8C%89%E4%BD%8D%E6%88%96/">HAOI2015按位或</a></p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>组合数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈Matrix-Tree定理</title>
+    <url>/2019/02/03/%E6%B5%85%E8%B0%88Matrix-Tree%E5%AE%9A%E7%90%86/</url>
+    <content><![CDATA[<h1 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>行列式指一个n阶方阵（行数和列数相等）的值，记为<script type="math/tex">det(A)</script>或<script type="math/tex">|A|</script>。</p>
+<p>求行列式的公式为:</p>
+<script type="math/tex; mode=display">
+det(K)=\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})</script><p>其中，P为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合。</p>
+<a id="more"></a>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ol>
+<li><p>交换矩阵的两行（列），行列式变号</p>
+</li>
+<li><p>如果矩阵有两行（列）完全相同，则行列式为0</p>
+</li>
+<li><p>如果某一行（列）都乘以同一个数k，那么新行列式的值等于原行列式的值乘k</p>
+</li>
+<li><p>如果矩阵有两行（列）成比例（比例系数为k），那么行列式为0</p>
+</li>
+<li><p>如果把矩阵某一行（列）加上另一行（列）的k倍，行列式的值不变</p>
+</li>
+</ol>
+<h2 id="求法"><a href="#求法" class="headerlink" title="求法"></a>求法</h2><p>对于一个行列式，我们根据<strong>性质5</strong>，将它转化为一个上三角矩阵（左下半部分全是0），那么，<strong>其行列式的值就等于对角线上数的乘积</strong>（带入求行列式公式即证）。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">2</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这就是一个上三角矩阵。</p>
+<p>这样，我们通过高斯消元的办法，把一个矩阵化成这个形式，再把对角线乘起来就可以了。</p>
+<p>如果矩阵不可以出现实数，且要取模的话，就要用辗转相除高斯消元法。</p>
+<h1 id="Matrix-Tree定理"><a href="#Matrix-Tree定理" class="headerlink" title="Matrix-Tree定理"></a>Matrix-Tree定理</h1><p>这是一个计算一个图的生成树个数的定理，它的计算规则如下：</p>
+<p>设D为度数矩阵，其中</p>
+<script type="math/tex; mode=display">
+D[i][j]=0(i\ne j),D[i][i]=i号点的度数</script><p>还有一个邻接矩阵A（这个大家都知道是啥吧）</p>
+<script type="math/tex; mode=display">
+A[i][i]=0,A[i][j]=A[j][i]=i,j的边数</script><p>定义<strong>基尔霍夫矩阵</strong>K=D-A</p>
+<p>那么，最后的答案就是K<strong>去掉第i行和第i列后的行列式（称为余子式）的值</strong>。</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.org/problemnew/show/P4111" target="_blank" rel="noopener">小Z的房间</a></p>
+<p>就是一个裸的Matrix-Tree定理的模板。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">5000</span>,mod=<span class="number">1e9</span>,step[<span class="number">2</span>][<span class="number">2</span>]=&#123;&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">int</span> tot,n,m;</span><br><span class="line"><span class="keyword">int</span> a[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>],id[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">char</span> G[maxN+<span class="number">1</span>][maxN+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">det</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=tot;j++)<span class="comment">//把i+1-&gt;tot行的第i列全部消成0 </span></span><br><span class="line">            <span class="keyword">while</span>(a[j][i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp=a[i][i]/a[j][i];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;=tot;k++) </span><br><span class="line">                &#123;</span><br><span class="line">                    a[i][k]=((a[i][k]-tmp*a[j][k])%mod+mod)%mod;</span><br><span class="line">                    swap(a[i][k],a[j][k]);</span><br><span class="line">                &#125;</span><br><span class="line">                ans*=<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[i][i]==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        ans=(ans*a[i][i]%mod+mod)%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (ans%mod+mod)%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> int</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,G[i]+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>(G[i][j]==<span class="string">'.'</span>) id[i][j]=++tot;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>(G[i][j]==<span class="string">'.'</span>)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;<span class="number">2</span>;k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">int</span> x=i+step[k][<span class="number">0</span>],y=j+step[k][<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span>(x&lt;<span class="number">1</span>||y&lt;<span class="number">1</span>||x&gt;n||y&gt;m||G[x][y]==<span class="string">'*'</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">int</span> u=id[i][j],v=id[x][y];</span><br><span class="line">                    a[u][u]++; a[v][v]++;</span><br><span class="line">                    a[u][v]--; a[v][u]--;</span><br><span class="line">                &#125;</span><br><span class="line">    tot--;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,det());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>线性代数</tag>
       </tags>
   </entry>
 </search>
