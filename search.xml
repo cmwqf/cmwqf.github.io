@@ -36,58 +36,39 @@ c_1,c_2,c_3,...,c_{len}</script><p>那么首先，很显然地<script type="math
     <url>/2020/04/03/AGC011F-Train-Service-Planning/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有一个<script type="math/tex">n+1</script>个车站的铁路，分别为<script type="math/tex">0,1,...,n</script>号，显然铁路被分为<script type="math/tex">n</script>段，设<script type="math/tex">a_i</script>为火车从第<script type="math/tex">i-1</script>个车站到第<script type="math/tex">i</script>个车站所需时间（也是第<script type="math/tex">i</script>个车站到第<script type="math/tex">i-1</script>个车站的所需时间），每段铁路还有一个参数<script type="math/tex">b_i=1/2</script>表示这段路是单向道还是双向道，如果是单向道，同一时间不能被两辆不同方向的火车经过，如果是双向道就没有限制。</p>
 <p>现在有两种车，一种从<script type="math/tex">0</script>开到<script type="math/tex">n</script>，另外一种从<script type="math/tex">n</script>开到<script type="math/tex">0</script>，且每隔<script type="math/tex">k</script>单位时间就会发一辆车（两种都发），我们的任务是调整两种车在每个站台的停留时间，使得不存在某个时刻两种车在同一个单向道上相遇，求满足这个条件的情况下，<script type="math/tex">0->n</script>的时间与<script type="math/tex">n->0</script>的时间之和的最小值。若无法完成，则输出<script type="math/tex">-1</script>。</p>
-<script type="math/tex; mode=display">n\le 1e5,k,a_i\le 1e9,b_i\le 2$$。
-
+<p>其中<script type="math/tex">n\le 1e5,k,a_i\le 1e9,b_i\le 2</script>。</p>
 <a id="more"></a>
-
-# Solution
-
-非常巧妙的一道题。
-
-首先，我们注意到因为每隔$$k$$发一次车，所以整个问题我们可以看成在$$mod\quad k$$意义下进行的。
-
-然后，我们发现整个问题可以转化为区间问题，即有一些长度固定的区间，然后我们的限制是在模意义下，一些区间不能相交。
-
-具体地，我们设$$p_i$$为第一种车在第$$i$$个车站的停留时间（$$0\le i \le n$$），设$$q_i$$为第二种车在第$$i$$个车站的停留时间，然后设$$P_i$$表示$$p_0,...p_i$$的和，$$Q_i$$同理，$$A_i$$即$$a$$的前缀和。
-
-我们发现第一种车的区间是$$p$$和$$a$$的前缀和的形式，第二种车的每个区间却是$$q$$和$$a$$的后缀和的形式，非常不好处理。
-
-但是我们发现一个好处是整个问题是在取模的意义下进行的。
-
-在时间轴上取模，就相当于拿一个长度为$$k$$的窗口在时间轴上滑动，不管窗口在什么位置，截到的时间及其上面发生的事件都是等价的。
-
-我们设窗口截到的最右边是整个事件结束，那么$$q_0$$的意义相当于第二种车到达$$0$$号站后再等待$$q_0$$时间才得以结束。
-
-为了与第一种车的区间形式相似，我们考虑对第二种车进行时光倒流，把第二种车也看成从$$0->n$$，然后看成它在$$0$$号车站等待了$$-q_0$$单位时间，然后到达$$1$$号车站的时间为$$-q_0-a_1$$，以此类推。
-
-通过这样的操作，我们将第一种车和第二种车的区间形式都统一为前缀和的形式。
-
-更具体地，第一种车在第$$i-1$$到第$$i$$个车站的时间区间和第二种车从第$$i$$个车站到第$$i - 1$$个的时间区间分别为为</script><p>(P_{i-1}+A_{i-1},P_{i-1}+A_i)\\<br>(-Q_{i-1}-A_i,-Q_{i-1}-A_{i-1})</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>非常巧妙的一道题。</p>
+<p>首先，我们注意到因为每隔<script type="math/tex">k</script>发一次车，所以整个问题我们可以看成在<script type="math/tex">mod\quad k</script>意义下进行的。</p>
+<p>然后，我们发现整个问题可以转化为区间问题，即有一些长度固定的区间，然后我们的限制是在模意义下，一些区间不能相交。</p>
+<p>具体地，我们设<script type="math/tex">p_i</script>为第一种车在第<script type="math/tex">i</script>个车站的停留时间（<script type="math/tex">0\le i \le n</script>），设<script type="math/tex">q_i</script>为第二种车在第<script type="math/tex">i</script>个车站的停留时间，然后设<script type="math/tex">P_i</script>表示<script type="math/tex">p_0,...p_i</script>的和，<script type="math/tex">Q_i</script>同理，<script type="math/tex">A_i</script>即<script type="math/tex">a</script>的前缀和。</p>
+<p>我们发现第一种车的区间是<script type="math/tex">p</script>和<script type="math/tex">a</script>的前缀和的形式，第二种车的每个区间却是<script type="math/tex">q</script>和<script type="math/tex">a</script>的后缀和的形式，非常不好处理。</p>
+<p>但是我们发现一个好处是整个问题是在取模的意义下进行的。</p>
+<p>在时间轴上取模，就相当于拿一个长度为<script type="math/tex">k</script>的窗口在时间轴上滑动，不管窗口在什么位置，截到的时间及其上面发生的事件都是等价的。</p>
+<p>我们设窗口截到的最右边是整个事件结束，那么<script type="math/tex">q_0</script>的意义相当于第二种车到达<script type="math/tex">0</script>号站后再等待<script type="math/tex">q_0</script>时间才得以结束。</p>
+<p>为了与第一种车的区间形式相似，我们考虑对第二种车进行时光倒流，把第二种车也看成从<script type="math/tex">0->n</script>，然后看成它在<script type="math/tex">0</script>号车站等待了<script type="math/tex">-q_0</script>单位时间，然后到达<script type="math/tex">1</script>号车站的时间为<script type="math/tex">-q_0-a_1</script>，以此类推。</p>
+<p>通过这样的操作，我们将第一种车和第二种车的区间形式都统一为前缀和的形式。</p>
+<p>更具体地，第一种车在第<script type="math/tex">i-1</script>到第<script type="math/tex">i</script>个车站的时间区间和第二种车从第<script type="math/tex">i</script>个车站到第<script type="math/tex">i - 1</script>个的时间区间分别为为</p>
 <script type="math/tex; mode=display">
-这样看起来形式非常统一，我们后面也会很好处理。
-
-现在，我们就是要求在取模意义下，这两个区间不相交。因为区间相交比较好算（好理解），我们先转化为区间相交，再取补集。
-
-区间相交，即其中一个区间的端点在另一个区间内。
-
-我们列出以下不等式</script><p>-Q_{i-1}-A_i&lt;P_{i-1}+A_{i-1}&lt;-Q_{i-1}-A_{i-1}\\<br>-Q_{i-1}-A_i&lt;P_{i-1}+A_i&lt;-Q_{i-1}-A_{i-1}</p>
+(P_{i-1}+A_{i-1},P_{i-1}+A_i)\\
+(-Q_{i-1}-A_i,-Q_{i-1}-A_{i-1})</script><p>这样看起来形式非常统一，我们后面也会很好处理。</p>
+<p>现在，我们就是要求在取模意义下，这两个区间不相交。因为区间相交比较好算（好理解），我们先转化为区间相交，再取补集。</p>
+<p>区间相交，即其中一个区间的端点在另一个区间内。</p>
+<p>我们列出以下不等式</p>
 <script type="math/tex; mode=display">
-两个不等式是或的关系，即只要一个成立即可。
-
-这两个不等式肯定是在模的意义下成立，但是在模的意义下理解不等式又比较困难，我们这么来思考模意义下不等式的含义。
-
-实际上，在模意义下，$$a<b<c$$的意义为在$$(a,c)$$中存在一个数，与$$b$$同余。这样理解起来就要好多了！
-
-那么显然$$a<b<c$$等价于$$a+d<b+d<c+d$$（考虑上面所说的意义即可），即这个不等式可以按照解普通不等式的方法来解。
-
-那么解得</script><p>-2A_i&lt;P_{i-1}+Q_{i-1}&lt;-2A_{i-1}</p>
+-Q_{i-1}-A_i<P_{i-1}+A_{i-1}<-Q_{i-1}-A_{i-1}\\
+-Q_{i-1}-A_i<P_{i-1}+A_i<-Q_{i-1}-A_{i-1}</script><p>两个不等式是或的关系，即只要一个成立即可。</p>
+<p>这两个不等式肯定是在模的意义下成立，但是在模的意义下理解不等式又比较困难，我们这么来思考模意义下不等式的含义。</p>
+<p>实际上，在模意义下，<script type="math/tex">a<b<c</script>的意义为在<script type="math/tex">(a,c)</script>中存在一个数，与<script type="math/tex">b</script>同余。这样理解起来就要好多了！</p>
+<p>那么显然<script type="math/tex">a<b<c</script>等价于<script type="math/tex">a+d<b+d<c+d</script>（考虑上面所说的意义即可），即这个不等式可以按照解普通不等式的方法来解。</p>
+<p>那么解得</p>
 <script type="math/tex; mode=display">
-那么其补集就是在模意义下，</script><p>P_{i-1}+Q_{i-1}\in [-2A_{i-1},-2A_i]</p>
+-2A_i<P_{i-1}+Q_{i-1}<-2A_{i-1}</script><p>那么其补集就是在模意义下，</p>
 <script type="math/tex; mode=display">
-这样一来，因为$$A$$是已知的，所以我们就能确定$$P_i+Q_i$$的范围。
-
-因为我们最终要求最小化的是</script><p>P_{n-1}+Q_{n-1}-p_0-q_0</p>
-<p>$$<br>所以问题就转化成十分可做的形式了！</p>
+P_{i-1}+Q_{i-1}\in [-2A_{i-1},-2A_i]</script><p>这样一来，因为<script type="math/tex">A</script>是已知的，所以我们就能确定<script type="math/tex">P_i+Q_i</script>的范围。</p>
+<p>因为我们最终要求最小化的是</p>
+<script type="math/tex; mode=display">
+P_{n-1}+Q_{n-1}-p_0-q_0</script><p>所以问题就转化成十分可做的形式了！</p>
 <p>这样，问题转化为：</p>
 <p>有一个数列<script type="math/tex">t</script>，满足<script type="math/tex">t[i]\ge t[i-1]</script>，然后对于某些特定的<script type="math/tex">i</script>（<script type="math/tex">b_i=1</script>），要满足<script type="math/tex">t[i]\quad mod\quad k\in [L[i],R[i]]</script>。求<script type="math/tex">t_n-t_1</script>的最小值。</p>
 <p>我们考虑用<script type="math/tex">dp</script>来解决，设<script type="math/tex">f[i][j]</script>表示处理了前<script type="math/tex">i</script>个，当前<script type="math/tex">t[i]\quad mod\quad k=j</script>时最小的<script type="math/tex">t[i]</script>。（对于<script type="math/tex">-t_1</script>的限制可以直接把<script type="math/tex">f[1]</script>中满足条件的变成<script type="math/tex">0</script>，别的变成<script type="math/tex">inf</script>），那么转移的时候，首先如果本来就在<script type="math/tex">[L[i],R[i]]</script>中的自然不会改变，其他的因为只能往一个方向走，必然是走到<script type="math/tex">L[i]</script>处，那么用不在区间中的步数最小值来更新<script type="math/tex">L[i]</script>的值，并把不在区间中的全部赋值为<script type="math/tex">inf</script>即可。</p>
@@ -113,7 +94,8 @@ c_1,c_2,c_3,...,c_{len}</script><p>那么首先，很显然地<script type="math
     <title>AGC021F Trinity</title>
     <url>/2020/04/02/AGC021F-Trinity/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有一个<script type="math/tex">n\times m</script>的网格，你要把它每个格子涂成黑或白色，定义<script type="math/tex">A_i</script>为第<script type="math/tex">i</script>行第一个涂成黑色的列，<script type="math/tex">B_i</script>为第<script type="math/tex">i</script>列第一个涂成黑色的行，<script type="math/tex">C_i</script>表示第<script type="math/tex">i</script>列最后一个涂成黑色的行，问有多少种可能的<script type="math/tex">(A,B,C)</script>组合？</p>
-<script type="math/tex; mode=display">n\le 8000,m\le 200</script><a id="more"></a>
+<p>其中<script type="math/tex">n\le 8000,m\le 200</script></p>
+<a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>因为列的限制要多于行的限制，所以我们可以按列的顺序来考虑，每次考虑当前列行的选取情况。</p>
 <p>考虑<script type="math/tex">dp</script>，设<script type="math/tex">f[i][j]</script>表示前<script type="math/tex">i</script>列，已经有<script type="math/tex">j</script>行被选的方案数。</p>
 <p>然后我们发现，我们并不好转移当前列的第一个和最后一个选的是什么。</p>
@@ -166,7 +148,8 @@ c[n]=\sum_{i=0}^{n-1}\frac{1}{(n-1-(i-3))!}*\frac{a[i]}{i!}</script><p>直接<sc
     <title>AGC020C Median Sum</title>
     <url>/2020/01/08/AGC020C-Median-Sum/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定<script type="math/tex">n</script>个数<script type="math/tex">a_i</script>，求这<script type="math/tex">n</script>个数构成的<script type="math/tex">2^n-1</script>个子集的和的中位数。</p>
-<script type="math/tex; mode=display">(n\le 2000,a_i\le 2000)</script><a id="more"></a>
+<p>其中<script type="math/tex">n\le 2000,a_i\le 2000</script></p>
+<a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p><script type="math/tex">Atcoder</script>的题面永远那么简单，思维难度依然那么高。。。</p>
 <p>看到这个中位数就感到很头疼，这么大的范围，感觉可能就是一个结论题。</p>
 <p>确实是结论题，只是想不到。。。</p>
@@ -313,32 +296,25 @@ w(s,nxt)=\sum_t p(s,t)*w(s,t)</script><p>实际上，<script type="math/tex">w(s
 <p>那么，所有的贡献就可以写成</p>
 <script type="math/tex; mode=display">
 \sum_s P(start->s)*w(s,nxt)</script><p>这样，我们就证明了。实际上，这个推演方法可以推广到很多相关的题目中。</p>
-<script type="math/tex; mode=display">w(s,nxt)$$等于什么呢？我们设其为$$W$$，所有$$a_i$$的和为$$S$$，所有$$i\in T$$的$$a_i$$和为$$S_T$$，则</script><p>W=\frac{S_T}{S}<em>1+(1-\frac{S_T}{S})</em>(W+1)\\<br>W=\frac{S}{S_T}</p>
+<p>那么<script type="math/tex">w(s,nxt)</script>等于什么呢？我们设其为<script type="math/tex">W</script>，所有<script type="math/tex">a_i</script>的和为<script type="math/tex">S</script>，所有<script type="math/tex">i\in T</script>的<script type="math/tex">a_i</script>和为<script type="math/tex">S_T</script>，则</p>
 <script type="math/tex; mode=display">
-我们现在的问题，就是求对于某个$$s$$，$$P(start->s)$$的值。
-
-好，这又是这道题的另一个难点！
-
-我们设$$X=\sum x_i$$，我们考虑这个随机数生成器生成的序列$$t_1,t_2,...$$，那么，我们考虑的是这个序列中前$$X$$个出现$$T$$中存在的数的位置构成的数列。
-
-别的位置生成任何一个数我们都不关心，概率为$$1$$，对我们要考虑的东西没有影响。
-
-所以我们相当于单独把这$$X$$个数拿来讨论。
-
-我们要考虑的，是这$$X$$个数中对于每一个$$i$$，满足$$i$$出现了$$x_i$$次的概率。
-
-因为这$$X$$个数只会出现$$T$$中有的数，所以别的数我们一概忽略，这$$X$$个数中每个数出现的概率为$$\frac{a_i}{S_T}$$。
-
-那么总概率为</script><p>\frac{X!}{\prod_{i\in T}x_i!}\prod_{i\in T}(\frac{a_i}{S_T})^{x_i}</p>
+W=\frac{S_T}{S}*1+(1-\frac{S_T}{S})*(W+1)\\
+W=\frac{S}{S_T}</script><p>我们现在的问题，就是求对于某个<script type="math/tex">s</script>，<script type="math/tex">P(start->s)</script>的值。</p>
+<p>好，这又是这道题的另一个难点！</p>
+<p>我们设<script type="math/tex">X=\sum x_i</script>，我们考虑这个随机数生成器生成的序列<script type="math/tex">t_1,t_2,...</script>，那么，我们考虑的是这个序列中前<script type="math/tex">X</script>个出现<script type="math/tex">T</script>中存在的数的位置构成的数列。</p>
+<p>别的位置生成任何一个数我们都不关心，概率为<script type="math/tex">1</script>，对我们要考虑的东西没有影响。</p>
+<p>所以我们相当于单独把这<script type="math/tex">X</script>个数拿来讨论。</p>
+<p>我们要考虑的，是这<script type="math/tex">X</script>个数中对于每一个<script type="math/tex">i</script>，满足<script type="math/tex">i</script>出现了<script type="math/tex">x_i</script>次的概率。</p>
+<p>因为这<script type="math/tex">X</script>个数只会出现<script type="math/tex">T</script>中有的数，所以别的数我们一概忽略，这<script type="math/tex">X</script>个数中每个数出现的概率为<script type="math/tex">\frac{a_i}{S_T}</script>。</p>
+<p>那么总概率为</p>
 <script type="math/tex; mode=display">
-为什么呢？我们考虑后面那个式子，是我们钦定了这$$X$$个数出现的顺序并且每个$$i$$出现$$x_i$$次的概率，但是这些数是可以无序出现的，所以我们要乘以这些东西出现的顺序，就是前面那一项。
-
-我们考虑如果枚举$$T$$的话时间复杂度是不现实的，
-
-所以我们现在考虑把**最后的答案$$ANS$$**拆成每个状态$$s$$的贡献。
-
-我们每一个$$s$$对于一个$$T$$的贡献是</script><p>\frac{S}{S_T}<em>\frac{X!}{\prod_{i\in T}x_i!}\prod_{i\in T}(\frac{a_i}{S_T})^{x_i}\\<br>=S</em>X!*(\frac{1}{S_T})^{X+1}\prod_{i\in T}\frac{a_i^{x_i}}{x_i!}</p>
-<p><script type="math/tex">好，我们观察这个式子，发现实际上前面只与</script>X<script type="math/tex">和</script>S_T<script type="math/tex">有关，后面才与每个数相关，而奇妙的时候，后面每个数的贡献都是独立的，与</script>T$$这个集合总体无关。</p>
+\frac{X!}{\prod_{i\in T}x_i!}\prod_{i\in T}(\frac{a_i}{S_T})^{x_i}</script><p>为什么呢？我们考虑后面那个式子，是我们钦定了这<script type="math/tex">X</script>个数出现的顺序并且每个<script type="math/tex">i</script>出现<script type="math/tex">x_i</script>次的概率，但是这些数是可以无序出现的，所以我们要乘以这些东西出现的顺序，就是前面那一项。</p>
+<p>我们考虑如果枚举<script type="math/tex">T</script>的话时间复杂度是不现实的，</p>
+<p>所以我们现在考虑把<strong>最后的答案<script type="math/tex">ANS</script></strong>拆成每个状态<script type="math/tex">s</script>的贡献。</p>
+<p>我们每一个<script type="math/tex">s</script>对于一个<script type="math/tex">T</script>的贡献是</p>
+<script type="math/tex; mode=display">
+\frac{S}{S_T}*\frac{X!}{\prod_{i\in T}x_i!}\prod_{i\in T}(\frac{a_i}{S_T})^{x_i}\\
+=S*X!*(\frac{1}{S_T})^{X+1}\prod_{i\in T}\frac{a_i^{x_i}}{x_i!}</script><p>好，我们观察这个式子，发现实际上前面只与<script type="math/tex">X</script>和<script type="math/tex">S_T</script>有关，后面才与每个数相关，而奇妙的时候，后面每个数的贡献都是独立的，与<script type="math/tex">T</script>这个集合总体无关。</p>
 <p>接下来也十分巧妙！</p>
 <p>那么，我们考虑<script type="math/tex">dp</script>，设<script type="math/tex">f[i][j]</script>表示所有的<script type="math/tex">s</script>满足<script type="math/tex">S_T=i</script>，<script type="math/tex">X=j</script>的容斥系数之和是多少。</p>
 <p>我们枚举每一位选或不选来转移，如果不选，就继承上一次的答案，如果选了，因为多加了一个元素，所以容斥系数取反，然后转移一下就好了，细节见代码。</p>
@@ -758,37 +734,31 @@ d=p1^{b1}*p2^{b2}*...*pk^{bk}</script><p>根据<script type="math/tex">\mu</scri
     <url>/2020/01/09/BZOJ3328-PYXFIB/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定<script type="math/tex">n,k,p</script>且保证<script type="math/tex">k|p-1</script>，求</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}</script><script type="math/tex; mode=display">Fib$$指斐波那契数列。$$n\le 1e18,k\le 2e5,p\le 1e9</script><a id="more"></a>
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>又一次被打败了。。。</p>
-<p>看这个式子形式就很不好搞，我们换一种</p>
+\sum_{i=0}^{\lfloor \frac{n}{k}\rfloor}C_n^{i*k}Fib_{i*k}</script><script type="math/tex; mode=display">Fib$$指斐波那契数列。其中$$n\le 1e18,k\le 2e5,p\le 1e9$$。
+
+<a id="more"></a>
+
+# Solution
+
+又一次被打败了。。。
+
+看这个式子形式就很不好搞，我们换一种</script><p>\sum_{i=0}^n[k|i]C_n^iFib_i</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^n[k|i]C_n^iFib_i</script><p>一般看到组合数和某个数相乘之和，首先想到二项式定理，考虑把<script type="math/tex">Fib_i</script>化成<script type="math/tex">x^i</script>的形式。</p>
-<p>注意到</p>
+一般看到组合数和某个数相乘之和，首先想到二项式定理，考虑把$$Fib_i$$化成$$x^i$$的形式。
+
+注意到</script><p>Fib_i=(A^i)_{1,1}</p>
 <script type="math/tex; mode=display">
-Fib_i=(A^i)_{1,1}</script><p>，其中</p>
+
+，其中</script><p>A=\left[<br>\begin{matrix}<br>1 &amp; 1\\<br>1 &amp; 0<br>\end{matrix}<br>\right]</p>
 <script type="math/tex; mode=display">
-A=\left[
-\begin{matrix}
-1 & 1\\
-1 & 0
-\end{matrix}
-\right]</script><p>这样，将二项式定理推广到矩阵形式，我们有</p>
+这样，将二项式定理推广到矩阵形式，我们有</script><p>\sum_{i=0}^nC_n^iFib_i=(A+I)^n_{1,1},<br>I=<br>\left[<br>\begin{matrix}<br>1 &amp; 0\\<br>0 &amp; 1<br>\end{matrix}<br>\right]</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^nC_n^iFib_i=(A+I)^n_{1,1},
-I=
-\left[
-\begin{matrix}
-1 & 0\\
-0 & 1
-\end{matrix}
-\right]</script><p>然而，那个<script type="math/tex">[k|i]</script>有什么用呢？</p>
-<p>如果你看了上面那篇<strong>原根及其应用</strong>，你就会明白，</p>
+然而，那个$$[k|i]$$有什么用呢？
+
+如果你看了上面那篇**原根及其应用**，你就会明白，</script><p>[k|i]=\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij},w_k=g^{\frac{p-1}{k}}</p>
 <script type="math/tex; mode=display">
-[k|i]=\frac{1}{k}\sum_{j=0}^{k-1}w_k^{ij},w_k=g^{\frac{p-1}{k}}</script><p>这样，原式等于</p>
-<script type="math/tex; mode=display">
-\frac{1}{k}\sum_{i=0}^n\sum_{j=0}^{k-1}w_k^{ij}C_n^iFib_i\\
-=\frac{1}{k}\sum_{j=0}^{k-1}\sum_{i=0}^{n}w_k^{ij}C_n^iFib_i\\
-=\frac{1}{k}\sum_{j=0}^{k-1}(A*w_k^{j}+I)^n_{1,1}</script><p>然后直接矩阵快速幂即可。</p>
+这样，原式等于</script><p>\frac{1}{k}\sum_{i=0}^n\sum_{j=0}^{k-1}w_k^{ij}C_n^iFib_i\\<br>=\frac{1}{k}\sum_{j=0}^{k-1}\sum_{i=0}^{n}w_k^{ij}C_n^iFib_i\\<br>=\frac{1}{k}\sum_{j=0}^{k-1}(A*w_k^{j}+I)^n_{1,1}</p>
+<p>$$<br>然后直接矩阵快速幂即可。</p>
 <p>复杂度<script type="math/tex">O(klogn)</script>。</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line">LL mod, n, k;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">matrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    LL a[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"> </span><br><span class="line">    matrix() &#123; <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a)); &#125;</span><br><span class="line"> </span><br><span class="line">    matrix <span class="keyword">operator</span> * (matrix rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        matrix ans;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                    ans.a[i][j] = (ans.a[i][j] + a[i][k] * rhs.a[k][j] % mod) % mod;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">mpow</span><span class="params">(LL a, LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = ans * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">check</span><span class="params">(LL g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL x = mod - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">2</span>; i * i &lt;= x; i++)</span><br><span class="line">        <span class="keyword">if</span>(x % i == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(mpow(g, (mod - <span class="number">1</span>) / i) == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">while</span>(x % i == <span class="number">0</span>) x /= i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(x != <span class="number">1</span> &amp;&amp; mpow(g, (mod - <span class="number">1</span>) / x) == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">solve</span><span class="params">(LL w, LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    matrix a;</span><br><span class="line">    a.a[<span class="number">0</span>][<span class="number">0</span>] = w + <span class="number">1</span>, a.a[<span class="number">0</span>][<span class="number">1</span>] = w;</span><br><span class="line">    a.a[<span class="number">1</span>][<span class="number">0</span>] = w, a.a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    matrix ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) ans.a[i][i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = ans * a;</span><br><span class="line">        a = a * a;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans.a[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T --)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld %lld %lld"</span>, &amp;n, &amp;k, &amp;mod);</span><br><span class="line">        LL ans = <span class="number">0</span>, g = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>( !check(g) ) g ++;</span><br><span class="line">        LL w = <span class="number">1</span>, wn = mpow(g, (mod - <span class="number">1</span>) / k);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++, w = w * wn % mod) ans = (ans + solve(w, n)) % mod;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans * mpow(k, mod - <span class="number">2</span>) % mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -1080,7 +1050,8 @@ ans=\sum_{j=0}^n2^j*(j!)*(f*g)(j)</script><p>然后。。就好了。</p>
     <title>[BZOJ4762]最小集合</title>
     <url>/2020/02/21/BZOJ4762-%E6%9C%80%E5%B0%8F%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>定义一个非空集合是合法的，当且仅当它满足以下两个条件。<br>1、集合内所有元素<script type="math/tex">and</script>和为<script type="math/tex">0</script><br>2、它的非空子集中仅有它本身满足<script type="math/tex">1</script><br>给出一个集合<script type="math/tex">S</script>，求它的合法非空子集数。</p>
-<script type="math/tex; mode=display">n\le 1000,a_i<1024</script><a id="more"></a>
+<p>其中<script type="math/tex">n\le 1000,a_i<1024</script></p>
+<a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>真是一道神仙题！</p>
 <p>首先，由于<script type="math/tex">and</script>不太好操作，我们把所有运算转化成<script type="math/tex">or</script>运算。</p>
 <p>我们把所有的数取反（<script type="math/tex">\oplus 1023</script>)，那么，条件<script type="math/tex">1</script>：<script type="math/tex">and</script>和为<script type="math/tex">0</script>等价于新的数<script type="math/tex">or</script>起来等于<script type="math/tex">1023</script>。</p>
@@ -1245,7 +1216,8 @@ ans=n*2^{C(n-1,2)}*\sum_{i=0}^{n-1}S(k,i)*i!*C(n-1,i)*2^{n-i-1}\\
     <title>[LOJ3120]珍珠</title>
     <url>/2020/03/19/LOJ3120-%E7%8F%8D%E7%8F%A0/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有一个<script type="math/tex">n</script>个数的序列，每个数取值在<script type="math/tex">[1,D]</script>之间，问有多少种可能的序列使得相同的数有至少<script type="math/tex">m</script>对（一个数只能出现在一对里面）。</p>
-<script type="math/tex; mode=display">D\le 1e5,n,m\le 1e9</script><p><strong>本题来源于CTS2019。</strong></p>
+<p>其中<script type="math/tex">D\le 1e5,n,m\le 1e9</script></p>
+<p><strong>本题来源于CTS2019。</strong></p>
 <a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>我们假设不考虑顺序，设第<script type="math/tex">c</script>种数有<script type="math/tex">cnt[c]</script>个，那么题目相当于</p>
 <script type="math/tex; mode=display">
@@ -1295,7 +1267,8 @@ f[k]=n!*\binom{D}{k}*[x^n](\frac{e^x-e^{-x}}{2})^k(e^{x})^{D-k}\\
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有<script type="math/tex">2n</script>个数，每个数在<script type="math/tex">[1,n]</script>之间，且<script type="math/tex">[1,n]</script>中每个数出现恰好两次。</p>
 <p>进行<script type="math/tex">n</script>次操作，每次操作，对于每个<script type="math/tex">[1,n]</script>的数，如果数列中存在这个数，找出这个数出现在最右边的位置<script type="math/tex">x_0</script>，然后将除了<script type="math/tex">x_0</script>以外所有出现这个数的位置上的数减一。</p>
 <p>那么，最后会剩下<script type="math/tex">n</script>个非零的数。现在给出最后这<script type="math/tex">n</script>个数的位置（只给位置，不知道数），问有多少种初始序列，使得经过<script type="math/tex">n</script>次操作后非<script type="math/tex">0</script>的数的位置是给定的这<script type="math/tex">n</script>个位置。</p>
-<script type="math/tex; mode=display">n\le 600</script><p><strong>本题来源于JOISC2020 D2T3</strong>。</p>
+<p>其中<script type="math/tex">n\le 600</script></p>
+<p><strong>本题来源于JOISC2020 D2T3</strong>。</p>
 <a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>非常巧妙的一道题。</p>
 <p>首先考虑如果给你一个长度<script type="math/tex">2n</script>的序列，怎样判断最后留下来的是否是给定的<script type="math/tex">n</script>个位置。</p>
@@ -1359,56 +1332,42 @@ g[i+1][j+2]+=g[i][j]*(j+1)*(j+2)</script><p>那么我们需要的就是<script t
     <title>[LOJ3284]Exercise</title>
     <url>/2020/04/10/LOJ3284-Exercise/</url>
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>给定<script type="math/tex">n,m</script>，设一个<script type="math/tex">1</script>到<script type="math/tex">n</script>的置换<script type="math/tex">P</script>，定义<script type="math/tex">f(P)</script>是满足<script type="math/tex">P^x=I</script>的最小的<script type="math/tex">x</script>（<script type="math/tex">I</script>是单位置换），求<script type="math/tex">\prod_P f(P)\mod m</script>。</p>
-<script type="math/tex; mode=display">n\le 7500,1e8\le m\le 1e9+7$$，且$$m$$为质数。
-
-**本题来源于USACO 2020 US Open Platinum T2。**
-
+<p>其中<script type="math/tex">n\le 7500,1e8\le m\le 1e9+7</script>，且<script type="math/tex">m</script>为质数。</p>
+<p><strong>本题来源于USACO 2020 US Open Platinum T2。</strong></p>
 <a id="more"></a>
-
-# Solution
-
-注意到$$f(P)$$实际上就是$$P$$所有循环长度的最小公倍数。
-
-直接求最小公倍数似乎无从下手，但题目要求的是乘积，所以我们可以枚举质数，然后计算每一个质数对答案的贡献。
-
-对于一个$$p$$，定义$$ord_p(x)$$为$$x$$质因子分解后$$p$$的指数，那么我们要计算的是</script><p>\sum_Smax_{a\in S} ord_p(a)</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>注意到<script type="math/tex">f(P)</script>实际上就是<script type="math/tex">P</script>所有循环长度的最小公倍数。</p>
+<p>直接求最小公倍数似乎无从下手，但题目要求的是乘积，所以我们可以枚举质数，然后计算每一个质数对答案的贡献。</p>
+<p>对于一个<script type="math/tex">p</script>，定义<script type="math/tex">ord_p(x)</script>为<script type="math/tex">x</script>质因子分解后<script type="math/tex">p</script>的指数，那么我们要计算的是</p>
 <script type="math/tex; mode=display">
-对于$$S$$，我们要满足</script><p>\sum_{a\in S}a=n</p>
+\sum_Smax_{a\in S} ord_p(a)</script><p>对于<script type="math/tex">S</script>，我们要满足</p>
 <script type="math/tex; mode=display">
-根据套路，我们把换成</script><p>\sum_{k\ge 1}k*\sum_S[max_{a\in S}ord_p(a)=k]</p>
+\sum_{a\in S}a=n</script><p>根据套路，我们把换成</p>
 <script type="math/tex; mode=display">
-这个时候，我们肯定是要对这个进行$$dp$$的，我们每次要枚举加入的数。
-
-我们发现这个$$max$$对复杂度非常不友好，要$$O(n)$$地进行枚举，而如果改成$$min$$的话，我们枚举量就可以缩减为$$\frac{n}{p^k}$$，大大减少了复杂度。怎么把$$max$$改成$$min$$呢？$$min-max$$容斥！
-
-想不到吧，$$min-max$$容斥不仅能用在期望上，有时还能优化复杂度！
-
-那么我们就变为</script><p>\sum_{k\ge 1}k<em>\sum_S\sum_{T\subset S}(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]\\<br>=\sum_{k\ge 1}k</em>\sum_T(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]*coef(T)</p>
+\sum_{k\ge 1}k*\sum_S[max_{a\in S}ord_p(a)=k]</script><p>这个时候，我们肯定是要对这个进行<script type="math/tex">dp</script>的，我们每次要枚举加入的数。</p>
+<p>我们发现这个<script type="math/tex">max</script>对复杂度非常不友好，要<script type="math/tex">O(n)</script>地进行枚举，而如果改成<script type="math/tex">min</script>的话，我们枚举量就可以缩减为<script type="math/tex">\frac{n}{p^k}</script>，大大减少了复杂度。怎么把<script type="math/tex">max</script>改成<script type="math/tex">min</script>呢？<script type="math/tex">min-max</script>容斥！</p>
+<p>想不到吧，<script type="math/tex">min-max</script>容斥不仅能用在期望上，有时还能优化复杂度！</p>
+<p>那么我们就变为</p>
 <script type="math/tex; mode=display">
-这个$$coef(T)$$就是$$T$$对答案的贡献系数，我们后面再说。
-
-我们发现这个$$k$$非常地不好弄，那么我们还有一个常用办法，把式子转变成：</script><p>\sum_{k\ge 1}\sum_T(-1)^{|T|-1}[ord_p(a)\ge k,\forall a\in T]*coef(T)</p>
+\sum_{k\ge 1}k*\sum_S\sum_{T\subset S}(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]\\
+=\sum_{k\ge 1}k*\sum_T(-1)^{|T|-1}[min_{a\in T}ord_p(a)=k]*coef(T)</script><p>这个<script type="math/tex">coef(T)</script>就是<script type="math/tex">T</script>对答案的贡献系数，我们后面再说。</p>
+<p>我们发现这个<script type="math/tex">k</script>非常地不好弄，那么我们还有一个常用办法，把式子转变成：</p>
 <script type="math/tex; mode=display">
-这个时候，一个$$T$$满足$$min(ord_p(a))=k$$，它对答案依然会产生$$k$$的贡献。这是非常常用的方法。这也是我们为什么把$$max$$转为$$min$$的重要原因！
-
-我们现在来看$$coef(T)$$，实际上，它的含义为剩下的随便变成若干环排列。我们记$$sum(T)$$为$$T$$中所有元素的和，那么首先我们要从$$n$$个中选出$$sum(T)$$个，先乘以$$\binom{n}{sum(T)}$$，现在来看剩下$$n-sum(T)$$个数构成若干环排列的方案数。
-
-我们设$$g(m)$$表示$$m$$个数分成若干环排列的方案数，那么我们每次考虑加入一个数，和第一类斯特林数推导类似的思想，我们考虑它放在哪：一种情况，它自立门户，单独成为一个环排列，另外一种情况，它放在前面某个数的一侧。那么递推式就有了：</script><p>g(m)=(m-1)<em>g(m-1)+g(m-1)</em>1=m*g(m-1)</p>
+\sum_{k\ge 1}\sum_T(-1)^{|T|-1}[ord_p(a)\ge k,\forall a\in T]*coef(T)</script><p>这个时候，一个<script type="math/tex">T</script>满足<script type="math/tex">min(ord_p(a))=k</script>，它对答案依然会产生<script type="math/tex">k</script>的贡献。这是非常常用的方法。这也是我们为什么把<script type="math/tex">max</script>转为<script type="math/tex">min</script>的重要原因！</p>
+<p>我们现在来看<script type="math/tex">coef(T)</script>，实际上，它的含义为剩下的随便变成若干环排列。我们记<script type="math/tex">sum(T)</script>为<script type="math/tex">T</script>中所有元素的和，那么首先我们要从<script type="math/tex">n</script>个中选出<script type="math/tex">sum(T)</script>个，先乘以<script type="math/tex">\binom{n}{sum(T)}</script>，现在来看剩下<script type="math/tex">n-sum(T)</script>个数构成若干环排列的方案数。</p>
+<p>我们设<script type="math/tex">g(m)</script>表示<script type="math/tex">m</script>个数分成若干环排列的方案数，那么我们每次考虑加入一个数，和第一类斯特林数推导类似的思想，我们考虑它放在哪：一种情况，它自立门户，单独成为一个环排列，另外一种情况，它放在前面某个数的一侧。那么递推式就有了：</p>
 <script type="math/tex; mode=display">
-根据$$g(1)=1$$，我们发现$$g(m)=m!$$，这也告诉我们第一类斯特林数第$$i$$行数的和为$$i!$$。
-
-那么我们就有</script><p>coef(T)=\binom{n}{sum(T)}*(n-sum(T))!</p>
+g(m)=(m-1)*g(m-1)+g(m-1)*1=m*g(m-1)</script><p>根据<script type="math/tex">g(1)=1</script>，我们发现<script type="math/tex">g(m)=m!</script>，这也告诉我们第一类斯特林数第<script type="math/tex">i</script>行数的和为<script type="math/tex">i!</script>。</p>
+<p>那么我们就有</p>
 <script type="math/tex; mode=display">
-我们发现这个$$coef(T)$$只与$$sum(T)$$有关，那么我们就可以枚举$$k$$进行$$dp$$了。
-
-下面设$$s=p^k$$，我们相当于钦定每个环排列大小都是$$s$$的倍数来计算方案。
-
-我们设$$f[i]$$表示$$sum(T)=is$$时的容斥系数。现在我们考虑加入一个环排列，首先容斥系数显然取反。然后为了避免算重，根据计数技巧，我们枚举与$$1$$在一起的那个环排列，一个大小为$$m$$的集合的环排列个数显然是$$(m-1)!$$，那么转移方程就出来了。</script><p>f[i]=-\sum_{j=1}^i \binom{i<em>s-1}{j</em>s-1}<em>(j</em>s-1)!*f[i-j]</p>
+coef(T)=\binom{n}{sum(T)}*(n-sum(T))!</script><p>我们发现这个<script type="math/tex">coef(T)</script>只与<script type="math/tex">sum(T)</script>有关，那么我们就可以枚举<script type="math/tex">k</script>进行<script type="math/tex">dp</script>了。</p>
+<p>下面设<script type="math/tex">s=p^k</script>，我们相当于钦定每个环排列大小都是<script type="math/tex">s</script>的倍数来计算方案。</p>
+<p>我们设<script type="math/tex">f[i]</script>表示<script type="math/tex">sum(T)=is</script>时的容斥系数。现在我们考虑加入一个环排列，首先容斥系数显然取反。然后为了避免算重，根据计数技巧，我们枚举与<script type="math/tex">1</script>在一起的那个环排列，一个大小为<script type="math/tex">m</script>的集合的环排列个数显然是<script type="math/tex">(m-1)!</script>，那么转移方程就出来了。</p>
 <script type="math/tex; mode=display">
-考虑时间复杂度，我们相当于是对于所有的质数$$p$$对于时间的贡献为</script><p>\sum_{p^k\le n}(\lfloor\frac{n}{p^k}\rfloor)^2\le n^2*\sum_k \frac{1}{p^{2k}}=O(\frac{n^2}{p^2})</p>
+f[i]=-\sum_{j=1}^i \binom{i*s-1}{j*s-1}*(j*s-1)!*f[i-j]</script><p>考虑时间复杂度，我们相当于是对于所有的质数<script type="math/tex">p</script>对于时间的贡献为</p>
 <script type="math/tex; mode=display">
-那么总复杂度为</script><p>n^2*\sum_p\frac{1}{p^2}\le n^2</p>
-<p><script type="math/tex">所以复杂度为</script>O(n^2)$$。</p>
+\sum_{p^k\le n}(\lfloor\frac{n}{p^k}\rfloor)^2\le n^2*\sum_k \frac{1}{p^{2k}}=O(\frac{n^2}{p^2})</script><p>那么总复杂度为</p>
+<script type="math/tex; mode=display">
+n^2*\sum_p\frac{1}{p^2}\le n^2</script><p>所以复杂度为<script type="math/tex">O(n^2)</script>。</p>
 <p>另外注意，我们在<script type="math/tex">dp</script>指数，所以<script type="math/tex">dp</script>值，组合数，阶乘的模数都是<script type="math/tex">\phi(mod)=mod-1</script>，而我们做快速幂的时候模数是<script type="math/tex">mod</script>，不要混淆。</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">7505</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, mod, ans;</span><br><span class="line"><span class="keyword">int</span> f[maxN + <span class="number">1</span>], C[maxN + <span class="number">1</span>][maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> fac[maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">bool</span> flag[maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ADD</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x + y &gt;= mod ? x + y - mod : x + y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">SUB</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x - y &lt; <span class="number">0</span> ? x - y + mod : x - y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mpow</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = <span class="number">1l</span>l * ans * a % (mod + <span class="number">1</span>);</span><br><span class="line">        a = <span class="number">1l</span>l * a * a % (mod + <span class="number">1</span>);</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = n / k, res = <span class="number">0</span>;</span><br><span class="line">    f[<span class="number">0</span>] = mod - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++)</span><br><span class="line">            f[i] = SUB(f[i], <span class="number">1l</span>l * C[i * k - <span class="number">1</span>][j * k - <span class="number">1</span>] * fac[j * k - <span class="number">1</span>] % mod * f[i - j] % mod); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        res = ADD(res, <span class="number">1l</span>l * C[n][i * k] * fac[n - i * k] % mod * f[i] % mod);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;mod);</span><br><span class="line">    mod --;</span><br><span class="line"></span><br><span class="line">    fac[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) fac[i] = <span class="number">1l</span>l * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        C[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++) C[i][j] = ADD(C[i - <span class="number">1</span>][j], C[i - <span class="number">1</span>][j - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">if</span>(!flag[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + i; j &lt;= n; j += i) flag[j] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt;= n; j *= i)</span><br><span class="line">                ans = <span class="number">1l</span>l * ans * mpow(i, calc(j)) % (mod + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，对于一些特定的题目，会有<script type="math/tex">min</script>比<script type="math/tex">max</script>更适合解题或<script type="math/tex">max</script>比<script type="math/tex">min</script>更适合解题的情况，这个时候也可以考虑<script type="math/tex">min-max</script>容斥。</p>
@@ -1558,7 +1517,7 @@ S(n,j)=g(n,|P|)-\sum_{i=1}^{j-1}f(P_i)+\sum_{k=j}^{P_k^2<=n}\sum_e^{P_k^{e+1}<=n
     <content><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有<script type="math/tex">n</script>个数<script type="math/tex">a_i</script>，给定初始值<script type="math/tex">m</script>，你要决定一种排列顺序<script type="math/tex">p_1,p_2,...,p_n</script>，使得</p>
 <script type="math/tex; mode=display">
 m\%a_{p_1}\%a_{p_2}...\%a_{p_n}</script><p>的值最大，输出最大值，并输出有多少种排列顺序使得最后的值是这个最大值。</p>
-<p><script type="math/tex">n\le 1000,m,a_i\le 5000</script>。</p>
+<p>其中<script type="math/tex">n\le 1000,m,a_i\le 5000</script>。</p>
 <a id="more"></a>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>很好的一道题。</p>
 <p>首先注意到我们只需要解决第二个问题即可。</p>

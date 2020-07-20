@@ -28,7 +28,7 @@
 <meta property="og:description" content="Description有一个n+1个车站的铁路，分别为0,1,...,n号，显然铁路被分为n段，设a_i为火车从第i-1个车站到第i个车站所需时间（也是第i个车站到第i-1个车站的所需时间），每段铁路还有一个参数b_i&#x3D;1&#x2F;2表示这段路是单向道还是双向道，如果是单向道，同一时间不能被两辆不同方向的火车经过，如果是双向道就没有限制。 现在有两种车，一种从0开到n，另外一种从n开到0，且每隔k单位时间">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-03T02:19:49.000Z">
-<meta property="article:modified_time" content="2020-07-20T02:59:50.005Z">
+<meta property="article:modified_time" content="2020-07-20T03:48:01.021Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="dp">
 <meta property="article:tag" content="贪心">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-20 10:59:50" itemprop="dateModified" datetime="2020-07-20T10:59:50+08:00">2020-07-20</time>
+                <time title="修改时间：2020-07-20 11:48:01" itemprop="dateModified" datetime="2020-07-20T11:48:01+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,58 +273,39 @@
       
         <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>有一个<script type="math/tex">n+1</script>个车站的铁路，分别为<script type="math/tex">0,1,...,n</script>号，显然铁路被分为<script type="math/tex">n</script>段，设<script type="math/tex">a_i</script>为火车从第<script type="math/tex">i-1</script>个车站到第<script type="math/tex">i</script>个车站所需时间（也是第<script type="math/tex">i</script>个车站到第<script type="math/tex">i-1</script>个车站的所需时间），每段铁路还有一个参数<script type="math/tex">b_i=1/2</script>表示这段路是单向道还是双向道，如果是单向道，同一时间不能被两辆不同方向的火车经过，如果是双向道就没有限制。</p>
 <p>现在有两种车，一种从<script type="math/tex">0</script>开到<script type="math/tex">n</script>，另外一种从<script type="math/tex">n</script>开到<script type="math/tex">0</script>，且每隔<script type="math/tex">k</script>单位时间就会发一辆车（两种都发），我们的任务是调整两种车在每个站台的停留时间，使得不存在某个时刻两种车在同一个单向道上相遇，求满足这个条件的情况下，<script type="math/tex">0->n</script>的时间与<script type="math/tex">n->0</script>的时间之和的最小值。若无法完成，则输出<script type="math/tex">-1</script>。</p>
-<script type="math/tex; mode=display">n\le 1e5,k,a_i\le 1e9,b_i\le 2$$。
-
+<p>其中<script type="math/tex">n\le 1e5,k,a_i\le 1e9,b_i\le 2</script>。</p>
 <a id="more"></a>
-
-# Solution
-
-非常巧妙的一道题。
-
-首先，我们注意到因为每隔$$k$$发一次车，所以整个问题我们可以看成在$$mod\quad k$$意义下进行的。
-
-然后，我们发现整个问题可以转化为区间问题，即有一些长度固定的区间，然后我们的限制是在模意义下，一些区间不能相交。
-
-具体地，我们设$$p_i$$为第一种车在第$$i$$个车站的停留时间（$$0\le i \le n$$），设$$q_i$$为第二种车在第$$i$$个车站的停留时间，然后设$$P_i$$表示$$p_0,...p_i$$的和，$$Q_i$$同理，$$A_i$$即$$a$$的前缀和。
-
-我们发现第一种车的区间是$$p$$和$$a$$的前缀和的形式，第二种车的每个区间却是$$q$$和$$a$$的后缀和的形式，非常不好处理。
-
-但是我们发现一个好处是整个问题是在取模的意义下进行的。
-
-在时间轴上取模，就相当于拿一个长度为$$k$$的窗口在时间轴上滑动，不管窗口在什么位置，截到的时间及其上面发生的事件都是等价的。
-
-我们设窗口截到的最右边是整个事件结束，那么$$q_0$$的意义相当于第二种车到达$$0$$号站后再等待$$q_0$$时间才得以结束。
-
-为了与第一种车的区间形式相似，我们考虑对第二种车进行时光倒流，把第二种车也看成从$$0->n$$，然后看成它在$$0$$号车站等待了$$-q_0$$单位时间，然后到达$$1$$号车站的时间为$$-q_0-a_1$$，以此类推。
-
-通过这样的操作，我们将第一种车和第二种车的区间形式都统一为前缀和的形式。
-
-更具体地，第一种车在第$$i-1$$到第$$i$$个车站的时间区间和第二种车从第$$i$$个车站到第$$i - 1$$个的时间区间分别为为</script><p>(P_{i-1}+A_{i-1},P_{i-1}+A_i)\\<br>(-Q_{i-1}-A_i,-Q_{i-1}-A_{i-1})</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>非常巧妙的一道题。</p>
+<p>首先，我们注意到因为每隔<script type="math/tex">k</script>发一次车，所以整个问题我们可以看成在<script type="math/tex">mod\quad k</script>意义下进行的。</p>
+<p>然后，我们发现整个问题可以转化为区间问题，即有一些长度固定的区间，然后我们的限制是在模意义下，一些区间不能相交。</p>
+<p>具体地，我们设<script type="math/tex">p_i</script>为第一种车在第<script type="math/tex">i</script>个车站的停留时间（<script type="math/tex">0\le i \le n</script>），设<script type="math/tex">q_i</script>为第二种车在第<script type="math/tex">i</script>个车站的停留时间，然后设<script type="math/tex">P_i</script>表示<script type="math/tex">p_0,...p_i</script>的和，<script type="math/tex">Q_i</script>同理，<script type="math/tex">A_i</script>即<script type="math/tex">a</script>的前缀和。</p>
+<p>我们发现第一种车的区间是<script type="math/tex">p</script>和<script type="math/tex">a</script>的前缀和的形式，第二种车的每个区间却是<script type="math/tex">q</script>和<script type="math/tex">a</script>的后缀和的形式，非常不好处理。</p>
+<p>但是我们发现一个好处是整个问题是在取模的意义下进行的。</p>
+<p>在时间轴上取模，就相当于拿一个长度为<script type="math/tex">k</script>的窗口在时间轴上滑动，不管窗口在什么位置，截到的时间及其上面发生的事件都是等价的。</p>
+<p>我们设窗口截到的最右边是整个事件结束，那么<script type="math/tex">q_0</script>的意义相当于第二种车到达<script type="math/tex">0</script>号站后再等待<script type="math/tex">q_0</script>时间才得以结束。</p>
+<p>为了与第一种车的区间形式相似，我们考虑对第二种车进行时光倒流，把第二种车也看成从<script type="math/tex">0->n</script>，然后看成它在<script type="math/tex">0</script>号车站等待了<script type="math/tex">-q_0</script>单位时间，然后到达<script type="math/tex">1</script>号车站的时间为<script type="math/tex">-q_0-a_1</script>，以此类推。</p>
+<p>通过这样的操作，我们将第一种车和第二种车的区间形式都统一为前缀和的形式。</p>
+<p>更具体地，第一种车在第<script type="math/tex">i-1</script>到第<script type="math/tex">i</script>个车站的时间区间和第二种车从第<script type="math/tex">i</script>个车站到第<script type="math/tex">i - 1</script>个的时间区间分别为为</p>
 <script type="math/tex; mode=display">
-这样看起来形式非常统一，我们后面也会很好处理。
-
-现在，我们就是要求在取模意义下，这两个区间不相交。因为区间相交比较好算（好理解），我们先转化为区间相交，再取补集。
-
-区间相交，即其中一个区间的端点在另一个区间内。
-
-我们列出以下不等式</script><p>-Q_{i-1}-A_i&lt;P_{i-1}+A_{i-1}&lt;-Q_{i-1}-A_{i-1}\\<br>-Q_{i-1}-A_i&lt;P_{i-1}+A_i&lt;-Q_{i-1}-A_{i-1}</p>
+(P_{i-1}+A_{i-1},P_{i-1}+A_i)\\
+(-Q_{i-1}-A_i,-Q_{i-1}-A_{i-1})</script><p>这样看起来形式非常统一，我们后面也会很好处理。</p>
+<p>现在，我们就是要求在取模意义下，这两个区间不相交。因为区间相交比较好算（好理解），我们先转化为区间相交，再取补集。</p>
+<p>区间相交，即其中一个区间的端点在另一个区间内。</p>
+<p>我们列出以下不等式</p>
 <script type="math/tex; mode=display">
-两个不等式是或的关系，即只要一个成立即可。
-
-这两个不等式肯定是在模的意义下成立，但是在模的意义下理解不等式又比较困难，我们这么来思考模意义下不等式的含义。
-
-实际上，在模意义下，$$a<b<c$$的意义为在$$(a,c)$$中存在一个数，与$$b$$同余。这样理解起来就要好多了！
-
-那么显然$$a<b<c$$等价于$$a+d<b+d<c+d$$（考虑上面所说的意义即可），即这个不等式可以按照解普通不等式的方法来解。
-
-那么解得</script><p>-2A_i&lt;P_{i-1}+Q_{i-1}&lt;-2A_{i-1}</p>
+-Q_{i-1}-A_i<P_{i-1}+A_{i-1}<-Q_{i-1}-A_{i-1}\\
+-Q_{i-1}-A_i<P_{i-1}+A_i<-Q_{i-1}-A_{i-1}</script><p>两个不等式是或的关系，即只要一个成立即可。</p>
+<p>这两个不等式肯定是在模的意义下成立，但是在模的意义下理解不等式又比较困难，我们这么来思考模意义下不等式的含义。</p>
+<p>实际上，在模意义下，<script type="math/tex">a<b<c</script>的意义为在<script type="math/tex">(a,c)</script>中存在一个数，与<script type="math/tex">b</script>同余。这样理解起来就要好多了！</p>
+<p>那么显然<script type="math/tex">a<b<c</script>等价于<script type="math/tex">a+d<b+d<c+d</script>（考虑上面所说的意义即可），即这个不等式可以按照解普通不等式的方法来解。</p>
+<p>那么解得</p>
 <script type="math/tex; mode=display">
-那么其补集就是在模意义下，</script><p>P_{i-1}+Q_{i-1}\in [-2A_{i-1},-2A_i]</p>
+-2A_i<P_{i-1}+Q_{i-1}<-2A_{i-1}</script><p>那么其补集就是在模意义下，</p>
 <script type="math/tex; mode=display">
-这样一来，因为$$A$$是已知的，所以我们就能确定$$P_i+Q_i$$的范围。
-
-因为我们最终要求最小化的是</script><p>P_{n-1}+Q_{n-1}-p_0-q_0</p>
-<p>$$<br>所以问题就转化成十分可做的形式了！</p>
+P_{i-1}+Q_{i-1}\in [-2A_{i-1},-2A_i]</script><p>这样一来，因为<script type="math/tex">A</script>是已知的，所以我们就能确定<script type="math/tex">P_i+Q_i</script>的范围。</p>
+<p>因为我们最终要求最小化的是</p>
+<script type="math/tex; mode=display">
+P_{n-1}+Q_{n-1}-p_0-q_0</script><p>所以问题就转化成十分可做的形式了！</p>
 <p>这样，问题转化为：</p>
 <p>有一个数列<script type="math/tex">t</script>，满足<script type="math/tex">t[i]\ge t[i-1]</script>，然后对于某些特定的<script type="math/tex">i</script>（<script type="math/tex">b_i=1</script>），要满足<script type="math/tex">t[i]\quad mod\quad k\in [L[i],R[i]]</script>。求<script type="math/tex">t_n-t_1</script>的最小值。</p>
 <p>我们考虑用<script type="math/tex">dp</script>来解决，设<script type="math/tex">f[i][j]</script>表示处理了前<script type="math/tex">i</script>个，当前<script type="math/tex">t[i]\quad mod\quad k=j</script>时最小的<script type="math/tex">t[i]</script>。（对于<script type="math/tex">-t_1</script>的限制可以直接把<script type="math/tex">f[1]</script>中满足条件的变成<script type="math/tex">0</script>，别的变成<script type="math/tex">inf</script>），那么转移的时候，首先如果本来就在<script type="math/tex">[L[i],R[i]]</script>中的自然不会改变，其他的因为只能往一个方向走，必然是走到<script type="math/tex">L[i]</script>处，那么用不在区间中的步数最小值来更新<script type="math/tex">L[i]</script>的值，并把不在区间中的全部赋值为<script type="math/tex">inf</script>即可。</p>
@@ -422,7 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
