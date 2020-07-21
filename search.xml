@@ -1950,14 +1950,14 @@ ans=\sum_{i=1}^n n-sa[i]+1-height[i]</script><h1 id="Code"><a href="#Code" class
   <entry>
     <title>浅谈Berlekamp-Massey算法</title>
     <url>/2020/07/18/%E6%B5%85%E8%B0%88Berlekamp-Massey%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="BM算法"><a href="#BM算法" class="headerlink" title="BM算法"></a>BM算法</h1><p>如果我们已知一个数列是线性递推数列（或猜测一个数列是线性递推数列），但是我们并不知道它的线性递推式具体是多少，那么我们可以使用$Berlekamp-Massey$算法，简称$BM$算法，来计算最短线性递推式。</p>
+    <content><![CDATA[<h1 id="BM算法"><a href="#BM算法" class="headerlink" title="BM算法"></a>BM算法</h1><p>如果我们已知一个数列是线性递推数列（或猜测一个数列是线性递推数列），但是我们并不知道它的线性递推式具体是多少，那么我们可以使用<script type="math/tex">Berlekamp-Massey</script>算法，简称<script type="math/tex">BM</script>算法，来计算最短线性递推式。</p>
 <p>具体来说，如果已知数列可以写成</p>
 <script type="math/tex; mode=display">
-a[n]=\sum_{i=1}^mc[i]*a[n - i]\quad(n\ge m+1)</script><p>给定长度为$n$数列$a$，那么我们可以通过$BM$计算出这个数列最短的线性递推式（设长度为$m$），满足对于$m+1\le i\le n$，$a[i]$都满足这个规律。</p>
+a[n]=\sum_{i=1}^mc[i]*a[n - i]\quad(n\ge m+1)</script><p>给定长度为<script type="math/tex">n</script>数列<script type="math/tex">a</script>，那么我们可以通过<script type="math/tex">BM</script>计算出这个数列最短的线性递推式（设长度为<script type="math/tex">m</script>），满足对于<script type="math/tex">m+1\le i\le n</script>，<script type="math/tex">a[i]</script>都满足这个规律。</p>
 <a id="more"></a>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>为了方便起见，以下所称线性递推数列均代表<strong>最短线性递推数列</strong>。</p>
-<p>考虑通过不断增加数来修改线性递推数列，设$R_i$为第$i$版线性递推数列。</p>
-<p>假设我们现在已经求出$a_1,a_2,…a_{i-1}$的线性递推数列$r_1,r_2,…r_m$，现在我们要求$a_1,a_2,…,a_i$的线性递推数列。</p>
+<p>考虑通过不断增加数来修改线性递推数列，设<script type="math/tex">R_i</script>为第<script type="math/tex">i</script>版线性递推数列。</p>
+<p>假设我们现在已经求出<script type="math/tex">a_1,a_2,...a_{i-1}</script>的线性递推数列<script type="math/tex">r_1,r_2,...r_m</script>，现在我们要求<script type="math/tex">a_1,a_2,...,a_i</script>的线性递推数列。</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
