@@ -1957,8 +1957,8 @@ a[n]=\sum_{i=1}^mc[i]*a[n - i]\quad(n\ge m+1)</script><p>给定长度为<script 
 <a id="more"></a>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>为了方便起见，以下所称线性递推数列均代表<strong>最短线性递推数列</strong>。</p>
 <p>考虑通过不断增加数来修改线性递推数列，设<script type="math/tex">R_i</script>为第<script type="math/tex">i</script>版线性递推数列。</p>
-<p>假设我们现在已经求出<script type="math/tex">a_1,a_2,...a_{i-1}</script>的线性递推数列<script type="math/tex">r_1,r_2,...r_m</script>（记为$R_{cnt}$），现在我们要求<script type="math/tex">a_1,a_2,...,a_i</script>的线性递推数列。</p>
-<p>设</p>
+<p>假设我们现在已经求出<script type="math/tex">a_1,a_2,...a_{i-1}</script>的线性递推数列<script type="math/tex">r_1,r_2,...r_m</script>（记为<script type="math/tex">R_{cnt}</script>），现在我们要求<script type="math/tex">a_1,a_2,...,a_i</script>的线性递推数列。</p>
+<p>设<script type="math/tex">delta_i=\sum_{j=1}^mc[j]*a[n-j]-a[i]</script>。</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
