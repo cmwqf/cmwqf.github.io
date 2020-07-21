@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cmwqf.github.io/"/>
-  <updated>2020-07-21T01:43:02.556Z</updated>
+  <updated>2020-07-21T02:20:15.850Z</updated>
   <id>http://cmwqf.github.io/</id>
   
   <author>
@@ -21,16 +21,16 @@
     <link href="http://cmwqf.github.io/2020/07/18/%E6%B5%85%E8%B0%88Berlekamp-Massey%E7%AE%97%E6%B3%95/"/>
     <id>http://cmwqf.github.io/2020/07/18/%E6%B5%85%E8%B0%88Berlekamp-Massey%E7%AE%97%E6%B3%95/</id>
     <published>2020-07-18T14:32:35.000Z</published>
-    <updated>2020-07-21T01:43:02.556Z</updated>
+    <updated>2020-07-21T02:20:15.850Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="BM算法"><a href="#BM算法" class="headerlink" title="BM算法"></a>BM算法</h1><p>如果我们已知一个数列是线性递推数列（或猜测一个数列是线性递推数列），但是我们并不知道它的线性递推式具体是多少，那么我们可以使用<script type="math/tex">Berlekamp-Massey</script>算法，简称<script type="math/tex">BM</script>算法，来计算最短线性递推式。</p><p>具体来说，如果已知数列可以写成</p><script type="math/tex; mode=display">a[n]=\sum_{i=1}^mc[i]*a[n - i]\quad(n\ge m+1)</script><p>给定长度为<script type="math/tex">n</script>数列<script type="math/tex">a</script>，那么我们可以通过<script type="math/tex">BM</script>计算出这个数列最短的线性递推式（设长度为<script type="math/tex">m</script>），满足对于<script type="math/tex">m+1\le i\le n</script>，<script type="math/tex">a[i]</script>都满足这个规律。</p><a id="more"></a><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>为了方便起见，以下所称线性递推数列均代表<strong>最短线性递推数列</strong>。</p><p>考虑通过不断增加数来修改线性递推数列，设<script type="math/tex">R_i</script>为第<script type="math/tex">i</script>版线性递推数列。</p><p>假设我们现在已经求出<script type="math/tex">a_1,a_2,...a_{i-1}</script>的线性递推数列<script type="math/tex">r_1,r_2,...r_m</script>（记为<script type="math/tex">R_{cnt}</script>），现在我们要求<script type="math/tex">a_1,a_2,...,a_i</script>的线性递推数列。</p><p>设<script type="math/tex">delta_i=\sum_{j=1}^mc[j]*a[n-j]-a[i]</script>。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="BM算法"><a href="#BM算法" class="headerlink" title="BM算法"></a>BM算法</h1><p>如果我们已知一个数列是线性递推数列（或猜测一个数列是线性递推数列），但是我们并不知道它的线性递推式具体是多少，那么我们可以使用<script type="math/tex">Berlekamp-Massey</script>算法，简称<script type="math/tex">BM</script>算法，来计算最短线性递推式。</p><p>具体来说，如果已知数列可以写成</p><script type="math/tex; mode=display">a[n]=\sum_{i=1}^mr[i]*a[n - i]\quad(n\ge m+1)</script><p>给定长度为<script type="math/tex">n</script>数列<script type="math/tex">a</script>，那么我们可以通过<script type="math/tex">BM</script>计算出这个数列最短的线性递推式（设长度为<script type="math/tex">m</script>），满足对于<script type="math/tex">m+1\le i\le n</script>，<script type="math/tex">a[i]</script>都满足这个规律。</p><a id="more"></a><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>考虑通过不断增加数来修改线性递推数列，设<script type="math/tex">R_i</script>为第<script type="math/tex">i</script>版线性递推数列。</p><p>假设我们现在已经求出<script type="math/tex">a_1,a_2,...a_{i-1}</script>的线性递推数列<script type="math/tex">r_1,r_2,...r_m</script>（记为<script type="math/tex">R_{cnt}</script>），现在我们要求<script type="math/tex">a_1,a_2,...,a_i</script>的线性递推数列。</p><p>设<script type="math/tex">delta_i=\sum_{j=1}^mr[j]*a[n-j]-a[i]</script>。</p><p>如果$delta_i=0$，那么说明$R_{cnt}$对$a_1,a_2,…,a_i$也成立。</p><p>否则，说明我们需要调整$R_{cnt}$为$R_{cnt+1}$。怎么调整呢？</p><p>首先，如果此时$cnt=0$，那么说明$a_i$是数列中第一个非零数，那么我们只需将$R_1$置为$\{0,0,..,0\}$（$i$个$0$）即可。</p><p>否则，如果我们能找到另一个线性递推数列，使得这个线性递推数列前$i-1$个数都是$0$，而第$i$个数是$delta_i$，那么我们只需将这个线性递推数列和$R_{cnt}$加起来就能得到一个合法的$R_{cnt+1}$。</p><p>其实要构造这样的线性递推数列很简单，我们只需找任意一个历史版本的$R_k(k&lt;cnt)$。设$w=fail_k$为使得$R_k$变得不合法的第一个位置。那么我们设$mul=\frac{delta_i}{delta_w}$，并构造$\{0,0,…,0,mul,-mul*R_k\}$（前面有$i-w-1$个$0$）即可，设其长度为$m$。</p><p>这样，对于$\forall j&lt;i$，$mul*a[j-(i-w)]$与最后的相抵消，结果为$0$。而当$j=i$时，结果是$delta_i$，因此满足我们所需的数列条件。</p><p>因此，$R_{cnt+1}=\{0,0,…,0,mul,-mul*R_k\}+R_{cnt}$，长度为$max(i-w+len_k,len_{cnt})$。</p><p>而我们要求最短，因此只需记录下当前$len_k-fail_k$最短的$R$即可。</p><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>用$BM$得到的最短线性递推式最好要长度远小于$\frac{n}{2}$才结束，否则要再打表。因为如果长度为$\frac{n}{2}$，那么相当于$\frac{n}{2}$个未知数列$\frac{n}{2}$个方程，总能找到解。因此对于任何一个长度为$n$随机数列，它的线性递推数列也是$\frac{n}{2}$左右，所以只有当长度远小于$\frac{n}{2}$时才能大致确定是原数列的线性递推式。如果长度一直在$\frac{n}{2}$左右，那么很可能这个数列并不是线性递推数列。</p><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1>]]></content>
     
     <summary type="html">
     
       &lt;h1 id=&quot;BM算法&quot;&gt;&lt;a href=&quot;#BM算法&quot; class=&quot;headerlink&quot; title=&quot;BM算法&quot;&gt;&lt;/a&gt;BM算法&lt;/h1&gt;&lt;p&gt;如果我们已知一个数列是线性递推数列（或猜测一个数列是线性递推数列），但是我们并不知道它的线性递推式具体是多少，那么我们可以使用&lt;script type=&quot;math/tex&quot;&gt;Berlekamp-Massey&lt;/script&gt;算法，简称&lt;script type=&quot;math/tex&quot;&gt;BM&lt;/script&gt;算法，来计算最短线性递推式。&lt;/p&gt;
 &lt;p&gt;具体来说，如果已知数列可以写成&lt;/p&gt;
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;
-a[n]=\sum_{i=1}^mc[i]*a[n - i]\quad(n\ge m+1)&lt;/script&gt;&lt;p&gt;给定长度为&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;数列&lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;，那么我们可以通过&lt;script type=&quot;math/tex&quot;&gt;BM&lt;/script&gt;计算出这个数列最短的线性递推式（设长度为&lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt;），满足对于&lt;script type=&quot;math/tex&quot;&gt;m+1\le i\le n&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;a[i]&lt;/script&gt;都满足这个规律。&lt;/p&gt;
+a[n]=\sum_{i=1}^mr[i]*a[n - i]\quad(n\ge m+1)&lt;/script&gt;&lt;p&gt;给定长度为&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;数列&lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;，那么我们可以通过&lt;script type=&quot;math/tex&quot;&gt;BM&lt;/script&gt;计算出这个数列最短的线性递推式（设长度为&lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt;），满足对于&lt;script type=&quot;math/tex&quot;&gt;m+1\le i\le n&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;a[i]&lt;/script&gt;都满足这个规律。&lt;/p&gt;
     
     </summary>
     
