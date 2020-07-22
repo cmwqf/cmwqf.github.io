@@ -46,3 +46,32 @@ $$
 用$$BM$$得到的最短线性递推式最好要长度远小于$$\frac{n}{2}$$才结束，否则要再打表。因为如果长度为$$\frac{n}{2}$$，那么相当于$$\frac{n}{2}$$个未知数列$$\frac{n}{2}$$个方程，总能找到解。因此对于任何一个长度为$$n$$随机数列，它的线性递推数列也是$$\frac{n}{2}$$左右，所以只有当长度远小于$$\frac{n}{2}$$时才能大致确定是原数列的线性递推式。如果长度一直在$$\frac{n}{2}$$左右，那么很可能这个数列并不是线性递推数列。
 
 # Code
+
+```c++
+inline void BM(int *a, vector<int> &ans)
+{
+	ans.clear();
+	vector<int> lst;
+	int w = 0, delta = 0;
+	for(int i = 1; i <= n; i++)
+	{
+		int t = 0;
+		for(int j = 0; j < ans.size(); j++)
+			t = ADD(t, 1ll * ans[j] * a[i - j - 1] % mod);
+		if(t == a[i]) continue;
+		if(!w)
+		{
+			w = i; delta = SUB(a[i], t);
+			for(int j = 1; j <= i; j++) ans.push_back(0);
+			continue;
+		}
+		vector<int> now = ans;
+		int mul = 1ll * SUB(a[i], t) * mpow(delta, mod - 2) % mod;
+		if(i - w + lst.size() > ans.size()) ans.resize(i - w + lst.size(), 0);
+		ans[i - w - 1] = ADD(ans[i - w - 1], mul);
+		for(int j = 0; j < lst.size(); j++) ans[i - w + j] = SUB(ans[i - w + j], 1ll * mul * lst[j] % mod);
+		if(now.size() - i < lst.size() - w) delta = SUB(a[i], t), w = i, lst = now;
+	}
+}
+```
+
