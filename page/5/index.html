@@ -731,7 +731,7 @@ C_k=\sum_{i\oplus j = k} A_i*B_j\\
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-20 11:19:49" itemprop="dateModified" datetime="2020-07-20T11:19:49+08:00">2020-07-20</time>
+                <time title="修改时间：2020-07-25 10:01:43" itemprop="dateModified" datetime="2020-07-25T10:01:43+08:00">2020-07-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -756,13 +756,14 @@ C_k=\sum_{i\oplus j = k} A_i*B_j\\
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="伯努利数"><a href="#伯努利数" class="headerlink" title="伯努利数"></a>伯努利数</h1><p>伯努利数，它的发明其实就是为了解决自然数幂和的问题的，所以，并没有什么具体的含义。</p>
-<p>那么，怎样定义它呢？</p>
-<p>我们可以采取递归定义法<del>（因为另一种我看不懂）</del>：</p>
-<p>伯努利数B，满足：</p>
+          <h1 id="伯努利数"><a href="#伯努利数" class="headerlink" title="伯努利数"></a>伯努利数</h1><p>伯努利数，是用于解决自然数幂和的一类数，并没有一定的组合意义，其通过生成函数定义如下：</p>
 <script type="math/tex; mode=display">
-B_0=1,\\
-\sum_{k=0}^nC(n+1,k)*B_k=0</script>
+\sum_{i\ge 0}B_i\frac{t^i}{i!}=\frac{t}{e^t-1}</script><p>其中，<script type="math/tex">B_i</script>是第<script type="math/tex">i</script>个伯努利数。</p>
+<p>另外，还有伯努利多项式，定义</p>
+<script type="math/tex; mode=display">
+B_n(x)=\sum_{i=0}^n\binom{n}{i}B_ix^{n-i}</script><p>关于伯努利多项式也有一个生成函数定义：</p>
+<script type="math/tex; mode=display">
+\sum_{i\ge 0}B_i(x)\frac{t^i}{i!}=\frac{te^{xt}}{e^t-1}</script>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/06/26/%E4%BC%AF%E5%8A%AA%E5%88%A9%E6%95%B0%E7%9B%B8%E5%85%B3/#more" rel="contents">
