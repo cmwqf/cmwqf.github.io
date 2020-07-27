@@ -2154,44 +2154,6 @@ O(kn^{1-\frac{1}{k}}+logn)</script><p>其中k是维数，如果是1维，就是l
       </tags>
   </entry>
   <entry>
-    <title>浅谈Min-max容斥</title>
-    <url>/2019/07/25/%E6%B5%85%E8%B0%88Min-max%E5%AE%B9%E6%96%A5/</url>
-    <content><![CDATA[<h1 id="Min-max容斥"><a href="#Min-max容斥" class="headerlink" title="Min-max容斥"></a>Min-max容斥</h1><p>早就听闻Min-max容斥的大名，今天学习了一下，感觉妙不可言。</p>
-<p>给定集合<script type="math/tex">S</script>，设<script type="math/tex">max(S)</script>为<script type="math/tex">S</script>中的最大值，<script type="math/tex">min(S)</script>为<script type="math/tex">S</script>中的最小值，那么我们可以得到：</p>
-<script type="math/tex; mode=display">
-max(S)=\sum_{T\subset S}(-1)^{|T|-1}min(T)</script><a id="more"></a>
-<p>举个例子：</p>
-<script type="math/tex; mode=display">
-max(a,b)=min(a)+min(b)-min(a,b)\\
-max(a,b,c)=min(a)+min(b)+min(c)-min(a,b)-min(b,c)-min(a,c)+min(a,b,c)</script><p>我们来看一下，假设<script type="math/tex">a<=b<=c</script>，则后面那个式子右边等于</p>
-<script type="math/tex; mode=display">
-a+b+c-a-b-a+a=c=max(a,b,c)</script><p>是不是感觉很神奇？</p>
-<p><strong>证明：</strong></p>
-<p>我们考虑化简右边。</p>
-<p>我们将集合中所有元素从小到大排好序，然后考虑每个元素的贡献。</p>
-<p>首先，最大的那个元素贡献显然为<script type="math/tex">1</script>，因为只有只存在它本身的集合的<script type="math/tex">min</script>才是它。</p>
-<p>那么，其他的元素的贡献是什么呢？</p>
-<p>是它在排好序的序列中右边的数构成的所有子集（因为这样的话最小值才是它）。</p>
-<p>当<script type="math/tex">n</script>为奇数时，我们考虑每个子集的贡献，对于任意一个子集，我们考虑它的补集，这个补集大小的奇偶性必然与这个子集相反，且每个子集和它的补集时一一对应的，所以只要有一个子集对答案有贡献，它的子集就立刻会产生相反的贡献，相互抵消，显然等式成立。</p>
-<p>当<script type="math/tex">n</script>为偶数时（不为<script type="math/tex">0</script>），我们考虑集合中的一个数<script type="math/tex">x</script>，如果我们选的子集不包括<script type="math/tex">x</script>，剩下的数为奇数个，贡献为<script type="math/tex">0</script>，如果选了<script type="math/tex">x</script>，剩下的数还是为奇数，贡献也是<script type="math/tex">0</script>，所以等式仍然成立。</p>
-<p>我们考虑对偶数的讨论中，我们必须要选出一个数再对剩下的数进行讨论，所以<script type="math/tex">0</script>不适用于这个证明，只有<script type="math/tex">0</script>是例外。</p>
-<p>这样，我们就证明了结论。</p>
-<p>其实，我们还证明了对于<script type="math/tex">\forall n>0</script>，有<script type="math/tex">C(n,0)+C(n,2)+...=C(n,1)+C(n,3)+...</script>。</p>
-<h1 id="K-th-Min-max容斥"><a href="#K-th-Min-max容斥" class="headerlink" title="K-th Min-max容斥"></a>K-th Min-max容斥</h1><p>我们计<script type="math/tex">max_k(S)</script>表示<script type="math/tex">S</script>中第<script type="math/tex">k</script>大的元素，那么我们有：</p>
-<script type="math/tex; mode=display">
-max_k(S)=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)min(T)</script><h1 id="期望的Min-max容斥"><a href="#期望的Min-max容斥" class="headerlink" title="期望的Min-max容斥"></a>期望的Min-max容斥</h1><p>由于期望的线性性，<script type="math/tex">min-max</script>容斥适用于期望。</p>
-<script type="math/tex; mode=display">
-E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))\\
-E(max_k(S))=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)E(min(T))</script><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://cmwqf.github.io/2019/07/25/%E6%8C%89%E4%BD%8D%E6%88%96/">HAOI2015按位或</a></p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>组合数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>浅谈Dilworth定理</title>
     <url>/2019/12/17/%E6%B5%85%E8%B0%88Dilworth%E5%AE%9A%E7%90%86/</url>
     <content><![CDATA[<h1 id="Dilworth定理"><a href="#Dilworth定理" class="headerlink" title="Dilworth定理"></a>Dilworth定理</h1><p>Dilworth定理是组合数学的一个重要定理，它是定义在偏序集上的，在解决实际问题时非常有效。比如经典的题目“导弹拦截”。现在，我们就来对它一探究竟。</p>
@@ -3558,6 +3520,44 @@ a[r+1]\oplus 2^i==a[x]</script><p>的个数，这样，我们枚举<script type=
       </categories>
       <tags>
         <tag>莫队</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈Min-max容斥</title>
+    <url>/2019/07/25/%E6%B5%85%E8%B0%88min-max%E5%AE%B9%E6%96%A5/</url>
+    <content><![CDATA[<h1 id="Min-max容斥"><a href="#Min-max容斥" class="headerlink" title="Min-max容斥"></a>Min-max容斥</h1><p>早就听闻Min-max容斥的大名，今天学习了一下，感觉妙不可言。</p>
+<p>给定集合<script type="math/tex">S</script>，设<script type="math/tex">max(S)</script>为<script type="math/tex">S</script>中的最大值，<script type="math/tex">min(S)</script>为<script type="math/tex">S</script>中的最小值，那么我们可以得到：</p>
+<script type="math/tex; mode=display">
+max(S)=\sum_{T\subset S}(-1)^{|T|-1}min(T)</script><a id="more"></a>
+<p>举个例子：</p>
+<script type="math/tex; mode=display">
+max(a,b)=min(a)+min(b)-min(a,b)\\
+max(a,b,c)=min(a)+min(b)+min(c)-min(a,b)-min(b,c)-min(a,c)+min(a,b,c)</script><p>我们来看一下，假设<script type="math/tex">a<=b<=c</script>，则后面那个式子右边等于</p>
+<script type="math/tex; mode=display">
+a+b+c-a-b-a+a=c=max(a,b,c)</script><p>是不是感觉很神奇？</p>
+<p><strong>证明：</strong></p>
+<p>我们考虑化简右边。</p>
+<p>我们将集合中所有元素从小到大排好序，然后考虑每个元素的贡献。</p>
+<p>首先，最大的那个元素贡献显然为<script type="math/tex">1</script>，因为只有只存在它本身的集合的<script type="math/tex">min</script>才是它。</p>
+<p>那么，其他的元素的贡献是什么呢？</p>
+<p>是它在排好序的序列中右边的数构成的所有子集（因为这样的话最小值才是它）。</p>
+<p>当<script type="math/tex">n</script>为奇数时，我们考虑每个子集的贡献，对于任意一个子集，我们考虑它的补集，这个补集大小的奇偶性必然与这个子集相反，且每个子集和它的补集时一一对应的，所以只要有一个子集对答案有贡献，它的子集就立刻会产生相反的贡献，相互抵消，显然等式成立。</p>
+<p>当<script type="math/tex">n</script>为偶数时（不为<script type="math/tex">0</script>），我们考虑集合中的一个数<script type="math/tex">x</script>，如果我们选的子集不包括<script type="math/tex">x</script>，剩下的数为奇数个，贡献为<script type="math/tex">0</script>，如果选了<script type="math/tex">x</script>，剩下的数还是为奇数，贡献也是<script type="math/tex">0</script>，所以等式仍然成立。</p>
+<p>我们考虑对偶数的讨论中，我们必须要选出一个数再对剩下的数进行讨论，所以<script type="math/tex">0</script>不适用于这个证明，只有<script type="math/tex">0</script>是例外。</p>
+<p>这样，我们就证明了结论。</p>
+<p>其实，我们还证明了对于<script type="math/tex">\forall n>0</script>，有<script type="math/tex">C(n,0)+C(n,2)+...=C(n,1)+C(n,3)+...</script>。</p>
+<h1 id="K-th-Min-max容斥"><a href="#K-th-Min-max容斥" class="headerlink" title="K-th Min-max容斥"></a>K-th Min-max容斥</h1><p>我们计<script type="math/tex">max_k(S)</script>表示<script type="math/tex">S</script>中第<script type="math/tex">k</script>大的元素，那么我们有：</p>
+<script type="math/tex; mode=display">
+max_k(S)=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)min(T)</script><h1 id="期望的Min-max容斥"><a href="#期望的Min-max容斥" class="headerlink" title="期望的Min-max容斥"></a>期望的Min-max容斥</h1><p>由于期望的线性性，<script type="math/tex">min-max</script>容斥适用于期望。</p>
+<script type="math/tex; mode=display">
+E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))\\
+E(max_k(S))=\sum_{T\subset S}(-1)^{|T|-k}C(|T|-1,k-1)E(min(T))</script><h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://cmwqf.github.io/2019/07/25/%E6%8C%89%E4%BD%8D%E6%88%96/">HAOI2015按位或</a></p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>组合数学</tag>
       </tags>
   </entry>
 </search>
