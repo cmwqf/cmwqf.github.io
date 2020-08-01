@@ -2765,7 +2765,7 @@ G'(x)F(x)\equiv F'(x)\pmod{x^m}</script><p>那么</p>
 [x^{n-1}]G'(x)F(x)=\sum_{i=0}^{n-1}f_ig_{n-i}(n-i)=f_nn</script><p>即</p>
 <script type="math/tex; mode=display">
 f_0g_nn=f_nn-\sum_{i=1}^{n-1}f_ig_{n-i}(n-i)</script><p>根据定义，边界条件为<script type="math/tex">g_0=0</script>，递推即可。</p>
-<h1 id="多项式exp"><a href="#多项式exp" class="headerlink" title="多项式exp"></a>多项式exp</h1><p>我们已知<script type="math/tex">F(x)</script>，要求<script type="math/tex">G(x)\equiv \exp F(x)</script>。实际上，我们要求</p>
+<h1 id="多项式exp"><a href="#多项式exp" class="headerlink" title="多项式exp"></a>多项式exp</h1><p>我们已知<script type="math/tex">F(x)</script>，要求<script type="math/tex">G(x)\equiv \exp F(x) \pmod{x^m}</script>。实际上，我们要求</p>
 <script type="math/tex; mode=display">
 G(x)\equiv \sum_{i\ge 0}\frac{F^i}{i!}\pmod{x^m}</script><p>首先我们两边求导，有</p>
 <script type="math/tex; mode=display">
