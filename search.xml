@@ -3608,6 +3608,7 @@ H(n)=\sum_{i=1}^ni^2*F(n/i)\\
     <url>/2020/09/12/%E6%B5%85%E8%B0%88BEST%E5%AE%9A%E7%90%86/</url>
     <content><![CDATA[<h1 id="BEST定理"><a href="#BEST定理" class="headerlink" title="BEST定理"></a>BEST定理</h1><p>什么是<script type="math/tex">BEST</script>定理呢？</p>
 <p>所谓<script type="math/tex">BEST</script>，是由发现这个定理的四个人缩写构成的。这个定理的作用，是求有向图欧拉回路的个数。</p>
+<a id="more"></a>
 <h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>首先，如果存在某个点的入度和出度不相等，那么这张图不存在欧拉回路。</p>
 <p>否则，我们设<script type="math/tex">T(x)</script>表示以<script type="math/tex">x</script>为根的内向树个数，<script type="math/tex">deg(x)</script>为<script type="math/tex">x</script>的出度（等于入度），那么有向图欧拉回路个数为</p>
 <script type="math/tex; mode=display">
