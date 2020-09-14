@@ -15,7 +15,7 @@ categories: [学习笔记]
 $$
 det(K)=\sum_P((-1)^{T(P)}*K_{1,p1}...*K_{n,pn})
 $$
-其中，P为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合。
+其中，$$P$$为1~N任意的一个排列，T(P)表示排列P的逆序对数，那个求和式的每一项就是从矩阵中选出n个数，使他们的行列都不重合。
 
 <!--more-->
 
@@ -62,66 +62,3 @@ $$
 定义**基尔霍夫矩阵**K=D-A
 
 那么，最后的答案就是K**去掉第i行和第i列后的行列式（称为余子式）的值**。
-
-# 例题
-
-[小Z的房间](https://www.luogu.org/problemnew/show/P4111)
-
-就是一个裸的Matrix-Tree定理的模板。
-
-```c++
-#include<cstdio>
-#include<iostream> 
-#define int long long
-using namespace std;
-const int maxN=5000,mod=1e9,step[2][2]={{-1,0},{0,-1}};
-int tot,n,m;
-int a[maxN+1][maxN+1],id[maxN+1][maxN+1];
-char G[maxN+1][maxN+1];
-inline int det()
-{
-    int ans=1;
-    for(int i=1;i<=tot;i++)
-    {
-        for(int j=i+1;j<=tot;j++)//把i+1->tot行的第i列全部消成0 
-            while(a[j][i])
-            {
-                int tmp=a[i][i]/a[j][i];
-                for(int k=i;k<=tot;k++) 
-                {
-                    a[i][k]=((a[i][k]-tmp*a[j][k])%mod+mod)%mod;
-                    swap(a[i][k],a[j][k]);
-                }
-                ans*=-1;
-            }
-        if(a[i][i]==0) return 0;
-        ans=(ans*a[i][i]%mod+mod)%mod;
-    }
-    return (ans%mod+mod)%mod;
-}
-#undef int
-int main()
-#define int long long
-{
-    scanf("%lld%lld",&n,&m);
-    for(int i=1;i<=n;i++) scanf("%s",G[i]+1);
-    for(int i=1;i<=n;i++)
-        for(int j=1;j<=m;j++)
-            if(G[i][j]=='.') id[i][j]=++tot;
-    for(int i=1;i<=n;i++)
-        for(int j=1;j<=m;j++)
-            if(G[i][j]=='.')
-                for(int k=0;k<2;k++)
-                {
-                    int x=i+step[k][0],y=j+step[k][1];
-                    if(x<1||y<1||x>n||y>m||G[x][y]=='*') continue;
-                    int u=id[i][j],v=id[x][y];
-                    a[u][u]++; a[v][v]++;
-                    a[u][v]--; a[v][u]--;
-                }
-    tot--;
-    printf("%lld",det());
-    return 0;
-} 
-```
-
