@@ -172,20 +172,20 @@ $$
 ```c++
 inline void FFT(Complex *a, int type, int lim)
 {
-    for(int i = 0; i < lim; i++)
-        if(i < r[i]) swap(a[i], a[ r[i] ]);
-   	for(int mid = 1; mid < lim; mid <<= 1)
-        for(int i = 0; i < lim; i += (mid << 1))
-            for(int j = 0; j < mid; j++)
-            {
-                Complex x = a[i + j], y = a[i + mid + j] * wn[mid + j];
-                a[i + j] = x + y; a[i + mid + j] = x - y;
-            }
-   	if(type == -1)
-    {
-        for(int i = 0; i < lim; i++) a[i] /= lim;
-        reverse(a + 1, a + lim);
-    }
+	for(int i = 0; i < lim; i++)
+		if(i < r[i]) swap(a[i], a[ r[i] ]);
+	for(int mid = 1; mid < lim; mid <<= 1)
+		for(int i = 0; i < lim; i += (mid << 1))
+			for(int j = 0; j < mid; j++)
+			{
+				Complex x = a[i + j], y = a[i + mid + j] * wn[mid + j];
+				a[i + j] = x + y; a[i + mid + j] = x - y;
+			}
+	if(type == -1)
+	{
+		for(int i = 0; i < lim; i++) a[i] /= lim;
+		reverse(a + 1, a + lim);
+	}
 }
 ```
 
