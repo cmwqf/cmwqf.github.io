@@ -70,9 +70,9 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -186,6 +186,87 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
+      <meta itemprop="name" content="cmwqf">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cmwqf's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/" class="post-title-link" itemprop="url">浅谈常系数齐次线性递推</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-20 19:58:52 / 修改时间：23:58:12" itemprop="dateCreated datePublished" datetime="2020-12-20T19:58:52+08:00">2020-12-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="常系数齐次线性递推"><a href="#常系数齐次线性递推" class="headerlink" title="常系数齐次线性递推"></a>常系数齐次线性递推</h1><p>给定<script type="math/tex">a_1,a_2,...,a_m</script>以及<script type="math/tex">f_1,f_2,...,f_m</script>，对于<script type="math/tex">\forall n>m</script>，满足</p>
+<script type="math/tex; mode=display">
+f_n=\sum_{i=1}^ma_if_{n-i}</script><p>每次给定<script type="math/tex">n</script>，求<script type="math/tex">f_n</script>。<script type="math/tex">n\le 10^{18}</script>。</p>
+<p>这个显然可以矩阵乘法，然而有所不同的是，这回<script type="math/tex">m</script>比较大，可能有<script type="math/tex">m\le 500</script>甚至<script type="math/tex">m\le 30000</script>，那么这个时候，普通的矩阵乘法就无法解决了。</p>
+<p>这个时候，我们就可以使用一些技巧来加速这个过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -948,92 +1029,6 @@ f[n]=\sum_{i=0}^n{n \brace i}g[i]</script><p>那么我们可以通过斯特林�
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/04/22/%E6%B5%85%E8%B0%88%E7%AB%9E%E8%B5%9B%E5%9B%BE/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2020/04/20/%E6%B5%85%E8%B0%88%E8%AF%A2%E9%97%AE%E5%88%86%E5%9D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
-      <meta itemprop="name" content="cmwqf">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="cmwqf's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/20/%E6%B5%85%E8%B0%88%E8%AF%A2%E9%97%AE%E5%88%86%E5%9D%97/" class="post-title-link" itemprop="url">浅谈询问分块</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-20 11:48:25" itemprop="dateCreated datePublished" datetime="2020-04-20T11:48:25+08:00">2020-04-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-20 11:42:37" itemprop="dateModified" datetime="2020-07-20T11:42:37+08:00">2020-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="询问分块"><a href="#询问分块" class="headerlink" title="询问分块"></a>询问分块</h1><p>什么是询问分块？</p>
-<p>对于一些题目，它的操作我们无法用高级数据结构在<script type="math/tex">log_2n</script>时间复杂度内解决，那么，我们可以考虑，<strong>对询问分块，定期重构</strong>，使复杂度降为<script type="math/tex">\sqrt{n}</script>级别。</p>
-<p>注意，这个询问分块的适用范围还是比较广泛的，因为它只需要答案重构复杂度为<script type="math/tex">O(n)</script>，且对于一个修改，我们能很快，如在<script type="math/tex">O(1)</script>或<script type="math/tex">O(log_2n)</script>的时间内，计算出它对某个询问的贡献，那么我们就可以用这种对询问分块的方法。</p>
-<p>实际上，对询问分块可以看成一种强大的暴力。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/20/%E6%B5%85%E8%B0%88%E8%AF%A2%E9%97%AE%E5%88%86%E5%9D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

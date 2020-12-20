@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/now_favicon2.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/now_favicon1.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="常系数齐次线性递推给定a_1,a_2,...,a_m以及f_1,f_2,...,f_m，对于\forall n&gt;m，满足  f_n&#x3D;\sum_{i&#x3D;1}^ma_if_{n-i}每次给定n，求f_n。n\le 10^{18}。 这个显然可以矩阵乘法，然而有所不同的是，这回m比较大，可能有m\le 500甚至m\le 30000，那么这个时候，普通的矩阵乘法就无法解决了。 这个时候，我们就可以使用一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈常系数齐次线性递推">
+<meta property="og:url" content="http://cmwqf.github.io/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/index.html">
+<meta property="og:site_name" content="cmwqf&#39;s blog">
+<meta property="og:description" content="常系数齐次线性递推给定a_1,a_2,...,a_m以及f_1,f_2,...,f_m，对于\forall n&gt;m，满足  f_n&#x3D;\sum_{i&#x3D;1}^ma_if_{n-i}每次给定n，求f_n。n\le 10^{18}。 这个显然可以矩阵乘法，然而有所不同的是，这回m比较大，可能有m\le 500甚至m\le 30000，那么这个时候，普通的矩阵乘法就无法解决了。 这个时候，我们就可以使用一些">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-20T11:58:52.000Z">
+<meta property="article:modified_time" content="2020-12-20T15:58:12.893Z">
+<meta property="article:author" content="cmwqf">
+<meta property="article:tag" content="线性代数">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://cmwqf.github.io/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>浅谈常系数齐次线性递推 | cmwqf's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">cmwqf's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">愿你出走半生，归来仍是少年</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
+      <meta itemprop="name" content="cmwqf">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cmwqf's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈常系数齐次线性递推
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-20 19:58:52 / 修改时间：23:58:12" itemprop="dateCreated datePublished" datetime="2020-12-20T19:58:52+08:00">2020-12-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="常系数齐次线性递推"><a href="#常系数齐次线性递推" class="headerlink" title="常系数齐次线性递推"></a>常系数齐次线性递推</h1><p>给定<script type="math/tex">a_1,a_2,...,a_m</script>以及<script type="math/tex">f_1,f_2,...,f_m</script>，对于<script type="math/tex">\forall n>m</script>，满足</p>
+<script type="math/tex; mode=display">
+f_n=\sum_{i=1}^ma_if_{n-i}</script><p>每次给定<script type="math/tex">n</script>，求<script type="math/tex">f_n</script>。<script type="math/tex">n\le 10^{18}</script>。</p>
+<p>这个显然可以矩阵乘法，然而有所不同的是，这回<script type="math/tex">m</script>比较大，可能有<script type="math/tex">m\le 500</script>甚至<script type="math/tex">m\le 30000</script>，那么这个时候，普通的矩阵乘法就无法解决了。</p>
+<p>这个时候，我们就可以使用一些技巧来加速这个过程。</p>
+<a id="more"></a>
+<h1 id="特征多项式"><a href="#特征多项式" class="headerlink" title="特征多项式"></a>特征多项式</h1><p>设<script type="math/tex">A</script>是<script type="math/tex">n</script>阶矩阵，那么如果数<script type="math/tex">\lambda</script>和非零向量<script type="math/tex">v</script>满足</p>
+<script type="math/tex; mode=display">
+\lambda v=Av</script><p>那么称<script type="math/tex">\lambda</script>为矩阵<script type="math/tex">A</script>的特征值，<script type="math/tex">v</script>为矩阵<script type="math/tex">A</script>的特征向量。</p>
+<p>上式可以写成</p>
+<script type="math/tex; mode=display">
+(\lambda I - A)v=0</script><p>对于某个特定的<script type="math/tex">\lambda</script>，这个式子有非零<script type="math/tex">v</script>解当且仅当</p>
+<script type="math/tex; mode=display">
+\det(\lambda I-A)=0</script><p>把<script type="math/tex">\lambda</script>看成未知量，那么<script type="math/tex">\det(\lambda I-A)</script>可以看成关于<script type="math/tex">\lambda</script>的一个多项式，记为<script type="math/tex">p_A(\lambda)</script>，称为<script type="math/tex">A</script>的特征多项式。</p>
+<p>显然，这个多项式应该是一个关于<script type="math/tex">\lambda</script>的<script type="math/tex">n</script>次多项式。</p>
+<h1 id="Cayley-Hamilton定理"><a href="#Cayley-Hamilton定理" class="headerlink" title="Cayley-Hamilton定理"></a>Cayley-Hamilton定理</h1><p>为什么要引入特征多项式的定义呢？其实就是为了这个定理做准备。</p>
+<p>这个定理的内容很简洁：</p>
+<script type="math/tex; mode=display">
+p_A(A)=O</script><p>其中<script type="math/tex">O</script>是零矩阵。</p>
+<p>如果读者感兴趣，可以自行查阅证明，此处略去。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>现在，我们就可以讲述常系数齐次线性递推的原理了。</p>
+<p>我们想要加速矩阵快速幂的过程，那么我们的目标：对于一个矩阵<script type="math/tex">A</script>，快速算出<script type="math/tex">A^n</script>。</p>
+<p>假设这个<script type="math/tex">m</script>阶矩阵<script type="math/tex">A</script>的特征多项式为</p>
+<script type="math/tex; mode=display">
+p_A(\lambda)=\sum_{i=0}^mc_i\lambda^i</script><p>由<script type="math/tex">Cayley-Hamilton</script>定理可知，</p>
+<script type="math/tex; mode=display">
+p_A(A)=\sum_{i=0}^mc_iA^i=0</script><p>那么我们只需要求出<script type="math/tex">G(x)=x^n\bmod p_A(x)</script>，最终的答案就是<script type="math/tex">A^n=G(A)</script>。</p>
+<p>对于特征多项式的求法，我们可以用拉格朗日插值，但是由于常系数齐次线性递推的矩阵比较特殊，我们可以直接计算，这个我们后面再说。</p>
+<p>假设我们已经求出了<script type="math/tex">p_A(x)</script>，那么我们只需要求出<script type="math/tex">G(x)</script>即可解决问题，因为<script type="math/tex">G(x)</script>必然是一个不超过<script type="math/tex">m-1</script>次的多项式，那么有</p>
+<script type="math/tex; mode=display">
+G(x)=\sum_{i=0}^{m-1}g_ix^i\\
+G(A)=\sum_{i=0}^{m-1}g_iA^i\\
+f_n=\sum_{i=0}^{m-1}g_if_{m+i}</script><p>因此我们可以根据<script type="math/tex">f_m,f_{m+1},...,f_{2m-1}</script>来推出<script type="math/tex">f_n</script>。</p>
+<h1 id="多项式取模"><a href="#多项式取模" class="headerlink" title="多项式取模"></a>多项式取模</h1><p>首先我们注意到要求出<script type="math/tex">G(x)</script>，我们要进行多项式取模。有<script type="math/tex">FFT</script>版的多项式取模+快速幂做法，时间复杂度<script type="math/tex">O(m\log m\log n)</script>，但是那个非常难写，考场上几乎不可能写出来。我们来介绍暴力方法。</p>
+<p>在<a href="https://cmwqf.github.io/2020/07/27/%E6%B5%85%E8%B0%88%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%9A%84%E6%9A%B4%E5%8A%9B%E5%AE%9E%E7%8E%B0/">多项式操作的暴力实现</a>中，我介绍了如何暴力进行多项式取模，但是在此处，我们不能直接对<script type="math/tex">x^n</script>进行多项式取模，这样时间复杂度<script type="math/tex">O(n)</script>，无法接受。</p>
+<p>我们可以考虑快速幂的思想，只不过变成在<script type="math/tex">\bmod p_A(x)</script>的情况下进行。</p>
+<p>考虑快速幂的过程，我们把数换成多项式，并且每次让多项式先平方，再取模，这样时间复杂度为<script type="math/tex">O(m^2\log n)</script>。</p>
+<h1 id="求p-A-x"><a href="#求p-A-x" class="headerlink" title="求p_A(x)"></a>求<script type="math/tex">p_A(x)</script></h1><p>现在，唯一的问题是如何求特征多项式。</p>
+<p>考虑<script type="math/tex">A</script>长什么样子？</p>
+<script type="math/tex; mode=display">
+A=
+\begin{bmatrix}
+a_1 & a_2 & a_3 & ... & a_{m-1} & a_m\\
+1 & 0 & 0 & ... & 0 & 0\\
+0 & 1 & 0 & ... & 0 & 0\\
+... & ... & ... & ... & ... & ...\\
+0 & 0 & 0 & ... & 1 & 0
+\end{bmatrix}</script><p>那么</p>
+<script type="math/tex; mode=display">
+p_A(\lambda)=\det(\lambda I-A)=|
+\begin{bmatrix}
+\lambda - a_1 & -a_2 & -a_3 & ... & -a_{m-1} & -a_m\\
+-1 & \lambda & 0 & ... & 0 & 0\\
+0 & -1 & \lambda & ... & 0 & 0\\
+... & ... & ... & ... & ... & ...\\
+0 & 0 & 0 & ... & -1 & \lambda
+\end{bmatrix}
+|</script><p>假设<script type="math/tex">B=\lambda I - A</script>，那么根据第一行展开，有</p>
+<script type="math/tex; mode=display">
+\det(B)=(\lambda-a_1)B_{1,1}-a_2B_{1,2}-...-a_mB_{1,m}</script><p>其中<script type="math/tex">B_{i,j}</script>表示代数余子式。</p>
+<p>注意到<script type="math/tex">1,i</script>余子式的行列式就是其对角线上数的乘积，即<script type="math/tex">(-1)^{i-1}\lambda^{m-i}</script>，则</p>
+<script type="math/tex; mode=display">
+B_{1,i}=(-1)^{1+i}(-1)^{i-1}\lambda^{m-i}=\lambda^{m-i}</script><p>那么我们有</p>
+<script type="math/tex; mode=display">
+\det(B)=\lambda^m-\sum_{i=1}^ma_i\lambda^{m-i}</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" rel="tag"># 线性代数</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/12/%E6%B5%85%E8%B0%88BEST%E5%AE%9A%E7%90%86/" rel="prev" title="浅谈BEST定理">
+      <i class="fa fa-chevron-left"></i> 浅谈BEST定理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常系数齐次线性递推"><span class="nav-number">1.</span> <span class="nav-text">常系数齐次线性递推</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特征多项式"><span class="nav-number">2.</span> <span class="nav-text">特征多项式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cayley-Hamilton定理"><span class="nav-number">3.</span> <span class="nav-text">Cayley-Hamilton定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">4.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项式取模"><span class="nav-number">5.</span> <span class="nav-text">多项式取模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求p-A-x"><span class="nav-number">6.</span> <span class="nav-text">求p_A(x)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cmwqf"
+      src="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
+  <p class="site-author-name" itemprop="name">cmwqf</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cmwqf" title="GitHub → https://github.com/cmwqf" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:cmwqfcmwqf@gmail.com" title="E-Mail → mailto:cmwqfcmwqf@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cmwqf</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'geF1bFsMiH6vR98UsueryV1X-gzGzoHsz',
+      appKey     : 'yIcGzbWtU0kgJqq4SLAqGnB7',
+      placeholder: "写下你的评论吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
