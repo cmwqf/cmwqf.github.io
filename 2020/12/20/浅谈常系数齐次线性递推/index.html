@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"cmwqf.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="常系数齐次线性递推给定a_1,a_2,...,a_m以及f_1,f_2,...,f_m，对于\forall n&gt;m，满足  f_n&#x3D;\sum_{i&#x3D;1}^ma_if_{n-i}每次给定n，求f_n。n\le 10^{18}。 这个显然可以矩阵乘法，然而有所不同的是，这回m比较大，可能有m\le 500甚至m\le 30000，那么这个时候，普通的矩阵乘法就无法解决了。 这个时候，我们就可以使用一些">
+  <meta name="description" content="常系数齐次线性递推给定a_1,a_2,...,a_m以及f_1,f_2,...,f_m，对于\forall n&gt;m，满足  f_n&#x3D;\sum_{i&#x3D;1}^ma_if_{n-i}每次给定n，求f_n。n\le 10^{18}。 这个显然可以矩阵乘法，然而有所不同的是，这回m比较大，可能有m\le 500甚至m\le 30000，那么，普通的矩阵乘法就无法解决了。 这个时候，我们就可以使用一些技巧来加">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈常系数齐次线性递推">
 <meta property="og:url" content="http://cmwqf.github.io/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/index.html">
 <meta property="og:site_name" content="cmwqf&#39;s blog">
-<meta property="og:description" content="常系数齐次线性递推给定a_1,a_2,...,a_m以及f_1,f_2,...,f_m，对于\forall n&gt;m，满足  f_n&#x3D;\sum_{i&#x3D;1}^ma_if_{n-i}每次给定n，求f_n。n\le 10^{18}。 这个显然可以矩阵乘法，然而有所不同的是，这回m比较大，可能有m\le 500甚至m\le 30000，那么这个时候，普通的矩阵乘法就无法解决了。 这个时候，我们就可以使用一些">
+<meta property="og:description" content="常系数齐次线性递推给定a_1,a_2,...,a_m以及f_1,f_2,...,f_m，对于\forall n&gt;m，满足  f_n&#x3D;\sum_{i&#x3D;1}^ma_if_{n-i}每次给定n，求f_n。n\le 10^{18}。 这个显然可以矩阵乘法，然而有所不同的是，这回m比较大，可能有m\le 500甚至m\le 30000，那么，普通的矩阵乘法就无法解决了。 这个时候，我们就可以使用一些技巧来加">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-20T11:58:52.000Z">
-<meta property="article:modified_time" content="2020-12-20T16:01:23.807Z">
+<meta property="article:modified_time" content="2020-12-21T01:42:43.428Z">
 <meta property="article:author" content="cmwqf">
 <meta property="article:tag" content="线性代数">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 00:01:23" itemprop="dateModified" datetime="2020-12-21T00:01:23+08:00">2020-12-21</time>
+                <time title="修改时间：2020-12-21 09:42:43" itemprop="dateModified" datetime="2020-12-21T09:42:43+08:00">2020-12-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,7 +273,7 @@
         <h1 id="常系数齐次线性递推"><a href="#常系数齐次线性递推" class="headerlink" title="常系数齐次线性递推"></a>常系数齐次线性递推</h1><p>给定<script type="math/tex">a_1,a_2,...,a_m</script>以及<script type="math/tex">f_1,f_2,...,f_m</script>，对于<script type="math/tex">\forall n>m</script>，满足</p>
 <script type="math/tex; mode=display">
 f_n=\sum_{i=1}^ma_if_{n-i}</script><p>每次给定<script type="math/tex">n</script>，求<script type="math/tex">f_n</script>。<script type="math/tex">n\le 10^{18}</script>。</p>
-<p>这个显然可以矩阵乘法，然而有所不同的是，这回<script type="math/tex">m</script>比较大，可能有<script type="math/tex">m\le 500</script>甚至<script type="math/tex">m\le 30000</script>，那么这个时候，普通的矩阵乘法就无法解决了。</p>
+<p>这个显然可以矩阵乘法，然而有所不同的是，这回<script type="math/tex">m</script>比较大，可能有<script type="math/tex">m\le 500</script>甚至<script type="math/tex">m\le 30000</script>，那么，普通的矩阵乘法就无法解决了。</p>
 <p>这个时候，我们就可以使用一些技巧来加速这个过程。</p>
 <a id="more"></a>
 <h1 id="特征多项式"><a href="#特征多项式" class="headerlink" title="特征多项式"></a>特征多项式</h1><p>设<script type="math/tex">A</script>是<script type="math/tex">n</script>阶矩阵，那么如果数<script type="math/tex">\lambda</script>和非零向量<script type="math/tex">v</script>满足</p>
