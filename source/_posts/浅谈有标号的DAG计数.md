@@ -2,6 +2,7 @@
 title: 浅谈有标号的DAG计数
 date: 2021-01-01 19:41:55
 tags: [dp, 容斥原理, 多项式]
+categories: [学习笔记]
 ---
 
 # Description
