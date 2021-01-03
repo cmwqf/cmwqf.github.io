@@ -189,6 +189,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2021/01/01/%E6%B5%85%E8%B0%88%E6%9C%89%E6%A0%87%E5%8F%B7%E7%9A%84DAG%E8%AE%A1%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
+      <meta itemprop="name" content="cmwqf">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cmwqf's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/01/%E6%B5%85%E8%B0%88%E6%9C%89%E6%A0%87%E5%8F%B7%E7%9A%84DAG%E8%AE%A1%E6%95%B0/" class="post-title-link" itemprop="url">浅谈有标号的DAG计数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-01 19:41:55" itemprop="dateCreated datePublished" datetime="2021-01-01T19:41:55+08:00">2021-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-03 09:18:55" itemprop="dateModified" datetime="2021-01-03T09:18:55+08:00">2021-01-03</time>
+              </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>求<script type="math/tex">n</script>个点的有标号有向无环图个数，<script type="math/tex">n\le 5000</script>。</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>设<script type="math/tex">f_n</script>表示<script type="math/tex">n</script>个点的<script type="math/tex">DAG</script>个数，那么有以下递推式成立：</p>
+<script type="math/tex; mode=display">
+f_n=\sum_{i=1}^n(-1)^{i+1}\binom{n}{i}2^{i(n-i)}f_{n-i}</script><p>为什么这个式子成立呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/01/%E6%B5%85%E8%B0%88%E6%9C%89%E6%A0%87%E5%8F%B7%E7%9A%84DAG%E8%AE%A1%E6%95%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2020/12/20/%E6%B5%85%E8%B0%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -969,90 +1046,6 @@ f[n]=\sum_{i=0}^n{n \brace i}g[i]</script><p>那么我们可以通过斯特林�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cmwqf.github.io/2020/04/22/%E6%B5%85%E8%B0%88%E7%AB%9E%E8%B5%9B%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2020/02/04/hRcKACwW5rL1sdf.jpg">
-      <meta itemprop="name" content="cmwqf">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="cmwqf's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/22/%E6%B5%85%E8%B0%88%E7%AB%9E%E8%B5%9B%E5%9B%BE/" class="post-title-link" itemprop="url">浅谈竞赛图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-22 17:36:37" itemprop="dateCreated datePublished" datetime="2020-04-22T17:36:37+08:00">2020-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-20 11:23:00" itemprop="dateModified" datetime="2020-07-20T11:23:00+08:00">2020-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="竞赛图"><a href="#竞赛图" class="headerlink" title="竞赛图"></a>竞赛图</h1><p>定义：<script type="math/tex">n</script>个点的有向图，若满足<strong>任意两点都有且仅有一条有向边</strong>，就称此有向图为竞赛图。</p>
-<p>为什么竞赛图要专门分析呢？因为竞赛图有很多非常有趣的性质。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/22/%E6%B5%85%E8%B0%88%E7%AB%9E%E8%B5%9B%E5%9B%BE/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1124,7 +1117,7 @@ f[n]=\sum_{i=0}^n{n \brace i}g[i]</script><p>那么我们可以通过斯特林�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1172,7 +1165,7 @@ f[n]=\sum_{i=0}^n{n \brace i}g[i]</script><p>那么我们可以通过斯特林�
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
