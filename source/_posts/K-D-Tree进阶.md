@@ -2,6 +2,7 @@
 title: K-D Tree进阶
 date: 2019-02-04 15:12:49
 tags: [K-D Tree]
+categories: [学习笔记]
 ---
 
 # 新的KD-Tree写法
@@ -138,9 +139,7 @@ inline void query(int node)
 
 [CQOI2017老C的任务](https://www.luogu.org/problemnew/show/P3755)
 
-是一道省选题，出题人应该不想让K-D Tree过掉，但是我开了O2还是水过去了（逃
-
-[评测记录](https://www.luogu.org/recordnew/lists?uid=cmwqf&pid=P3755&status=&sort=0)
+是一道省选题，出题人应该不想让K-D Tree过掉，但是我开了O2还是水过去了。
 
 最后一次提交是把O2去掉之后的结果。。。
 
