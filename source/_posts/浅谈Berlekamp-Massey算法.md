@@ -67,10 +67,10 @@ inline void BM(int *a, vector<int> &ans)
 		}
 		vector<int> now = ans;
 		int mul = 1ll * SUB(a[i], t) * mpow(delta, mod - 2) % mod;
-		if(i - w + lst.size() > ans.size()) ans.resize(i - w + lst.size(), 0);
+		if(i - w + (int)lst.size() > (int)ans.size()) ans.resize(i - w + (int)lst.size(), 0);
 		ans[i - w - 1] = ADD(ans[i - w - 1], mul);
 		for(int j = 0; j < lst.size(); j++) ans[i - w + j] = SUB(ans[i - w + j], 1ll * mul * lst[j] % mod);
-		if(now.size() - i < lst.size() - w) delta = SUB(a[i], t), w = i, lst = now;
+		if((int)now.size() - i < (int)lst.size() - w) delta = SUB(a[i], t), w = i, lst = now;
 	}
 }
 ```
