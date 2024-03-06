@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>AGC030F Permutation and Minimum | cmwqf's blog</title><meta name="author" content="cmwqf"><meta name="copyright" content="cmwqf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Description对于2n个数的排列p，定义其生成数列g_i&#x3D;\min(p_{2i-1},p_{2i})\quad\forall 1\le i\le n。现在有一个2n个数的排列，其中有一些位置还不确定，问在所有合法的填法中，能生成的不同的g的个数，答案对1e9+7取模。 两个g不同当且仅当存在1\le i\le n，使得g1_i\neq g2_i。 其中1\le n\le 300。">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="AGC030F Permutation and Minimum">
+<meta property="og:url" content="http://cmwqf.github.io/2021/03/01/AGC030F-Permutation-and-Minimum/index.html">
+<meta property="og:site_name" content="cmwqf&#39;s blog">
+<meta property="og:description" content="Description对于2n个数的排列p，定义其生成数列g_i&#x3D;\min(p_{2i-1},p_{2i})\quad\forall 1\le i\le n。现在有一个2n个数的排列，其中有一些位置还不确定，问在所有合法的填法中，能生成的不同的g的个数，答案对1e9+7取模。 两个g不同当且仅当存在1\le i\le n，使得g1_i\neq g2_i。 其中1\le n\le 300。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg">
+<meta property="article:published_time" content="2021-03-01T07:16:05.000Z">
+<meta property="article:modified_time" content="2024-03-06T06:29:00.634Z">
+<meta property="article:author" content="cmwqf">
+<meta property="article:tag" content="dp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://cmwqf.github.io/2021/03/01/AGC030F-Permutation-and-Minimum/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AGC030F Permutation and Minimum',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-06 14:29:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="cmwqf's blog"><img class="site-icon" src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"/><span class="site-name">cmwqf's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AGC030F Permutation and Minimum</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-01T07:16:05.000Z" title="发表于 2021-03-01 15:16:05">2021-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-06T06:29:00.634Z" title="更新于 2024-03-06 14:29:00">2024-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Atcoder/">Atcoder</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AGC030F Permutation and Minimum"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>对于<script type="math/tex">2n</script>个数的排列<script type="math/tex">p</script>，定义其生成数列<script type="math/tex">g_i=\min(p_{2i-1},p_{2i})\quad\forall 1\le i\le n</script>。现在有一个<script type="math/tex">2n</script>个数的排列，其中有一些位置还不确定，问在所有合法的填法中，能生成的不同的<script type="math/tex">g</script>的个数，答案对<script type="math/tex">1e9+7</script>取模。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>两个<script type="math/tex">g</script>不同当且仅当存在<script type="math/tex">1\le i\le n</script>，使得<script type="math/tex">g1_i\neq g2_i</script>。</p>
+<p>其中<script type="math/tex">1\le n\le 300</script>。</p>
+<span id="more"></span>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><h2 id="Tip1"><a href="#Tip1" class="headerlink" title="Tip1"></a>Tip1</h2><p>这类问题可以形式化地表述为：我们有一个<script type="math/tex">f</script>，根据一些操作变成<script type="math/tex">g</script>，我们要数<script type="math/tex">g</script>的个数。</p>
+<p>这种问题的麻烦处在于，如果只数<script type="math/tex">f</script>，会把<script type="math/tex">g</script>算重，如果只数<script type="math/tex">g</script>，有些<script type="math/tex">g</script>是不合法的，会算多。</p>
+<p>那么，我们就是要在<script type="math/tex">g</script>和<script type="math/tex">f</script>中建立一个桥梁，即一个构造方法（很多时候是贪心），使得每个合法的<script type="math/tex">g_0</script>通过构造能得到唯一一个合法的<script type="math/tex">f_0</script>，且这个<script type="math/tex">f_0</script>通过原来的操作变成的序列为<script type="math/tex">g_0</script>。</p>
+<p>我们考虑对<script type="math/tex">g</script>序列进行<script type="math/tex">dp</script>，同时<script type="math/tex">dp</script>状态维护当前<script type="math/tex">g</script>经过构造形成的<script type="math/tex">f</script>的必要参数。最后，只要<script type="math/tex">f</script>的参数表明构造出了合法的<script type="math/tex">f</script>，那么<script type="math/tex">g</script>也是合法的。也就是说，最后把所有表示<script type="math/tex">f</script>合法的<script type="math/tex">dp</script>值加起来即可。</p>
+<hr>
+<p>现在考虑本题。</p>
+<p>显然，本题中的<script type="math/tex">f</script>就是<script type="math/tex">n</script>个二元组组成的序列，<script type="math/tex">g</script>就是题目所述的生成序列。</p>
+<p>可以发现，本题的<script type="math/tex">n</script>个二元组可以分为<script type="math/tex">3</script>种类型，分别为<script type="math/tex">(0,-1),(-1,-1),(0,0)</script>，其中<script type="math/tex">0</script>表示给定的数，<script type="math/tex">-1</script>表示可以随便填的数。可以发现，<script type="math/tex">(0,0)</script>对答案没用，因此可以忽略它。</p>
+<p>那么，我们把所有形如<script type="math/tex">(0,-1)</script>的分为一类，设为<script type="math/tex">A</script>，所有<script type="math/tex">(-1,-1)</script>的分为一类，设为<script type="math/tex">B</script>。</p>
+<p>我们考虑通过一个合法的<script type="math/tex">g</script>构造出唯一的相应的<script type="math/tex">f</script>。</p>
+<p>注意到因为我们统计的是<script type="math/tex">g</script>的个数，因此每个二元组内部交换顺序，<script type="math/tex">g</script>不变，那么我们不妨假设<script type="math/tex">f</script>中所有二元组<script type="math/tex">(a_i,b_i)</script>都满足<script type="math/tex">a_i<b_i</script>。</p>
+<p>考虑从小到大枚举数。</p>
+<p>如果这个数是已经给定的，那么直接放到它对应的二元组去，如果那个二元组还没有数，就填在左边，否则填在右边（为了满足<script type="math/tex">a_i<b_i</script>）。</p>
+<p>如果这个数不是给定的，那么有两种情况：第一种，它出现在<script type="math/tex">g</script>中，即它是某个二元组的最小值，那么我们把它填在其在<script type="math/tex">g</script>出现位置的那个二元组的左边。否则，如果它不出现在<script type="math/tex">g</script>中，那么说明它是某个二元组的最小值，那么考虑当前所有<strong>已经填了左边数且右边数不是给定的二元组</strong>，实际上它可以放在这些二元组中的任何一个，但是由于我们要求构造出唯一的一个<script type="math/tex">f</script>，不难想到将它填在其中左边数字最小的那个二元组中。</p>
+<p>如此构造出相应的<script type="math/tex">f</script>。</p>
+<p>可以发现，一个合法的<script type="math/tex">g</script>唯一对应一个操作序列，而一个操作序列也唯一对应一个合法的<script type="math/tex">g</script>（因为构造出来的<script type="math/tex">f</script>唯一对应一个<script type="math/tex">g</script>）。</p>
+<p>那么我们现在考虑如何<script type="math/tex">dp</script>。</p>
+<p>考虑如果我们想要完成这个操作序列需要知道什么？</p>
+<p>首先如果这个数已经给定，那么它填的位置已经确定，所以不需要知道信息。</p>
+<p>如果这个数没有被给定，那么它需要知道什么信息呢？如果它出现在<script type="math/tex">g</script>中，那么我们需要知道有多少个二元组一个数都没填，然后选一个填下去。否则，如果它不出现在<script type="math/tex">g</script>中，那么我们需要知道有多少个二元组已经填了左边数且右边数不是给定的。因此，我们一共需要这两个状态。</p>
+<p>根据这个进行<script type="math/tex">dp</script>，问题似乎解决了？？</p>
+<p>但是，我们很快发现这个做法有些问题。在这个算法中，可能出现我们填已经<strong>给定的数</strong>的时候，如果我们决定填左边，而实际上左边已经被填过了。又或者如果我们准备填右边，而实际上这个二元组左边还没有被填。这个时候，<script type="math/tex">g</script>已经不合法了，但还是被我们统计到了答案里。</p>
+<p>如果还是考虑<strong>给定的数</strong>能否填，似乎只有记录所有<script type="math/tex">A</script>中二元组的状态？这是无法接受的。</p>
+<p>既然无法考虑<strong>给定的数</strong>能否填，不如在填<strong>没给定的数</strong>的时候决定它应该和哪个进行配对，然后再考虑<strong>给定的数</strong>的时候在一个固定的集合里选择。</p>
+<p>具体地，我们在状态中记录一维表示当前有多少个<strong>没给定的数</strong>决定以后和<strong>给定的数</strong>配对。那么每次填<strong>给定的数</strong>的时候，如果它想放在后面（不出现在<script type="math/tex">g</script>中）的话，就在这些数中选一个进行配对即可。</p>
+<h2 id="Tip2"><a href="#Tip2" class="headerlink" title="Tip2"></a>Tip2</h2><p>这是一个很常用的思想，即当我们按照一定顺序进行<script type="math/tex">dp</script>，选出来一些元素要放在某些位置，但是如果在选出来这个元素的同时决定它放在哪个位置会影响后面的选择，那么不如先把它放入一个候选集合中，等到需要它的时候再拿出来即可。</p>
+<hr>
+<p>那么，我们设<script type="math/tex">f[i][j][k]</script>表示考虑了所有<script type="math/tex">\le i</script>的数，有<script type="math/tex">j</script>个数决定和<strong>给定的数</strong>配对，有<script type="math/tex">k</script>个数决定和<strong>没给定的数</strong>配对的方案数。</p>
+<p>但是，这样还有一个问题，如果我们当前考虑的数是<strong>没给定的</strong>，而我们想填在<script type="math/tex">B</script>组的左边，那么我们还要记录当前有多少个还没被填的<script type="math/tex">B</script>组，来进行选择。</p>
+<p>这样，时间复杂度又不对了。注意到实际上<script type="math/tex">B</script>组中的二元组是可以交换的，那么我们不妨假设所有<script type="math/tex">B</script>组二元组满足<script type="math/tex">a_1<a_2<\dots<a_k</script>（其中<script type="math/tex">k</script>是<script type="math/tex">B</script>组的大小），最后乘以<script type="math/tex">k!</script>即可。</p>
+<p>因此，当我们把<strong>没给定的数</strong>填到<script type="math/tex">B</script>组的左边时无需考虑具体填到哪个二元组，因为它会自动填在当前所有已经填了左边数的<script type="math/tex">B</script>组二元组的后面那个二元组中。</p>
+<p>接下来，转移过程就很简单了。设当前考虑<script type="math/tex">f[i][j][k]</script>能往哪些地方转移。</p>
+<p>如果它是<strong>给定的</strong>：</p>
+<p>第一种情况，想让它在<script type="math/tex">g</script>中出现，那么它后面一定配对一个<strong>没给定的数</strong>，那么<script type="math/tex">f[i+1][j][k+1]+=f[i][j][k]</script>。</p>
+<p>第二种情况，它不在<script type="math/tex">g</script>中出现，那么在候选集合中选一个，<script type="math/tex">f[i+1][j-1][k]+=f[i][j][k]\times j</script>。</p>
+<p>如果它是<strong>没给定的</strong>：</p>
+<p>第一种情况，想让它在<script type="math/tex">g</script>中出现，那么它后面既可以配对<strong>给定的</strong>，也可以配对<strong>没给定的</strong>，因此<script type="math/tex">f[i+1][j+1][k]+=f[i][j][k],f[i+1][j][k+1]+=f[i][j][k]</script>。</p>
+<p>第二种情况，不在<script type="math/tex">g</script>中出现，那么和配对集合中数字最小的那个配对，即<script type="math/tex">f[i+1][j][k-1]+=f[i][j][k]</script>。</p>
+<p>最后的答案是<script type="math/tex">f[2n][0][0]\times k!</script>。</p>
+<p>为什么这两个状态都是<script type="math/tex">0</script>就一定符合条件呢？这个状态中丝毫没有用到<script type="math/tex">A</script>组和<script type="math/tex">B</script>组的集合大小，会不会最后构造出来的<script type="math/tex">f</script>两个集合大小和原来不相等呢？</p>
+<p>不会，因为在去除了两边都给定的二元组的情况下，只需要知道有多少个数字给定，多少个数字没给定，就能推出<script type="math/tex">A</script>和<script type="math/tex">B</script>的大小。而这两个状态都是<script type="math/tex">0</script>，说明这<script type="math/tex">2n</script>个数已经合法地填满了所有的二元组，自然满足条件。</p>
+<p>时间复杂度<script type="math/tex">O(n^3)</script>。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">305</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, s;</span><br><span class="line"><span class="keyword">int</span> flag[maxN * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">2</span>][maxN + <span class="number">1</span>][maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> &amp;x, <span class="keyword">int</span> y)</span> </span>&#123; x = x + y &gt;= mod ? x + y - mod : x + y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">        <span class="keyword">if</span>(x &gt; <span class="number">0</span> &amp;&amp; y &gt; <span class="number">0</span>) &#123; flag[x] = flag[y] = <span class="number">2</span>; <span class="keyword">continue</span>; &#125;</span><br><span class="line">        <span class="keyword">if</span>(x &gt; <span class="number">0</span>) flag[x] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(y &gt; <span class="number">0</span>) flag[y] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">0</span> &amp;&amp; y &lt; <span class="number">0</span>) s ++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">    f[now][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">2</span> * n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        now ^= <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">memset</span>(f[now], <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f[now]));</span><br><span class="line">        <span class="keyword">if</span>(flag[i] == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= n; k++)</span><br><span class="line">                    f[now][j][k] = f[now ^ <span class="number">1</span>][j][k];</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= n; k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(!f[now ^ <span class="number">1</span>][j][k]) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">int</span> res = f[now ^ <span class="number">1</span>][j][k];</span><br><span class="line">                <span class="keyword">if</span>(!flag[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">update</span>(f[now][j + <span class="number">1</span>][k], res);</span><br><span class="line">                    <span class="built_in">update</span>(f[now][j][k + <span class="number">1</span>], res);</span><br><span class="line">                    <span class="keyword">if</span>(j) <span class="built_in">update</span>(f[now][j - <span class="number">1</span>][k], res);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">update</span>(f[now][j + <span class="number">1</span>][k], res);</span><br><span class="line">                    <span class="keyword">if</span>(k) <span class="built_in">update</span>(f[now][j][k - <span class="number">1</span>], <span class="number">1ll</span> * res * k % mod);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = f[now][<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s; i++) ans = <span class="number">1ll</span> * ans * i % mod;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以后我们遇到这类计数”由某个操作生成的序列“的问题，首先考虑判定问题：一个序列能否被生成？</p>
+<p>如果这个问题可以在这个序列上从头到尾遍历的同时用贪心解决，且贪心过程所用到的信息（称为贪心参数）是<script type="math/tex">O(1)</script>的，那么我们就可以从头到尾以这些信息作为状态进行<script type="math/tex">dp</script>。</p>
+<p>我们的思想实际上是对<script type="math/tex">g</script>进行<script type="math/tex">dp</script>，但是有的<script type="math/tex">g</script>是不合法的，因此我们在状态中加入可以判定是否合法的贪心参数，最后对所有合法的答案累加。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io">cmwqf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io/2021/03/01/AGC030F-Permutation-and-Minimum/">http://cmwqf.github.io/2021/03/01/AGC030F-Permutation-and-Minimum/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cmwqf.github.io" target="_blank">cmwqf's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/dp/">dp</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/04/08/%E6%B5%85%E8%B0%88%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/" title="浅谈最小表示法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浅谈最小表示法</div></div></a></div><div class="next-post pull-right"><a href="/2021/02/22/CF1307G-Cow-and-Exercise/" title="CF1307G Cow and Exercise"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CF1307G Cow and Exercise</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/01/08/AGC020C-Median-Sum/" title="AGC020C Median Sum"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-08</div><div class="title">AGC020C Median Sum</div></div></a></div><div><a href="/2020/04/03/AGC011F-Train-Service-Planning/" title="AGC011F Train Service Planning"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-03</div><div class="title">AGC011F Train Service Planning</div></div></a></div><div><a href="/2020/01/03/AGC009E-Eternal-Average/" title="AGC009E Eternal Average"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-03</div><div class="title">AGC009E Eternal Average</div></div></a></div><div><a href="/2020/04/02/AGC021F-Trinity/" title="AGC021F Trinity"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-02</div><div class="title">AGC021F Trinity</div></div></a></div><div><a href="/2019/02/07/BZOJ1002-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92/" title="[BZOJ1002]轮状病毒"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-02-07</div><div class="title">[BZOJ1002]轮状病毒</div></div></a></div><div><a href="/2020/02/29/AGC038E-Gachapon/" title="AGC038E Gachapon"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-29</div><div class="title">AGC038E Gachapon</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">cmwqf</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cmwqf" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:cmwqfcmwqf@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Description"><span class="toc-number">1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tip1"><span class="toc-number">2.1.</span> <span class="toc-text">Tip1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tip2"><span class="toc-number">2.2.</span> <span class="toc-text">Tip2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number">3.</span> <span class="toc-text">Code</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/20/%E6%B5%85%E8%B0%88%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/" title="浅谈莫队算法">浅谈莫队算法</a><time datetime="2021-07-20T11:43:06.000Z" title="发表于 2021-07-20 19:43:06">2021-07-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/08/%E6%B5%85%E8%B0%88%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/" title="浅谈最小表示法">浅谈最小表示法</a><time datetime="2021-04-08T03:12:27.000Z" title="发表于 2021-04-08 11:12:27">2021-04-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/03/01/AGC030F-Permutation-and-Minimum/" title="AGC030F Permutation and Minimum">AGC030F Permutation and Minimum</a><time datetime="2021-03-01T07:16:05.000Z" title="发表于 2021-03-01 15:16:05">2021-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/02/22/CF1307G-Cow-and-Exercise/" title="CF1307G Cow and Exercise">CF1307G Cow and Exercise</a><time datetime="2021-02-22T07:56:11.000Z" title="发表于 2021-02-22 15:56:11">2021-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/01/19/Rikka-with-Game%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="Rikka with Game解题报告">Rikka with Game解题报告</a><time datetime="2021-01-19T07:04:15.000Z" title="发表于 2021-01-19 15:04:15">2021-01-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By cmwqf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

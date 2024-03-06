@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>浅谈带权二分 | cmwqf's blog</title><meta name="author" content="cmwqf"><meta name="copyright" content="cmwqf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="带权二分带权二分，又称为wqs二分或凸优化，它适用于一类dp的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。 具体地，带权二分一般适用于这样一类问题：有n个物品，要求从里面选恰好m个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用wqs二分。 那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="浅谈带权二分">
+<meta property="og:url" content="http://cmwqf.github.io/2020/07/05/%E6%B5%85%E8%B0%88%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86/index.html">
+<meta property="og:site_name" content="cmwqf&#39;s blog">
+<meta property="og:description" content="带权二分带权二分，又称为wqs二分或凸优化，它适用于一类dp的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。 具体地，带权二分一般适用于这样一类问题：有n个物品，要求从里面选恰好m个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用wqs二分。 那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg">
+<meta property="article:published_time" content="2020-07-05T07:28:05.000Z">
+<meta property="article:modified_time" content="2024-03-06T06:29:00.640Z">
+<meta property="article:author" content="cmwqf">
+<meta property="article:tag" content="dp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://cmwqf.github.io/2020/07/05/%E6%B5%85%E8%B0%88%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浅谈带权二分',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-06 14:29:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="cmwqf's blog"><img class="site-icon" src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"/><span class="site-name">cmwqf's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">浅谈带权二分</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-05T07:28:05.000Z" title="发表于 2020-07-05 15:28:05">2020-07-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-06T06:29:00.640Z" title="更新于 2024-03-06 14:29:00">2024-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="浅谈带权二分"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="带权二分"><a href="#带权二分" class="headerlink" title="带权二分"></a>带权二分</h1><p>带权二分，又称为<script type="math/tex">wqs</script>二分或凸优化，它适用于一类<script type="math/tex">dp</script>的优化，可以将一个二维的状态转化为一维，从而达到优化时间复杂度的效果。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>具体地，带权二分一般适用于这样一类问题：有<script type="math/tex">n</script>个物品，要求从里面选恰好<script type="math/tex">m</script>个（可能有若干限制），使得价值总和最优。但是，并不是所有这一类问题都可以使用<script type="math/tex">wqs</script>二分。</p>
+<p>那么，具体什么情况可以使用带权二分呢？带权二分又是运用了什么思想呢？</p>
+<span id="more"></span>
+<h1 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h1><p>什么情况下，我们可以使用带权二分呢？注意我们上面提出的这一类问题，一般我们会设计状态为设<script type="math/tex">f[i][j]</script>表示前<script type="math/tex">i</script>个物品，选了<script type="math/tex">j</script>个的最优结果是什么。显然最后的答案是<script type="math/tex">f[n][m]</script>。</p>
+<p>如果我们把<script type="math/tex">f[n]</script>画成图像：即我们画一张图像，每个点为<script type="math/tex">(i,f[n][i])</script>，并顺次连接。如果这个图像是凸的（不管是上凸还是下凸），我们就可以使用带权二分。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>我们的思想是去掉选择个数的条件，即我们去掉“恰好选<script type="math/tex">m</script>个”，下面我们不妨设问题让我们求最大值，<script type="math/tex">f[n]</script>的图像为上凸函数。</p>
+<p>设<script type="math/tex">g[i]</script>表示<script type="math/tex">f[i][j]</script>的最大值，然后我们来<script type="math/tex">dp</script>出<script type="math/tex">g</script>，这个的时间复杂度显然就要优秀的多。但是，我们最后并不能通过<script type="math/tex">g</script>知道<script type="math/tex">f[n][m]</script>，因为<script type="math/tex">g[n]</script>代表的只是<script type="math/tex">f[n][i]</script>的最大值。</p>
+<p>这个时候，我们考虑<script type="math/tex">f[n]</script>图像的导函数，由于是上凸函数，其导函数一定是递减的。其导函数与<script type="math/tex">x</script>轴的交点横坐标就是<script type="math/tex">f[n]</script>取最大值时的横坐标。</p>
+<p>我们考虑给<script type="math/tex">f[n]</script>加上一个正比例函数<script type="math/tex">y=kx</script>，那么，这个时候其导函数会加上<script type="math/tex">k</script>，那么其与<script type="math/tex">x</script>轴的交点会往右移，换句话说，<script type="math/tex">f[n]</script>的最值点会往右移。那么，我们可以通过加上正比例函数，使得<script type="math/tex">f</script>的最值点位置调整。因为<script type="math/tex">g[n]</script>求的是<script type="math/tex">f[n][i]</script>的最值点，那么我们只需要调整<script type="math/tex">k</script>使得<script type="math/tex">f[n]</script>的最值点变到<script type="math/tex">x=m</script>上，那么此时的<script type="math/tex">g[n]-mk</script>就是答案。</p>
+<p>怎样使得整个函数加上<script type="math/tex">kx</script>呢？注意<script type="math/tex">kx</script>的实际意义是每多选一个物品，我们就多获得<script type="math/tex">k</script>的价值，所以我们只需在<script type="math/tex">dp</script>的时候修改一下价值即可。</p>
+<p>那么，我们怎么调整<script type="math/tex">k</script>呢？注意到<script type="math/tex">k</script>显然是可二分的，因此我们只需二分<script type="math/tex">k</script>（<script type="math/tex">k</script>的值域为<script type="math/tex">f[n]</script>导函数的值域），然后我们在<script type="math/tex">dp</script>的时候很容易记录<script type="math/tex">g[i]</script>取这个最优值时最少要选多少个物品（只需转移时稍微记录一下即可），设为<script type="math/tex">s[i]</script>，那么如果最后<script type="math/tex">s[n]>m</script>那么说明<script type="math/tex">k</script>要调小，否则说明<script type="math/tex">k</script>要调大。</p>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>最后二分出来的<script type="math/tex">k</script>会是小数吗？</p>
+<p>不会，我们只需在整数上进行二分即可。因为<script type="math/tex">k</script>的值域是<script type="math/tex">f[n]</script>导函数的值域。实际上<script type="math/tex">f[n]</script>是由一些折线构成的，相邻两个点的斜率为<script type="math/tex">f[n][i]-f[n][i-1]</script>，故只要<script type="math/tex">f[n]</script>中不存在小数，那么其导函数（即斜率的值）不可能会是小数。</p>
+<p>如果最后二分出来的<script type="math/tex">k</script>中<script type="math/tex">s[n]\neq m</script>怎么办？</p>
+<p>由上文所述，<script type="math/tex">k</script>不会是小数，因此如果最后<script type="math/tex">s[n]\neq m</script>，一定是因为<script type="math/tex">f[n]</script>导函数中<script type="math/tex">m</script>周围点的导函数与<script type="math/tex">m</script>相同，那么，注意<script type="math/tex">s[i]</script>的定义是当<script type="math/tex">g[i]</script>取最优值时<strong>最少</strong>要选多少物品，因此我们只需保留<script type="math/tex">s[n]\le m</script>中<script type="math/tex">s[n]</script>最大的所对应的<script type="math/tex">k</script>即可。</p>
+<p>如果读者无法理解，可以想象导函数图像，是一些递减的水平线段，最后的<script type="math/tex">s[n]</script>即<script type="math/tex">x=m</script>时导函数上那个点所在线段的左端点的横坐标。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>那么，在考试的时候，我们怎样才能想到带权二分？</p>
+<p>首先，明确带权二分是<script type="math/tex">dp</script>的优化，所以我们要先想到朴素的<script type="math/tex">dp</script>，然后如果发现这个<script type="math/tex">dp</script>无法获得满分，我们尝试把<script type="math/tex">f[n][i]</script>的表打出来，观察是否是凸的。如果是，尝试通过归纳法证明，实在无法证明可以进行大胆猜想，写完以后对拍验证。不放心的话，最后还是和前面的暴力<script type="math/tex">dp</script>数据分治一下。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io">cmwqf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io/2020/07/05/%E6%B5%85%E8%B0%88%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86/">http://cmwqf.github.io/2020/07/05/%E6%B5%85%E8%B0%88%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cmwqf.github.io" target="_blank">cmwqf's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/dp/">dp</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/18/%E6%B5%85%E8%B0%88Berlekamp-Massey%E7%AE%97%E6%B3%95/" title="浅谈Berlekamp-Massey算法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浅谈Berlekamp-Massey算法</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/27/%E6%B5%85%E8%B0%88%E4%B8%8A%E4%B8%8B%E7%95%8C%E7%BD%91%E7%BB%9C%E6%B5%81/" title="浅谈上下界网络流"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">浅谈上下界网络流</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/01/08/AGC020C-Median-Sum/" title="AGC020C Median Sum"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-08</div><div class="title">AGC020C Median Sum</div></div></a></div><div><a href="/2020/04/03/AGC011F-Train-Service-Planning/" title="AGC011F Train Service Planning"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-03</div><div class="title">AGC011F Train Service Planning</div></div></a></div><div><a href="/2020/01/03/AGC009E-Eternal-Average/" title="AGC009E Eternal Average"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-03</div><div class="title">AGC009E Eternal Average</div></div></a></div><div><a href="/2020/04/02/AGC021F-Trinity/" title="AGC021F Trinity"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-02</div><div class="title">AGC021F Trinity</div></div></a></div><div><a href="/2019/02/07/BZOJ1002-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92/" title="[BZOJ1002]轮状病毒"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-02-07</div><div class="title">[BZOJ1002]轮状病毒</div></div></a></div><div><a href="/2020/02/29/AGC038E-Gachapon/" title="AGC038E Gachapon"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-29</div><div class="title">AGC038E Gachapon</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">cmwqf</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cmwqf" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:cmwqfcmwqf@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86"><span class="toc-number">1.</span> <span class="toc-text">带权二分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">4.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/20/%E6%B5%85%E8%B0%88%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/" title="浅谈莫队算法">浅谈莫队算法</a><time datetime="2021-07-20T11:43:06.000Z" title="发表于 2021-07-20 19:43:06">2021-07-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/08/%E6%B5%85%E8%B0%88%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/" title="浅谈最小表示法">浅谈最小表示法</a><time datetime="2021-04-08T03:12:27.000Z" title="发表于 2021-04-08 11:12:27">2021-04-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/03/01/AGC030F-Permutation-and-Minimum/" title="AGC030F Permutation and Minimum">AGC030F Permutation and Minimum</a><time datetime="2021-03-01T07:16:05.000Z" title="发表于 2021-03-01 15:16:05">2021-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/02/22/CF1307G-Cow-and-Exercise/" title="CF1307G Cow and Exercise">CF1307G Cow and Exercise</a><time datetime="2021-02-22T07:56:11.000Z" title="发表于 2021-02-22 15:56:11">2021-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/01/19/Rikka-with-Game%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="Rikka with Game解题报告">Rikka with Game解题报告</a><time datetime="2021-01-19T07:04:15.000Z" title="发表于 2021-01-19 15:04:15">2021-01-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By cmwqf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>浅谈上下界网络流 | cmwqf's blog</title><meta name="author" content="cmwqf"><meta name="copyright" content="cmwqf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="上下界网络流在一类网络流问题中，我们对每条边的流量，不仅有上界限制，还有下界限制，即第i条边流量要在[l_i,r_i]中，由此引申出来的一些问题（可行流，最大流），我们可以用上下界网络流来解决。 实际上，一个可行的网络流满足以下条件：  每条边的流量在流量限制内。  对于\forall u\neq s,t，都有\sum w(v,u)&#x3D;\sum w(u,v)，即每个点的流入流量等于流出流量，称为流量">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="浅谈上下界网络流">
+<meta property="og:url" content="http://cmwqf.github.io/2020/05/27/%E6%B5%85%E8%B0%88%E4%B8%8A%E4%B8%8B%E7%95%8C%E7%BD%91%E7%BB%9C%E6%B5%81/index.html">
+<meta property="og:site_name" content="cmwqf&#39;s blog">
+<meta property="og:description" content="上下界网络流在一类网络流问题中，我们对每条边的流量，不仅有上界限制，还有下界限制，即第i条边流量要在[l_i,r_i]中，由此引申出来的一些问题（可行流，最大流），我们可以用上下界网络流来解决。 实际上，一个可行的网络流满足以下条件：  每条边的流量在流量限制内。  对于\forall u\neq s,t，都有\sum w(v,u)&#x3D;\sum w(u,v)，即每个点的流入流量等于流出流量，称为流量">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg">
+<meta property="article:published_time" content="2020-05-27T00:59:06.000Z">
+<meta property="article:modified_time" content="2024-03-06T06:29:00.640Z">
+<meta property="article:author" content="cmwqf">
+<meta property="article:tag" content="网络流">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://cmwqf.github.io/2020/05/27/%E6%B5%85%E8%B0%88%E4%B8%8A%E4%B8%8B%E7%95%8C%E7%BD%91%E7%BB%9C%E6%B5%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浅谈上下界网络流',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-06 14:29:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="cmwqf's blog"><img class="site-icon" src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"/><span class="site-name">cmwqf's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">浅谈上下界网络流</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-27T00:59:06.000Z" title="发表于 2020-05-27 08:59:06">2020-05-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-06T06:29:00.640Z" title="更新于 2024-03-06 14:29:00">2024-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="浅谈上下界网络流"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="上下界网络流"><a href="#上下界网络流" class="headerlink" title="上下界网络流"></a>上下界网络流</h1><p>在一类网络流问题中，我们对每条边的流量，不仅有上界限制，还有下界限制，即第<script type="math/tex">i</script>条边流量要在<script type="math/tex">[l_i,r_i]</script>中，由此引申出来的一些问题（可行流，最大流），我们可以用上下界网络流来解决。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>实际上，一个可行的网络流满足以下条件：</p>
+<ol>
+<li><p>每条边的流量在流量限制内。</p>
+</li>
+<li><p>对于<script type="math/tex">\forall u\neq s,t</script>，都有<script type="math/tex">\sum w(v,u)=\sum w(u,v)</script>，即每个点的流入流量等于流出流量，称为流量守恒，这个思想是我们讨论的核心。</p>
+</li>
+</ol>
+<p>接下来，我们来逐步探索上下界网络流的几种形式。</p>
+<span id="more"></span>
+<h1 id="无源汇上下界可行流"><a href="#无源汇上下界可行流" class="headerlink" title="无源汇上下界可行流"></a>无源汇上下界可行流</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>一个网络，我们要求出一个流，使得第<script type="math/tex">i</script>条边的流量必须在<script type="math/tex">[l_i,r_i]</script>中，且对于每个点，都有总流入量等于总流出量（注意这个流没有源汇，因此循环往复，无始无终）。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>这个算法是整个上下界网络流的基础，所以需要理解掌握。</p>
+<p>我们的思想是调整：我们忽视掉第二个流量守恒的条件，只满足第一个条件，构成一组初始流。然后，我们在残量网络上进行调整，构造一组附加流，使得初始流加上附加流满足第二个条件，即流量守恒，最后每条边的流量为其在初始流中流量与在附加流中流量之和。</p>
+<p>首先我们钦定每条边的流量是<script type="math/tex">l_i</script>，然后，我们构建出残量网络，在残量网络上每条边的限制为<script type="math/tex">r_i-l_i</script>，因为初始流不一定满足流量守恒，因此附加流也不一定满足流量守恒。具体地，如果在初始流中点<script type="math/tex">u</script>的<strong>流入流量</strong>比<strong>流出流量</strong>多<script type="math/tex">w</script>，那么为了最终流量守恒，在附加流中其<strong>流出流量</strong>要比<strong>流入流量</strong>多<script type="math/tex">w</script>，反之亦然。</p>
+<p>但是一般求解网络流的方法都是要求流量守恒，怎么办呢？</p>
+<p>我们新建两个虚拟节点<script type="math/tex">ss</script>，<script type="math/tex">tt</script>，分别用作补给和分流。具体地，如果在<strong>附加流</strong>中要求<script type="math/tex">u</script>的<strong>流入流量</strong>比<strong>流出流量</strong>多<script type="math/tex">w</script>，那么多的流就要分担，因此我们连一条<script type="math/tex">(u,tt,w)</script>的边。如果<script type="math/tex">u</script>的<strong>流入流量</strong>比<strong>流出流量</strong>少<script type="math/tex">w</script>，那么少的流需要补充，因此我们连一条<script type="math/tex">(ss,u,w)</script>的边。最后，我们跑一边最大流即可。</p>
+<p>在实际的实现中，我们只需记录<script type="math/tex">w[u]</script>为所有流入<script type="math/tex">u</script>的边的下界减所有流出<script type="math/tex">u</script>边的下界。如果<script type="math/tex">w[u]>0</script>，则说明<strong>初始流</strong>中流入流量多于流出流量，那么在<strong>附加流</strong>中必须流入流量少于流出流量，因此建一条<script type="math/tex">(ss,u,w[u])</script>的边；如果<script type="math/tex">w[u]<0</script>，则建一条<script type="math/tex">(u,tt,-w[u])</script>的边。</p>
+<p>跑完最大流之后，如果最大流等于我们所需要的流，即<script type="math/tex">ss</script>连出去的边的流量之和（等于连向<script type="math/tex">tt</script>的边的流量之和），那么就存在可行流，此时附加流中每条边的流量就是每条边反向边的<script type="math/tex">val</script>值。</p>
+<h1 id="有源汇上下界可行流"><a href="#有源汇上下界可行流" class="headerlink" title="有源汇上下界可行流"></a>有源汇上下界可行流</h1><h2 id="Description-1"><a href="#Description-1" class="headerlink" title="Description"></a>Description</h2><p>有一个有源汇的网络，第<script type="math/tex">i</script>条边流量要求在<script type="math/tex">[l_i,r_i]</script>之间，问是否存在可行流（对于<script type="math/tex">\forall u\neq s,t</script>，都满足流量守恒）。</p>
+<h2 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h2><p>这个模型和前者区别仅在于它有一个源点<script type="math/tex">s</script>和一个汇点<script type="math/tex">t</script>，而这两个点是不满足流量守恒的。</p>
+<p>那么，我们想办法让这两个点也满足流量守恒，这样就可以转化为无源汇的问题了。</p>
+<p>为了使<script type="math/tex">s</script>和<script type="math/tex">t</script>满足流量守恒，我们需有边流入<script type="math/tex">s</script>，且有边流出<script type="math/tex">t</script>。注意到<script type="math/tex">s</script>流出的流量等于流入<script type="math/tex">t</script>的流量，因此我们只需连一条从<script type="math/tex">t</script>到<script type="math/tex">s</script>，下界为<script type="math/tex">0</script>上界为<script type="math/tex">+\infty</script>的边即可。最后我们只需拆掉加入的<script type="math/tex">(t,s)</script>边，剩下的就是一个可行的有源汇网络流了。</p>
+<p>最后网络流的流量是多少呢？应该是<script type="math/tex">s</script>连出去的边（不包括连向<script type="math/tex">tt</script>的边）上的流量加上它们的下界之和。但是我们有一个更简单的做法，注意到<script type="math/tex">s</script>会向<script type="math/tex">tt</script>连一条限制为<script type="math/tex">w</script>的边，而<script type="math/tex">w</script>正是<script type="math/tex">s</script>连出去的边的下界之和，而如果可行，这条边最后一定是满流，所以我们只需要统计<script type="math/tex">s</script>连出去的所有边的流量和即可，那么根据流量守恒，它等于连向<script type="math/tex">s</script>所有边的流量之和。而连向<script type="math/tex">s</script>的边只有<script type="math/tex">(t,s)</script>一条，因此答案就是<script type="math/tex">(t,s)</script>这条边上的流量，也就是其反向边最后的<script type="math/tex">val</script>。</p>
+<h1 id="有源汇上下界最大流"><a href="#有源汇上下界最大流" class="headerlink" title="有源汇上下界最大流"></a>有源汇上下界最大流</h1><h2 id="Description-2"><a href="#Description-2" class="headerlink" title="Description"></a>Description</h2><p>有一个有源汇的网络，在第<script type="math/tex">i</script>条边流量要求在<script type="math/tex">[l_i,r_i]</script>之间，且流量守恒的前提下，要求流量最大。</p>
+<h2 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h2><p>首先我们先用上面的方法跑出一个可行流。但是可行流不一定是最大流。</p>
+<p>然后，我们只需在去掉<script type="math/tex">(t,s)</script>这条边的残量网络上跑一遍从<script type="math/tex">s</script>到<script type="math/tex">t</script>的最大流再加上原来可行流即可（注意<script type="math/tex">s,t</script>和<script type="math/tex">ss,tt</script>的区别）。</p>
+<p>为什么这样就对了呢？</p>
+<p>这样做的结果肯定是最大，下面我们来考虑这个结果的可行性。</p>
+<p>首先这样一定是满足第一个条件的，即每条边都在<script type="math/tex">[l_i,r_i]</script>中间，因为我们已经把<script type="math/tex">l_i</script>的流量拿出来了，所以这张图不管怎么跑都不会突破流量下界。</p>
+<p>考虑第二个条件，我们考虑求解最大流的过程，可以发现每次找增广路的时候，任意一个点（除了<script type="math/tex">s,t</script>）流入流量与流出流量的差永远不会改变（当然在普通求最大流的时候这个差就是<script type="math/tex">0</script>）。那么，我们在除去<script type="math/tex">ss,tt</script>及相邻的边的网络上跑完最大流之后，每个点流入流量和流出流量的差与之前相同，因此再加上<script type="math/tex">ss</script>和<script type="math/tex">tt</script>相关的流量，仍然是守恒的。</p>
+<p>为什么差不变呢？对于一个<script type="math/tex">u\neq s,t</script>，记这个点当前的流入流量减流出流量为<script type="math/tex">w[u]</script>，每次增广到这个点，我们从一条边进来并从一条边出去。进来的时候，有两种可能：退回一个原本出去的流或者新增一个进来的流，不管怎么样，设流量为<script type="math/tex">v</script>，都会使<script type="math/tex">w[u]</script>增加<script type="math/tex">v</script>。而出去的时候，也有两种可能：退回一个原本进来的流或者新增一个出去的流，同理，不管怎么样，都会使<script type="math/tex">w[u]</script>减少<script type="math/tex">v</script>，因此，<script type="math/tex">w[u]</script>始终不变。</p>
+<p>具体实现的时候，跑完可行流后不需要去除<script type="math/tex">ss,tt</script>，也不用去除相关的边，<script type="math/tex">t</script>到<script type="math/tex">s</script>的边也不用去除，直接跑<script type="math/tex">s->t</script>的最大流就是答案。因为<script type="math/tex">ss</script>的出边和<script type="math/tex">tt</script>的入边已经满流，所以不会被增广，<script type="math/tex">t</script>到<script type="math/tex">s</script>的反向边会把<script type="math/tex">t</script>到<script type="math/tex">s</script>上原有的流量（即原来可行流流量）加上，所以就是最后的答案。</p>
+<h1 id="有源汇上下界最小流"><a href="#有源汇上下界最小流" class="headerlink" title="有源汇上下界最小流"></a>有源汇上下界最小流</h1><h2 id="Description-3"><a href="#Description-3" class="headerlink" title="Description"></a>Description</h2><p>有一个有源汇的网络，在第<script type="math/tex">i</script>条边流量要求在<script type="math/tex">[l_i,r_i]</script>之间，且流量守恒的前提下，要求流量最小。</p>
+<h2 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution"></a>Solution</h2><p>同样地，我们先跑出一个可行流，但是可行流也不一定是最小流，所以我们要对它进行调整。</p>
+<p>我们如果找一条从<script type="math/tex">s</script>到<script type="math/tex">t</script>的路径，去掉这条路径上的流量后仍然满足流量下限，那么我们就找到了一个更小的流。但是，并没有算法能够算出“去掉尽量多的流且仍满足条件”。</p>
+<p>怎么办呢？考虑网络中的反向边，反向边流量增加相当于正向边退流，因此，我们的目标实际上是想让反向边的流量最大。那么，我们在除去所有附加边的残量网络上跑一遍<script type="math/tex">t->s</script>的最大流，并用可行流量减掉它即可。</p>
+<p>为什么这是对的呢？考虑任何一条<script type="math/tex">t->s</script>的路径，它唯一对应了一条<script type="math/tex">s->t</script>的路径（路径上所有边的反向边构成的），我们选择了这条<script type="math/tex">t->s</script>的路径的流量，就相当于撤销了一条<script type="math/tex">s->t</script>的路径流量，而我们的目的是撤销一些<script type="math/tex">s->t</script>的路径使得撤销的流量最大，那么相当于选择一些<script type="math/tex">t->s</script>的路径使得选择的流量最大，即<script type="math/tex">t->s</script>的最大流。</p>
+<p>注意这个算法在求完可行流后要把附加边（即有关<script type="math/tex">ss,tt</script>的边和<script type="math/tex">t->s</script>的边）都删掉再跑<script type="math/tex">t->s</script>的最大流。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io">cmwqf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io/2020/05/27/%E6%B5%85%E8%B0%88%E4%B8%8A%E4%B8%8B%E7%95%8C%E7%BD%91%E7%BB%9C%E6%B5%81/">http://cmwqf.github.io/2020/05/27/%E6%B5%85%E8%B0%88%E4%B8%8A%E4%B8%8B%E7%95%8C%E7%BD%91%E7%BB%9C%E6%B5%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cmwqf.github.io" target="_blank">cmwqf's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/">网络流</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/05/%E6%B5%85%E8%B0%88%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86/" title="浅谈带权二分"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浅谈带权二分</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/18/%E6%B5%85%E8%B0%88%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91/" title="浅谈李超线段树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">浅谈李超线段树</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/02/22/CF1307G-Cow-and-Exercise/" title="CF1307G Cow and Exercise"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-22</div><div class="title">CF1307G Cow and Exercise</div></div></a></div><div><a href="/2019/01/20/%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/" title="最小路径覆盖问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-20</div><div class="title">最小路径覆盖问题</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">cmwqf</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cmwqf" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:cmwqfcmwqf@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E7%95%8C%E7%BD%91%E7%BB%9C%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">上下界网络流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%8F%AF%E8%A1%8C%E6%B5%81"><span class="toc-number">2.</span> <span class="toc-text">无源汇上下界可行流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-number">2.1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">2.2.</span> <span class="toc-text">Solution</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%8F%AF%E8%A1%8C%E6%B5%81"><span class="toc-number">3.</span> <span class="toc-text">有源汇上下界可行流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description-1"><span class="toc-number">3.1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1"><span class="toc-number">3.2.</span> <span class="toc-text">Solution</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="toc-number">4.</span> <span class="toc-text">有源汇上下界最大流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description-2"><span class="toc-number">4.1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2"><span class="toc-number">4.2.</span> <span class="toc-text">Solution</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E6%9C%80%E5%B0%8F%E6%B5%81"><span class="toc-number">5.</span> <span class="toc-text">有源汇上下界最小流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description-3"><span class="toc-number">5.1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-3"><span class="toc-number">5.2.</span> <span class="toc-text">Solution</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/20/%E6%B5%85%E8%B0%88%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/" title="浅谈莫队算法">浅谈莫队算法</a><time datetime="2021-07-20T11:43:06.000Z" title="发表于 2021-07-20 19:43:06">2021-07-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/08/%E6%B5%85%E8%B0%88%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/" title="浅谈最小表示法">浅谈最小表示法</a><time datetime="2021-04-08T03:12:27.000Z" title="发表于 2021-04-08 11:12:27">2021-04-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/03/01/AGC030F-Permutation-and-Minimum/" title="AGC030F Permutation and Minimum">AGC030F Permutation and Minimum</a><time datetime="2021-03-01T07:16:05.000Z" title="发表于 2021-03-01 15:16:05">2021-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/02/22/CF1307G-Cow-and-Exercise/" title="CF1307G Cow and Exercise">CF1307G Cow and Exercise</a><time datetime="2021-02-22T07:56:11.000Z" title="发表于 2021-02-22 15:56:11">2021-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/01/19/Rikka-with-Game%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="Rikka with Game解题报告">Rikka with Game解题报告</a><time datetime="2021-01-19T07:04:15.000Z" title="发表于 2021-01-19 15:04:15">2021-01-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By cmwqf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

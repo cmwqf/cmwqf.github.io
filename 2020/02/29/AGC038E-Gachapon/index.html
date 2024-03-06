@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>AGC038E Gachapon | cmwqf's blog</title><meta name="author" content="cmwqf"><meta name="copyright" content="cmwqf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Description由一个随机数生成器，每次生成一个[0,n-1]的数，每个数出现的概率为\frac{a_i}{S}（S&#x3D;\sum a_i）。 我们现在要求每个数i都满足其出现次数&gt;&#x3D;b_i的期望时间。 其中n\le 400,\sum a_i \le 400, \sum b_i \le 400。">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="AGC038E Gachapon">
+<meta property="og:url" content="http://cmwqf.github.io/2020/02/29/AGC038E-Gachapon/index.html">
+<meta property="og:site_name" content="cmwqf&#39;s blog">
+<meta property="og:description" content="Description由一个随机数生成器，每次生成一个[0,n-1]的数，每个数出现的概率为\frac{a_i}{S}（S&#x3D;\sum a_i）。 我们现在要求每个数i都满足其出现次数&gt;&#x3D;b_i的期望时间。 其中n\le 400,\sum a_i \le 400, \sum b_i \le 400。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg">
+<meta property="article:published_time" content="2020-02-29T04:34:17.000Z">
+<meta property="article:modified_time" content="2024-03-06T06:29:00.634Z">
+<meta property="article:author" content="cmwqf">
+<meta property="article:tag" content="dp">
+<meta property="article:tag" content="概率期望">
+<meta property="article:tag" content="容斥原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://cmwqf.github.io/2020/02/29/AGC038E-Gachapon/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AGC038E Gachapon',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-06 14:29:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="cmwqf's blog"><img class="site-icon" src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"/><span class="site-name">cmwqf's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AGC038E Gachapon</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-29T04:34:17.000Z" title="发表于 2020-02-29 12:34:17">2020-02-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-06T06:29:00.634Z" title="更新于 2024-03-06 14:29:00">2024-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Atcoder/">Atcoder</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AGC038E Gachapon"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>由一个随机数生成器，每次生成一个<script type="math/tex">[0,n-1]</script>的数，每个数出现的概率为<script type="math/tex">\frac{a_i}{S}</script>（<script type="math/tex">S=\sum a_i</script>）。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>我们现在要求每个数<script type="math/tex">i</script>都满足其出现次数<script type="math/tex">>=b_i</script>的期望时间。</p>
+<p>其中<script type="math/tex">n\le 400,\sum a_i \le 400, \sum b_i \le 400</script>。</p>
+<span id="more"></span>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>其实，本质上就是求一个集合，其中每个元素如果存在，说明它已经出现了<script type="math/tex">>=b_i</script>次，问这个集合被填满的最晚时间的期望。</p>
+<p>很显然，这是<script type="math/tex">min-max</script>容斥的模型，所以我们先套<script type="math/tex">min-max</script>容斥</p>
+<script type="math/tex; mode=display">
+ANS=E(max(S))=\sum_{T\subset S}(-1)^{|T|-1}E(min(T))</script><p>其中<script type="math/tex">min(T)</script>的意思是<script type="math/tex">T</script>这个集合中的元素开始存在某个出现<script type="math/tex">>=b_i</script>次的期望时间。</p>
+<p>这个问题显然比一开始要求的要好一些，然而还是无法算。</p>
+<p>下面是很重要的一步转化，</p>
+<p>对于一个集合<script type="math/tex">T</script>，再考虑一些集合<script type="math/tex">S(T)=\{x_i|i\in T,x_i<b_i\}</script>，<script type="math/tex">x_i</script>表示<script type="math/tex">i</script>出现的次数。</p>
+<p>实际上，根据期望的线性，<script type="math/tex">E(min(T))</script>等于这些<script type="math/tex">S(T)</script>中每个集合<script type="math/tex">s</script>走向下一个状态的期望步数乘以到达<script type="math/tex">s</script>这个状态的概率。</p>
+<p>为什么？</p>
+<p>我们考虑所有的<script type="math/tex">S(T)</script>中的集合<script type="math/tex">s</script>构成一张有向无环图，每个点表示一个状态<script type="math/tex">s</script>，连向每个后继状态一条边，边权是走到那个状态的期望步数。注意，每个节点只与<script type="math/tex">T</script>中的元素的<script type="math/tex">x</script>相关。</p>
+<p>我们给所有<script type="math/tex">\{x_i|i\in T,\exists x_i=b_i\}</script>的节点连向且只连向一个终止节点<script type="math/tex">end</script>，边权为<script type="math/tex">0</script>，设初始节点<script type="math/tex">start=\{x_i|i\in T,x_i=0\}</script>。</p>
+<p>那么实际上，<script type="math/tex">E(min(T))</script>就等于<script type="math/tex">start</script>到<script type="math/tex">end</script>的期望步数。</p>
+<p>我们想把整个贡献拆分成边的贡献。</p>
+<p>我们考虑在这个图上<script type="math/tex">dp</script>，<script type="math/tex">f[s]</script>表示到达<script type="math/tex">s</script>这个状态点的期望步数，设<script type="math/tex">t</script>为<script type="math/tex">s</script>的一个后继状态，那么显然有</p>
+<script type="math/tex; mode=display">
+f[t]+=(f[s]+w(s,t))*P(start->s)*p(s,t)</script><p>其中<script type="math/tex">w(s,t)</script>指<script type="math/tex">s->t</script>的期望步数，<script type="math/tex">p(s,t)</script>指的是从<script type="math/tex">s->t</script>的概率，<script type="math/tex">P(start->s)</script>表示<script type="math/tex">start</script>到<script type="math/tex">s</script>的概率。</p>
+<p>我们不需要求到达每个点的期望，只需要求那个总贡献。</p>
+<p>我们观察每条边<script type="math/tex">(s,t)</script>的贡献，发现实际上它的贡献是</p>
+<script type="math/tex; mode=display">
+P(start->s)*p(s,t)*w(s,t)*P(t->end)</script><p>对于任何一个节点，它最终一定能走到<script type="math/tex">end</script>，所以<script type="math/tex">P(t->end)=1</script>，那么每条边的贡献是</p>
+<script type="math/tex; mode=display">
+P(start->s)*p(s,t)*w(s,t)</script><p>注意到对于任何一个<script type="math/tex">s</script>，我们设</p>
+<script type="math/tex; mode=display">
+w(s,nxt)=\sum_t p(s,t)*w(s,t)</script><p>实际上，<script type="math/tex">w(s,nxt)</script>是我们可以算出来的，即每个状态到下一个状态（不管具体是什么，只要与<script type="math/tex">s</script>不同）的期望步数，具体怎么算，我们后面再说。</p>
+<p>那么我们可以考虑计算<strong>每个点连出去的边对答案的贡献和</strong>。</p>
+<p>那么，所有的贡献就可以写成</p>
+<script type="math/tex; mode=display">
+\sum_s P(start->s)*w(s,nxt)</script><p>这样，我们就证明了。实际上，这个推演方法可以推广到很多相关的题目中。</p>
+<p>那么<script type="math/tex">w(s,nxt)</script>等于什么呢？我们设其为<script type="math/tex">W</script>，所有<script type="math/tex">a_i</script>的和为<script type="math/tex">S</script>，所有<script type="math/tex">i\in T</script>的<script type="math/tex">a_i</script>和为<script type="math/tex">S_T</script>，则</p>
+<script type="math/tex; mode=display">
+W=\frac{S_T}{S}*1+(1-\frac{S_T}{S})*(W+1)\\
+W=\frac{S}{S_T}</script><p>我们现在的问题，就是求对于某个<script type="math/tex">s</script>，<script type="math/tex">P(start->s)</script>的值。</p>
+<p>好，这又是这道题的另一个难点！</p>
+<p>我们设<script type="math/tex">X=\sum x_i</script>，我们考虑这个随机数生成器生成的序列<script type="math/tex">t_1,t_2,...</script>，那么，我们考虑的是这个序列中前<script type="math/tex">X</script>个出现<script type="math/tex">T</script>中存在的数的位置构成的数列。</p>
+<p>别的位置生成任何一个数我们都不关心，概率为<script type="math/tex">1</script>，对我们要考虑的东西没有影响。</p>
+<p>所以我们相当于单独把这<script type="math/tex">X</script>个数拿来讨论。</p>
+<p>我们要考虑的，是这<script type="math/tex">X</script>个数中对于每一个<script type="math/tex">i</script>，满足<script type="math/tex">i</script>出现了<script type="math/tex">x_i</script>次的概率。</p>
+<p>因为这<script type="math/tex">X</script>个数只会出现<script type="math/tex">T</script>中有的数，所以别的数我们一概忽略，这<script type="math/tex">X</script>个数中每个数出现的概率为<script type="math/tex">\frac{a_i}{S_T}</script>。</p>
+<p>那么总概率为</p>
+<script type="math/tex; mode=display">
+\frac{X!}{\prod_{i\in T}x_i!}\prod_{i\in T}(\frac{a_i}{S_T})^{x_i}</script><p>为什么呢？我们考虑后面那个式子，是我们钦定了这<script type="math/tex">X</script>个数出现的顺序并且每个<script type="math/tex">i</script>出现<script type="math/tex">x_i</script>次的概率，但是这些数是可以无序出现的，所以我们要乘以这些东西出现的顺序，就是前面那一项。</p>
+<p>我们考虑如果枚举<script type="math/tex">T</script>的话时间复杂度是不现实的，</p>
+<p>所以我们现在考虑把<strong>最后的答案<script type="math/tex">ANS</script></strong>拆成每个状态<script type="math/tex">s</script>的贡献。</p>
+<p>我们每一个<script type="math/tex">s</script>对于一个<script type="math/tex">T</script>的贡献是</p>
+<script type="math/tex; mode=display">
+\frac{S}{S_T}*\frac{X!}{\prod_{i\in T}x_i!}\prod_{i\in T}(\frac{a_i}{S_T})^{x_i}\\
+=S*X!*(\frac{1}{S_T})^{X+1}\prod_{i\in T}\frac{a_i^{x_i}}{x_i!}</script><p>好，我们观察这个式子，发现实际上前面只与<script type="math/tex">X</script>和<script type="math/tex">S_T</script>有关，后面才与每个数相关，而奇妙的时候，后面每个数的贡献都是独立的，与<script type="math/tex">T</script>这个集合总体无关。</p>
+<p>接下来也十分巧妙！</p>
+<p>那么，我们考虑<script type="math/tex">dp</script>，设<script type="math/tex">f[i][j]</script>表示所有的<script type="math/tex">s</script>满足<script type="math/tex">S_T=i</script>，<script type="math/tex">X=j</script>的容斥系数之和是多少。</p>
+<p>我们枚举每一位选或不选来转移，如果不选，就继承上一次的答案，如果选了，因为多加了一个元素，所以容斥系数取反，然后转移一下就好了，细节见代码。</p>
+<p>注意，初始状态为<script type="math/tex">f[0][0]=-1</script>，因为<script type="math/tex">min-max</script>容斥的系数是<script type="math/tex">(-1)^{|T|-1}</script>。</p>
+<p>复杂度<script type="math/tex">O((\sum a_i)(\sum b_i)^2)</script>。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">405</span>, mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, a[maxN + <span class="number">1</span>], b[maxN + <span class="number">1</span>], sa, sb;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">2</span>][maxN + <span class="number">1</span>][maxN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> fac[maxN + <span class="number">1</span>], inv[maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ADD</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x + y &gt;= mod ? x + y - mod : x + y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">SUB</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x - y &lt; <span class="number">0</span> ? x - y + mod : x - y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mpow</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) ans = <span class="number">1ll</span> * ans * a % mod;</span><br><span class="line">        a = <span class="number">1ll</span> * a * a % mod;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a[i], &amp;b[i]), sa += a[i], sb += b[i];</span><br><span class="line"></span><br><span class="line">    fac[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= sb; i++) fac[i] = <span class="number">1ll</span> * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[sb] = <span class="built_in">mpow</span>(fac[sb], mod - <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = sb - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) inv[i] = <span class="number">1ll</span> * inv[i + <span class="number">1</span>] * (i + <span class="number">1</span>) % mod;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">    f[now][<span class="number">0</span>][<span class="number">0</span>] = mod - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        now ^= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt;= sa; s++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">0</span>; x &lt;= sb; x++)</span><br><span class="line">            &#123;</span><br><span class="line">                f[now][s][x] = f[now ^ <span class="number">1</span>][s][x];</span><br><span class="line">                <span class="keyword">if</span>(s &lt; a[i]) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">0</span>, w = <span class="number">1</span>; t &lt; b[i] &amp;&amp; t &lt;= x; t++, w = <span class="number">1ll</span> * w * a[i] % mod)</span><br><span class="line">                    f[now][s][x] = <span class="built_in">SUB</span>(f[now][s][x], <span class="number">1ll</span> * w * inv[t] % mod * f[now ^ <span class="number">1</span>][s - a[i]][x - t] % mod);			   </span><br><span class="line">                &#125;	</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt;= sa; s++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> INV = <span class="built_in">mpow</span>(s, mod - <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">0</span>, t = INV; x &lt;= sb; x++, t = <span class="number">1ll</span> * t * INV % mod)</span><br><span class="line">            ans = <span class="built_in">ADD</span>(ans, <span class="number">1ll</span> * t * fac[x] % mod * f[now][s][x] % mod);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ans = <span class="number">1ll</span> * ans * sa % mod;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，这道题蕴含了许多的概率期望技巧和套路，需要牢记一些小<script type="math/tex">trick</script>，例如把总的期望步数拆成每个状态到其后继的期望步数乘以到这个状态的概率，还有可重复的数列出现概率的计算，都是应该仔细揣摩的。</p>
+<p>然后，有一个思想十分重要，就是我们考虑一个数列中只跟某个集合中的数有关的位置时，我们可以忽略其他数的影响，直接考虑这些位置本身的相对关系，包括这里概率的计算，和之前有些题都是一样，这样可以大大减少思维难度，相当于只考虑一个跟这个集合中有关的数列的概率一样，因为其他位置不管出现什么数都无关，所以概率时<script type="math/tex">1</script>，可以忽略。</p>
+<p>最后，非常重要的<script type="math/tex">dp</script>，我们要观察到一个东西的贡献式子如果只与这个东西的某些性质有关（比如这一题，只与集合的<script type="math/tex">\sum a_i</script>和<script type="math/tex">\sum x_i</script>有关），其他的都是独立的话，我们就可以<script type="math/tex">dp</script>，把状态设为这些性质，然后<script type="math/tex">dp</script>出其贡献的系数，最后累加即可，也是一个非常重要的思想。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io">cmwqf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io/2020/02/29/AGC038E-Gachapon/">http://cmwqf.github.io/2020/02/29/AGC038E-Gachapon/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cmwqf.github.io" target="_blank">cmwqf's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/dp/">dp</a><a class="post-meta__tags" href="/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/">概率期望</a><a class="post-meta__tags" href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/">容斥原理</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/01/LOJ6047-%E5%86%B3%E6%96%97/" title="[LOJ6047]决斗"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">[LOJ6047]决斗</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/28/ARC096E-Everything-on-it/" title="ARC096E Everything on it"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ARC096E Everything on it</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2019/08/24/BZOJ3622-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86/" title="[BZOJ3622]已经没有什么好害怕的了"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-08-24</div><div class="title">[BZOJ3622]已经没有什么好害怕的了</div></div></a></div><div><a href="/2020/04/10/LOJ3284-Exercise/" title="[LOJ3284]Exercise"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-10</div><div class="title">[LOJ3284]Exercise</div></div></a></div><div><a href="/2019/01/26/Tribles/" title="Tribles"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-26</div><div class="title">Tribles</div></div></a></div><div><a href="/2020/03/31/UOJ22-%E5%A4%96%E6%98%9F%E4%BA%BA/" title="[UOJ22]外星人"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-31</div><div class="title">[UOJ22]外星人</div></div></a></div><div><a href="/2019/01/27/%E5%BE%97%E5%88%B01/" title="得到1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-27</div><div class="title">得到1</div></div></a></div><div><a href="/2021/01/01/%E6%B5%85%E8%B0%88%E6%9C%89%E6%A0%87%E5%8F%B7%E7%9A%84DAG%E8%AE%A1%E6%95%B0/" title="浅谈有标号的DAG计数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-01</div><div class="title">浅谈有标号的DAG计数</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">cmwqf</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cmwqf" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:cmwqfcmwqf@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Description"><span class="toc-number">1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number">3.</span> <span class="toc-text">Code</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/20/%E6%B5%85%E8%B0%88%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/" title="浅谈莫队算法">浅谈莫队算法</a><time datetime="2021-07-20T11:43:06.000Z" title="发表于 2021-07-20 19:43:06">2021-07-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/08/%E6%B5%85%E8%B0%88%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/" title="浅谈最小表示法">浅谈最小表示法</a><time datetime="2021-04-08T03:12:27.000Z" title="发表于 2021-04-08 11:12:27">2021-04-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/03/01/AGC030F-Permutation-and-Minimum/" title="AGC030F Permutation and Minimum">AGC030F Permutation and Minimum</a><time datetime="2021-03-01T07:16:05.000Z" title="发表于 2021-03-01 15:16:05">2021-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/02/22/CF1307G-Cow-and-Exercise/" title="CF1307G Cow and Exercise">CF1307G Cow and Exercise</a><time datetime="2021-02-22T07:56:11.000Z" title="发表于 2021-02-22 15:56:11">2021-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/01/19/Rikka-with-Game%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="Rikka with Game解题报告">Rikka with Game解题报告</a><time datetime="2021-01-19T07:04:15.000Z" title="发表于 2021-01-19 15:04:15">2021-01-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By cmwqf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

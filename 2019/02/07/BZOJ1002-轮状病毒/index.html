@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[BZOJ1002]轮状病毒 | cmwqf's blog</title><meta name="author" content="cmwqf"><meta name="copyright" content="cmwqf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Descriptionn轮状病毒的产生规律是在一个n轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有16个不同的3轮状病毒。 现给定n">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1002]轮状病毒">
+<meta property="og:url" content="http://cmwqf.github.io/2019/02/07/BZOJ1002-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92/index.html">
+<meta property="og:site_name" content="cmwqf&#39;s blog">
+<meta property="og:description" content="Descriptionn轮状病毒的产生规律是在一个n轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有16个不同的3轮状病毒。 现给定n">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg">
+<meta property="article:published_time" content="2019-02-07T05:53:51.000Z">
+<meta property="article:modified_time" content="2024-03-06T06:29:00.635Z">
+<meta property="article:author" content="cmwqf">
+<meta property="article:tag" content="dp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://cmwqf.github.io/2019/02/07/BZOJ1002-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[BZOJ1002]轮状病毒',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-06 14:29:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="cmwqf's blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="cmwqf's blog"><img class="site-icon" src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg"/><span class="site-name">cmwqf's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">[BZOJ1002]轮状病毒</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-02-07T05:53:51.000Z" title="发表于 2019-02-07 13:53:51">2019-02-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-06T06:29:00.635Z" title="更新于 2024-03-06 14:29:00">2024-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/BZOJ/">BZOJ</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="[BZOJ1002]轮状病毒"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>n轮状病毒的产生规律是在一个<script type="math/tex">n</script>轮状基中删去若干条边，使得各原子之间有唯一的信息通道，例如共有<script type="math/tex">16</script>个不同的<script type="math/tex">3</script>轮状病毒。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>现给定<script type="math/tex">n<=100</script>，编程计算有多少个不同的<script type="math/tex">n</script>轮状病毒。</p>
+<span id="more"></span>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>其实刚刚看到这一题，就想到了一个东西：<strong>矩阵树定理</strong>。这不是矩阵树定理的裸题吗？</p>
+<p>刚刚准备敲代码的时候，偷偷瞄了一眼题解，突然意识到这一题答案太大了，用矩阵树定理，要用高斯消元，而高斯消元要用long double来存储，而答案一大，long double就爆掉了。。。</p>
+<p>果断放弃了矩阵树，怎么办呢？</p>
+<p>这时，我们发现可以打表找规律，于是，我拿出草稿纸，大力画图，最终，得出一个结果：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">121</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>额，看起来好像并没有什么规律，但仔细一看，好像奇数号都是完全平方数，例如</p>
+<script type="math/tex; mode=display">
+1=1^2,16=4^2,121=11^2</script><p>然而，还是看不出什么规律，我们再将完全平方数联系第二个和第四个，又惊奇地发现:</p>
+<script type="math/tex; mode=display">
+5=3^2-4,45=7^2-4</script><p>我们再把跟平方数有关的放在一起：</p>
+<script type="math/tex; mode=display">
+1,3,4,7,11...</script><p>有没有发现什么？这就是以<script type="math/tex">1,3</script>开头的另一种斐波那契数列啊！！我们只要打出这一串数列，然后分类讨论一下：如果n是奇数，就直接平方，否则就平方再减四。</p>
+<p>嗯，我觉得在考场上，我也许是能想出这个的，因为矩阵树定理可以帮我们把1~50（或更多）的表给打出来，然后一个一个找规律……</p>
+<p>还有，这一题要高精度，可惜我高精度都不会了，重载运算符经过多人指点，终于调对了，这也可以当高精度运算的板子吧：</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN=<span class="number">1000</span> + <span class="number">100</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">big</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a[maxN+<span class="number">1</span>],len;</span><br><span class="line">    <span class="built_in">big</span>() &#123; len=<span class="number">1</span>; <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(a)); &#125;</span><br><span class="line">    big <span class="keyword">operator</span> + (big rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        big ans;</span><br><span class="line">        ans.len=<span class="built_in">max</span>(len,rhs.len);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=ans.len;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp=a[i]+rhs.a[i];</span><br><span class="line">            ans.a[i]+=tmp%<span class="number">10</span>;</span><br><span class="line">            ans.a[i+<span class="number">1</span>]+=tmp/<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(ans.a[ans.len+<span class="number">1</span>]) ans.len++;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    big <span class="keyword">operator</span> * (big rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        big ans;</span><br><span class="line">        ans.len=len+rhs.len<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=len;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=rhs.len;j++) ans.a[i+j<span class="number">-1</span>]+=a[i]*rhs.a[j];</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(ans.a[i]||i&lt;=ans.len)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.a[i+<span class="number">1</span>]+=ans.a[i]/<span class="number">10</span>;</span><br><span class="line">            ans.a[i]%=<span class="number">10</span>; i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!ans.a[i]) i--;</span><br><span class="line">        ans.len=i;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    big <span class="keyword">operator</span> - (big rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        big ans;</span><br><span class="line">        ans.len=<span class="built_in">max</span>(len,rhs.len);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=ans.len;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.a[i]+=a[i]-rhs.a[i];</span><br><span class="line">            <span class="keyword">if</span>(ans.a[i]&lt;<span class="number">0</span>) ans.a[i]+=<span class="number">10</span>,ans.a[i+<span class="number">1</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(ans.a[ans.len+<span class="number">1</span>]) ans.len++;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;<span class="comment">//高精度的板子</span></span><br><span class="line">big f[<span class="number">105</span>],ans;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(big ans)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=ans.len;i&gt;=<span class="number">1</span>;i--) <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,ans.a[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    f[<span class="number">1</span>].a[<span class="number">1</span>]=<span class="number">1</span>; f[<span class="number">2</span>].a[<span class="number">1</span>]=<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i++) f[i]=f[i<span class="number">-1</span>]+f[i<span class="number">-2</span>];</span><br><span class="line">    ans=f[n]*f[n];</span><br><span class="line">    big tmp; tmp.a[<span class="number">1</span>]=<span class="number">4</span>;</span><br><span class="line">    <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>) ans=ans-tmp;</span><br><span class="line">    <span class="built_in">print</span>(ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，除了打表找规律以外，这一题对于我来说的难度就是高精度了（捂脸），我感觉高精度已经很不熟练了呢，不过，近年来考高精度的频率到是越来越少了呢。</p>
+<p>总之，综合性的题目还是很重要的，毕竟考试不太可能出裸题吧。。。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io">cmwqf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://cmwqf.github.io/2019/02/07/BZOJ1002-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92/">http://cmwqf.github.io/2019/02/07/BZOJ1002-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cmwqf.github.io" target="_blank">cmwqf's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/dp/">dp</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/02/07/BZOJ1003-%E7%89%A9%E6%B5%81%E8%BF%90%E8%BE%93/" title="[BZOJ1003]物流运输"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">[BZOJ1003]物流运输</div></div></a></div><div class="next-post pull-right"><a href="/2019/02/04/K-D-Tree%E8%BF%9B%E9%98%B6/" title="K-D Tree进阶"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">K-D Tree进阶</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/01/08/AGC020C-Median-Sum/" title="AGC020C Median Sum"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-08</div><div class="title">AGC020C Median Sum</div></div></a></div><div><a href="/2020/04/03/AGC011F-Train-Service-Planning/" title="AGC011F Train Service Planning"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-03</div><div class="title">AGC011F Train Service Planning</div></div></a></div><div><a href="/2020/01/03/AGC009E-Eternal-Average/" title="AGC009E Eternal Average"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-03</div><div class="title">AGC009E Eternal Average</div></div></a></div><div><a href="/2020/04/02/AGC021F-Trinity/" title="AGC021F Trinity"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-02</div><div class="title">AGC021F Trinity</div></div></a></div><div><a href="/2020/02/29/AGC038E-Gachapon/" title="AGC038E Gachapon"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-29</div><div class="title">AGC038E Gachapon</div></div></a></div><div><a href="/2021/03/01/AGC030F-Permutation-and-Minimum/" title="AGC030F Permutation and Minimum"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-01</div><div class="title">AGC030F Permutation and Minimum</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/08/21/WcGYUHnZif8PoLF.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">cmwqf</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cmwqf" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:cmwqfcmwqf@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Description"><span class="toc-number">1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number">3.</span> <span class="toc-text">Code</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/20/%E6%B5%85%E8%B0%88%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/" title="浅谈莫队算法">浅谈莫队算法</a><time datetime="2021-07-20T11:43:06.000Z" title="发表于 2021-07-20 19:43:06">2021-07-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/08/%E6%B5%85%E8%B0%88%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/" title="浅谈最小表示法">浅谈最小表示法</a><time datetime="2021-04-08T03:12:27.000Z" title="发表于 2021-04-08 11:12:27">2021-04-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/03/01/AGC030F-Permutation-and-Minimum/" title="AGC030F Permutation and Minimum">AGC030F Permutation and Minimum</a><time datetime="2021-03-01T07:16:05.000Z" title="发表于 2021-03-01 15:16:05">2021-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/02/22/CF1307G-Cow-and-Exercise/" title="CF1307G Cow and Exercise">CF1307G Cow and Exercise</a><time datetime="2021-02-22T07:56:11.000Z" title="发表于 2021-02-22 15:56:11">2021-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/01/19/Rikka-with-Game%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="Rikka with Game解题报告">Rikka with Game解题报告</a><time datetime="2021-01-19T07:04:15.000Z" title="发表于 2021-01-19 15:04:15">2021-01-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By cmwqf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
